@@ -161,7 +161,7 @@ class Numerology_Calc {
     private static function calculateEasterEggs(string $name, string $dob): array {
         $easter_eggs = [];
 
-        $dob_obj = DateTime::createFromFormat('d/m/Y', $dob);
+        $dob_obj = DateTime::createFromFormat('Y-m-d', $dob);
         if (!$dob_obj) return $easter_eggs;
 
         $now         = new DateTime('now', new DateTimeZone('UTC'));
@@ -712,13 +712,13 @@ class Numerology_Calc {
     }
 
     private static function parseDob(string $dob): array {
-        if (!preg_match('/^(\d{1,2})[\/.\-\s](\d{1,2})[\/.\-\s](\d{4})$/', trim($dob), $m)) throw new InvalidArgumentException("Invalid date of birth.");
-        return [(int)$m[1], (int)$m[2], (int)$m[3]];
+        if (!preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', trim($dob), $m)) throw new InvalidArgumentException("Invalid date of birth.");
+        return [(int)$m[3], (int)$m[2], (int)$m[1]];
     }
 
     private static function validateDate($d, $m, $y): void {
         if (!checkdate($m, $d, $y)) {
-            throw new InvalidArgumentException("Date {$d}/{$m}/{$y} does not exist.");
+            throw new InvalidArgumentException("Date {$y}-{$m}-{$d} does not exist.");
         }
     }
 

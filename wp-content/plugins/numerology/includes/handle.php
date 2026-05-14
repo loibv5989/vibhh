@@ -69,7 +69,7 @@ class Numerology {
                 'required'          => true,
                 'sanitize_callback' => 'sanitize_text_field',
                 'validate_callback' => function($param) {
-                    return !empty($param) && preg_match('/^(\d{1,2})[\/\-\.\s](\d{1,2})[\/\-\.\s](19\d{2}|20\d{2})$/', $param);
+                    return !empty($param) && preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $param);
                 }
             ]
         ];
@@ -186,17 +186,22 @@ class Numerology {
 
     private static function normalizeDob(string $dob): string {
         $dob = trim($dob);
-        $normalized = preg_replace('/[\-\.\s]+/', '/', $dob);
 
+        $d = DateTime::createFromFormat('Y-m-d', $dob);
+        if ($d && $d->format('Y-m-d') === $dob) {
+            return $dob;
+        }
+
+        $normalized = preg_replace('/[\-\.\s]+/', '/', $dob);
         $formats = ['m/d/Y', 'n/j/Y'];
         foreach ($formats as $fmt) {
             $d = DateTime::createFromFormat($fmt, $normalized);
             if ($d && $d->format($fmt) === $normalized) {
-                return $d->format('d/m/Y');
+                return $d->format('Y-m-d');
             }
         }
 
-        throw new InvalidArgumentException('Invalid date format. Please use MM/DD/YYYY.');
+        throw new InvalidArgumentException('Invalid date format. Please use YYYY-MM-DD.');
     }
 
     public function removePageTitle($title, $post_id) {

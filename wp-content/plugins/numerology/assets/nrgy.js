@@ -50,7 +50,7 @@ jQuery(function ($) {
         dob(inputId, errorId) {
             const $input = $('#' + inputId);
             const $error = $('#' + errorId);
-            const value = $input.val().trim();
+            let value = $input.val().trim();
             $input.removeClass('is-error');
             $error.text('');
             if (!value) {
@@ -58,15 +58,23 @@ jQuery(function ($) {
                 $input.addClass('is-error');
                 return false;
             }
-            const match = value.match(/^(\d{1,2})[/\-\.\s](\d{1,2})[/\-\.\s](19\d{2}|20\d{2})$/);
+
+            value = value.replace(/[\/\.\s]+/g, '-');
+
+            const mmdd = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
+            if (mmdd) {
+                value = mmdd[3] + '-' + String(parseInt(mmdd[1], 10)).padStart(2, '0') + '-' + String(parseInt(mmdd[2], 10)).padStart(2, '0');
+            }
+
+            const match = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
             if (!match) {
-                $error.text('Please enter a valid date (MM/DD/YYYY).');
+                $error.text('Please enter a valid date (YYYY-MM-DD).');
                 $input.addClass('is-error');
                 return false;
             }
-            const month = parseInt(match[1], 10);
-            const day   = parseInt(match[2], 10);
-            const year  = parseInt(match[3], 10);
+            const year  = parseInt(match[1], 10);
+            const month = parseInt(match[2], 10);
+            const day   = parseInt(match[3], 10);
             if (month < 1 || month > 12) {
                 $error.text('Month must be between 1 and 12.');
                 $input.addClass('is-error');
@@ -80,11 +88,14 @@ jQuery(function ($) {
 
             const testDate = new Date(year, month - 1, day);
             if (testDate.getFullYear() !== year || testDate.getMonth() !== month - 1 || testDate.getDate() !== day) {
-                $error.text('Date ' + month + '/' + day + '/' + year + ' does not exist.');
+                $error.text('Date ' + year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0') + ' does not exist.');
                 $input.addClass('is-error');
                 return false;
             }
-            return value;
+
+            const formatted = year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+            $input.val(formatted);
+            return formatted;
         }
     };
 
