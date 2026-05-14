@@ -2,10 +2,10 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Calc {
+class Zodiac_Calc {
 
     private static function getData(): array {
-        return require BB_ZODIAC_PLUGIN_DIR . 'data/zodiac.php';
+        return require ZODIAC_PLUGIN_DIR . 'data/zodiac.php';
     }
 
     public static function calculate(string $dob): array {
@@ -150,7 +150,7 @@ class BbZodiac_Calc {
         $md = preg_replace('/^_{3,}$/m', '', $md);
 
         if (!class_exists('Parsedown')) {
-            require_once BB_ZODIAC_PLUGIN_DIR . 'lib/Parsedown.php';
+            require_once ZODIAC_PLUGIN_DIR . 'lib/Parsedown.php';
         }
 
         $Parsedown = new Parsedown();
@@ -434,7 +434,7 @@ class BbZodiac_Calc {
     }
 
     public static function getStaticHoroscopeLines(string $signId, string $period, string $avoidDomain = ''): array {
-        $tuviData = include BB_ZODIAC_PLUGIN_DIR . 'data/cusps.php';
+        $tuviData = include ZODIAC_PLUGIN_DIR . 'data/cusps.php';
         if (!isset($tuviData[$period])) return ['lines' => [], 'primary' => ''];
 
         $elementKey = $tuviData['__zodiac_map'][$signId]['element'] ?? 'fire';

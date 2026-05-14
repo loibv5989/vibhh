@@ -1,7 +1,7 @@
 <?php
 /**
  * Template: Zodiac Personality Analysis
- * @package BbZodiac
+ * @package Zodiac
  */
 if (!defined('ABSPATH')) exit;
 ?>
@@ -16,8 +16,8 @@ if (!defined('ABSPATH')) exit;
             <input type="text" id="zdc-cbsp" name="zdc_cbsp" class="zdc-decoy-field" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="ftn-form-row">
                 <div class="ftn-form-group">
-                    <label for="zdc-dob">Date of birth (Gregorian calendar)</label>
-                    <input type="text" id="zdc-dob" class="ftn-input" placeholder="Example: 15/12/1999" autocomplete="on">
+                    <label for="zdc-dob">Date of birth (DD/MM/YYYY)</label>
+                    <input type="text" id="zdc-dob" class="ftn-input" placeholder="e.g. 15/12/1999" autocomplete="on">
                     <span class="ftn-error" id="zdc-error-dob"></span>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Render {
+class Zodiac_Render {
 
     public static function buildStaticAnalyze(array $sign): string {
         if (empty($sign['personality'])) return '';
@@ -9,23 +9,23 @@ class BbZodiac_Render {
         $p = $sign['personality'];
         $decanNum = $sign['decan'] ?? 1;
 
-        $horoscopeLife = BbZodiac_Calc::spinText($sign['horoscope_life'] ?? '');
-        $core = BbZodiac_Calc::spinText($p['core'] ?? '');
-        $love = BbZodiac_Calc::spinText($p['love'] ?? '');
-        $career = BbZodiac_Calc::spinText($p['career'] ?? '');
-        $shadow = BbZodiac_Calc::spinText($p['shadow'] ?? '');
-        $decanOverlay = BbZodiac_Calc::spinText($p['decan_overlays'][$decanNum] ?? '');
+        $horoscopeLife = Zodiac_Calc::spinText($sign['horoscope_life'] ?? '');
+        $core = Zodiac_Calc::spinText($p['core'] ?? '');
+        $love = Zodiac_Calc::spinText($p['love'] ?? '');
+        $career = Zodiac_Calc::spinText($p['career'] ?? '');
+        $shadow = Zodiac_Calc::spinText($p['shadow'] ?? '');
+        $decanOverlay = Zodiac_Calc::spinText($p['decan_overlays'][$decanNum] ?? '');
 
-        $layerElem = BbZodiac_Calc::spinText($p['layers']['element'] ?? '');
-        $layerPlan = BbZodiac_Calc::spinText($p['layers']['planet'] ?? '');
-        $layerQual = BbZodiac_Calc::spinText($p['layers']['quality'] ?? '');
-        $layerPol  = BbZodiac_Calc::spinText($p['layers']['polarity'] ?? '');
+        $layerElem = Zodiac_Calc::spinText($p['layers']['element'] ?? '');
+        $layerPlan = Zodiac_Calc::spinText($p['layers']['planet'] ?? '');
+        $layerQual = Zodiac_Calc::spinText($p['layers']['quality'] ?? '');
+        $layerPol  = Zodiac_Calc::spinText($p['layers']['polarity'] ?? '');
 
         $strHtml = '';
-        if(!empty($p['strengths'])) foreach($p['strengths'] as $s) $strHtml .= '<li>' . BbZodiac_Calc::spinText($s) . '</li>';
+        if(!empty($p['strengths'])) foreach($p['strengths'] as $s) $strHtml .= '<li>' . Zodiac_Calc::spinText($s) . '</li>';
 
         $weakHtml = '';
-        if(!empty($p['weaknesses'])) foreach($p['weaknesses'] as $w) $weakHtml .= '<li>' . BbZodiac_Calc::spinText($w) . '</li>';
+        if(!empty($p['weaknesses'])) foreach($p['weaknesses'] as $w) $weakHtml .= '<li>' . Zodiac_Calc::spinText($w) . '</li>';
 
         $html = '<div class="zdc-static-content">';
 
@@ -258,7 +258,7 @@ class BbZodiac_Render {
                         <div class="ftn-chat-body" id="zdc-love-chat-body" data-lines="<?= esc_attr(json_encode($lines, JSON_UNESCAPED_UNICODE)) ?>"></div>
                     </div>
                 </div>
-                <?php if (get_option('bb_zodiac_allow_ai', '0') === '1' && $showAiBtn): ?>
+                <?php if (get_option('zodiac_allow_ai', '0') === '1' && $showAiBtn): ?>
                     <div id="zdc-love-deep-analysis-form" class="ftn-form-deep" style="display:none;">
                         <p>Continue analyzing <strong>to understand deeper</strong> the connection and potential of both people.</p>
                         <input type="text" id="zdc-love-cbsp-deep" name="zdc_cbsp" class="zdc-decoy-field" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -414,9 +414,9 @@ class BbZodiac_Render {
         }
 
         $lines[] = ['type' => 'divider', 'text' => ''];
-        $lines[] = ['type' => 'block', 'text' => BbZodiac_Calc::spinText($sign['horoscope_life'] ?? '') ];
+        $lines[] = ['type' => 'block', 'text' => Zodiac_Calc::spinText($sign['horoscope_life'] ?? '') ];
 
-        $horoscopeData = BbZodiac_Calc::getStaticHoroscopeLines($signId, $period, $avoidDomain);
+        $horoscopeData = Zodiac_Calc::getStaticHoroscopeLines($signId, $period, $avoidDomain);
         $horoscopeParagraphs = $horoscopeData['lines'] ?? [];
         $primaryDomain = $horoscopeData['primary'] ?? '';
 
@@ -480,7 +480,7 @@ class BbZodiac_Render {
                 'Water' => 'sharp intuition, hidden emotional depth, empathy and need for spiritual bonding.'
         ];
 
-        $allow_ai = get_option('bb_zodiac_allow_ai', '0') === '1';
+        $allow_ai = get_option('zodiac_allow_ai', '0') === '1';
 
         $lines = [
                 ['type' => 'greeting', 'text' => 'Your personal star map has been initialized.'],

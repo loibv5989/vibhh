@@ -2,10 +2,10 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Mistral {
+class Zodiac_Mistral {
 
     private static ?self $instance = null;
-    private ?BbZodiac_AI_Settings $helpers = null;
+    private ?Zodiac_AI_Settings $helpers = null;
     private const BASE_URL = "https://api.mistral.ai/v1/conversations";
 
     public static function get_instance(): self {
@@ -15,15 +15,15 @@ class BbZodiac_Mistral {
 
     private function __construct() {}
 
-    private function helpers(): BbZodiac_AI_Settings {
-        if ($this->helpers === null) $this->helpers = BbZodiac_AI_Settings::get_instance();
+    private function helpers(): Zodiac_AI_Settings {
+        if ($this->helpers === null) $this->helpers = Zodiac_AI_Settings::get_instance();
         return $this->helpers;
     }
 
     private function sendAdminNotification(string $subject, string $message): void {
         $admin_email = get_option('admin_email');
         if (!$admin_email) return;
-        wp_mail($admin_email, '[BB-Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
+        wp_mail($admin_email, '[Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
     }
 
     private function parseContent(array $response): ?string {
@@ -81,4 +81,4 @@ class BbZodiac_Mistral {
     }
 }
 
-BbZodiac_Mistral::get_instance();
+Zodiac_Mistral::get_instance();

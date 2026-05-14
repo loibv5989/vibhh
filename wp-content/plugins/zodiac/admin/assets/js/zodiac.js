@@ -1,16 +1,16 @@
 jQuery(document).ready(function ($) {
 
-    $('#bb-zodiac-test-provider').on('click', function () {
-        var provider = $('#bb_zodiac_test_provider_select').val();
+    $('#zodiac-test-provider').on('click', function () {
+        var provider = $('#zodiac_test_provider_select').val();
         var $btn     = $(this);
-        var $results = $('#bb-zodiac-test-results');
+        var $results = $('#zodiac-test-results');
 
         $btn.prop('disabled', true).text('Testing...');
         $results.html('');
 
-        $.post(bbZodiacAdmin.ajax_url, {
-            action:   'bb_zodiac_test_provider',
-            nonce:    bbZodiacAdmin.test_provider_nonce,
+        $.post(zodiacAdmin.ajax_url, {
+            action:   'zodiac_test_provider',
+            nonce:    zodiacAdmin.test_provider_nonce,
             provider: provider
         }, function (res) {
             if (res.success) {
@@ -25,16 +25,16 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    $('#bb-zodiac-create-pages').on('click', function () {
+    $('#zodiac-create-pages').on('click', function () {
         var $btn     = $(this);
-        var $results = $('#bb-zodiac-create-pages-results');
+        var $results = $('#zodiac-create-pages-results');
 
         $btn.prop('disabled', true).text('Creating...');
         $results.html('');
 
-        $.post(bbZodiacAdmin.ajax_url, {
-            action: 'bb_zodiac_create_pages',
-            nonce:  bbZodiacAdmin.create_pages_nonce
+        $.post(zodiacAdmin.ajax_url, {
+            action: 'zodiac_create_pages',
+            nonce:  zodiacAdmin.create_pages_nonce
         }, function (res) {
             if (res.success && res.data && res.data.pages) {
                 var html = '<p>' + res.data.message + '</p><ul>';

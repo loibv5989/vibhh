@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Gemini {
+class Zodiac_Gemini {
 
     private $helpers = null;
     private const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/";
@@ -16,20 +16,20 @@ class BbZodiac_Gemini {
     public function __construct() {}
 
     private function helpers() {
-        if ($this->helpers === null) $this->helpers = BbZodiac_AI_Settings::get_instance();
+        if ($this->helpers === null) $this->helpers = Zodiac_AI_Settings::get_instance();
         return $this->helpers;
     }
 
     private function sendAdminNotification($subject, $message) {
         $admin_email = get_option('admin_email');
         if (!$admin_email) return;
-        wp_mail($admin_email, '[BB-Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
+        wp_mail($admin_email, '[Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
     }
 
     public function ftn_gemini_generate($prompt) {
         $helpers      = $this->helpers();
         $gemini_keys  = $helpers->geminiKeysArray();
-        $gemini_model = apply_filters('bb_zodiac_gemini_model', $helpers->geminiModel());
+        $gemini_model = apply_filters('zodiac_gemini_model', $helpers->geminiModel());
         $result = null;
 
         while (!empty($gemini_keys)) {
@@ -79,4 +79,4 @@ class BbZodiac_Gemini {
     }
 }
 
-BbZodiac_Gemini::get_instance();
+Zodiac_Gemini::get_instance();

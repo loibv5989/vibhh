@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Groq {
+class Zodiac_Groq {
 
     private $helpers = null;
     private const BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
@@ -16,14 +16,14 @@ class BbZodiac_Groq {
     public function __construct() {}
 
     private function helpers() {
-        if ($this->helpers === null) $this->helpers = BbZodiac_AI_Settings::get_instance();
+        if ($this->helpers === null) $this->helpers = Zodiac_AI_Settings::get_instance();
         return $this->helpers;
     }
 
     private function sendAdminNotification($subject, $message) {
         $admin_email = get_option('admin_email');
         if (!$admin_email) return;
-        wp_mail($admin_email, '[BB-Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
+        wp_mail($admin_email, '[Zodiac] ' . $subject, $message, ['Content-Type: text/plain; charset=UTF-8']);
     }
 
     public function ftn_groq_generate($prompt) {
@@ -80,4 +80,4 @@ class BbZodiac_Groq {
     }
 }
 
-BbZodiac_Groq::get_instance();
+Zodiac_Groq::get_instance();

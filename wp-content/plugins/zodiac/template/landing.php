@@ -1,7 +1,7 @@
 <?php
 /**
  * Template: Landing Page – Zodiac
- * @package BbZodiac
+ * @package Zodiac
  */
 if (!defined('ABSPATH')) exit;
 

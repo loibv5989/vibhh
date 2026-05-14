@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Prompt {
+class Zodiac_Prompt {
 
     public static function build(string $dob, array $sign): string {
         $signName   = $sign['name']       ?? '';
@@ -173,110 +173,6 @@ Based on layer 5 status "{$planetMatch}", decode the level of empathy, resonance
 
 (Hint - Advice (Based on score {$score}%):
 Give a final assessment on the {$score}% compatibility level and 1-2 core advice to maintain or balance this relationship based on the analyzed differences.)
-
-[ZDC_HTML]
-(Analysis content will be placed here)
-[/ZDC_HTML]
-TXT;
-    }
-
-    public static function buildNatal(string $dob, string $tob, string $pob, array $natalChart): string {
-        $pob = mb_convert_case($pob, MB_CASE_TITLE, "UTF-8");
-        $planets = $natalChart['planets'];
-        $ascendant = $natalChart['ascendant'];
-        $midheaven = $natalChart['midheaven'];
-        $elementDist = $natalChart['element_distribution'];
-        $tobText = $natalChart['is_exact_time'] ? $tob : '12:00';
-
-        $planetList = '';
-        foreach ($planets as $planet) {
-            $extra = [];
-            if (!empty($planet['quality']))  $extra[] = "Quality: {$planet['quality']}";
-            if (!empty($planet['keywords'])) $extra[] = "Keywords: {$planet['keywords']}";
-            $extraStr = !empty($extra) ? ' | ' . implode(' | ', $extra) : '';
-            $planetList .= "- {$planet['name']}: {$planet['sign']} {$planet['degree_formatted']} ({$planet['element']}, {$planet['modality']}){$extraStr}\n";
-        }
-
-        $elementStats = '';
-        $total = array_sum($elementDist);
-        foreach ($elementDist as $element => $count) {
-            $percent = $total > 0 ? round(($count / $total) * 100) : 0;
-            $elementStats .= "- {$element}: {$count} planets ({$percent}%)\n";
-        }
-
-        $houseList = '';
-        if (!empty($natalChart['houses'])) {
-            foreach ($natalChart['houses'] as $num => $house) {
-                $planetsInHouse = !empty($house['planets']) ? implode(', ', $house['planets']) : 'Empty';
-                $houseList .= "- House {$num} ({$house['sign']}): {$planetsInHouse}\n";
-            }
-        }
-
-        $aspectStr = '';
-        if (!empty($natalChart['aspects'])) {
-            foreach ($natalChart['aspects'] as $asp) {
-                $aspectStr .= "- {$asp['planet1']} {$asp['aspect']} {$asp['planet2']} ({$asp['nature']})\n";
-            }
-        }
-
-        $patternStr = '';
-        if (!empty($natalChart['patterns'])) {
-            foreach ($natalChart['patterns'] as $pat) {
-                $pList = implode(', ', $pat['planets']);
-                $patternStr .= "- Pattern {$pat['type']}: {$pList}\n";
-            }
-        }
-
-        return <<<TXT
-You are a professional Astrologer.
-Task: Interpret the Personal Natal Chart.
-
-[INPUT DATA]:
-- Birth coordinates: {$pob}
-- Time: {$tobText} |  {$dob}
-- Dominant element: {$natalChart['dominant_element']} | Modality: {$natalChart['dominant_modality']}
-{$elementStats}
-[PLANETS & ASCENDANT]:
-{$planetList}- Ascendant: {$ascendant['sign']}
-- Midheaven (MC): {$midheaven['sign']}
-[HOUSES]:
-{$houseList}[ASPECTS & PATTERNS]:
-{$aspectStr}{$patternStr}
-
-MANDATORY RULES:
-- Focused, direct, straight to the essence of the issue.
-- NO lengthy prose, NO rambling academic or encyclopedic analysis. Short and practical, read and immediately understand real-life application.
-- Interpretation stays close to real life, psychology, and human character.
-- DO NOT re-predict planet positions, only use the given data.
-
-EXPRESSION REQUIREMENTS:
-- ADDRESSING: "You". DO NOT use "Brother/Sister".
-- Natural, clear, easy-to-understand language.
-- Professional tone, straight to the point, no preachy or lecturing language.
-- Coherent presentation, not wordy.
-
-OUTPUT REQUIREMENTS:
-- DO NOT use bullet-section headings like a), b), c) or 1, 2, 3 as titles.
-- Use bold and italics reasonably, do not overuse (do not use ---, ***, ___).
-- Use short sub-headings, sub-headings are only for separation. Do not try to CRAM content meaning into headings.
-- Sub-headings should be single-sided, for example: World of Emotions and Inner Values -> Emotions.
-- FORMAT: Standard Markdown (do not use ---, ***, ___), easy-to-read text formatting.
-- MUST RETURN exactly in format [ZDC_HTML][/ZDC_HTML].
-
-PROHIBITIONS:
-- GUIDANCE paragraphs (Hint:) are ONLY FOR ORIENTING THOUGHT, not to be included in OUTPUT content.
-- FORBID draft passages, internal thinking, thinking-> only return complete content.
-- FORBID displaying any meta content, including but not limited to: Constraint Checklist, Confidence Score, validation, reasoning, notes.
-- ABSOLUTELY FORBID using icons or emojis in the text.
-- These parts only serve internal processing and MUST NOT be output in the final result.
-- Output only includes complete interpretation content in the requested format.
-
-[CONTENT GUIDE]
-(Hint: Write short, concise paragraphs focusing on:
-- Ego, subconscious & outer shell.
-- Thinking style, actions & emotions in relationships.
-- Innate challenges or most prominent potential.
-- Practical advice for personal development.)
 
 [ZDC_HTML]
 (Analysis content will be placed here)

@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BbZodiac_Admin {
+class Zodiac_Admin {
 
     private string $plugin_file;
 
@@ -12,25 +12,25 @@ class BbZodiac_Admin {
         add_action('admin_menu',            [$this, 'registerSettingsPage'], 99);
         add_action('admin_init',            [$this, 'saveSettings']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAssets']);
-        add_action('wp_ajax_bb_zodiac_test_provider', [$this, 'testProvider']);
-        add_action('wp_ajax_bb_zodiac_create_pages',  [$this, 'createPages']);
+        add_action('wp_ajax_zodiac_test_provider', [$this, 'testProvider']);
+        add_action('wp_ajax_zodiac_create_pages',  [$this, 'createPages']);
         add_filter('plugin_action_links_' . plugin_basename($this->plugin_file), [$this, 'settingsLink']);
     }
 
     public function enqueueAssets(string $hook): void {
-        if (!str_contains($hook, 'bb-zodiac-settings')) return;
+        if (!str_contains($hook, 'zodiac-settings')) return;
 
-        wp_enqueue_style('bb-zodiac-admin-css', BB_ZODIAC_PLUGIN_URL . 'admin/assets/css/zodiac-admin.css', [], BB_ZODIAC_VERSION);
-        wp_enqueue_script('bb-zodiac-admin-js', BB_ZODIAC_PLUGIN_URL . 'admin/assets/js/zodiac-admin.js', ['jquery'], BB_ZODIAC_VERSION, true);
-        wp_localize_script('bb-zodiac-admin-js', 'bbZodiacAdmin', [
+        wp_enqueue_style('zodiac', ZODIAC_PLUGIN_URL . 'admin/assets/css/zodiac.css', [], ZODIAC_VERSION);
+        wp_enqueue_script('zodiac', ZODIAC_PLUGIN_URL . 'admin/assets/js/zodiac.js', ['jquery'], ZODIAC_VERSION, true);
+        wp_localize_script('zodiac', 'zodiacAdmin', [
             'ajax_url'            => admin_url('admin-ajax.php'),
-            'test_provider_nonce' => wp_create_nonce('bb_zodiac_test_nonce'),
-            'create_pages_nonce'  => wp_create_nonce('bb_zodiac_create_pages_nonce'),
+            'test_provider_nonce' => wp_create_nonce('zodiac_test_nonce'),
+            'create_pages_nonce'  => wp_create_nonce('zodiac_create_pages_nonce'),
         ]);
     }
 
     public function settingsLink(array $links): array {
-        array_unshift($links, '<a href="admin.php?page=bb-zodiac-settings">Settings</a>');
+        array_unshift($links, '<a href="admin.php?page=zodiac-settings">Settings</a>');
         return $links;
     }
 
@@ -40,25 +40,25 @@ class BbZodiac_Admin {
             'Zodiac',
             'Zodiac',
             'manage_options',
-            'bb-zodiac-settings',
+            'zodiac-settings',
             [$this, 'renderSettingsPage']
         );
     }
 
     public function renderSettingsPage(): void {
-        $model         = get_option('bb_zodiac_ai_model',      'gemini-flash-latest');
-        $provider      = get_option('bb_zodiac_ai_provider',   'gemini');
-        $groq_model    = get_option('bb_zodiac_groq_model',    'llama-3.3-70b-versatile');
-        $gemini_key    = get_option('bb_zodiac_gemini_key',    '');
-        $groq_key      = get_option('bb_zodiac_groq_key',      '');
-        $mistral_key   = get_option('bb_zodiac_mistral_key',   '');
-        $mistral_model = get_option('bb_zodiac_mistral_model', 'mistral-small-latest');
-        $allow_ai      = get_option('bb_zodiac_allow_ai',      '0');
+        $model         = get_option('zodiac_ai_model',      'gemini-flash-latest');
+        $provider      = get_option('zodiac_ai_provider',   'gemini');
+        $groq_model    = get_option('zodiac_groq_model',    'llama-3.3-70b-versatile');
+        $gemini_key    = get_option('zodiac_gemini_key',    '');
+        $groq_key      = get_option('zodiac_groq_key',      '');
+        $mistral_key   = get_option('zodiac_mistral_key',   '');
+        $mistral_model = get_option('zodiac_mistral_model', 'mistral-small-latest');
+        $allow_ai      = get_option('zodiac_allow_ai',      '0');
         ?>
         <div class="wrap">
             <h1>Settings | Zodiac</h1>
             <form method="post">
-                <?php wp_nonce_field('bb_zodiac_settings_form'); ?>
+                <?php wp_nonce_field('zodiac_settings_form'); ?>
 
                 <h2>🤖 Enable / Disable AI</h2>
                 <table class="form-table">
@@ -168,13 +168,13 @@ class BbZodiac_Admin {
                     <tr>
                         <th scope="row">Select provider to test</th>
                         <td>
-                            <select id="bb_zodiac_test_provider_select" style="min-width:250px;">
+                            <select id="zodiac_test_provider_select" style="min-width:250px;">
                                 <option value="gemini">Google Gemini</option>
                                 <option value="groq">Groq</option>
                                 <option value="mistral">Mistral AI</option>
                             </select>
-                            <button type="button" id="bb-zodiac-test-provider" class="button" style="margin-left:10px;">Test Connection</button>
-                            <div id="bb-zodiac-test-results" style="margin-top:10px;"></div>
+                            <button type="button" id="zodiac-test-provider" class="button" style="margin-left:10px;">Test Connection</button>
+                            <div id="zodiac-test-results" style="margin-top:10px;"></div>
                         </td>
                     </tr>
                 </table>
@@ -186,8 +186,8 @@ class BbZodiac_Admin {
                     <tr>
                         <th scope="row">Create Zodiac Pages</th>
                         <td>
-                            <button type="button" id="bb-zodiac-create-pages" class="button button-primary">Create Pages</button>
-                            <div id="bb-zodiac-create-pages-results" style="margin-top:10px;"></div>
+                            <button type="button" id="zodiac-create-pages" class="button button-primary">Create Pages</button>
+                            <div id="zodiac-create-pages-results" style="margin-top:10px;"></div>
                             <p class="description">
                                 Create page with shortcode <code>[zodiac_form]</code>:<br>
                                 • <strong>/cung-hoang-dao/</strong> — Online zodiac decoding<br>
@@ -204,22 +204,22 @@ class BbZodiac_Admin {
     }
 
     public function saveSettings(): void {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'bb_zodiac_settings_form')) return;
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'zodiac_settings_form')) return;
         if (!current_user_can('manage_options')) return;
 
-        if (isset($_POST['provider']))      update_option('bb_zodiac_ai_provider',   sanitize_text_field($_POST['provider']));
-        if (isset($_POST['model']))         update_option('bb_zodiac_ai_model',       sanitize_text_field($_POST['model']));
-        if (isset($_POST['groq_model']))    update_option('bb_zodiac_groq_model',     sanitize_text_field($_POST['groq_model']));
-        if (isset($_POST['mistral_model'])) update_option('bb_zodiac_mistral_model',  sanitize_text_field($_POST['mistral_model']));
-        if (isset($_POST['gemini_key']))    update_option('bb_zodiac_gemini_key',     sanitize_textarea_field($_POST['gemini_key']));
-        if (isset($_POST['groq_key']))      update_option('bb_zodiac_groq_key',       sanitize_textarea_field($_POST['groq_key']));
-        if (isset($_POST['mistral_key']))   update_option('bb_zodiac_mistral_key',    sanitize_textarea_field($_POST['mistral_key']));
+        if (isset($_POST['provider']))      update_option('zodiac_ai_provider',   sanitize_text_field($_POST['provider']));
+        if (isset($_POST['model']))         update_option('zodiac_ai_model',       sanitize_text_field($_POST['model']));
+        if (isset($_POST['groq_model']))    update_option('zodiac_groq_model',     sanitize_text_field($_POST['groq_model']));
+        if (isset($_POST['mistral_model'])) update_option('zodiac_mistral_model',  sanitize_text_field($_POST['mistral_model']));
+        if (isset($_POST['gemini_key']))    update_option('zodiac_gemini_key',     sanitize_textarea_field($_POST['gemini_key']));
+        if (isset($_POST['groq_key']))      update_option('zodiac_groq_key',       sanitize_textarea_field($_POST['groq_key']));
+        if (isset($_POST['mistral_key']))   update_option('zodiac_mistral_key',    sanitize_textarea_field($_POST['mistral_key']));
 
-        update_option('bb_zodiac_allow_ai', isset($_POST['allow_ai']) ? '1' : '0');
+        update_option('zodiac_allow_ai', isset($_POST['allow_ai']) ? '1' : '0');
     }
 
     public function testProvider(): void {
-        if (!check_ajax_referer('bb_zodiac_test_nonce', 'nonce', false)) {
+        if (!check_ajax_referer('zodiac_test_nonce', 'nonce', false)) {
             wp_send_json_error(['message' => 'Invalid nonce.']);
             return;
         }
@@ -227,7 +227,7 @@ class BbZodiac_Admin {
             wp_send_json_error(['message' => 'Permission denied']);
             return;
         }
-        if (get_option('bb_zodiac_allow_ai', '0') !== '1') {
+        if (get_option('zodiac_allow_ai', '0') !== '1') {
             wp_send_json_error(['message' => 'AI is currently turned off in settings.']);
             return;
         }
@@ -235,26 +235,26 @@ class BbZodiac_Admin {
         $provider    = sanitize_text_field($_POST['provider'] ?? 'gemini');
         $test_prompt = "Test connection - respond with 'OK'";
 
-        if (!class_exists('BbZodiac_Gemini')) {
-            require_once BB_ZODIAC_PLUGIN_DIR . 'includes/gemini.php';
+        if (!class_exists('Zodiac_Gemini')) {
+            require_once ZODIAC_PLUGIN_DIR . 'includes/gemini.php';
         }
-        if (!class_exists('BbZodiac_Groq')) {
-            require_once BB_ZODIAC_PLUGIN_DIR . 'includes/groq.php';
+        if (!class_exists('Zodiac_Groq')) {
+            require_once ZODIAC_PLUGIN_DIR . 'includes/groq.php';
         }
-        if (!class_exists('BbZodiac_Mistral')) {
-            require_once BB_ZODIAC_PLUGIN_DIR . 'includes/mistral.php';
+        if (!class_exists('Zodiac_Mistral')) {
+            require_once ZODIAC_PLUGIN_DIR . 'includes/mistral.php';
         }
 
         try {
             switch ($provider) {
                 case 'gemini':
-                    $response = BbZodiac_Gemini::get_instance()->ftn_gemini_generate($test_prompt);
+                    $response = Zodiac_Gemini::get_instance()->ftn_gemini_generate($test_prompt);
                     break;
                 case 'groq':
-                    $response = BbZodiac_Groq::get_instance()->ftn_groq_generate($test_prompt);
+                    $response = Zodiac_Groq::get_instance()->ftn_groq_generate($test_prompt);
                     break;
                 case 'mistral':
-                    $response = BbZodiac_Mistral::get_instance()->ftn_mistral_generate($test_prompt);
+                    $response = Zodiac_Mistral::get_instance()->ftn_mistral_generate($test_prompt);
                     break;
                 default:
                     wp_send_json_error(['message' => 'Invalid provider']);
@@ -272,7 +272,7 @@ class BbZodiac_Admin {
     }
 
     public function createPages(): void {
-        if (!check_ajax_referer('bb_zodiac_create_pages_nonce', 'nonce', false)) {
+        if (!check_ajax_referer('zodiac_create_pages_nonce', 'nonce', false)) {
             wp_send_json_error(['message' => 'Invalid nonce.']);
             return;
         }
