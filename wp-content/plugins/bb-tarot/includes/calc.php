@@ -42,7 +42,7 @@ class Tarot_Calc {
             $lite[$pos_key] = [
                 'key'         => $key,
                 'orientation' => rand(0, 1) ? 'upright' : 'reversed',
-                'name_vi'     => $d['name_vi']
+                'name'        => $d['name']
             ];
         }
         return $lite;
@@ -71,7 +71,6 @@ class Tarot_Calc {
                 'key'               => $key,
                 'orientation'       => $orient,
                 'name'              => $d['name'] ?? '',
-                'name_vi'           => $d['name_vi'] ?? '',
                 'arcana'            => $d['arcana'] ?? '',
                 'suit'              => $d['suit'] ?? null,
                 'element'           => $d['element'] ?? '',
@@ -105,7 +104,7 @@ class Tarot_Calc {
         }
 
         if (empty(trim(strip_tags($html)))) {
-            $html = '<p>Không thể giải mã kết quả. Vui lòng thử lại.</p>';
+            $html = '<p>Unable to decode result. Please try again.</p>';
         }
 
         return ['hints' => [], 'html' => $html];

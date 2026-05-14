@@ -3,117 +3,117 @@ if (!defined('ABSPATH')) exit;
 
 $spreads = [
     '1_card' => [
-        'name'     => 'Trải bài 1 lá',
+        'name'     => '1-Card Spread',
         'count'    => 1,
         'template' => 'one-card',
         'positions' => [
-            'answer' => 'Lá bài'
+            'answer' => 'The Card'
         ]
     ],
     '3_cards' => [
-        'name'     => 'Trải bài 3 lá',
+        'name'     => '3-Card Spread',
         'count'    => 3,
         'template' => 'three-cards',
         'positions' => [
-            'past'    => 'Quá khứ',
-            'present' => 'Hiện tại',
-            'future'  => 'Tương lai'
+            'past'    => 'Past',
+            'present' => 'Present',
+            'future'  => 'Future'
         ]
     ],
     '5_cards' => [
-        'name'     => 'Trải bài 5 lá (Chữ thập)',
+        'name'     => '5-Card Cross Spread',
         'count'    => 5,
         'template' => 'cross',
         'positions' => [
-            'situation' => 'Hiện tại',
-            'challenge' => 'Thử thách',
-            'advice'    => 'Lời khuyên',
-            'external'  => 'Tác động ngoài',
-            'outcome'   => 'Kết quả'
+            'situation' => 'Current Situation',
+            'challenge' => 'Challenge',
+            'advice'    => 'Advice',
+            'external'  => 'External Influences',
+            'outcome'   => 'Outcome'
         ]
     ],
     '7_cards' => [
-        'name'     => 'Trải bài 7 lá (Móng ngựa)',
+        'name'     => '7-Card Horseshoe Spread',
         'count'    => 7,
         'template' => 'horseshoe',
         'positions' => [
-            'past'        => 'Quá khứ',
-            'present'     => 'Hiện tại',
-            'hidden'      => 'Yếu tố ẩn',
-            'obstacle'    => 'Trở ngại',
-            'environment' => 'Môi trường',
-            'advice'      => 'Lời khuyên',
-            'outcome'     => 'Kết quả'
+            'past'        => 'Past',
+            'present'     => 'Present',
+            'hidden'      => 'Hidden Factors',
+            'obstacle'    => 'Obstacles',
+            'environment' => 'Environment',
+            'advice'      => 'Advice',
+            'outcome'     => 'Outcome'
         ]
     ],
     '10_cards' => [
-        'name'     => 'Trải bài Celtic Cross (10 lá)',
+        'name'     => 'Celtic Cross (10 Cards)',
         'count'    => 10,
         'template' => 'celtic-cross',
         'positions' => [
-            'heart'       => 'Trọng tâm',
-            'challenge'   => 'Thử thách',
-            'root'        => 'Gốc rễ',
-            'past'        => 'Quá khứ',
-            'goal'        => 'Mục tiêu',
-            'future'      => 'Tương lai gần',
-            'self'        => 'Bản thân',
-            'environment' => 'Môi trường',
-            'hopes_fears' => 'Hy vọng / Sợ hãi',
-            'outcome'     => 'Kết quả'
+            'heart'       => 'Heart of the Matter',
+            'challenge'   => 'Challenge',
+            'root'        => 'Root Cause',
+            'past'        => 'Past',
+            'goal'        => 'Goal',
+            'future'      => 'Near Future',
+            'self'        => 'Self',
+            'environment' => 'Environment',
+            'hopes_fears' => 'Hopes / Fears',
+            'outcome'     => 'Outcome'
         ]
     ],
 
     'love_3_cards' => [
-        'name'     => 'Tình Yêu 3 Lá',
+        'name'     => 'Love 3-Card Spread',
         'count'    => 3,
         'template' => 'three-cards',
         'positions' => [
-            'you'        => 'Bạn (Năng lượng & Vị thế)',
-            'partner'    => 'Người ấy (Suy nghĩ & Cảm xúc)',
-            'connection' => 'Kết nối (Tương lai & Lời khuyên)'
+            'you'        => 'You (Energy & Position)',
+            'partner'    => 'Partner (Thoughts & Feelings)',
+            'connection' => 'Connection (Future & Advice)'
         ]
     ],
     'love_5_cards' => [
-        'name'     => 'Tình Yêu 5 Lá (Đối chiếu)',
+        'name'     => 'Love 5-Card Contrast Spread',
         'count'    => 5,
         'template' => 'cross',
         'positions' => [
-            'your_mind'   => 'Lý trí của Bạn',
-            'their_mind'  => 'Lý trí của Họ',
-            'your_heart'  => 'Trái tim của Bạn',
-            'their_heart' => 'Trái tim của Họ',
-            'outcome'     => 'Kết quả / Lời khuyên'
+            'your_mind'   => 'Your Mind',
+            'their_mind'  => 'Their Mind',
+            'your_heart'  => 'Your Heart',
+            'their_heart' => 'Their Heart',
+            'outcome'     => 'Outcome / Advice'
         ]
     ],
     'love_7_cards' => [
-        'name'     => 'Tình Yêu 7 Lá (Móng ngựa)',
+        'name'     => 'Love 7-Card Horseshoe Spread',
         'count'    => 7,
         'template' => 'horseshoe',
         'positions' => [
-            'past_love'      => 'Quá khứ tình cảm',
-            'present_status' => 'Tình trạng hiện tại',
-            'your_desire'    => 'Mong muốn của Bạn',
-            'their_desire'   => 'Mong muốn của Họ',
-            'hidden_factors' => 'Yếu tố cản trở',
-            'advice'         => 'Lời khuyên',
-            'future_outcome' => 'Kết quả tương lai'
+            'past_love'      => 'Past Love',
+            'present_status' => 'Present Status',
+            'your_desire'    => 'Your Desire',
+            'their_desire'   => 'Their Desire',
+            'hidden_factors' => 'Hidden Blocks',
+            'advice'         => 'Advice',
+            'future_outcome' => 'Future Outcome'
         ]
     ],
     'love_9_cards' => [
-        'name'     => 'Tình Yêu 9 Lá (Toàn cảnh)',
+        'name'     => 'Love 9-Card Overview',
         'count'    => 9,
         'template' => 'love-nine',
         'positions' => [
-            'you_now'       => 'Bạn ở hiện tại',
-            'them_now'      => 'Họ ở hiện tại',
-            'core_issue'    => 'Vấn đề cốt lõi',
-            'past_bond'     => 'Quá khứ chung',
-            'your_hope'     => 'Kỳ vọng của Bạn',
-            'their_hope'    => 'Kỳ vọng của Họ',
-            'challenge'     => 'Thử thách sắp tới',
-            'advice'        => 'Lời khuyên từ vũ trụ',
-            'final_outcome' => 'Kết quả cuối cùng'
+            'you_now'       => 'You Now',
+            'them_now'      => 'Them Now',
+            'core_issue'    => 'Core Issue',
+            'past_bond'     => 'Shared Past',
+            'your_hope'     => 'Your Hope',
+            'their_hope'    => 'Their Hope',
+            'challenge'     => 'Upcoming Challenge',
+            'advice'        => 'Advice from the Universe',
+            'final_outcome' => 'Final Outcome'
         ]
     ],
 ];

@@ -4,97 +4,97 @@ if (!defined('ABSPATH')) exit;
 
 function tarot_build_prompt_topic(string $name, string $topic, array $cards, string $spread_key): string {
     $topic_labels = [
-        'love'    => 'Tình yêu / Mối quan hệ',
-        'career'  => 'Sự nghiệp / Công việc',
-        'finance' => 'Tài chính',
-        'study'   => 'Học tập / Thi cử',
-        'health'  => 'Sức khỏe',
-        'future'  => 'Định hướng tương lai',
+        'love'    => 'Love / Relationships',
+        'career'  => 'Career / Work',
+        'finance' => 'Finance',
+        'study'   => 'Study / Exams',
+        'health'  => 'Health',
+        'future'  => 'Future Direction',
     ];
-    
+
     $topic_contexts = [
-        'love'    => 'Tập trung vào tình yêu, mối quan hệ tình cảm, hôn nhân, đôi lứa. Diễn giải các lá bài theo góc độ tình cảm, cảm xúc, sự kết nối giữa hai người.',
-        'career'  => 'Tập trung vào sự nghiệp, công việc, thăng tiến, chuyển việc, môi trường làm việc. Diễn giải các lá bài theo góc độ nghề nghiệp, cơ hội phát triển, thử thách trong công việc.',
-        'finance' => 'Tập trung vào tài chính, tiền bạc, đầu tư, kinh doanh, thu nhập. Diễn giải các lá bài theo góc độ tài chính, cơ hội kiếm tiền, rủi ro tài chính.',
-        'study'   => 'Tập trung vào học tập, thi cử, du học, kiến thức, kỹ năng. Diễn giải các lá bài theo góc độ học vấn, khả năng tiếp thu, kết quả thi cử.',
-        'health'  => 'Tập trung vào sức khỏe thể chất, tinh thần, năng lượng, sự cân bằng. Diễn giải các lá bài theo góc độ sức khỏe, cảnh báo, lời khuyên chăm sóc bản thân.',
-        'future'  => 'Tập trung vào định hướng tương lai, quyết định quan trọng, con đường phía trước. Diễn giải các lá bài theo góc độ tổng quan, xu hướng, cơ hội và thách thức sắp tới.',
+        'love'    => 'Focus on love, romantic relationships, marriage, and partnerships. Interpret the cards from the angle of emotion, feelings, and the connection between two people.',
+        'career'  => 'Focus on career, work, promotion, job changes, and the work environment. Interpret the cards from the angle of profession, growth opportunities, and workplace challenges.',
+        'finance' => 'Focus on finances, money, investment, business, and income. Interpret the cards from the angle of financial matters, earning opportunities, and financial risks.',
+        'study'   => 'Focus on study, exams, studying abroad, knowledge, and skills. Interpret the cards from the angle of education, learning ability, and exam results.',
+        'health'  => 'Focus on physical health, mental wellbeing, energy, and balance. Interpret the cards from the angle of health, warnings, and self-care advice.',
+        'future'  => 'Focus on future direction, important decisions, and the road ahead. Interpret the cards from a broad angle covering trends, upcoming opportunities, and challenges.',
     ];
 
     $topic_label = $topic_labels[$topic] ?? $topic;
     $topic_context = $topic_contexts[$topic] ?? '';
-    
+
     static $spreads = null;
     if ($spreads === null) {
         $spreads = require TAROT_PLUGIN_DIR . 'includes/spreads.php';
     }
     $spread_config = $spreads[$spread_key] ?? $spreads['3_cards'];
     $positions = $spread_config['positions'];
-    
+
     $card_lines = '';
-    $orient_labels = ['upright' => 'Xuôi ↑', 'reversed' => 'Ngược ↓'];
-    
+    $orient_labels = ['upright' => 'Upright ↑', 'reversed' => 'Reversed ↓'];
+
     foreach ($positions as $pos_key => $pos_label) {
         if (!isset($cards[$pos_key])) continue;
         $c = $cards[$pos_key];
         $ol = $orient_labels[$c['orientation']] ?? '';
         $kw = implode(', ', $c['keywords']);
-        
+
         $card_lines .= "- [{$pos_label}]: {$c['name_vi']} ({$c['name']}) — {$ol}\n";
-        $card_lines .= "  Thông điệp: {$kw}\n";
+        $card_lines .= "  Message: {$kw}\n";
         if (!empty($c['timing'])) {
-            $card_lines .= "  Thời điểm: {$c['timing']}\n";
+            $card_lines .= "  Timing: {$c['timing']}\n";
         }
         $card_lines .= "\n";
     }
 
     return <<<TXT
-Dựa trên toàn bộ các lá bài đã rút, hãy tổng hợp insight và giải nghĩa lá bài về chủ đề "{$topic_label}".
+Based on all the drawn cards, synthesize the insights and interpret the reading on the topic of "{$topic_label}".
 
-THÔNG TIN:
-- Họ và tên: {$name}
-- Chủ đề quan tâm: {$topic_label}
+INFORMATION:
+- Full name: {$name}
+- Topic of interest: {$topic_label}
 
-CÁC LÁ BÀI:
+CARDS:
 {$card_lines}
 
-CONTEXT CHỦ ĐỀ:
+TOPIC CONTEXT:
 {$topic_context}
 
-YÊU CẦU QUY TẮC:
-- KHÔNG phân tích từng lá bài riêng lẻ  
-- KHÔNG giải thích ý nghĩa lá bài  
-- Xưng hô “Bạn” hoặc trích xuất tên (ví dụ: “Bùi Văn Lợi” → “Lợi”), dùng nhất quán  
-- KHÔNG dùng “Anh/Chị/Em/Họ/Mày/Tao”  
-- TỔNG HỢP insight từ toàn bộ lá bài để trả lời câu hỏi  
-- KHÔNG suy diễn ngoài dữ liệu lá bài  
+RULES:
+- DO NOT analyze each card individually
+- DO NOT explain card meanings
+- Address the user as "you" or extract their first name (e.g., "John Smith" → "John"), use consistently
+- DO NOT use gendered or informal pronouns
+- SYNTHESIZE insights from all cards to answer the question
+- DO NOT infer beyond the card data
 
-YÊU CẦU DIỄN ĐẠT:
-- Ngôn ngữ tự nhiên, rõ ràng, dễ hiểu  
-- Văn phong chuyên nghiệp, đi thẳng vào vấn đề  
-- Trình bày mạch lạc, không dài dòng  
-- Sử dụng **in đậm**, *in nghiêng* hợp lý để nhấn mạnh
+STYLE REQUIREMENTS:
+- Natural, clear, and easy-to-understand language
+- Professional tone, get straight to the point
+- Coherent and concise presentation
+- Use **bold** and *italic* appropriately for emphasis
 
-YÊU CẦU OUTPUT:
-1. TUYỆT ĐỐI KHÔNG dùng các gạch đầu dòng phân mục như a), b), c), d), e), f) hay 1, 2, 3, 4 để làm tiêu đề trong bài viết.
-2. CÁC ĐOẠN (Gợi ý:)/hướng dẫn CHỈ DÙNG ĐỂ ĐỊNH HƯỚNG SUY NGHĨ, không được đưa vào nội dung OUTPUT.
-3. Trả về đúng format [AST_RESULT][/AST_RESULT], sử dụng Markdown, định dạng văn bản dễ đọc.
-4. Sử dụng in đậm in nghiêng hợp lý, không lạm dụng, (không sử dụng ---, ***, ___, thẻ hr).
-5. KHÔNG in tiêu đề, chỉ có nội dung. không in những hướng dẫn, suy nghĩ nội bộ vào nội dung.
+OUTPUT REQUIREMENTS:
+1. NEVER use lettered or numbered section headers such as a), b), c) or 1, 2, 3 as headings in the output.
+2. (Hint:) sections and instructions are for INTERNAL GUIDANCE ONLY and must NOT appear in the output.
+3. Return output strictly in [AST_RESULT][/AST_RESULT] format, using Markdown for readable formatting.
+4. Use bold and italic sparingly and appropriately. Do NOT use ---, ***, ___, or hr tags.
+5. Do NOT print any headings or internal instructions in the output. Content only.
 
 [AST_RESULT]
-(Gợi ý: Nhìn qua toàn bộ các lá bài và vị trí của chúng. Năng lượng chung là gì? (Tích cực, tiêu cực, mâu thuẫn, hay đang chuyển giao?). Xác định một thông điệp cốt lõi nhất bao trùm toàn bộ trải bài để làm câu mở đầu.)
-[Viết 1 đoạn văn mở đầu: Đi thẳng vào nhận định tổng quan về tình huống hiện tại của {$name} đối với câu hỏi/chủ đề. Bắt đầu bằng: Chào bạn, (hoặc Chào {$name}, ).]
+(Hint: Scan all the cards and their positions. What is the overall energy? (Positive, negative, conflicted, or in transition?) Identify the single core message that runs through the entire spread to use as the opening sentence.)
+[Write 1 opening paragraph: Go straight to an overall assessment of {$name}'s current situation regarding the question or topic. Begin with: Hello, (or Hello {$name},).]
 
-(Gợi ý: Xâu chuỗi các lá bài thành một câu chuyện theo luồng nhân quả hoặc tiến trình trải bài (ví dụ: Nguyên nhân/Quá khứ -> Nút thắt hiện tại -> Xu hướng tương lai). 
-- BẮT BUỘC: Lồng ghép tên các lá bài (và chiều xuôi/ngược) vào trong câu văn một cách mượt mà để minh chứng cho nhận định.
-- CẤM TUYỆT ĐỐI: Không được dùng cấu trúc liệt kê kiểu "Lá bài 1 ở vị trí X cho thấy... Lá bài 2 nói rằng...".
-- Chỉ ra sự tương tác: Lá bài này đang bổ trợ hay cản trở lá bài kia?)
-[Viết 2-3 đoạn văn phân tích mạch lạc. Diễn giải những góc khuất, những rào cản đang gặp phải và xu hướng sắp tới. Văn phong khách quan, sâu sắc, thấu hiểu tâm lý.]
+(Hint: Weave the cards into a narrative following a cause-and-effect or spread-flow structure (e.g., Root cause / Past -> Current tension -> Future trend).
+- REQUIRED: Naturally embed card names (and their orientation) into the sentences as evidence for your interpretation.
+- STRICTLY FORBIDDEN: Do not use a list structure like "Card 1 in position X shows... Card 2 says...".
+- Point out interaction: Is this card supporting or blocking the other?)
+[Write 2-3 coherent analytical paragraphs. Interpret the hidden layers, the obstacles being faced, and the trends ahead. Objective, insightful, and psychologically empathetic tone.]
 
-(Gợi ý: Dựa vào lá bài mang tính giải pháp hoặc kết quả để đúc kết hành động.)
-Nếu tổng thể tốt: Có thể viết 1 câu nhẹ nhàng đúng mực, phù hợp tình huống ví dụ, chúc mứng, lời khen .v.v
-Nếu tổng thể trung bình trở xuống: Có thể viết 1 câu nhẹ nhàng ngắn, lời khuyên/an ủi tâm lý nhưng đảm bảo không biến chất Tarot, không dạy đời, đạo lý.
+(Hint: Draw on the resolution or outcome card to arrive at a closing point.)
+If the overall reading is positive: Write 1 brief, fitting sentence — a congratulation or light praise appropriate to the situation.
+If the overall reading is average or below: Write 1 short, gentle sentence of advice or emotional support, while keeping the Tarot reading authentic. No moralizing or life lessons.
 [/AST_RESULT]
 
 TXT;
@@ -108,69 +108,69 @@ function tarot_build_prompt_question(string $name, string $question, array $card
     }
     $spread_config = $spreads[$spread_key] ?? $spreads['3_cards'];
     $positions = $spread_config['positions'];
-    
+
     // Format cards
     $card_lines = '';
-    $orient_labels = ['upright' => 'Xuôi ↑', 'reversed' => 'Ngược ↓'];
-    
+    $orient_labels = ['upright' => 'Upright ↑', 'reversed' => 'Reversed ↓'];
+
     foreach ($positions as $pos_key => $pos_label) {
         if (!isset($cards[$pos_key])) continue;
         $c = $cards[$pos_key];
         $ol = $orient_labels[$c['orientation']] ?? '';
         $kw = implode(', ', $c['keywords']);
-        
+
         $card_lines .= "- [{$pos_label}]: {$c['name_vi']} ({$c['name']}) — {$ol}\n";
-        $card_lines .= "  Thông điệp: {$kw}\n";
+        $card_lines .= "  Message: {$kw}\n";
         if (!empty($c['timing'])) {
-            $card_lines .= "  Thời điểm: {$c['timing']}\n";
+            $card_lines .= "  Timing: {$c['timing']}\n";
         }
         $card_lines .= "\n";
     }
 
     return <<<TXT
-Dựa trên toàn bộ các lá bài đã rút, hãy tổng hợp insight và trả lời trực tiếp câu hỏi Tarot.
+Based on all the drawn cards, synthesize the insights and directly answer the Tarot question.
 
-THÔNG TIN:
-- Họ và tên: {$name}
-- Câu hỏi: "{$question}"
+INFORMATION:
+- Full name: {$name}
+- Question: "{$question}"
 
-CÁC LÁ BÀI:
+CARDS:
 {$card_lines}
 
-YÊU CẦU QUY TẮC:
-- KHÔNG phân tích từng lá bài riêng lẻ  
-- KHÔNG giải thích ý nghĩa lá bài  
-- Xưng hô “Bạn” hoặc trích xuất tên (ví dụ: “Bùi Văn Lợi” → “Lợi”), dùng nhất quán  
-- KHÔNG dùng “Anh/Chị/Em/Họ/Mày/Tao”  
-- TỔNG HỢP insight từ toàn bộ lá bài để trả lời câu hỏi  
-- KHÔNG suy diễn ngoài dữ liệu lá bài, KHÔNG CẦN VIẾT CHO HAY. Không sử dụng ngôn ngữ dạy đời, đạo lý.
+RULES:
+- DO NOT analyze each card individually
+- DO NOT explain card meanings
+- Address the user as "you" or extract their first name (e.g., "John Smith" → "John"), use consistently
+- DO NOT use gendered or informal pronouns
+- SYNTHESIZE insights from all cards to answer the question
+- DO NOT infer beyond the card data. DO NOT over-polish the writing. Do not use moralizing or preachy language.
 
-YÊU CẦU DIỄN ĐẠT:
-- Ngôn ngữ tự nhiên, rõ ràng, dễ hiểu  
-- Văn phong chuyên nghiệp, đi thẳng vào vấn đề  
-- Trình bày mạch lạc, không dài dòng  
-- Sử dụng **in đậm**, *in nghiêng* hợp lý để nhấn mạnh
+STYLE REQUIREMENTS:
+- Natural, clear, and easy-to-understand language
+- Professional tone, get straight to the point
+- Coherent and concise presentation
+- Use **bold** and *italic* appropriately for emphasis
 
-YÊU CẦU OUTPUT:
-1. TUYỆT ĐỐI KHÔNG dùng các gạch đầu dòng phân mục như a), b), c), d), e), f) hay 1, 2, 3, 4 để làm tiêu đề trong bài viết.
-2. CÁC ĐOẠN (Gợi ý:)/hướng dẫn CHỈ DÙNG ĐỂ ĐỊNH HƯỚNG SUY NGHĨ, không được đưa vào nội dung OUTPUT.
-3. Trả về đúng format [AST_RESULT][/AST_RESULT], sử dụng Markdown, định dạng văn bản dễ đọc.
-4. Sử dụng in đậm in nghiêng hợp lý, không lạm dụng, (không sử dụng ---, ***, ___, thẻ hr).
-5. Không in tiêu đề, chỉ có nội dung Không in những hướng dẫn, suy nghĩ nội bộ vào nội dung.
+OUTPUT REQUIREMENTS:
+1. NEVER use lettered or numbered section headers such as a), b), c) or 1, 2, 3 as headings in the output.
+2. (Hint:) sections and instructions are for INTERNAL GUIDANCE ONLY and must NOT appear in the output.
+3. Return output strictly in [AST_RESULT][/AST_RESULT] format, using Markdown for readable formatting.
+4. Use bold and italic sparingly and appropriately. Do NOT use ---, ***, ___, or hr tags.
+5. Do NOT print any headings or internal instructions in the output. Content only.
 
 [AST_RESULT]
-(Gợi ý: Nhìn lướt qua toàn bộ các lá bài và vị trí của chúng. Năng lượng chung là gì? (Tích cực, tiêu cực, mâu thuẫn, hay đang chuyển giao?). Xác định một thông điệp cốt lõi nhất bao trùm toàn bộ trải bài để làm câu mở đầu.)
-[Viết 1 đoạn văn mở đầu: Đi thẳng vào nhận định tổng quan về tình huống hiện tại của {$name} đối với câu hỏi/chủ đề. Bắt đầu bằng: Chào bạn, (hoặc Chào {$name}, ).]
+(Hint: Quickly scan all the cards and their positions. What is the overall energy? (Positive, negative, conflicted, or in transition?) Identify the single core message that runs through the entire spread to use as the opening sentence.)
+[Write 1 opening paragraph: Go straight to an overall assessment of {$name}'s current situation regarding the question or topic. Begin with: Hello, (or Hello {$name},).]
 
-(Gợi ý: Xâu chuỗi các lá bài thành một câu chuyện theo luồng nhân quả hoặc tiến trình trải bài (ví dụ: Nguyên nhân/Quá khứ -> Nút thắt hiện tại -> Xu hướng tương lai). 
-- BẮT BUỘC: Lồng ghép tên các lá bài (và chiều xuôi/ngược) vào trong câu văn một cách mượt mà để minh chứng cho nhận định.
-- CẤM TUYỆT ĐỐI: Không được dùng cấu trúc liệt kê kiểu "Lá bài 1 ở vị trí X cho thấy... Lá bài 2 nói rằng...".
-- Chỉ ra sự tương tác: Lá bài này đang bổ trợ hay cản trở lá bài kia?)
-[Viết 2-3 đoạn văn phân tích mạch lạc. Diễn giải những góc khuất, những rào cản đang gặp phải và xu hướng sắp tới. Văn phong khách quan, sâu sắc, thấu hiểu tâm lý.]
+(Hint: Weave the cards into a narrative following a cause-and-effect or spread-flow structure (e.g., Root cause / Past -> Current tension -> Future trend).
+- REQUIRED: Naturally embed card names (and their orientation) into the sentences as evidence for your interpretation.
+- STRICTLY FORBIDDEN: Do not use a list structure like "Card 1 in position X shows... Card 2 says...".
+- Point out interaction: Is this card supporting or blocking the other?)
+[Write 2-3 coherent analytical paragraphs. Interpret the hidden layers, the obstacles being faced, and the trends ahead. Objective, insightful, and psychologically empathetic tone.]
 
-(Gợi ý: Dựa vào lá bài mang tính giải pháp hoặc kết quả để đúc kết hành động.)
-Nếu tổng thể tốt: Có thể viết 1 câu nhẹ nhàng đúng mục, phù hợp tình huống ví dụ, chúc mứng, lời khen .v.v
-Nếu tổng thể trung bình trở xuống: Có thể viết 1 câu nhẹ nhàng ngắn, lời khuyên/an ủi tâm lý nhưng đảm bảo không biến chất Tarot, không dạy đời, đạo lý.
+(Hint: Draw on the resolution or outcome card to arrive at a closing point.)
+If the overall reading is positive: Write 1 brief, fitting sentence — a congratulation or light praise appropriate to the situation.
+If the overall reading is average or below: Write 1 short, gentle sentence of advice or emotional support, while keeping the Tarot reading authentic. No moralizing or life lessons.
 [/AST_RESULT]
 TXT;
 }
