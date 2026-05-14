@@ -69,7 +69,7 @@ class Numerology {
                 'required'          => true,
                 'sanitize_callback' => 'sanitize_text_field',
                 'validate_callback' => function($param) {
-                    return !empty($param) && preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $param);
+                    return !empty($param) && preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $param);
                 }
             ]
         ];
@@ -189,7 +189,7 @@ class Numerology {
 
         $d = DateTime::createFromFormat('Y-m-d', $dob);
         if ($d && $d->format('Y-m-d') === $dob) {
-            return $dob;
+            return $d->format('d/m/Y');
         }
 
         $normalized = preg_replace('/[\-\.\s]+/', '/', $dob);
@@ -197,7 +197,7 @@ class Numerology {
         foreach ($formats as $fmt) {
             $d = DateTime::createFromFormat($fmt, $normalized);
             if ($d && $d->format($fmt) === $normalized) {
-                return $d->format('Y-m-d');
+                return $d->format('d/m/Y');
             }
         }
 

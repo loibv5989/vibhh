@@ -101,11 +101,6 @@ jQuery(function ($) {
             $input.val(formatted);
             return formatted;
         },
-        dobToISO(dob) {
-            const parts = dob.split('/');
-            if (parts.length !== 3) return dob;
-            return parts[2] + '-' + parts[1] + '-' + parts[0];
-        }
     };
 
     const Auth = {
@@ -366,14 +361,14 @@ jQuery(function ($) {
                 $('.zdc-love-btn-reset').fadeOut(150).prop('disabled', true);
 
                 $.post(ZodiacAjax.api_url + 'love', {
-                    name_a: nameA, dob_a: Validator.dobToISO(dobA), name_b: nameB, dob_b: Validator.dobToISO(dobB), zdc_cbsp: $('#zdc-love-cbsp').val() || ''
+                    name_a: nameA, dob_a: dobA, name_b: nameB, dob_b: dobB, zdc_cbsp: $('#zdc-love-cbsp').val() || ''
                 }, function (res) {
                     if (!res.success) {
                         $('#zdc-error-love-name1').text(res.data?.message || 'An error has occurred.');
                         $submit.removeClass('zdc-loading').removeAttr('disabled');
                         return;
                     }
-                    activeLoveData = {nameA, dobA: Validator.dobToISO(dobA), nameB, dobB: Validator.dobToISO(dobB), calcData: res.data.calc_data || null};
+                    activeLoveData = {nameA, dobA, nameB, dobB, calcData: res.data.calc_data || null};
                     $wrapper.addClass('is-focused');
                     $result.html(res.data.html).fadeIn(300);
                     $('html,body').animate({scrollTop: $result.offset().top - 80}, 500);

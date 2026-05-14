@@ -88,11 +88,6 @@ jQuery(function ($) {
             $input.val(formatted);
             return formatted;
         },
-        dobToISO(dob) {
-            const parts = dob.split('/');
-            if (parts.length !== 3) return dob;
-            return parts[2] + '-' + parts[1] + '-' + parts[0];
-        }
     };
 
     const Color = {
@@ -353,7 +348,7 @@ jQuery(function ($) {
                 fetch(nrgy.api_url + 'calculate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ full_name: name, dob: Validator.dobToISO(dob) })
+                    body: JSON.stringify({ full_name: name, dob })
                 })
                     .then(response => response.json())
                     .then(res => {
