@@ -26,8 +26,8 @@ if (!defined('ABSPATH')) exit;
                             <span class="nrgy-error" id="nrgy-error-name"></span>
                         </div>
                         <div class="nrgy-form-group">
-                            <label for="nrgy-dob">Date of Birth <span style="font-weight:400;opacity:.7">(YYYY-MM-DD)</span></label>
-                            <input type="text" id="nrgy-dob" class="nrgy-input" placeholder="e.g. 1996-09-11" maxlength="10"  autocomplete="on">
+                            <label for="nrgy-dob">Date of Birth <span style="font-weight:400;opacity:.7">(DD/MM/YYYY)</span></label>
+                            <input type="text" id="nrgy-dob" class="nrgy-input" placeholder="e.g. 11/09/1996" maxlength="10"  autocomplete="on">
                             <span class="nrgy-error" id="nrgy-error-dob"></span>
                         </div>
                     </div>

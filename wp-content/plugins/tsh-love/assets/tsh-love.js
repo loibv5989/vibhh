@@ -43,19 +43,19 @@ jQuery(function ($) {
             setSubmit(on) {
                 const $l = $submitBtn.find('.ftn-btn-loading');
                 on ? start($submitBtn, $l, [
-                    'Calculating...', 'Calculating Life Path...',
-                        'Calculating Soul Urge...', 'Calculating Attitude...',
-                        'Compiling...', 'Displaying result...'
-                    ], 'submit') : stop($submitBtn, $l, 'Calculating...', 'submit');
+                    'Đang tính toán...', 'Tính toán số chủ đạo ...',
+                        'Tính toán số linh hồn ...', 'Tính toán số thái độ ...',
+                        'Tổng hợp...', 'Hiển thị kết quả...'
+                    ], 'submit') : stop($submitBtn, $l, 'Đang tính toán...', 'submit');
             },
             setAnalyze(on) {
                 const $btn = $('#numm-analyze-btn');
                 const $l = $btn.find('.ftn-analyze-loading');
                 on ? start($btn, $l, [
-                    'Analyzing indexes...', 'Analyzing energy...',
-                        'Analyzing resonance...', 'Analyzing differences...',
-                        'Compiling...', 'Displaying result...'
-                    ], 'analyze') : stop($btn, $l, 'Analyzing...', 'analyze');
+                    'Phân tích các chỉ số...', 'Phân tích năng lượng...',
+                        'Phân tích cộng hướng...', 'Phân tích sự khác biệt...',
+                        'Đang tổng hợp...', 'Hiển thị kết quả...'
+                    ], 'analyze') : stop($btn, $l, 'Đang phân tích...', 'analyze');
             },
         };
     })();
@@ -66,7 +66,7 @@ jQuery(function ($) {
             $i.removeClass('is-error');
             $e.text('');
             if (!v) {
-                $e.text('Please enter a name.');
+                $e.text('Vui lòng nhập tên.');
                 $i.addClass('is-error');
                 return false;
             }
@@ -77,25 +77,25 @@ jQuery(function ($) {
             $i.removeClass('is-error');
             $e.text('');
             if (!v) {
-                $e.text('Please enter date of birth.');
+                $e.text('Vui lòng nhập ngày sinh.');
                 $i.addClass('is-error');
                 return false;
             }
             const m = v.match(/^(\d{1,2})[/\-\.\s](\d{1,2})[/\-\.\s](19\d{2}|20\d{2})$/);
             if (!m) {
-                $e.text('Invalid date (e.g. 15/12/1999).');
+                $e.text('Ngày không hợp lệ (VD: 15/12/1999).');
                 $i.addClass('is-error');
                 return false;
             }
             const d = parseInt(m[1], 10), mo = parseInt(m[2], 10), y = parseInt(m[3], 10);
             if (mo < 1 || mo > 12 || d < 1 || d > 31) {
-                $e.text('Month or day does not exist.');
+                $e.text('Ngày hoặc tháng không tồn tại.');
                 $i.addClass('is-error');
                 return false;
             }
             const testDate = new Date(y, mo - 1, d);
             if (testDate.getFullYear() !== y || testDate.getMonth() !== mo - 1 || testDate.getDate() !== d) {
-                $e.text('Date ' + d + '/' + mo + ' does not exist.');
+                $e.text('Ngày ' + d + '/' + mo + ' không tồn tại.');
                 $i.addClass('is-error');
                 return false;
             }
@@ -105,8 +105,8 @@ jQuery(function ($) {
 
     const normalizeName = v =>
         (v || '').replace(/\s+/g, ' ').trim()
-            .toLowerCase().split(' ').filter(Boolean)
-            .map(w => w.split('-').map(p => p ? p.charAt(0).toUpperCase() + p.slice(1).toLowerCase() : '').join('-'))
+            .toLocaleLowerCase('vi-VN').split(' ').filter(Boolean)
+            .map(w => w.split('-').map(p => p ? p.charAt(0).toLocaleUpperCase('vi-VN') + p.slice(1).toLocaleLowerCase('vi-VN') : '').join('-'))
             .join(' ');
 
     const validateAll = () => !!(
@@ -122,8 +122,8 @@ jQuery(function ($) {
         typeText($el, text, speed, cb) {
             let i = 0, html = '', inTag = false;
             const $span = $('<span></span>');
-            $el.append($span);
             $('#numm-chat-body .ftn-cursor').removeClass('ftn-cursor-hidden').appendTo($el);
+            $el.append($span);
 
             const tick = () => {
                 if (i >= text.length) {
@@ -213,7 +213,7 @@ jQuery(function ($) {
         const id = $(this).attr('id');
         Validator.name(id, id.replace('numm-', 'numm-error-'));
         const v = $(this).val();
-        if (v) $(this).val(normalizeName(v.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trim()));
+        if (v) $(this).val(normalizeName(v.replace(/[^a-zA-ZÀ-ỹ\s]/g, '').replace(/\s+/g, ' ').trim()));
     };
 
     const onDobBlur = function () {
@@ -248,7 +248,7 @@ jQuery(function ($) {
             data: JSON.stringify(baseData), contentType: 'application/json',
             success(res) {
                 if (!res.success) {
-                    $('#numm-error-name1').text(res.message || 'An error occurred.');
+                    $('#numm-error-name1').text(res.message || 'Lỗi xảy ra.');
                     Spinner.setSubmit(false);
                     return;
                 }
@@ -270,7 +270,7 @@ jQuery(function ($) {
                 });
             },
             error() {
-                $('#numm-error-name1').text('Connection error.');
+                $('#numm-error-name1').text('Lỗi kết nối.');
                 Spinner.setSubmit(false);
             },
         });
@@ -292,10 +292,10 @@ jQuery(function ($) {
             url: REST + '/analyze', type: 'POST',
             data: JSON.stringify(baseData), contentType: 'application/json',
             success(res) {
-                res.success ? AIResult.inject(res) : onError(res.message || 'Unknown error. Please try again.');
+                res.success ? AIResult.inject(res) : onError(res.message || 'Lỗi không xác định. Vui lòng thử lại.');
             },
             error() {
-                onError('Connection error. Please try again later.');
+                onError('Lỗi kết nối. Vui lòng thử lại sau.');
             },
         });
     };

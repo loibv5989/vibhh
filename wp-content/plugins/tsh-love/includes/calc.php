@@ -41,19 +41,19 @@ class TshLove_Calc {
         $age_gap_msg = '';
 
         if ($diff > 0) {
-            if ($absDiff >= 10 && $absDiff <= 15) { $penalty = 5; $age_gap_msg = "He is $absDiff years older"; }
-            elseif ($absDiff >= 16 && $absDiff <= 25) { $penalty = 10; $age_gap_msg = "He is $absDiff years older"; }
-            elseif ($absDiff >= 26 && $absDiff <= 30) { $penalty = 15; $age_gap_msg = "He is $absDiff years older (Generation gap)"; }
-            elseif ($absDiff >= 31 && $absDiff <= 40) { $penalty = 25; $age_gap_msg = "He is $absDiff years older (Large gap)"; }
-            elseif ($absDiff >= 41 && $absDiff <= 50) { $penalty = 35; $age_gap_msg = "He is $absDiff years older (Major barrier)"; }
-            elseif ($absDiff > 50) { $penalty = 50; $age_gap_msg = "He is $absDiff years older (Incompatible)"; }
+            if ($absDiff >= 10 && $absDiff <= 15) { $penalty = 5; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi"; }
+            elseif ($absDiff >= 16 && $absDiff <= 25) { $penalty = 10; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi"; }
+            elseif ($absDiff >= 26 && $absDiff <= 30) { $penalty = 15; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi (Khoảng cách thế hệ)"; }
+            elseif ($absDiff >= 31 && $absDiff <= 40) { $penalty = 25; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi (Khoảng cách lớn)"; }
+            elseif ($absDiff >= 41 && $absDiff <= 50) { $penalty = 35; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi (Rào cản rất lớn)"; }
+            elseif ($absDiff > 50) { $penalty = 50; $age_gap_msg = "Nam hơn Nữ $absDiff tuổi (Không phù hợp)"; }
         } elseif ($diff < 0) {
-            if ($absDiff >= 4 && $absDiff <= 9) { $penalty = 5; $age_gap_msg = "She is $absDiff years older"; }
-            elseif ($absDiff >= 10 && $absDiff <= 15) { $penalty = 12; $age_gap_msg = "She is $absDiff years older"; }
-            elseif ($absDiff >= 16 && $absDiff <= 20) { $penalty = 20; $age_gap_msg = "She is $absDiff years older (Major barrier)"; }
-            elseif ($absDiff >= 21 && $absDiff <= 30) { $penalty = 30; $age_gap_msg = "She is $absDiff years older (Large gap)"; }
-            elseif ($absDiff >= 31 && $absDiff <= 40) { $penalty = 40; $age_gap_msg = "She is $absDiff years older (Major barrier)"; }
-            elseif ($absDiff > 40) { $penalty = 50; $age_gap_msg = "She is $absDiff years older (Incompatible)"; }
+            if ($absDiff >= 4 && $absDiff <= 9) { $penalty = 5; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi"; }
+            elseif ($absDiff >= 10 && $absDiff <= 15) { $penalty = 12; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi"; }
+            elseif ($absDiff >= 16 && $absDiff <= 20) { $penalty = 20; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi (Rào cản lớn)"; }
+            elseif ($absDiff >= 21 && $absDiff <= 30) { $penalty = 30; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi (Khoảng cách lớn)"; }
+            elseif ($absDiff >= 31 && $absDiff <= 40) { $penalty = 40; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi (Rào cản rất lớn)"; }
+            elseif ($absDiff > 40) { $penalty = 50; $age_gap_msg = "Nữ hơn Nam $absDiff tuổi (Không phù hợp)"; }
         }
 
         $final_percent = max(0, $base_percent - $penalty);

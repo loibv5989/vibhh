@@ -23,6 +23,7 @@ return [
         'pisces' => ['vi' => 'Song Ngư', 'element' => 'water'],
     ],
 
+    // MỎ NEO NĂNG LƯỢNG (MỞ BÀI THỰC TẾ)
     'anchors' => [
         'daily' => [
             'fire' => "{Với đặc tính mạnh mẽ của nguyên tố Lửa|Dưới tác động của luồng năng lượng Lửa trong ngày hôm nay},",
@@ -44,6 +45,7 @@ return [
         ]
     ],
 
+    // KHO DỮ LIỆU LUẬN GIẢI
     'daily' => [
         'fire' => [
             'career' => [

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Cung hoàng đạo data
+ * plugins/bb-zodiac/data/zodiac.php
+ */
 if (!defined("ABSPATH")) {
     exit();
 }

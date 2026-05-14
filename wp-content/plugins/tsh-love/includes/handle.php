@@ -63,7 +63,7 @@ class TshLove_Handle {
         if (!has_shortcode($post->post_content, 'tsh_love_form')) return;
 
         wp_enqueue_style('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.css', [], TSH_LOVE_VERSION);
-        wp_enqueue_script('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.js', ['jquery'], TSH_LOVE_VERSION, true);
+        wp_enqueue_script('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.min.js', ['jquery'], TSH_LOVE_VERSION, true);
         wp_localize_script('tsh-love', 'ThsLove', [
                 'rest_url' => rest_url('tsh-love/v1')
         ]);
@@ -140,7 +140,8 @@ class TshLove_Handle {
         $user = self::get_cookie_user();
         if (empty($user['username'])) return false;
 
-        $today = wp_date('Y-m-d');
+        $date_format = get_option('date_format');
+        $today = wp_date($date_format);
 
         $key = 'tshlove_quota_ai_' . $user['username'] . '_' . $today;
 
@@ -168,14 +169,14 @@ class TshLove_Handle {
         $dob2 = $request->get_param('dob2');
 
         if (!self::isValidName($n1) || !self::isValidName($n2)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Name can only contain letters and spaces.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Tên chỉ được chứa chữ cái và dấu cách.'], 200);
         }
 
         $dob1_norm = self::normalizeDob($dob1);
         $dob2_norm = self::normalizeDob($dob2);
 
         if (substr_count($dob1_norm, '/') !== 2 || substr_count($dob2_norm, '/') !== 2) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid date of birth format.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Định dạng ngày sinh không hợp lệ.'], 200);
         }
 
         try {
@@ -212,7 +213,7 @@ class TshLove_Handle {
 
     public function renderShortcode(array $atts): string {
         ob_start();
-        require_once TSH_LOVE_PLUGIN_DIR . 'template/form.php';
+        require_once TSH_LOVE_PLUGIN_DIR . 'template/landing.php';
         return ob_get_clean();
     }
 
@@ -221,7 +222,7 @@ class TshLove_Handle {
             return new WP_REST_Response(
                 [
                     'success' => false,
-                    'message' => 'Please log in to use this feature.'
+                    'message' => 'Vui lòng đăng nhập để sử dụng tính năng này.'
                 ], 200);
         }
 
@@ -229,7 +230,7 @@ class TshLove_Handle {
             return new WP_REST_Response(
                 [
                     'success' => false,
-                    'message' => 'This feature is currently disabled.'
+                    'message' => 'Tính năng hiện đang tắt.'
                 ], 200);
         }
 
@@ -237,7 +238,7 @@ class TshLove_Handle {
             return new WP_REST_Response(
                 [
                     'success' => false,
-                    'message' => 'Daily analysis limit reached. Please come back tomorrow.'
+                    'message' => 'Đã đạt giới hạn phân tích trong ngày. Vui lòng quay lại vào ngày mai.'
                 ], 200);
         }
 
@@ -247,11 +248,7 @@ class TshLove_Handle {
         $dob2 = self::normalizeDob($request->get_param('dob2'));
 
         if (!self::isValidName($n1) || !self::isValidName($n2)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Name can only contain letters and spaces.'], 200);
-        }
-
-        if (substr_count($dob1, '-') !== 2 || substr_count($dob2, '-') !== 2) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid date of birth format.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Tên chỉ được chứa chữ cái và dấu cách.'], 200);
         }
 
         if (!empty($n1) && !empty($dob1) && !empty($n2) && !empty($dob2)) {
@@ -277,7 +274,7 @@ class TshLove_Handle {
         $data = TshLove_Calc::calculate($n1, $dob1, $n2, $dob2);
 
         if (empty($data)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid data.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu không hợp lệ.'], 200);
         }
 
         if (!empty($data['blocks']) && is_array($data['blocks'])) {
@@ -285,22 +282,22 @@ class TshLove_Handle {
                 $type = $block['type'] ?? '';
                 $name = $block['name'] ?? '';
                 if ($type === 'future') {
-                    $msg = $name ? "Come back when {$name} is born." : "Come back when they're born.";
+                    $msg = $name ? "Khi nào {$name} ra đời rồi tính tiếp." : 'Khi nào ra đời rồi tính tiếp';
                     return new WP_REST_Response(['success' => false, 'message' => $msg], 200);
                 } elseif ($type === 'infant') {
-                    $msg = $name ? "Baby {$name} is still in diapers. Let them grow up naturally first!" : "Still in diapers? Love compatibility can wait!";
+                    $msg = $name ? "Bé {$name} còn đang bú bình, hãy để bé lớn lên tự nhiên nhé!" : 'Bé còn đang bú bình, tính toán tình duyên gì tầm này!';
                     return new WP_REST_Response(['success' => false, 'message' => $msg], 200);
                 } elseif ($type === 'under14') {
-                    $msg = $name ? "Focus on school first, love later, {$name}." : "Focus on school first, love later!";
+                    $msg = $name ? "Hãy tập trung học trước đã rồi yêu sau nhé, {$name}." : 'Hãy tập trung học trước đã rồi yêu sau nhé!';
                     return new WP_REST_Response(['success' => false, 'message' => $msg], 200);
                 } elseif ($type === 'over90') {
-                    $msg = $name ? "{$name}, love knows no age limit." : "Love knows no age limit.";
+                    $msg = $name ? "{$name}, Tuổi cụ là tình yêu bao la." : 'Tuổi cụ là tình yêu bao la.';
                     return new WP_REST_Response(['success' => false, 'message' => $msg], 200);
                 } elseif ($type === 'same_name') {
-                    return new WP_REST_Response(['success' => false, 'message' => 'Both people have the same name.'], 200);
+                    return new WP_REST_Response(['success' => false, 'message' => 'Hai người có tên giống nhau.'], 200);
                 }
             }
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid data.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu không hợp lệ.'], 200);
         }
 
         $prompt = TshLove_Prompt::build($data);
@@ -332,14 +329,14 @@ class TshLove_Handle {
         }
 
         if (empty($rawResponse)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Connection failed. Please try again.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Không thể kết nối, vui lòng thử lại.'], 200);
         }
 
         $parsed = self::parseResponse($rawResponse);
 
         $is_valid_data = true;
 
-        $required_tabs = ['analysis'];
+        $required_tabs = ['phan_tich'];
         foreach ($required_tabs as $tab_key) {
             if (empty(trim($parsed['tabs'][$tab_key] ?? ''))) {
                 $is_valid_data = false;
@@ -359,9 +356,9 @@ class TshLove_Handle {
     }
 
     public static function parseResponse(string $raw): array {
-        $tabs = ['analysis' => ''];
+        $tabs = ['phan_tich' => ''];
         if (preg_match('/\[TAB_RESULT\](.*?)\[\/TAB_RESULT\]/is', $raw, $matches)) {
-            $tabs['analysis'] = self::markdownToHtml(trim($matches[1]));
+            $tabs['phan_tich'] = self::markdownToHtml(trim($matches[1]));
         }
         return ['tabs' => $tabs];
     }

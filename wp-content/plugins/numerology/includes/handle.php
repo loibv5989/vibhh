@@ -193,7 +193,7 @@ class Numerology {
         }
 
         $normalized = preg_replace('/[\-\.\s]+/', '/', $dob);
-        $formats = ['m/d/Y', 'n/j/Y'];
+        $formats = ['d/m/Y', 'j/n/Y', 'm/d/Y', 'n/j/Y'];
         foreach ($formats as $fmt) {
             $d = DateTime::createFromFormat($fmt, $normalized);
             if ($d && $d->format($fmt) === $normalized) {
@@ -201,7 +201,7 @@ class Numerology {
             }
         }
 
-        throw new InvalidArgumentException('Invalid date format. Please use YYYY-MM-DD.');
+        throw new InvalidArgumentException('Invalid date format. Please use DD/MM/YYYY.');
     }
 
     public function removePageTitle($title, $post_id) {

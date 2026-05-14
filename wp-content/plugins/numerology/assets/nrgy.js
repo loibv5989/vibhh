@@ -50,7 +50,7 @@ jQuery(function ($) {
         dob(inputId, errorId) {
             const $input = $('#' + inputId);
             const $error = $('#' + errorId);
-            let value = $input.val().trim();
+            let value = ($input.val() || '').trim();
             $input.removeClass('is-error');
             $error.text('');
             if (!value) {
@@ -58,23 +58,16 @@ jQuery(function ($) {
                 $input.addClass('is-error');
                 return false;
             }
-
-            value = value.replace(/[\/\.\s]+/g, '-');
-
-            const mmdd = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
-            if (mmdd) {
-                value = mmdd[3] + '-' + String(parseInt(mmdd[1], 10)).padStart(2, '0') + '-' + String(parseInt(mmdd[2], 10)).padStart(2, '0');
-            }
-
-            const match = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+            value = value.replace(/[\-\.\s]+/g, '/');
+            const match = value.match(/^(\d{1,2})\/(\d{1,2})\/(1[8-9]\d{2}|20\d{2})$/);
             if (!match) {
-                $error.text('Please enter a valid date (YYYY-MM-DD).');
+                $error.text('Please enter a valid date (DD/MM/YYYY).');
                 $input.addClass('is-error');
                 return false;
             }
-            const year  = parseInt(match[1], 10);
+            const day   = parseInt(match[1], 10);
             const month = parseInt(match[2], 10);
-            const day   = parseInt(match[3], 10);
+            const year  = parseInt(match[3], 10);
             if (month < 1 || month > 12) {
                 $error.text('Month must be between 1 and 12.');
                 $input.addClass('is-error');
@@ -85,17 +78,20 @@ jQuery(function ($) {
                 $input.addClass('is-error');
                 return false;
             }
-
             const testDate = new Date(year, month - 1, day);
             if (testDate.getFullYear() !== year || testDate.getMonth() !== month - 1 || testDate.getDate() !== day) {
-                $error.text('Date ' + year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0') + ' does not exist.');
+                $error.text('Date ' + day + '/' + month + ' does not exist.');
                 $input.addClass('is-error');
                 return false;
             }
-
-            const formatted = year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+            const formatted = String(day).padStart(2, '0') + '/' + String(month).padStart(2, '0') + '/' + year;
             $input.val(formatted);
             return formatted;
+        },
+        dobToISO(dob) {
+            const parts = dob.split('/');
+            if (parts.length !== 3) return dob;
+            return parts[2] + '-' + parts[1] + '-' + parts[0];
         }
     };
 
@@ -357,7 +353,7 @@ jQuery(function ($) {
                 fetch(nrgy.api_url + 'calculate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ full_name: name, dob: dob })
+                    body: JSON.stringify({ full_name: name, dob: Validator.dobToISO(dob) })
                 })
                     .then(response => response.json())
                     .then(res => {

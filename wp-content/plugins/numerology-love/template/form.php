@@ -16,8 +16,8 @@ if (!defined('ABSPATH')) exit;
                     <span class="ftn-error" id="numm-error-name1"></span>
                 </div>
                 <div class="ftn-form-group">
-                    <label for="numm-dob1">Date of Birth (YYYY-MM-DD)</label>
-                    <input type="text" id="numm-dob1" class="ftn-input" placeholder="e.g. 1995-07-20" autocomplete="on">
+                    <label for="numm-dob1">Date of Birth (DD/MM/YYYY)</label>
+                    <input type="text" id="numm-dob1" class="ftn-input" placeholder="e.g. 20/07/1995" autocomplete="on">
                     <span class="ftn-error" id="numm-error-dob1"></span>
                 </div>
             </div>
@@ -28,8 +28,8 @@ if (!defined('ABSPATH')) exit;
                     <span class="ftn-error" id="numm-error-name2"></span>
                 </div>
                 <div class="ftn-form-group">
-                    <label for="numm-dob2">Date of Birth (YYYY-MM-DD)</label>
-                    <input type="text" id="numm-dob2" class="ftn-input" placeholder="e.g. 1995-12-18" autocomplete="on">
+                    <label for="numm-dob2">Date of Birth (DD/MM/YYYY)</label>
+                    <input type="text" id="numm-dob2" class="ftn-input" placeholder="e.g. 18/12/1995" autocomplete="on">
                     <span class="ftn-error" id="numm-error-dob2"></span>
                 </div>
             </div>
