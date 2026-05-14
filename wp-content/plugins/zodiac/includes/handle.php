@@ -13,9 +13,9 @@ class Zodiac_Handle {
 
     private static array $shortcodes = [
         'zodiac_form',
-        'zodiac_tinh_cach',
-        'zodiac_tinh_yeu',
-        'zodiac_tu_vi',
+        'zodiac_personality',
+        'zodiac_love',
+        'zodiac_horoscope',
     ];
 
     private const ALLOWED_CACHE_PROVIDERS = ['gemini'];
@@ -112,9 +112,9 @@ class Zodiac_Handle {
     public function renderShortcode(array $atts, string $content = '', string $tag = 'zodiac_form'): string {
         $template_map = [
             'zodiac_form'         => 'landing.php',
-            'zodiac_tinh_cach'    => 'personality.php',
-            'zodiac_tinh_yeu'     => 'love.php',
-            'zodiac_tu_vi'        => 'horoscope.php',
+            'zodiac_personality'    => 'personality.php',
+            'zodiac_love'     => 'love.php',
+            'zodiac_horoscope'        => 'horoscope.php',
         ];
         $tpl = ZODIAC_PLUGIN_DIR . 'template/' . ($template_map[$tag] ?? 'landing.php');
         ob_start();

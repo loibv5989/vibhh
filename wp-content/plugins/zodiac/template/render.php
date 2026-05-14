@@ -130,7 +130,7 @@ class Zodiac_Render {
         <div class="ftn-analysis-wrap" id="zdc-analysis-wrap">
             <div class="ftn-tabs" role="tablist">
                 <button class="ftn-tab active" data-tab="zdc-chi-tiet" role="tab">Details</button>
-                <button class="ftn-tab" data-tab="zdc-cach-tinh" role="tab">How It Works</button>
+                <button class="ftn-tab" data-tab="zdc-cach-tinh" role="tab">Calculation</button>
             </div>
             <div class="ftn-tab-pane active" id="ftn-tab-zdc-chi-tiet">
                 <div class="ftn-chat-wrap">
@@ -250,7 +250,7 @@ class Zodiac_Render {
         <div class="ftn-analysis-wrap" id="zdc-love-analysis-wrap">
             <div class="ftn-tabs" role="tablist">
                 <button class="ftn-tab active" data-tab="chat" role="tab">Result</button>
-                <button class="ftn-tab" data-tab="co-so-luan-giai" role="tab">How It Works</button>
+                <button class="ftn-tab" data-tab="co-so-luan-giai" role="tab">Calculation</button>
             </div>
             <div class="ftn-tab-pane active" id="zdc-love-tab-chat">
                 <div class="ftn-chat-wrap">

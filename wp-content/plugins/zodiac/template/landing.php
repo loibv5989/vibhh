@@ -121,7 +121,7 @@ $faqs = [
             <h2 class="zdc-section-title">Astrology Toolkit</h2>
             <p class="zdc-section-desc">Choose the right approach to decode the messages from the universe tailored for you.</p>
             <div class="zdc-tools-grid">
-                <a href="<?= esc_url(home_url('/cung-hoang-dao/tinh-cach/')) ?>" class="zdc-tool-card">
+                <a href="<?= esc_url(home_url('/zodiac/personality/')) ?>" class="zdc-tool-card">
                     <div class="zdc-tool-header">
                         <div class="zdc-tool-icon">🔮</div>
                         <h3>Your True Personality</h3>
@@ -131,7 +131,7 @@ $faqs = [
                     <span class="zdc-tool-cta">Start →</span>
                 </a>
 
-                <a href="<?= esc_url(home_url('/cung-hoang-dao/tinh-yeu/')) ?>" class="zdc-tool-card">
+                <a href="<?= esc_url(home_url('/zodiac/love/')) ?>" class="zdc-tool-card">
                     <div class="zdc-tool-header">
                         <div class="zdc-tool-icon">💘</div>
                         <h3>Love Match (Compatible – Challenging)</h3>
@@ -141,7 +141,7 @@ $faqs = [
                     <span class="zdc-tool-cta">Start →</span>
                 </a>
 
-                <a href="<?= esc_url(home_url('/cung-hoang-dao/tu-vi/')) ?>" class="zdc-tool-card">
+                <a href="<?= esc_url(home_url('/zodiac/horoscope/')) ?>" class="zdc-tool-card">
                     <div class="zdc-tool-header">
                         <div class="zdc-tool-icon">🗓️</div>
                         <h3>Daily Horoscope</h3>

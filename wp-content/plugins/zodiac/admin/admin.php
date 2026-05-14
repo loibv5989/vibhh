@@ -285,26 +285,26 @@ class Zodiac_Admin {
             [
                 'title'   => 'Decode Your Zodiac Sign Online – 12 Astrological Signs',
                 'content' => "<!-- wp:shortcode -->\n[zodiac_form]\n<!-- /wp:shortcode -->",
-                'slug'    => 'cung-hoang-dao',
+                'slug'    => 'zodiac',
                 'parent'  => 0,
             ],
             [
                 'title'   => 'Zodiac Personality Analysis',
-                'content' => "<!-- wp:shortcode -->\n[zodiac_tinh_cach]\n<!-- /wp:shortcode -->",
-                'slug'    => 'tinh-cach',
-                'parent'  => 'cung-hoang-dao',
+                'content' => "<!-- wp:shortcode -->\n[zodiac_personality]\n<!-- /wp:shortcode -->",
+                'slug'    => 'personality',
+                'parent'  => 'zodiac',
             ],
             [
                 'title'   => 'Love Match – Zodiac Compatibility',
-                'content' => "<!-- wp:shortcode -->\n[zodiac_tinh_yeu]\n<!-- /wp:shortcode -->",
-                'slug'    => 'tinh-yeu',
-                'parent'  => 'cung-hoang-dao',
+                'content' => "<!-- wp:shortcode -->\n[zodiac_love]\n<!-- /wp:shortcode -->",
+                'slug'    => 'love',
+                'parent'  => 'zodiac',
             ],
             [
                 'title'   => 'Daily Horoscope by Zodiac Sign',
-                'content' => "<!-- wp:shortcode -->\n[zodiac_tu_vi]\n<!-- /wp:shortcode -->",
-                'slug'    => 'tu-vi',
-                'parent'  => 'cung-hoang-dao',
+                'content' => "<!-- wp:shortcode -->\n[zodiac_horoscope]\n<!-- /wp:shortcode -->",
+                'slug'    => 'horoscope',
+                'parent'  => 'zodiac',
             ]
         ];
 
