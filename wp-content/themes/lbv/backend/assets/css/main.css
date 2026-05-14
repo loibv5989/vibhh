@@ -1,0 +1,867 @@
+/* ADMIN WRAPPER */
+.lbv-admin-wrapper {
+    margin-left: -20px;
+    background: #f5f5f5;
+}
+
+/* TOP NAVIGATION */
+.lbv-top-nav {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    min-height: 60px;
+}
+
+.lbv-top-tabs {
+    display: flex;
+    gap: 5px;
+}
+
+.lbv-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: #555;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.lbv-tab:hover {
+    color: #2271b1;
+    background: #f9f9f9;
+}
+
+.lbv-tab.active {
+    color: #2271b1;
+    border-bottom-color: #2271b1;
+    font-weight: 600;
+}
+
+.lbv-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.lbv-support-text {
+    color: #666;
+    font-size: 13px;
+}
+
+.lbv-buy-btn {
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* CONTENT WRAPPER */
+.lbv-content-wrapper {
+    display: flex;
+    min-height: calc(100vh - 92px);
+}
+
+/* SIDEBAR */
+.lbv-sidebar {
+    width: 280px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 20px 0;
+}
+
+.lbv-sidebar-section {
+    margin-bottom: 5px;
+}
+
+.lbv-section-title {
+    padding: 12px 20px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: #f9f9f9;
+    border-left: 3px solid transparent;
+}
+
+.lbv-section-title:hover {
+    background: #f0f0f0;
+}
+
+.lbv-submenu {
+    background: #fafafa;
+}
+
+.lbv-submenu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px 10px 40px;
+    text-decoration: none;
+    color: #555;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.lbv-submenu a:hover {
+    background: #f0f0f0;
+    color: #2271b1;
+}
+
+.lbv-submenu a.active {
+    background: #e8f4f8;
+    border-left-color: #46b450;
+    color: #2271b1;
+    font-weight: 600;
+}
+
+/* MAIN CONTENT */
+.lbv-main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* SETTINGS HEADER */
+.lbv-settings-header {
+    background: #fff;
+    padding: 16px 30px;
+    margin: -30px -30px 30px;
+    border-bottom: 1px solid #dcdcde;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lbv-search-box input {
+    padding: 6px 12px;
+    width: 280px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.lbv-header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* CONTENT BOX */
+.lbv-content-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.lbv-content-box h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.lbv-content-box > p {
+    color: #646970;
+    font-size: 14px;
+    margin: 0 0 20px;
+}
+
+/* INFO BOXES */
+.lbv-info-box {
+    padding: 12px 16px;
+    margin: 15px 0;
+    border-radius: 4px;
+    border-left: 4px solid;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.lbv-info-box p {
+    margin: 0;
+}
+
+.lbv-info-blue {
+    background: #e7f5fe;
+    border-left-color: #2196f3;
+    color: #014361;
+}
+
+.lbv-info-orange {
+    background: #fff3cd;
+    border-left-color: #ff9800;
+    color: #664d03;
+}
+
+/* FIELD WRAPPER - 2 CỘT */
+.lbv-field-wrapper {
+    display: flex;
+    gap: 40px;
+    margin: 30px 0;
+    padding: 30px 0;
+    border-top: 1px solid #dcdcde;
+}
+
+.lbv-field-wrapper:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.lbv-field-left {
+    flex: 0 0 30%;
+    width: 30%;
+}
+
+.lbv-field-right {
+    flex: 1;
+    min-width: 0;
+    max-width: 600px;
+}
+
+.lbv-field-right input {
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.lbv-field-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.lbv-field-desc {
+    color: #646970;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* LOGO INPUT + PREVIEW */
+.lbv-logo-url-display {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 12px;
+    font-size: 13px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    background: #f6f7f7;
+    color: #50575e;
+    margin-bottom: 15px;
+    font-family: 'Courier New', Consolas, monospace;
+    box-sizing: border-box;
+}
+
+.lbv-logo-preview-box {
+    background: #f6f7f7;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    width: 350px;
+    height: auto;
+}
+
+
+.lbv-logo-image {
+    max-width: 100%;
+    max-height: 120px;
+    height: auto;
+    width: auto;
+}
+
+.lbv-no-logo-placeholder {
+    text-align: center;
+    color: #a7aaad;
+}
+
+.lbv-no-logo-placeholder .dashicons {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.3;
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.lbv-no-logo-placeholder p {
+    margin: 0;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* FIELD ACTIONS + BUTTONS */
+.lbv-field-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.lbv-btn {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.4;
+}
+
+.lbv-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lbv-btn-primary {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+}
+
+.lbv-btn-primary:hover:not(:disabled) {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+.lbv-btn-secondary {
+    background: #fff;
+    border-color: #2271b1;
+    color: #2271b1;
+}
+
+.lbv-btn-secondary:hover:not(:disabled) {
+    background: #f6f7f7;
+}
+
+.lbv-btn-success {
+    background: #00a32a;
+    border-color: #00a32a;
+    color: #fff;
+}
+
+.lbv-btn-success:hover:not(:disabled) {
+    background: #008a20;
+    border-color: #008a20;
+}
+
+.lbv-btn-danger {
+    background: #fff;
+    border-color: #b32d2e;
+    color: #b32d2e;
+}
+
+.lbv-btn-danger:hover:not(:disabled) {
+    background: #b32d2e;
+    color: #fff;
+}
+
+/* FIELD NOTE */
+.lbv-field-note {
+    font-style: italic;
+    color: #646970;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* NOTIFICATIONS */
+.lbv-admin-wrapper .notice {
+    position: fixed;
+    right: 20px;
+    z-index: 99999;
+    padding: 10px 20px;
+    background: #29833d;
+    border-left: 4px solid;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-width: 100%;
+    animation: slideIn 0.3s ease;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.lbv-admin-wrapper .notice-success {
+    border-left-color: #00a32a;
+}
+
+.lbv-admin-wrapper .notice-error {
+    border-left-color: #d63638;
+}
+
+.lbv-admin-wrapper .notice p {
+    margin: 0;
+    font-size: 13px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* System Info Wrapper */
+.lbv-system-info-wrapper {
+    background: #fff;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+/* Header */
+.lbv-system-info-header {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+}
+
+.lbv-system-info-icon {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f1;
+    border-radius: 8px;
+}
+
+.lbv-system-info-icon .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: #2271b1;
+}
+
+.lbv-system-info-title h1 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.lbv-system-info-title p {
+    margin: 0;
+    color: #646970;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Info Section */
+.lbv-info-section {
+    margin-bottom: 40px;
+}
+
+.lbv-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d2327;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f1;
+}
+
+.lbv-section-title .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Info Table */
+.lbv-info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lbv-info-table tr {
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.lbv-info-table tr:last-child {
+    border-bottom: none;
+}
+
+.lbv-info-table td {
+    padding: 15px 20px;
+}
+
+.lbv-info-label {
+    font-weight: 500;
+    color: #50575e;
+    width: 40%;
+}
+
+.lbv-info-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+.lbv-info-value.success {
+    color: #00a32a;
+}
+
+.lbv-info-value.warning {
+    color: #dba617;
+}
+
+.lbv-info-value.error {
+    color: #d63638;
+}
+
+.lbv-info-value a {
+    color: #2271b1;
+    text-decoration: none;
+    border-bottom: 1px solid #2271b1;
+}
+
+.lbv-info-value a:hover {
+    color: #135e96;
+    border-bottom-color: #135e96;
+}
+
+/* ========================================
+   OAUTH SETTINGS - FIELD GROUP
+   ======================================== */
+
+/* Field Group Container */
+.lbv-field-group {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 2px solid #e8e8e8;
+}
+
+.lbv-field-group:first-of-type {
+    margin-top: 20px;
+    padding-top: 0;
+    border-top: none;
+}
+
+.lbv-field-group h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 25px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.lbv-field-group h3 .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #2271b1;
+}
+
+/* ========================================
+   OAUTH SETTINGS - TEXT INPUT
+   ======================================== */
+
+.lbv-text-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    background: #fff;
+    color: #2c3338;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.lbv-text-input:focus {
+    border-color: #2271b1;
+    outline: 2px solid transparent;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.lbv-text-input::placeholder {
+    color: #a7aaad;
+}
+
+.lbv-text-input:disabled {
+    background: #f6f7f7;
+    color: #a7aaad;
+    cursor: not-allowed;
+}
+
+/* ========================================
+   OAUTH SETTINGS - PASSWORD INPUT
+   ======================================== */
+
+/* Container cho password input + toggle button */
+.lbv-field-wrapper[data-field*="secret"] .lbv-field-right {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.lbv-password-input {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    background: #fff;
+    color: #2c3338;
+    font-family: 'Courier New', Consolas, monospace;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.lbv-password-input:focus {
+    border-color: #2271b1;
+    outline: 2px solid transparent;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.lbv-password-input::placeholder {
+    color: #a7aaad;
+    letter-spacing: normal;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.lbv-password-input:disabled {
+    background: #f6f7f7;
+    color: #a7aaad;
+    cursor: not-allowed;
+}
+
+/* Toggle Password Button */
+.lbv-toggle-password {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    background: #f6f7f7;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    color: #2c3338;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.lbv-toggle-password:hover {
+    background: #f0f0f1;
+    border-color: #646970;
+    color: #1d2327;
+}
+
+.lbv-toggle-password:active {
+    background: #e8e8e8;
+}
+
+.lbv-toggle-password .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.lbv-toggle-password:focus {
+    border-color: #2271b1;
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+/* ========================================
+   OAUTH SETTINGS - SAVE BUTTON
+   ======================================== */
+
+#lbv-save-oauth-settings {
+    min-width: 120px;
+}
+
+#lbv-save-oauth-settings.saving {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+#lbv-save-oauth-settings.saving::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: lbv-spin 0.6s linear infinite;
+}
+
+@keyframes lbv-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   OAUTH SETTINGS - RESPONSIVE
+   ======================================== */
+
+@media screen and (max-width: 782px) {
+    .lbv-field-wrapper[data-field*="secret"] .lbv-field-right {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lbv-password-input {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .lbv-text-input {
+        max-width: 100%;
+    }
+
+    .lbv-toggle-password {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lbv-field-group h3 {
+        font-size: 15px;
+    }
+}
+
+/* ========================================
+   OAUTH SETTINGS - FIELD WRAPPER OVERRIDE
+   (Chỉ áp dụng cho OAuth fields)
+   ======================================== */
+
+/* Override cho text input fields trong OAuth section */
+.lbv-field-wrapper[data-field*="client_id"] .lbv-field-right,
+.lbv-field-wrapper[data-field*="client_secret"] .lbv-field-right {
+    max-width: 100%;
+}
+
+/* Đảm bảo input không bị giới hạn bởi CSS cũ */
+.lbv-field-wrapper[data-field*="client_id"] .lbv-field-right input,
+.lbv-field-wrapper[data-field*="client_secret"] .lbv-field-right input {
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+/* ========================================
+   OAUTH SETTINGS - VALIDATION STATES
+   ======================================== */
+
+/* Success state */
+.lbv-text-input.is-valid,
+.lbv-password-input.is-valid {
+    border-color: #00a32a;
+}
+
+.lbv-text-input.is-valid:focus,
+.lbv-password-input.is-valid:focus {
+    box-shadow: 0 0 0 1px #00a32a;
+}
+
+/* Error state */
+.lbv-text-input.is-invalid,
+.lbv-password-input.is-invalid {
+    border-color: #d63638;
+}
+
+.lbv-text-input.is-invalid:focus,
+.lbv-password-input.is-invalid:focus {
+    box-shadow: 0 0 0 1px #d63638;
+}
+
+/* Validation message */
+.lbv-field-validation {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.lbv-field-validation.success {
+    color: #00a32a;
+}
+
+.lbv-field-validation.error {
+    color: #d63638;
+}
+
+/* ========================================
+   OAUTH SETTINGS - EMPTY STATE
+   ======================================== */
+
+.lbv-password-input:placeholder-shown {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+}
+
+/* ========================================
+   OAUTH SETTINGS - COPY TO CLIPBOARD
+   (Optional - nếu muốn thêm nút copy)
+   ======================================== */
+
+.lbv-copy-btn {
+    padding: 8px 12px;
+    background: #f6f7f7;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    color: #2c3338;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lbv-copy-btn:hover {
+    background: #f0f0f1;
+    border-color: #646970;
+}
+
+.lbv-copy-btn.copied {
+    background: #00a32a;
+    border-color: #00a32a;
+    color: #fff;
+}
+
+.lbv-copy-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}

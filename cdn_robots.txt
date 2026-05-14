@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /
+
+Allow: /wp-includes/
+Allow: /wp-content/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff2$
+Allow: /*.mp4$

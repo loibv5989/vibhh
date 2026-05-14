@@ -1,0 +1,1378 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lbv\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-05 02:29+0000\n"
+"PO-Revision-Date: 2026-04-24 05:59+0000\n"
+"Last-Translator: Loibv\n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.3; wp-6.9.4; php-8.5.5\n"
+"X-Domain: lbv"
+
+#: templates/contact.php:136
+msgid "   New Contact Submission"
+msgstr "   Yêu cầu liên hệ mới"
+
+#: includes/walker-comment.php:56
+msgid " [Edit]"
+msgstr " [Chỉnh sửa]"
+
+#: includes/walker-comment.php:39 templates/ajax/notification.php:106
+#: templates/search/item.php:43
+#, php-format
+msgid "%s ago"
+msgstr "%s trước"
+
+#: comments.php:18
+#, php-format
+msgid "%s comments"
+msgstr "%s bình luận"
+
+#: comments.php:16
+msgid "1 comment"
+msgstr "1 bình luận"
+
+#: backend/templates/contact/table.php:38
+msgid "Actions"
+msgstr "Thao tác"
+
+#: templates/ajax/comments.php:414
+msgid "ago"
+msgstr "trước"
+
+#: backend/templates/contact/table.php:165
+msgid "All"
+msgstr "Tất cả"
+
+#: templates/profile.php:727
+msgid "An error occurred."
+msgstr "Đã xảy ra lỗi."
+
+#: templates/ajax/comments.php:175
+msgid "An error occurred. Please try again."
+msgstr "Đã xảy ra lỗi. Vui lòng thử lại."
+
+#: includes/walker-comment.php:26 templates/ajax/comments.php:399
+msgid "Anonymous User"
+msgstr "Người dùng ẩn danh"
+
+#: backend/templates/contact/table.php:110
+msgid "Are you sure you want to delete this contact?"
+msgstr "Bạn có chắc chắn muốn xóa liên hệ này không?"
+
+#: templates/profile.php:628
+msgid "Are you sure you want to remove your custom avatar?"
+msgstr "Bạn có chắc chắn muốn xóa ảnh đại diện tùy chỉnh không?"
+
+#: templates/profile/form.php:86
+msgid "Biographical Info"
+msgstr "Thông tin tiểu sử"
+
+#: single.php:44 single.php:130
+msgid "by"
+msgstr "bởi"
+
+#: templates/profile/form.php:189 backend/templates/contact/table.php:382
+msgid "Cancel"
+msgstr "Hủy"
+
+#: templates/ajax/comments.php:151
+msgid "Comment cannot be empty."
+msgstr "Bình luận không được để trống."
+
+#: templates/ajax/comments.php:163
+msgid "Comment contains prohibited content."
+msgstr "Bình luận chứa nội dung bị cấm."
+
+#: templates/ajax/comments.php:159
+msgid "Comment is too long. Maximum %d characters."
+msgstr "Bình luận quá dài. Tối đa %d ký tự."
+
+#: templates/ajax/comments.php:540
+msgid "Comment is too long. Please write no more than %d characters."
+msgstr "Bình luận quá dài. Vui lòng không viết quá %d ký tự."
+
+#: templates/ajax/comments.php:156
+msgid "Comment is too short. Minimum %d characters."
+msgstr "Bình luận quá ngắn. Tối thiểu %d ký tự."
+
+#: templates/ajax/comments.php:536
+msgid "Comment is too short. Please write at least %d characters."
+msgstr "Bình luận quá ngắn. Vui lòng viết ít nhất %d ký tự."
+
+#: templates/ajax/comments.php:226
+msgid "Comment not found."
+msgstr "Không tìm thấy bình luận."
+
+#: comments.php:56
+msgid "Comments are closed."
+msgstr "Đã đóng tính năng bình luận."
+
+#: backend/templates/contact/table.php:341
+msgid "Compose Reply"
+msgstr "Soạn phản hồi"
+
+#: backend/settings.php:234
+msgid "Configure OAuth credentials for third-party authentication services."
+msgstr "Cấu hình thông tin OAuth cho các dịch vụ xác thực bên thứ ba."
+
+#: templates/profile/form.php:143
+msgid "Confirm New Password"
+msgstr "Xác nhận mật khẩu mới"
+
+#: backend/templates/contact/table.php:15
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: backend/contact.php:107
+msgid "Contact deleted successfully!"
+msgstr "Đã xóa liên hệ thành công!"
+
+#: templates/profile/form.php:71
+msgid "Contact Information"
+msgstr "Thông tin liên hệ"
+
+#: backend/contact.php:90
+msgid "Contact Messages"
+msgstr "Tin nhắn liên hệ"
+
+#: backend/contact.php:185
+msgid "Contact Messages:"
+msgstr "Tin nhắn liên hệ:"
+
+#: backend/templates/contact/table.php:297
+msgid "Contact not found."
+msgstr "Không tìm thấy liên hệ."
+
+#: templates/contact.php:106
+msgid "Contact submitted successfully."
+msgstr "Gửi liên hệ thành công."
+
+#: backend/contact.php:32 backend/contact.php:43
+#: backend/templates/contact/table.php:16
+msgid "Contacts"
+msgstr "Danh sách liên hệ"
+
+#: templates/contact/form.php:41 backend/templates/contact/table.php:35
+msgid "Content"
+msgstr "Nội dung"
+
+#: templates/login.php:187
+#, php-format
+msgid "Continue with %s"
+msgstr "Tiếp tục với %s"
+
+#: templates/login.php:94
+msgid "Continue with Facebook"
+msgstr "Tiếp tục với Facebook"
+
+#: templates/login.php:86
+msgid "Continue with GitHub"
+msgstr "Tiếp tục với GitHub"
+
+#: templates/login.php:78
+msgid "Continue with Google"
+msgstr "Tiếp tục với Google"
+
+#: templates/profile.php:346
+msgid "Custom uploaded avatar is active"
+msgstr "Ảnh đại diện tùy chỉnh đang được sử dụng"
+
+#: backend/settings.php:52
+msgid "Dark Mode - Main Logo"
+msgstr "Chế độ tối - Logo chính"
+
+#: backend/settings.php:97
+msgid "Dark Mode - Mobile Logo"
+msgstr "Chế độ tối - Logo di động"
+
+#: backend/templates/system-info.php:173
+msgid "Database Charset"
+msgstr "Bảng mã cơ sở dữ liệu"
+
+#: backend/templates/system-info.php:165
+msgid "Database Host"
+msgstr "Máy chủ cơ sở dữ liệu"
+
+#: backend/templates/system-info.php:152
+msgid "Database Information"
+msgstr "Thông tin cơ sở dữ liệu"
+
+#: backend/templates/system-info.php:169
+msgid "Database Name"
+msgstr "Tên cơ sở dữ liệu"
+
+#: backend/templates/system-info.php:157
+msgid "Database Type"
+msgstr "Loại cơ sở dữ liệu"
+
+#: backend/templates/system-info.php:161
+msgid "Database Version"
+msgstr "Phiên bản cơ sở dữ liệu"
+
+#: backend/templates/contact/table.php:37
+#: backend/templates/contact/table.php:321
+msgid "Date"
+msgstr "Ngày"
+
+#: templates/contact.php:146
+#, php-format
+msgid "Date      : %s"
+msgstr "Ngày      : %s"
+
+#: backend/templates/system-info.php:214
+msgid "Debug Log"
+msgstr "Nhật ký gỡ lỗi"
+
+#: backend/templates/system-info.php:208
+msgid "Debug Mode"
+msgstr "Chế độ gỡ lỗi"
+
+#: backend/settings.php:36
+msgid "Default Logos"
+msgstr "Logo mặc định"
+
+#: backend/templates/contact/table.php:55
+#: backend/templates/contact/table.php:111
+msgid "Delete"
+msgstr "Xóa"
+
+#: templates/profile/form.php:160
+msgid "Delete User"
+msgstr "Xóa người dùng"
+
+#: templates/profile/form.php:194
+msgid "Deleting..."
+msgstr "Đang xóa..."
+
+#: templates/profile.php:501
+#, php-format
+msgid "Detected: %s"
+msgstr "Phát hiện: %s"
+
+#: templates/profile.php:535 templates/profile/form.php:131
+msgid "Disable edit notification emails"
+msgstr "Tắt email thông báo chỉnh sửa"
+
+#: templates/profile/form.php:56
+msgid "Display name publicly as"
+msgstr "Tên hiển thị công khai"
+
+#: backend/templates/system-info.php:101
+msgid "Document Root"
+msgstr "Thư mục gốc tài liệu"
+
+#: templates/ajax/comments.php:433 templates/ajax/comments.php:463
+#: templates/single/post-item.php:18
+msgid "Edit"
+msgstr "Sửa"
+
+#: templates/ajax/comments.php:235
+msgid "Edit time expired. You can only edit within %d seconds."
+msgstr "Đã hết thời gian chỉnh sửa. Bạn chỉ có thể sửa trong vòng %d giây."
+
+#: templates/ajax/comments.php:106
+msgid "Edit your profile"
+msgstr "Chỉnh sửa thông tin"
+
+#: templates/contact/form.php:28 templates/profile/form.php:74
+#: backend/templates/contact/table.php:33
+msgid "Email"
+msgstr "Email"
+
+#: templates/contact.php:139
+#, php-format
+msgid "Email   : %s"
+msgstr "Email   : %s"
+
+#: templates/profile.php:779
+msgid "Email address is already in use."
+msgstr "Địa chỉ email đã được sử dụng."
+
+#: templates/contact.php:72
+msgid "Email domain is not allowed."
+msgstr "Tên miền email không được phép."
+
+#: templates/ajax/live-search.php:49
+msgid "Empty search query"
+msgstr "Từ khóa tìm kiếm trống"
+
+#: backend/settings.php:40
+msgid ""
+"Ensure that dark mode logos are configured when enabling dark mode for your "
+"site."
+msgstr ""
+"Đảm bảo rằng logo chế độ tối đã được cấu hình khi bật chế độ tối cho trang "
+"web."
+
+#: backend/login.php:90
+msgid "Enter your answer"
+msgstr "Nhập câu trả lời của bạn"
+
+#: backend/settings.php:248
+msgid "Enter your GitHub OAuth application Client ID."
+msgstr "Nhập Client ID ứng dụng GitHub OAuth của bạn."
+
+#: backend/settings.php:255
+msgid "Enter your GitHub OAuth application Client Secret."
+msgstr "Nhập Client Secret ứng dụng GitHub OAuth của bạn."
+
+#: backend/settings.php:270
+msgid "Enter your Google OAuth application Client ID."
+msgstr "Nhập Client ID ứng dụng Google OAuth của bạn."
+
+#: backend/settings.php:277
+msgid "Enter your Google OAuth application Client Secret."
+msgstr "Nhập Client Secret ứng dụng Google OAuth của bạn."
+
+#: templates/profile/form.php:182
+msgid "Enter your username exactly as shown above"
+msgstr "Nhập chính xác tên người dùng như hiển thị ở trên"
+
+#: templates/login.php:93
+msgid "Facebook"
+msgstr "Facebook"
+
+#: templates/profile.php:721
+msgid "Failed to delete account."
+msgstr "Xóa tài khoản thất bại."
+
+#: templates/ajax/comments.php:515
+msgid "Failed to load comments."
+msgstr "Tải bình luận thất bại."
+
+#: templates/ajax/comments.php:322
+msgid "Failed to retrieve comment."
+msgstr "Lấy dữ liệu bình luận thất bại."
+
+#: backend/templates/contact/table.php:415
+msgid "Failed to send reply. Please check your email configuration."
+msgstr "Gửi phản hồi thất bại. Vui lòng kiểm tra cấu hình email."
+
+#: backend/contact.php:104
+msgid "Failed to send reply. Please check your email settings."
+msgstr "Gửi phản hồi thất bại. Vui lòng kiểm tra cài đặt email."
+
+#: templates/contact.php:110
+msgid "Failed to submit contact, please try again."
+msgstr "Gửi liên hệ thất bại, vui lòng thử lại."
+
+#: templates/ajax/comments.php:250
+msgid "Failed to update comment."
+msgstr "Cập nhật bình luận thất bại."
+
+#: templates/profile.php:606
+msgid "File size must be less than 2MB"
+msgstr "Kích thước tập tin phải nhỏ hơn 2MB"
+
+#: templates/profile.php:884
+msgid "File size must be less than 2MB."
+msgstr "Kích thước tập tin phải nhỏ hơn 2MB."
+
+#: templates/profile.php:877
+msgid "File upload failed."
+msgstr "Tải tập tin lên thất bại."
+
+#: category.php:48
+msgid "Filter by: "
+msgstr "Lọc theo: "
+
+#: templates/profile/form.php:41
+msgid "First Name"
+msgstr "Tên"
+
+#: functions.php:25
+msgid "Footer Menu 1"
+msgstr "Menu chân trang 1"
+
+#: functions.php:26
+msgid "Footer Menu 2"
+msgstr "Menu chân trang 2"
+
+#: backend/settings.php:46
+msgid ""
+"For optimal display, use a retina-ready logo with a recommended height of "
+"120px, which is twice the height of its wrapper."
+msgstr ""
+"Để hiển thị tối ưu, hãy sử dụng logo chuẩn retina với chiều cao khuyến nghị "
+"là 120px (gấp đôi chiều cao khung chứa)."
+
+#: backend/settings.php:90
+msgid ""
+"For optimal mobile display, use a logo with a recommended height of 80px."
+msgstr ""
+"Để hiển thị tối ưu trên di động, hãy sử dụng logo có chiều cao khuyến nghị "
+"là 80px."
+
+#: search.php:27
+#, php-format
+msgid "Found %s result"
+msgid_plural "Found %s results"
+msgstr[0] "Tìm thấy %s kết quả"
+
+#: backend/templates/contact/table.php:313
+msgid "From"
+msgstr "Từ"
+
+#: templates/contact/form.php:22
+msgid "Full Name"
+msgstr "Họ và tên"
+
+#: templates/login.php:85
+msgid "GitHub"
+msgstr "GitHub"
+
+#: templates/profile.php:357
+msgid "GitHub avatar is active"
+msgstr "Ảnh đại diện GitHub đang được sử dụng"
+
+#: templates/profile.php:387
+msgid "GitHub avatar will be shown after removal"
+msgstr "Ảnh đại diện GitHub sẽ được hiển thị sau khi xóa"
+
+#: backend/settings.php:247
+msgid "GitHub Client ID"
+msgstr "GitHub Client ID"
+
+#: backend/settings.php:254
+msgid "GitHub Client Secret"
+msgstr "GitHub Client Secret"
+
+#: backend/settings.php:242
+msgid "GitHub OAuth"
+msgstr "GitHub OAuth"
+
+#: templates/profile/form.php:192
+msgid "Goodbye!"
+msgstr "Tạm biệt!"
+
+#: templates/profile.php:717
+msgid "Goodbye!."
+msgstr "Tạm biệt!"
+
+#: templates/login.php:77
+msgid "Google"
+msgstr "Google"
+
+#: templates/profile.php:352
+msgid "Google avatar is active"
+msgstr "Ảnh đại diện Google đang được sử dụng"
+
+#: templates/profile.php:385
+msgid "Google avatar will be shown after removal"
+msgstr "Ảnh đại diện Google sẽ được hiển thị sau khi xóa"
+
+#: backend/settings.php:269
+msgid "Google Client ID"
+msgstr "Google Client ID"
+
+#: backend/settings.php:276
+msgid "Google Client Secret"
+msgstr "Google Client Secret"
+
+#: backend/settings.php:264
+msgid "Google OAuth"
+msgstr "Google OAuth"
+
+#: templates/home.php:6
+msgid "Hello, what are you looking for?"
+msgstr "Xin chào, bạn đang tìm kiếm nội dung gì?"
+
+#: backend/templates/system-info.php:196
+msgid "Home URL"
+msgstr "URL Trang chủ"
+
+#. URI of the theme
+msgid "https://omgidol.com"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://omgidol.com/author/loibv/"
+msgstr ""
+
+#: backend/templates/contact/table.php:31
+msgid "ID"
+msgstr "ID"
+
+#: backend/settings.php:83
+msgid "If mobile logos are not set, the main logos will be used instead."
+msgstr "Nếu không cài đặt logo di động, logo chính sẽ được sử dụng thay thế."
+
+#: templates/profile/form.php:76
+msgid ""
+"If you change this, a confirmation email will be sent to your new address."
+msgstr ""
+"Nếu bạn thay đổi mục này, một email xác nhận sẽ được gửi đến địa chỉ mới."
+
+#: templates/contact/form.php:9
+msgid ""
+"If you have any questions, comments, or concerns, please don't hesitate to "
+"contact us using the form below. We're here to help!"
+msgstr ""
+"Nếu bạn có bất kỳ câu hỏi, góp ý hoặc thắc mắc nào, đừng ngần ngại liên hệ "
+"với chúng tôi qua mẫu bên dưới. Chúng tôi luôn sẵn sàng hỗ trợ!"
+
+#: templates/ajax/comments.php:221
+msgid "Invalid comment ID."
+msgstr "ID bình luận không hợp lệ."
+
+#: backend/settings.php:168
+msgid "Invalid data"
+msgstr "Dữ liệu không hợp lệ"
+
+#: templates/profile.php:775 templates/contact.php:65
+#: templates/ajax/comments.php:303
+msgid "Invalid email address."
+msgstr "Địa chỉ email không hợp lệ."
+
+#: backend/settings.php:184
+msgid "Invalid field"
+msgstr "Trường thông tin không hợp lệ"
+
+#: templates/ajax/comments.php:480
+msgid "Invalid parameters."
+msgstr "Tham số không hợp lệ."
+
+#: templates/contact.php:44 templates/ajax/load-sidebar.php:36
+msgid "Invalid security token"
+msgstr "Mã bảo mật không hợp lệ"
+
+#: templates/profile.php:471
+msgid "IP Address"
+msgstr "Địa chỉ IP"
+
+#: 404.php:12
+msgid ""
+"It looks like nothing was found at this location. The page you were looking "
+"for does not exist or was loading incorrectly."
+msgstr ""
+"Có vẻ như không tìm thấy nội dung nào tại đây. Trang bạn tìm kiếm không tồn "
+"tại hoặc đã xảy ra lỗi khi tải."
+
+#: backend/settings.php:236
+msgid ""
+"Keep your OAuth credentials secure. Never share them publicly or commit them "
+"to version control."
+msgstr ""
+"Hãy bảo mật thông tin OAuth của bạn. Tuyệt đối không chia sẻ công khai hoặc "
+"đưa vào hệ thống quản lý phiên bản."
+
+#: templates/profile/form.php:45
+msgid "Last Name"
+msgstr "Họ"
+
+#: single.php:124
+msgid "Last reviewed on"
+msgstr "Kiểm duyệt lần cuối vào"
+
+#: single.php:39
+msgid "Last updated & reviewed:"
+msgstr "Cập nhật & kiểm duyệt lần cuối:"
+
+#: templates/home.php:29
+msgid "Latest Posts"
+msgstr "Bài viết mới nhất"
+
+#. Name of the theme
+msgid "Lbv"
+msgstr "Lbv"
+
+#. Name of the template
+#: home.php:3
+msgid "LBV Home"
+msgstr "Trang chủ LBV"
+
+#: backend/templates/system-info.php:68
+msgid ""
+"Lbv theme can operate on nearly all servers. However, we recommend following "
+"the server settings below if you encounter any red values"
+msgstr ""
+"Giao diện Lbv có thể hoạt động trên hầu hết các máy chủ. Tuy nhiên, chúng "
+"tôi khuyến nghị bạn điều chỉnh theo các cài đặt máy chủ bên dưới nếu thấy "
+"các giá trị hiển thị màu đỏ"
+
+#: comments.php:50
+msgid "Load comments"
+msgstr "Tải bình luận"
+
+#: tag.php:55 search.php:84 category.php:98 templates/home.php:72
+msgid "Loading..."
+msgstr "Đang tải..."
+
+#: templates/login.php:369
+msgid "Log In"
+msgstr "Đăng nhập"
+
+#: templates/ajax/comments.php:111
+msgid "Log out?"
+msgstr "Đăng xuất?"
+
+#: templates/ajax/comments.php:89
+msgid "logged in"
+msgstr "đăng nhập"
+
+#: templates/ajax/comments.php:101
+#, php-format
+msgid "Logged in as %1$s. %2$s %3$s"
+msgstr "Đã đăng nhập với tên %1$s. %2$s %3$s"
+
+#: templates/header.php:76
+msgid "Login"
+msgstr "Đăng nhập"
+
+#: backend/settings.php:232
+msgid "Login OAuth Settings"
+msgstr "Cài đặt đăng nhập OAuth"
+
+#: backend/settings.php:182
+msgid "Logo removed successfully"
+msgstr "Đã xóa logo thành công"
+
+#: backend/settings.php:163
+msgid "Logo saved successfully"
+msgstr "Đã lưu logo thành công"
+
+#. Author of the theme
+msgid "Loibv"
+msgstr "Loibv"
+
+#. Description of the theme
+msgid "Loibv's theme"
+msgstr "Giao diện của Loibv"
+
+#: templates/login.php:382
+msgid "Lost your password?"
+msgstr "Quên mật khẩu?"
+
+#: templates/header.php:57
+msgid "Loved Reads"
+msgstr "Bài viết yêu thích"
+
+#: backend/settings.php:44
+msgid "Main Logo"
+msgstr "Logo chính"
+
+#: backend/templates/system-info.php:126
+msgid "Max Execution Time"
+msgstr "Thời gian thực thi tối đa"
+
+#: backend/templates/system-info.php:130
+msgid "Max Input Vars"
+msgstr "Số lượng biến đầu vào tối đa"
+
+#: backend/templates/system-info.php:138
+msgid "Max Upload Size"
+msgstr "Dung lượng tải lên tối đa"
+
+#: templates/profile.php:371
+msgid "Maximum file size: 2MB. Allowed types: JPG, PNG, GIF, WEBP, SVG"
+msgstr "Dung lượng tối đa: 2MB. Định dạng cho phép: JPG, PNG, GIF, WEBP, SVG"
+
+#: templates/profile/form.php:108
+msgid "Maximum file size: 2MB. Allowed types: JPG, PNG, GIF, WEBP, SVG."
+msgstr "Dung lượng tối đa: 2MB. Định dạng cho phép: JPG, PNG, GIF, WEBP, SVG."
+
+#: backend/templates/system-info.php:122
+msgid "Memory Limit"
+msgstr "Giới hạn bộ nhớ"
+
+#: backend/templates/contact/table.php:329
+#: backend/templates/contact/table.php:359
+msgid "Message"
+msgstr "Tin nhắn"
+
+#: templates/contact.php:84
+msgid "Message must be at least 10 characters long."
+msgstr "Tin nhắn phải có ít nhất 10 ký tự."
+
+#: templates/contact.php:88
+msgid "Message must be less than 250 characters."
+msgstr "Tin nhắn phải ít hơn 250 ký tự."
+
+#: templates/contact.php:141
+msgid "Message:"
+msgstr "Tin nhắn:"
+
+#: templates/ajax/comments.php:473
+msgid "Missing parameters."
+msgstr "Thiếu tham số."
+
+#: backend/settings.php:88
+msgid "Mobile Logo"
+msgstr "Logo di động"
+
+#: backend/settings.php:77
+msgid "Mobile Logos"
+msgstr "Logo di động"
+
+#: backend/settings.php:81
+msgid ""
+"Mobile logos will be displayed on devices with screen widths less than 768px."
+msgstr ""
+"Logo di động sẽ hiển thị trên các thiết bị có độ rộng màn hình dưới 768px."
+
+#: templates/ajax/live-search.php:88
+msgid "More Results"
+msgstr "Xem thêm kết quả"
+
+#: templates/header.php:51
+msgid "My Account"
+msgstr "Tài khoản của tôi"
+
+#: templates/profile/form.php:24 backend/templates/contact/table.php:32
+msgid "Name"
+msgstr "Tên"
+
+#: templates/contact.php:138
+#, php-format
+msgid "Name    : %s"
+msgstr "Tên     : %s"
+
+#: templates/ajax/comments.php:299
+msgid "Name and email are required."
+msgstr "Yêu cầu nhập tên và email."
+
+#: templates/contact.php:57
+msgid "Name must be at least 2 characters long."
+msgstr "Tên phải có ít nhất 2 ký tự."
+
+#: templates/contact.php:61
+msgid "Name must be less than 50 characters."
+msgstr "Tên phải ít hơn 50 ký tự."
+
+#: templates/profile/form.php:137 templates/profile/form.php:139
+msgid "New Password"
+msgstr "Mật khẩu mới"
+
+msgid "Newest Artists"
+msgstr "Nghệ sĩ mới nhất"
+
+#: templates/profile.php:516
+msgid "Newsletter"
+msgstr "Bản tin"
+
+#: templates/profile/form.php:51
+msgid "Nickname"
+msgstr "Biệt danh"
+
+#: sidebar.php:64
+msgid "No popular posts found."
+msgstr "Không tìm thấy bài viết phổ biến nào."
+
+#: templates/ajax/load-sidebar.php:255
+msgid "No posts found for page %d"
+msgstr "Không tìm thấy bài viết nào cho trang %d"
+
+#: tag.php:29 author.php:82 category.php:75
+msgid "No posts found."
+msgstr "Không tìm thấy bài viết nào."
+
+#: search.php:58
+msgid "No posts were found."
+msgstr "Không tìm thấy bài viết nào."
+
+#: templates/ajax/notification.php:114
+msgid "No recent posts"
+msgstr "Không có bài viết gần đây"
+
+#: templates/ajax/live-search.php:93
+msgid "No results found"
+msgstr "Không tìm thấy kết quả"
+
+#: templates/profile.php:511 templates/profile/form.php:121
+msgid "Notifications"
+msgstr "Thông báo"
+
+#: backend/settings.php:209
+msgid "OAuth settings saved successfully"
+msgstr "Đã lưu cài đặt OAuth thành công"
+
+#: backend/templates/contact/table.php:144
+#, php-format
+msgid "on %s"
+msgstr "vào lúc %s"
+
+#: templates/profile.php:613
+msgid "Only JPG, PNG, and GIF files are allowed"
+msgstr "Chỉ cho phép các tập tin JPG, PNG và GIF"
+
+#: templates/profile.php:890
+msgid "Only JPG, PNG, Webp, and GIF files are allowed."
+msgstr "Chỉ cho phép các tập tin JPG, PNG, Webp và GIF."
+
+#: includes/toc-nav.php:149
+msgid "Open TOC"
+msgstr "Mở mục lục"
+
+#: templates/contact.php:121
+msgid "Or chat with us on Facebook:"
+msgstr "Hoặc trò chuyện với chúng tôi qua Facebook:"
+
+#: templates/login.php:281
+msgid "Or continue with"
+msgstr "Hoặc tiếp tục với"
+
+#: backend/templates/contact/table.php:310
+msgid "Original Message"
+msgstr "Tin nhắn gốc"
+
+#: templates/login.php:367
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: templates/profile.php:767
+msgid "Passwords do not match."
+msgstr "Mật khẩu không khớp."
+
+#: backend/templates/contact/table.php:122
+#: backend/templates/contact/table.php:176
+msgid "Pending"
+msgstr "Đang chờ"
+
+#: backend/settings.php:152 backend/settings.php:174 backend/settings.php:190
+msgid "Permission denied"
+msgstr "Truy cập bị từ chối"
+
+#: backend/templates/system-info.php:111
+msgid "PHP Information"
+msgstr "Thông tin PHP"
+
+#: backend/templates/system-info.php:116
+msgid "PHP Version"
+msgstr "Phiên bản PHP"
+
+#: 404.php:22 search.php:42 templates/home.php:14
+msgctxt "placeholder"
+msgid "What are you searching for?"
+msgstr "Bạn đang tìm gì?"
+
+#: templates/profile.php:665
+#, php-format
+msgid "Please contact %s for support."
+msgstr "Vui lòng liên hệ %s để được hỗ trợ."
+
+#: templates/contact.php:53
+msgid "Please fill in all the fields."
+msgstr "Vui lòng điền đầy đủ các trường thông tin."
+
+#: comments.php:63
+msgid "Post comment"
+msgstr "Gửi bình luận"
+
+#: templates/profile.php:529
+msgid "Post Editor"
+msgstr "Trình soạn thảo bài viết"
+
+#: backend/templates/system-info.php:134
+msgid "Post Max Size"
+msgstr "Dung lượng POST tối đa"
+
+#: templates/ajax/comments.php:487
+msgid "Post not found."
+msgstr "Không tìm thấy bài viết."
+
+#: functions.php:24
+msgid "Primary Menu"
+msgstr "Menu chính"
+
+#: templates/profile.php:336 templates/profile/form.php:94
+msgid "Profile Picture"
+msgstr "Ảnh đại diện"
+
+#: templates/profile.php:580
+msgid "Profile picture updated successfully!"
+msgstr "Cập nhật ảnh đại diện thành công!"
+
+#: backend/login.php:86
+msgid "Question: %d + %d = ?"
+msgstr "Câu hỏi: %d + %d = ?"
+
+#: templates/login.php:380 templates/header.php:82
+msgid "Register"
+msgstr "Đăng ký"
+
+#: templates/profile.php:459
+msgid "Registration Date"
+msgstr "Ngày đăng ký"
+
+#: templates/profile.php:428
+msgid "Registration Information"
+msgstr "Thông tin đăng ký"
+
+#: templates/profile.php:433
+msgid "Registration Method"
+msgstr "Phương thức đăng ký"
+
+#: sidebar.php:9
+msgid "Related post"
+msgstr "Bài viết liên quan"
+
+#: templates/login.php:368
+msgid "Remember Me"
+msgstr "Ghi nhớ đăng nhập"
+
+#: backend/settings.php:135
+msgid "Remove"
+msgstr "Gỡ bỏ"
+
+#: templates/profile/form.php:113
+msgid "Remove current avatar"
+msgstr "Xóa ảnh đại diện hiện tại"
+
+#: templates/profile.php:379
+msgid "Remove custom avatar"
+msgstr "Xóa ảnh đại diện tùy chỉnh"
+
+#: backend/templates/contact/table.php:127
+#: backend/templates/contact/table.php:187
+msgid "Replied"
+msgstr "Đã phản hồi"
+
+#: includes/walker-comment.php:48 templates/ajax/comments.php:425
+#: templates/ajax/comments.php:505 backend/templates/contact/table.php:104
+msgid "Reply"
+msgstr "Trả lời"
+
+#: backend/templates/contact/table.php:104
+msgid "Reply Again"
+msgstr "Trả lời lại"
+
+#: backend/templates/contact/table.php:408
+#, php-format
+msgid "Reply sent successfully to %s"
+msgstr "Đã gửi phản hồi thành công đến %s"
+
+#: backend/contact.php:101
+msgid "Reply sent successfully!"
+msgstr "Đã gửi phản hồi thành công!"
+
+#: backend/templates/contact/table.php:305
+msgid "Reply to Contact"
+msgstr "Phản hồi liên hệ"
+
+#: 404.php:35
+msgid "Return to Home"
+msgstr "Quay lại trang chủ"
+
+#: backend/settings.php:28 backend/settings.php:69 backend/settings.php:224
+msgid "Save Changes"
+msgstr "Lưu thay đổi"
+
+#: backend/contact.php:116
+msgid "Search Contacts"
+msgstr "Tìm kiếm liên hệ"
+
+#: backend/settings.php:24 backend/settings.php:65 backend/settings.php:220
+msgid "Search for options..."
+msgstr "Tìm kiếm tùy chọn..."
+
+#: search.php:18
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Kết quả tìm kiếm cho: %s"
+
+#: templates/profile.php:744 templates/ajax/comments.php:137
+msgid "Security check failed."
+msgstr "Kiểm tra bảo mật thất bại."
+
+#: backend/settings.php:98
+msgid "Select or upload the dark mode logo for mobile devices."
+msgstr "Chọn hoặc tải lên logo chế độ tối cho thiết bị di động."
+
+#: backend/settings.php:89
+msgid "Select or upload the logo for mobile devices."
+msgstr "Chọn hoặc tải lên logo cho thiết bị di động."
+
+#: backend/settings.php:53
+msgid "Select or upload the logo for your site's dark mode."
+msgstr "Chọn hoặc tải lên logo cho chế độ tối của trang web."
+
+#: backend/settings.php:45
+msgid "Select or upload the main logo for your site."
+msgstr "Chọn hoặc tải lên logo chính cho trang web."
+
+#: backend/templates/contact/table.php:380
+msgid "Send Reply"
+msgstr "Gửi phản hồi"
+
+#: templates/contact/form.php:14
+msgid "Sending message..."
+msgstr "Đang gửi tin nhắn..."
+
+#: templates/contact.php:145
+#, php-format
+msgid "Sent from : %s"
+msgstr "Gửi từ : %s"
+
+#: backend/templates/system-info.php:76
+msgid "Server Information"
+msgstr "Thông tin máy chủ"
+
+#: backend/templates/system-info.php:97
+msgid "Server IP"
+msgstr "IP máy chủ"
+
+#: backend/templates/system-info.php:93
+msgid "Server Name"
+msgstr "Tên máy chủ"
+
+#: backend/templates/system-info.php:89
+msgid "Server Protocol"
+msgstr "Giao thức máy chủ"
+
+#: backend/templates/system-info.php:85
+msgid "Server Software"
+msgstr "Phần mềm máy chủ"
+
+#: templates/single/share-post.php:21
+msgid "Share"
+msgstr "Chia sẻ"
+
+#: templates/profile/form.php:90
+msgid "Share a little biographical information to fill out your profile."
+msgstr "Chia sẻ một chút thông tin tiểu sử để hoàn thiện thông tin của bạn."
+
+#: tag.php:45 search.php:74 category.php:88 templates/home.php:62
+msgid "Show more →"
+msgstr "Xem thêm →"
+
+#: templates/login.php:354
+msgid "SIGN IN TO YOUR ACCOUNT"
+msgstr "ĐĂNG NHẬP VÀO TÀI KHOẢN"
+
+#: templates/header.php:61
+msgid "Sign Out"
+msgstr "Đăng xuất"
+
+#: templates/profile.php:522 templates/profile/form.php:125
+msgid "Sign up for our newsletter"
+msgstr "Đăng ký nhận bản tin"
+
+#: backend/templates/system-info.php:192
+msgid "Site URL"
+msgstr "URL trang web"
+
+#: 404.php:10
+msgid "Something's wrong here..."
+msgstr "Có gì đó không ổn ở đây..."
+
+#: backend/templates/contact/table.php:36
+#: backend/templates/contact/table.php:325
+msgid "Status"
+msgstr "Trạng thái"
+
+#: templates/contact/form.php:35 templates/contact/form.php:37
+#: backend/templates/contact/table.php:34
+#: backend/templates/contact/table.php:317
+#: backend/templates/contact/table.php:346
+msgid "Subject"
+msgstr "Tiêu đề"
+
+#: templates/contact.php:140
+#, php-format
+msgid "Subject : %s"
+msgstr "Tiêu đề : %s"
+
+#: templates/contact.php:76
+msgid "Subject must be at least 5 characters long."
+msgstr "Tiêu đề phải có ít nhất 5 ký tự."
+
+#: templates/contact.php:80
+msgid "Subject must be less than 100 characters."
+msgstr "Tiêu đề phải ít hơn 100 ký tự."
+
+#: templates/contact/form.php:46
+msgid "Submit"
+msgstr "Gửi"
+
+#: templates/header.php:131 templates/header.php:132
+msgid "Switch to Dark"
+msgstr "Chuyển sang chế độ tối"
+
+#: templates/header.php:128 templates/header.php:129
+msgid "Switch to Light"
+msgstr "Chuyển sang chế độ sáng"
+
+#: backend/templates/system-info.php:67
+msgid "System Information"
+msgstr "Thông tin hệ thống"
+
+#: includes/toc-nav.php:154
+msgid "Table of Contents"
+msgstr "Mục lục"
+
+#: backend/settings.php:335
+#, php-format
+msgid "Template file \"%s\" not found!"
+msgstr "Không tìm thấy tập tin giao diện \"%s\"!"
+
+#: templates/contact.php:118
+msgid "Thank you for contacting us!"
+msgstr "Cảm ơn bạn đã liên hệ với chúng tôi!"
+
+#: backend/templates/system-info.php:228
+msgid "Theme Author"
+msgstr "Tác giả giao diện"
+
+#: backend/templates/system-info.php:220
+msgid "Theme Name"
+msgstr "Tên giao diện"
+
+#: backend/templates/system-info.php:224
+msgid "Theme Version"
+msgstr "Phiên bản giao diện"
+
+#: backend/settings.php:54
+msgid ""
+"This logo should match the main logo but with colors adjusted to contrast "
+"well with a dark mode header background."
+msgstr ""
+"Logo này nên tương đồng với logo chính nhưng được điều chỉnh màu sắc để có "
+"độ tương phản tốt với nền đầu trang ở chế độ tối."
+
+#: backend/settings.php:99
+msgid ""
+"This logo will be displayed on mobile devices when dark mode is enabled."
+msgstr "Logo này sẽ hiển thị trên các thiết bị di động khi bật chế độ tối."
+
+#: templates/profile/form.php:177
+msgid "To confirm account deletion, please type your username: "
+msgstr "Để xác nhận xóa tài khoản, vui lòng nhập tên người dùng của bạn: "
+
+#: includes/toc-nav.php:59
+msgid "Toggle submenu"
+msgstr "Bật/tắt menu con"
+
+#: templates/ajax/comments.php:142
+msgid "Too many comments. Please wait a moment before commenting again."
+msgstr "Quá nhiều bình luận. Vui lòng đợi giây lát trước khi bình luận tiếp."
+
+msgid "Trending News"
+msgstr "Tin tức đang thịnh hành"
+
+#: templates/profile/form.php:213
+msgid "Update Profile"
+msgstr "Cập nhật thông tin"
+
+#: backend/settings.php:132
+msgid "Upload"
+msgstr "Tải lên"
+
+#: templates/profile.php:413
+#, php-format
+msgid ""
+"Upload a custom avatar to override your GitHub profile picture, or <a "
+"href=\"%s\" target=\"_blank\">update it on GitHub</a>."
+msgstr ""
+"Tải lên ảnh đại diện tùy chỉnh để thay thế ảnh từ GitHub, hoặc <a "
+"href=\"%s\" target=\"_blank\">cập nhật trên GitHub</a>."
+
+#: templates/profile.php:400
+#, php-format
+msgid ""
+"Upload a custom avatar to override your Google profile picture, or <a "
+"href=\"%s\" target=\"_blank\">update it on Google</a>."
+msgstr ""
+"Tải lên ảnh đại diện tùy chỉnh để thay thế ảnh từ Google, hoặc <a "
+"href=\"%s\" target=\"_blank\">cập nhật trên Google</a>."
+
+#: backend/settings.php:38
+msgid "Upload logos for you website."
+msgstr "Tải lên logo cho trang web của bạn."
+
+#: backend/settings.php:79
+msgid "Upload logos specifically optimized for mobile devices."
+msgstr "Tải lên logo được tối ưu riêng cho thiết bị di động."
+
+#: templates/header.php:69
+msgid "User"
+msgstr "Người dùng"
+
+#: templates/profile.php:495 templates/ajax/comments.php:123
+msgid "User Agent"
+msgstr "User Agent"
+
+#: templates/profile/form.php:26
+msgid "User URL"
+msgstr "URL người dùng"
+
+#: templates/profile/form.php:34
+msgid "Username"
+msgstr "Tên người dùng"
+
+#: templates/profile.php:672
+msgid "Username does not match."
+msgstr "Tên người dùng không khớp."
+
+#: templates/login.php:366
+msgid "Username or Email Address"
+msgstr "Tên người dùng hoặc địa chỉ Email"
+
+#: templates/profile/form.php:36
+msgid "Usernames cannot be changed."
+msgstr "Không thể thay đổi tên người dùng."
+
+#: templates/profile.php:362
+msgid "Using Gravatar (based on email)"
+msgstr "Sử dụng Gravatar (dựa trên email)"
+
+#: backend/contact.php:192
+msgid "View"
+msgstr "Xem"
+
+#: single.php:46 single.php:132
+#, php-format
+msgid "View all content by %s"
+msgstr "Xem tất cả nội dung bởi %s"
+
+#: templates/contact.php:119
+msgid "We will get back to you as soon as possible."
+msgstr "Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất."
+
+#: templates/profile/form.php:167
+msgid ""
+"We're sorry to see you go! Your account will be permanently deleted and all "
+"your data removed."
+msgstr ""
+"Rất tiếc khi bạn rời đi! Tài khoản của bạn sẽ bị xóa vĩnh viễn và mọi dữ "
+"liệu sẽ bị gỡ bỏ."
+
+#: backend/templates/system-info.php:81
+msgid "Web Server"
+msgstr "Máy chủ Web"
+
+#: templates/profile/form.php:80
+msgid "Website"
+msgstr "Trang web"
+
+#: templates/login.php:353
+msgid "Welcome Back!"
+msgstr "Chào mừng bạn trở lại!"
+
+#: templates/header.php:114
+msgid "What are you searching for?"
+msgstr "Bạn đang tìm kiếm nội dung gì?"
+
+#: backend/templates/system-info.php:183
+msgid "WordPress Info"
+msgstr "Thông tin WordPress"
+
+#: backend/templates/system-info.php:188
+msgid "WordPress Version"
+msgstr "Phiên bản WordPress"
+
+#: backend/templates/system-info.php:204
+msgid "WP Max Memory Limit"
+msgstr "Giới hạn bộ nhớ WP tối đa"
+
+#: backend/templates/system-info.php:200
+msgid "WP Memory Limit"
+msgstr "Giới hạn bộ nhớ WP"
+
+#: comments.php:62
+msgid "Write a comment"
+msgstr "Viết bình luận"
+
+#: comments.php:66
+msgid "Write a comment..."
+msgstr "Viết bình luận..."
+
+#: templates/contact/form.php:43
+msgid "Write something.."
+msgstr "Viết gì đó.."
+
+#: templates/profile/form.php:170
+msgid "You can always rejoin our community whenever you are ready."
+msgstr ""
+"Bạn luôn có thể tham gia lại cộng đồng của chúng tôi bất cứ khi nào sẵn sàng."
+
+#: templates/ajax/comments.php:231
+msgid "You do not have permission to edit this comment."
+msgstr "Bạn không có quyền chỉnh sửa bình luận này."
+
+#: backend/contact.php:188
+msgid "You have %d pending message(s)."
+msgstr "Bạn có %d tin nhắn đang chờ."
+
+#: templates/ajax/comments.php:271
+msgid "You have already submitted this comment."
+msgstr "Bạn đã gửi bình luận này rồi."
+
+#: templates/ajax/comments.php:85
+#, php-format
+msgid "You must be %s to post a comment."
+msgstr "Bạn phải %s để đăng bình luận."
+
+#: templates/profile.php:839
+#, php-format
+msgid ""
+"You must be <a rel=\"nofollow\" href=\"%s\">logged in</a> to view this page."
+msgstr ""
+"Bạn phải <a rel=\"nofollow\" href=\"%s\">đăng nhập</a> để xem trang này."
+
+#: templates/profile.php:655
+msgid "You must be logged in."
+msgstr "Bạn phải đăng nhập."
+
+#: templates/ajax/load-posts.php:134
+msgid "You've reached the end of the list!"
+msgstr "Bạn đã xem hết danh sách!"
+
+#: templates/profile/form.php:201
+msgid ""
+"Your account has been permanently deleted. Thank you for being part of our "
+"community."
+msgstr ""
+"Tài khoản của bạn đã được xóa vĩnh viễn. Cảm ơn bạn đã là một phần của cộng "
+"đồng."
+
+#: templates/ajax/comments.php:261
+msgid ""
+"Your comment has been updated and is now pending moderation because it "
+"contains links."
+msgstr ""
+"Bình luận của bạn đã được cập nhật và đang chờ kiểm duyệt vì có chứa liên "
+"kết."
+
+#: templates/ajax/comments.php:338
+msgid "Your comment is awaiting moderation because it contains links."
+msgstr "Bình luận của bạn đang chờ kiểm duyệt vì có chứa liên kết."
+
+#: templates/contact/form.php:30
+msgid "Your email.."
+msgstr "Email của bạn.."
+
+#: templates/contact/form.php:24
+msgid "Your name.."
+msgstr "Tên của bạn.."
+
+#: backend/templates/system-info.php:142
+msgid "ZipArchive Support"
+msgstr "Hỗ trợ ZipArchive"
+
+#: single.php:67 single.php:86
+msgid "⇱ Exit"
+msgstr "⇱ Thoát"
+
+#: templates/profile/form.php:10
+msgid "✓ Profile has been successfully updated!"
+msgstr "✓ Đã cập nhật thông tin thành công!"
+
+#: single.php:56 single.php:61
+msgid "📝 Edit"
+msgstr "📝 Sửa"
+
+#: single.php:77 single.php:80
+msgid "📝Edit"
+msgstr "📝Sửa"
+
+#: templates/contact.php:133
+#, php-format
+msgid "📩 New Contact Submission: %s"
+msgstr "📩 Yêu cầu liên hệ mới: %s"

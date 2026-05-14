@@ -1,0 +1,23 @@
+{
+  "name": "NBBLO",
+  "short_name": "NBBLO",
+  "description": "Xem vận mệnh, bói tình yêu – Thần số học, Tarot, tử vi 12 cung hoàng đạo và Kinh Dịch. Khám phá bản thân, tính cách, tình duyên và cuộc sống.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

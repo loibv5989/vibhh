@@ -1,0 +1,19 @@
+User-agent: *
+Disallow: /cdn-cgi/
+Disallow: /ezais/
+Disallow: /*?action=
+Disallow: /beardeddragon/
+Disallow: /detroitchicago/
+Disallow: /tardisrocinante/
+Disallow: /parsonsmaize/
+Disallow: /porpoiseant/
+Disallow: /wp-admin/
+Disallow: /wp-json/
+Disallow: /wp-login.php
+Disallow: /feed$
+Disallow: /feed/
+Disallow: /*/feed$
+Disallow: /*/feed/
+
+Allow: /wp-admin/admin-ajax.php
+Sitemap: https://nbblo.com/sitemap_index.xml

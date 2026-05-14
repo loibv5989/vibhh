@@ -1,0 +1,94 @@
+
+pre {
+    background-color: #282c34;
+    color: #e5e5e5;
+    overflow: auto;
+    margin: 0;
+    white-space: pre-wrap;
+    border-radius: 5px;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 10px 14px;
+}
+
+.terminal-command {
+    background-color: #1e1e1e;
+    color: #f8f8f2;
+    border-radius: 4px;
+    padding: .6em;
+    margin: 1em 0;
+    overflow: auto;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.wp-block-code.terminal-command code:before {
+    content: "$ ";
+    color: #216346;
+    font-weight: 700;
+    font-size: 15px
+}
+
+.wp-block-code code {
+    font-family: Consolas, Monaco, 'SF Mono', 'Cascadia Code', 'Roboto Mono', monospace !important;
+    font-size: 14px;
+    width: 100%;
+    word-break: keep-all;
+}
+
+:where(.editor-styles-wrapper) h1 {
+    font-size: 2rem;
+}
+:where(.editor-styles-wrapper) h2 {
+    font-size: 20px;
+}
+:where(.editor-styles-wrapper) h3,
+:where(.editor-styles-wrapper) h4,
+:where(.editor-styles-wrapper) h5,
+:where(.editor-styles-wrapper) h6 {
+    font-size: 18px;
+}
+
+.wp-caption-text:before, figcaption:not(:empty):before {
+    display: inline-block;
+    width: 30px;
+    height: .3em;
+    margin-right: 7px;
+    content: '';
+    border-top: 1px solid;
+}
+
+:where(.editor-styles-wrapper) a {
+    color: #008110;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+:where(.editor-styles-wrapper) a:hover {
+    color: #c10180;
+}
+
+.editor-styles-wrapper :where(:not(.is-layout-flex,.is-layout-grid))>.wp-block {
+    max-width: 890px;
+}
+
+code {
+    font-family: Consolas, Monaco, 'SF Mono', 'Cascadia Code', 'Roboto Mono', monospace;
+    font-size: 14px;
+    width: 100%;
+    word-break: keep-all;
+    padding: 5px 10px;
+    background-color: #282c34;
+    color: #e5e5e5;
+}
+
+.rich-text:focus *[data-rich-text-format-boundary] {
+    background-color: #282c34 !important;
+    color: #e5e5e5 !important;
+    border: none !important;
+}
+
+li.wp-block-list-item {
+    padding-bottom: 8px
+}

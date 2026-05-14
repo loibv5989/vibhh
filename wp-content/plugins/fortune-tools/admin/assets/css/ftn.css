@@ -1,0 +1,67 @@
+.lbv-ai-settings {
+    margin-top: 20px;
+}
+
+.lbv-ai-settings .section-heading {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 30px 0 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    color: #222;
+}
+
+.lbv-ai-settings .setting-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.lbv-ai-settings .setting-row label {
+    width: 180px;
+    font-weight: 600;
+    padding-top: 6px;
+}
+
+.lbv-ai-settings .setting-row .field {
+    flex: 1;
+}
+
+.lbv-ai-settings input[type="text"],
+.lbv-ai-settings input[type="number"],
+.lbv-ai-settings select,
+.lbv-ai-settings textarea {
+    width: 100%;
+    max-width: 380px;
+}
+
+.lbv-ai-settings .description {
+    display: block;
+    margin-top: 6px;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.fortune-test-success {
+    color: #46b450;
+    background-color: #f0f9f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.fortune-test-error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.fortune-test-response {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f1f5f5;
+    border-radius: 5px;
+}

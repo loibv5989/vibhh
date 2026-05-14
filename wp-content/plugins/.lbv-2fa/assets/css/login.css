@@ -1,0 +1,38 @@
+body.login .am2fa-shell {
+    max-width: 100%;
+}
+
+body.login .am2fa-message {
+    margin: 0 0 16px;
+}
+
+body.login #login form {
+    margin-top: 0;
+}
+
+body.login #login form p.submit {
+    margin-top: 16px;
+}
+
+body.login #login form input[type="text"].input {
+    width: 100%;
+}
+
+body.login .am2fa-resend {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #dcdcde;
+}
+
+body.login .am2fa-resend-text {
+    margin: 0 0 10px;
+    font-size: 13px;
+}
+
+body.login .am2fa-resend-form {
+    margin: 0;
+}
+
+body.login .am2fa-resend-form .button {
+    width: 100%;
+}
