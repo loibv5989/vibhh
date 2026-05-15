@@ -1,7 +1,7 @@
 <?php
 /**
  * Template: 3 Cards Spread
- * Layout: Horizontal (Hàng ngang)
+ * Layout: Horizontal
  */
 
 if (!defined('ABSPATH')) exit;
@@ -12,15 +12,15 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
     $positions = $spread_config['positions'];
 
     $orient_symbol = ['upright' => '↑', 'reversed' => '↓'];
-    $orient_label  = ['upright' => 'Xuôi', 'reversed' => 'Ngược'];
-    $topic_labels  = ['love' => 'Tình yêu', 'career' => 'Công việc', 'finance' => 'Tài chính', 'study' => 'Học tập', 'health' => 'Sức khỏe', 'future' => 'Tương lai'];
+    $orient_label  = ['upright' => 'Upright', 'reversed' => 'Reversed'];
+    $topic_labels  = ['love' => 'Love', 'career' => 'Career', 'finance' => 'Finance', 'study' => 'Study', 'health' => 'Health', 'future' => 'Future'];
     $colors_palette = ['#8b5cf6', '#d4af37', '#10b981'];
 
     $element_symbols = ['fire' => '🔥', 'water' => '🌊', 'air' => '🌬️', 'earth' => '🌿'];
     $suit_symbols = ['wands' => '🕯️', 'cups' => '🏆', 'swords' => '⚔️', 'pentacles' => '⭐'];
 
     $intro_text = (($mode === 'question' || $mode === 'love') && !empty($question))
-        ? 'Phương pháp: ' . $spread_config['name']
+        ? 'Method: ' . $spread_config['name']
         : $spread_config['name'] . ':';
 
     $lines = [
@@ -45,7 +45,7 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
             'type'  => 'index',
             'key'   => $pos_key,
             'label' => $pos_label,
-            'value' => $c['name_vi'] . ' ' . $os . ' ' . $ol,
+            'value' => $c['name'] . ' ' . $os . ' ' . $ol,
             'color' => $c_color,
         ];
 
@@ -72,13 +72,13 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
 
     <?php if (($mode === 'question' || $mode === 'love') && !empty($question)): ?>
         <div class="trt-context-badge">
-            <span class="trt-context-icon">Câu hỏi » </span>
+            <span class="trt-context-icon">Question » </span>
             <span class="trt-context-text"><?= esc_html(mb_substr($question, 0, 120)) ?></span>
         </div>
     <?php elseif (!empty($topic)): ?>
         <div class="trt-context-badge">
             <span class="trt-context-icon">» </span>
-            <span class="trt-context-text">Chủ đề: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
+            <span class="trt-context-text">Topic: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
         </div>
     <?php endif; ?>
 
@@ -95,11 +95,11 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
     </div>
 
     <div id="trt-detail-container" style="display:none">
-        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Bấm mở lá bài để xem chi tiết.</p>
+        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Click a card to view details.</p>
         <div class="trt-3cards-area">
             <?php foreach ($cards_data as $i => $data):
                 $c = $data['card'];
-                $slot_num = $i + 1; // 1 đến 3
+                $slot_num = $i + 1; // 1 to 3
                 $orient = $c['orientation'];
                 $el_class = 'trt-el-' . ($c['element'] ?? 'earth');
                 ?>
@@ -119,11 +119,11 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
                             </header>
 
                             <div class="trt-card-identity">
-                                <h3 class="trt-card-name"><?= esc_html($c['name_vi']) ?></h3>
+                                <h3 class="trt-card-name"><?= esc_html($c['name']) ?></h3>
                                 <p class="trt-card-name-en"><?= esc_html($c['name']) ?></p>
                                 <div class="trt-card-orientation <?= esc_attr($orient) ?>">
                                     <span class="trt-orient-arrow"><?= $orient === 'upright' ? '↑' : '↓' ?></span>
-                                    <span><?= $orient === 'upright' ? 'Xuôi' : 'Ngược' ?></span>
+                                    <span><?= $orient === 'upright' ? 'Upright' : 'Reversed' ?></span>
                                 </div>
                             </div>
 
@@ -160,18 +160,18 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
 
         <?php if (get_option('tarot_allow_ai', '0') === '1'): ?>
         <div id="trt-deep-analyze-form">
-            <h3>Giải mã các lá bài</h3>
-            <p class="analyze-desc">Tiếp tục luận giải chi tiết ý nghĩa, sự liên kết giữa các lá bài.</p>
+            <h3>Decode the Cards</h3>
+            <p class="analyze-desc">Continue to interpret the detailed meaning and connections between the cards.</p>
             <div class="trt-input-section">
                 <div class="trt-input-trap" aria-hidden="true">
                     <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                 </div>
-                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Họ và tên của bạn..." maxlength="40">
+                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your full name..." maxlength="40">
                 <span class="trt-error" id="trt-err-deep-name"></span>
             </div>
             <button class="trt-submit-btn" id="trt-btn-deep-analyze">
-                <span class="trt-btn-text">Giải mã</span>
-                <span class="trt-btn-loading"><span class="trt-spinner"></span> Đang giải mã...</span>
+                <span class="trt-btn-text">Decode</span>
+                <span class="trt-btn-loading"><span class="trt-spinner"></span> Decoding...</span>
             </button>
             <span class="trt-error trt-error-analyze" id="trt-err-analyze"></span>
         </div>
@@ -187,12 +187,12 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
         <?php endif; ?>
 
         <div class="ast-action-footer" style="display:none;">
-            <span id="ast-btn-comment" class="ast-btn-comment">Thảo Luận</span>
-            <span class="ast-reload" onclick="window.location.reload()">↺ Trải bài khác</span>
+            <span id="ast-btn-comment" class="ast-btn-comment">Discussion</span>
+            <span class="ast-reload" onclick="window.location.reload()">↺ New Reading</span>
         </div>
 
         <p class="trt-disclaimer" id="trt-disclaimer" style="display:none;">
-            ✦ Đây là kết quả tham khảo theo hệ thống Tarot. Mọi hành động và hướng đi tiếp theo nằm ở sự lựa chọn sáng suốt cũng như nỗ lực của bản thân.
+            ✦ This is a reference result based on the Tarot system. All actions and next steps depend on your wise choices and personal effort.
         </p>
 
     </div>
@@ -205,7 +205,6 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
                 <div class="trt-modal-titles">
                     <div class="trt-modal-pos" id="trtMPos"></div>
                     <div class="trt-modal-name" id="trtMName"></div>
-                    <div class="trt-modal-name-vi" id="trtMNameVi"></div>
                 </div>
             </div>
             <div class="trt-modal-dir-row">
@@ -230,8 +229,7 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
                     'pos' => sprintf('%02d · %s', $d['idx'] + 1, $d['pos_label']),
                     'sym' => $d['el_symbol'],
                     'name' => $c['name'],
-                    'nameVi' => $c['name_vi'],
-                    'dir' => $c['orientation'] === 'upright' ? '↑ Xuôi' : '↓ Ngược',
+                    'dir' => $c['orientation'] === 'upright' ? '↑ Upright' : '↓ Reversed',
                     'dirCls' => $c['orientation'],
                     'kw' => $d['kw'],
                     'timing' => $c['timing'] ?? '',
@@ -250,7 +248,6 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
                 document.getElementById('trtMSym').textContent = c.sym;
                 document.getElementById('trtMPos').textContent = c.pos;
                 document.getElementById('trtMName').textContent = c.name;
-                document.getElementById('trtMNameVi').textContent = c.nameVi;
 
                 const dirEl = document.getElementById('trtMDir');
                 dirEl.textContent = c.dir;
@@ -265,12 +262,12 @@ function tarot_three_cards(string $topic, array $cards, string $mode = 'topic', 
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Element</div><div class="trt-modal-info-val">${c.element}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Planet / Sign</div><div class="trt-modal-info-val">${c.planet || '—'}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Arcana</div><div class="trt-modal-info-val">${c.arcana}</div></div>
-                <div class="trt-modal-info"><div class="trt-modal-info-label">Thông điệp</div><div class="trt-modal-info-val" style="color:var(--lbv-color-1);font-style:italic">${c.kw}</div></div>
+                <div class="trt-modal-info"><div class="trt-modal-info-label">Message</div><div class="trt-modal-info-val" style="color:var(--lbv-color-1);font-style:italic">${c.kw}</div></div>
                 `;
 
                 if (c.links && c.links.length) {
                     document.getElementById('trtMLinks').innerHTML = `
-                    <div class="trt-modal-links-label">Liên kết lá bài</div>
+                    <div class="trt-modal-links-label">Related Cards</div>
                     <div class="trt-modal-link-tags">${c.links.map(l => `<span class="trt-modal-link-tag">${l.replace(/_/g, ' ')}</span>`).join('')}</div>
                     `;
                 } else {

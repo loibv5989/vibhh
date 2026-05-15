@@ -1,8 +1,8 @@
 <?php
 /**
- * Template: Love Nine Spread (9 lá)
- * Layout: 3x3 Grid - Toàn cảnh tình yêu
- * ĐỒNG BỘ 100% UI CELTIC CROSS
+ * Template: Love Nine Spread (9 cards)
+ * Layout: 3x3 Grid - Full love overview
+ * 100% SYNCED WITH CELTIC CROSS UI
  */
 
 if (!defined('ABSPATH')) exit;
@@ -13,15 +13,15 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
     $positions = $spread_config['positions'];
 
     $orient_symbol = ['upright' => '↑', 'reversed' => '↓'];
-    $orient_label  = ['upright' => 'Xuôi', 'reversed' => 'Ngược'];
-    $topic_labels  = ['love' => 'Tình yêu', 'career' => 'Công việc', 'finance' => 'Tài chính', 'study' => 'Học tập', 'health' => 'Sức khỏe', 'future' => 'Tương lai'];
+    $orient_label  = ['upright' => 'Upright', 'reversed' => 'Reversed'];
+    $topic_labels  = ['love' => 'Love', 'career' => 'Career', 'finance' => 'Finance', 'study' => 'Study', 'health' => 'Health', 'future' => 'Future'];
     $colors_palette = ['#ec4899', '#f43f5e', '#f59e0b', '#10b981', '#0ea5e9', '#8b5cf6', '#d4af37', '#14b8a6', '#84cc16'];
 
     $element_symbols = ['fire' => '🔥', 'water' => '🌊', 'air' => '🌬️', 'earth' => '🌿'];
     $suit_symbols = ['wands' => '🕯️', 'cups' => '🏆', 'swords' => '⚔️', 'pentacles' => '⭐'];
 
     $intro_text = (($mode === 'question' || $mode === 'love') && !empty($question))
-            ? 'Phương pháp: ' . $spread_config['name']
+            ? 'Method: ' . $spread_config['name']
             : $spread_config['name'] . ':';
 
     $lines = [
@@ -30,7 +30,7 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
             ['type' => 'divider',  'text' => '']
     ];
 
-    // Tạo mảng dữ liệu gốc để JS Modal hoạt động khớp index
+    // Build base data array so JS Modal works with matching index
     $cards_data = [];
     $idx = 0;
     foreach ($positions as $pos_key => $pos_label) {
@@ -41,7 +41,7 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                 'type'  => 'index',
                 'key'   => $pos_key,
                 'label' => $pos_label,
-                'value' => $c['name_vi'] . ' ' . ($orient_symbol[$c['orientation']] ?? '') . ' ' . ($orient_label[$c['orientation']] ?? ''),
+                'value' => $c['name'] . ' ' . ($orient_symbol[$c['orientation']] ?? '') . ' ' . ($orient_label[$c['orientation']] ?? ''),
                 'color' => $colors_palette[$idx % count($colors_palette)],
         ];
 
@@ -61,10 +61,10 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
     $lines[] = ['type' => 'divider',  'text' => ''];
     $lines_json = json_encode($lines, JSON_UNESCAPED_UNICODE);
 
-    // Mảng thứ tự in HTML để tạo thành Grid 3x3 đúng logic
-    // Hàng 1: Họ kỳ vọng - Họ hiện tại - Thử thách
-    // Hàng 2: Quá khứ - Bạn hiện tại - Bạn kỳ vọng
-    // Hàng 3: Lời khuyên - Vấn đề cốt lõi - Kết quả
+    // HTML print order to create a correct 3x3 Grid
+    // Row 1: Their hope - Them now - Challenge
+    // Row 2: Past bond - You now - Your hope
+    // Row 3: Advice - Core issue - Final outcome
     $visual_grid_order = [
             'their_hope', 'them_now', 'challenge',
             'past_bond', 'you_now', 'your_hope',
@@ -75,13 +75,13 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
 
     <?php if (($mode === 'question' || $mode === 'love') && !empty($question)): ?>
         <div class="trt-context-badge">
-            <span class="trt-context-icon">Câu hỏi » </span>
+            <span class="trt-context-icon">Question » </span>
             <span class="trt-context-text"><?= esc_html(mb_substr($question, 0, 120)) ?></span>
         </div>
     <?php elseif (!empty($topic)): ?>
         <div class="trt-context-badge">
             <span class="trt-context-icon">💕 </span>
-            <span class="trt-context-text">Chủ đề: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
+            <span class="trt-context-text">Topic: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
         </div>
     <?php endif; ?>
 
@@ -98,7 +98,7 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
     </div>
 
     <div id="trt-detail-container" style="display:none">
-        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Bấm mở lá bài để xem chi tiết.</p>
+        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Click a card to view details.</p>
         <div class="trt-9cards-grid">
             <?php foreach ($visual_grid_order as $grid_pos_key):
                 if (!isset($cards_data[$grid_pos_key])) continue;
@@ -122,11 +122,11 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                             </header>
 
                             <div class="trt-card-identity">
-                                <h3 class="trt-card-name"><?= esc_html($c['name_vi']) ?></h3>
+                                <h3 class="trt-card-name"><?= esc_html($c['name']) ?></h3>
                                 <p class="trt-card-name-en"><?= esc_html($c['name']) ?></p>
                                 <div class="trt-card-orientation <?= esc_attr($orient) ?>">
                                     <span class="trt-orient-arrow"><?= $orient === 'upright' ? '↑' : '↓' ?></span>
-                                    <span><?= $orient === 'upright' ? 'Xuôi' : 'Ngược' ?></span>
+                                    <span><?= $orient === 'upright' ? 'Upright' : 'Reversed' ?></span>
                                 </div>
                             </div>
 
@@ -163,24 +163,24 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
 
         <?php if (get_option('tarot_allow_ai', '0') === '1'): ?>
         <div id="trt-deep-analyze-form">
-            <h3>Giải mã các lá bài tình yêu</h3>
-            <p class="analyze-desc">Tiếp tục luận giải chi tiết ý nghĩa, sự liên kết giữa các lá bài trong mối quan hệ của bạn.</p>
+            <h3>Decode the Love Cards</h3>
+            <p class="analyze-desc">Continue to interpret the detailed meaning and connections between the cards in your relationship.</p>
             <div class="trt-input-section">
                 <div class="trt-input-trap" aria-hidden="true">
                     <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                 </div>
-                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Họ và tên của bạn..." maxlength="40">
+                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your full name..." maxlength="40">
                 <span class="trt-error" id="trt-err-deep-name"></span>
             </div>
             <button class="trt-submit-btn" id="trt-btn-deep-analyze">
-                <span class="trt-btn-text">Giải mã tình yêu</span>
-                <span class="trt-btn-loading"><span class="trt-spinner"></span> Đang giải mã...</span>
+                <span class="trt-btn-text">Decode Love</span>
+                <span class="trt-btn-loading"><span class="trt-spinner"></span> Decoding...</span>
             </button>
             <span class="trt-error trt-error-analyze" id="trt-err-analyze"></span>
         </div>
 
         <div id="ast-analysis-wrap" style="display:none;">
-            <h3>💕 Lời Giải Tình Yêu</h3>
+            <h3>💕 Love Reading</h3>
             <div id="ast-final-result">
                 <div class="ast-skeleton ast-sk-title"></div>
                 <div class="ast-skeleton ast-sk-line"></div>
@@ -191,12 +191,12 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
         <?php endif; ?>
 
         <div class="ast-action-footer" style="display:none;">
-            <span id="ast-btn-comment" class="ast-btn-comment">Thảo Luận</span>
-            <span class="ast-reload" onclick="window.location.reload()">↺ Trải bài khác</span>
+            <span id="ast-btn-comment" class="ast-btn-comment">Discussion</span>
+            <span class="ast-reload" onclick="window.location.reload()">↺ New Reading</span>
         </div>
 
         <p class="trt-disclaimer" id="trt-disclaimer" style="display:none;">
-            ✦ Đây là kết quả tham khảo theo hệ thống Tarot. Mọi hành động và hướng đi tiếp theo nằm ở sự lựa chọn sáng suốt cũng như nỗ lực của bản thân.
+            ✦ This is a reference result based on the Tarot system. All actions and next steps depend on your wise choices and personal effort.
         </p>
 
     </div>
@@ -209,7 +209,6 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                 <div class="trt-modal-titles">
                     <div class="trt-modal-pos" id="trtMPos"></div>
                     <div class="trt-modal-name" id="trtMName"></div>
-                    <div class="trt-modal-name-vi" id="trtMNameVi"></div>
                 </div>
             </div>
             <div class="trt-modal-dir-row">
@@ -234,13 +233,12 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                         'pos' => sprintf('%02d · %s', $d['idx'] + 1, $d['pos_label']),
                         'sym' => $d['el_symbol'],
                         'name' => $c['name'],
-                        'nameVi' => $c['name_vi'],
-                        'dir' => $c['orientation'] === 'upright' ? '↑ Xuôi' : '↓ Ngược',
+                        'dir' => $c['orientation'] === 'upright' ? '↑ Upright' : '↓ Reversed',
                         'dirCls' => $c['orientation'],
                         'kw' => $d['kw'],
                         'timing' => $c['timing'] ?? '',
                         'desc' => $c['description'] ?? $c['meaning'] ?? '',
-                        'element' => ucfirst($c['element'] ?? '') . ' ' . $d['el_symbol'], // Đã fix sạch lỗi text thừa
+                        'element' => ucfirst($c['element'] ?? '') . ' ' . $d['el_symbol'],
                         'planet' => $c['astro_name'] ?? '',
                         'arcana' => ($c['arcana'] ?? '') === 'major' ? 'Major Arcana' : 'Minor Arcana',
                         'links' => $c['related_cards'] ?? [],
@@ -254,7 +252,6 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                 document.getElementById('trtMSym').textContent = c.sym;
                 document.getElementById('trtMPos').textContent = c.pos;
                 document.getElementById('trtMName').textContent = c.name;
-                document.getElementById('trtMNameVi').textContent = c.nameVi;
 
                 const dirEl = document.getElementById('trtMDir');
                 dirEl.textContent = c.dir;
@@ -269,12 +266,12 @@ function tarot_love_nine(string $topic, array $cards, string $mode = 'topic', st
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Element</div><div class="trt-modal-info-val">${c.element}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Planet / Sign</div><div class="trt-modal-info-val">${c.planet || '—'}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Arcana</div><div class="trt-modal-info-val">${c.arcana}</div></div>
-                <div class="trt-modal-info"><div class="trt-modal-info-label">Thông điệp</div><div class="trt-modal-info-val" style="color:var(--lbv-color-1);font-style:italic">${c.kw}</div></div>
+                <div class="trt-modal-info"><div class="trt-modal-info-label">Message</div><div class="trt-modal-info-val" style="color:var(--lbv-color-1);font-style:italic">${c.kw}</div></div>
             `;
 
                 if (c.links && c.links.length) {
                     document.getElementById('trtMLinks').innerHTML = `
-                    <div class="trt-modal-links-label">Liên kết lá bài</div>
+                    <div class="trt-modal-links-label">Related Cards</div>
                     <div class="trt-modal-link-tags">${c.links.map(l => `<span class="trt-modal-link-tag">${l.replace(/_/g, ' ')}</span>`).join('')}</div>
                 `;
                 } else {

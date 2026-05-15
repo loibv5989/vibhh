@@ -6,190 +6,190 @@
 ?>
 <div class="trt-step active" id="trt-step-landing">
     <div class="trt-hero">
-        <div class="trt-hero-badge">✦ 78 Lá Bài · Thông Điệp Từ Vũ Trụ</div>
-        <h1 class="trt-hero-title"><span>Tarot</span> Online Miễn Phí</h1>
-        <p class="trt-hero-sub">Chọn phương pháp trải bài phù hợp với vấn đề của bạn</p>
+        <div class="trt-hero-badge">✦ 78 Cards · Messages From The Universe</div>
+        <h1 class="trt-hero-title"><span>Tarot</span> Online Free</h1>
+        <p class="trt-hero-sub">Choose the spread that fits your situation</p>
     </div>
     <div class="trt-mode-grid">
         <a href="/tarot-online/tarot-tinh-yeu/" class="trt-mode-card" style="border-color: var(--accent-color);">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">💖</div>
-                <div class="trt-mode-title">Bói <span>Tarot</span> Tình Yêu</div>
+                <div class="trt-mode-title">Love <span>Tarot</span> Reading</div>
             </div>
-            <div class="trt-mode-desc">Phân tích chi tiết suy nghĩ, cảm xúc, rào cản và tương lai của mối quan hệ (Tùy chọn 3, 5, 7, 9 lá).</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">Detailed analysis of thoughts, emotions, obstacles, and the future of your relationship (Choose 3, 5, 7, or 9 cards).</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-1-la/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🎯</div>
-                <div class="trt-mode-title">Bói Bài Tarot 1 Lá</div>
+                <div class="trt-mode-title">1-Card Tarot Reading</div>
             </div>
-            <div class="trt-mode-desc">Trải bài Tarot 1 lá nhanh chóng, nhận câu trả lời trực tiếp cho vấn đề của bạn. Tập trung vào lời khuyên từ vũ trụ.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">A quick single-card Tarot draw for a direct answer to your question. Focused on guidance from the universe.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-3-la/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🃏</div>
-                <div class="trt-mode-title">Bói Bài Tarot 3 Lá</div>
+                <div class="trt-mode-title">3-Card Tarot Reading</div>
             </div>
-            <div class="trt-mode-desc">Trải bài Tarot 3 lá để xem Quá khứ, Hiện tại và Tương lai. Cách bói Tarot nhanh giúp bạn hiểu diễn biến và định hướng sắp tới.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">A 3-card spread covering Past, Present, and Future. A quick Tarot reading to understand how things have unfolded and where they are heading.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-5-la/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🔮</div>
-                <div class="trt-mode-title">Bói Bài Tarot 5 Lá</div>
+                <div class="trt-mode-title">5-Card Tarot Reading</div>
             </div>
-            <div class="trt-mode-desc">Trải bài Tarot 5 lá giúp phân tích vấn đề, thách thức, lời khuyên và tác động xung quanh để hiểu rõ tình huống hiện tại.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">A 5-card spread that breaks down the issue, challenges, advice, and surrounding influences to clarify your current situation.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-7-la/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🧲</div>
-                <div class="trt-mode-title">Bói Bài Móng Ngựa 7 Lá</div>
+                <div class="trt-mode-title">7-Card Horseshoe Reading</div>
             </div>
-            <div class="trt-mode-desc">Trải bài Tarot 7 lá Horseshoe, khám phá nguyên nhân, trở ngại và hướng phát triển của vấn đề trong tương lai.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">A 7-card Horseshoe Tarot spread to uncover root causes, obstacles, and how the situation may develop going forward.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-10-la/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">✡️</div>
-                <div class="trt-mode-title">Celtic Cross 10 Lá</div>
+                <div class="trt-mode-title">Celtic Cross 10-Card Reading</div>
             </div>
-            <div class="trt-mode-desc">Trải bài Tarot Celtic Cross 10 lá nổi tiếng, phân tích toàn diện hoàn cảnh, tiềm thức, thách thức và con đường phía trước.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">The classic 10-card Celtic Cross spread for a full picture of your circumstances, subconscious influences, challenges, and the path ahead.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
         <a href="/tarot-online/tarot-cau-hoi/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">✍️</div>
-                <div class="trt-mode-title">Bói Tarot Theo Câu Hỏi</div>
+                <div class="trt-mode-title">Ask a Tarot Question</div>
             </div>
-            <div class="trt-mode-desc">Hỏi Tarot điều bạn muốn biết và giải mã các lá bài.</div>
-            <div class="trt-mode-arrow">Bắt đầu →</div>
+            <div class="trt-mode-desc">Ask Tarot whatever you want to know and let the cards speak.</div>
+            <div class="trt-mode-arrow">Get Started →</div>
         </a>
     </div>
 
     <div class="trt-landing-section">
-        <h2 class="trt-ls-heading">Tarot là gì?</h2>
+        <h2 class="trt-ls-heading">What is Tarot?</h2>
         <div class="trt-ls-prose">
-            <p>Tarot là bộ bài gồm 78 lá, chia thành hai phần: <strong>Major Arcana</strong> (22 lá Bí ẩn Lớn) đại diện cho những lực lượng và bài học mang tính phổ quát trong cuộc đời, và <strong>Minor Arcana</strong> (56 lá Bí ẩn Nhỏ) phản ánh những tình huống, cảm xúc và sự kiện thường ngày. Mỗi lá bài mang một biểu tượng riêng, được đọc tùy theo vị trí xuôi hoặc ngược và mối quan hệ với các lá xung quanh trong trải bài.</p>
-            <p>Bộ bài Tarot phổ biến nhất hiện nay là <strong>Rider-Waite-Smith</strong>, xuất bản năm 1909, với hình ảnh minh họa chi tiết trên từng lá — khác với các bộ bài trước đó chỉ dùng ký hiệu số. Từ đó đến nay, hàng ngàn phiên bản đã ra đời nhưng hệ thống ý nghĩa cốt lõi vẫn giữ nguyên.</p>
+            <p>Tarot is a deck of 78 cards divided into two parts: the <strong>Major Arcana</strong> (22 cards) representing universal forces and life lessons, and the <strong>Minor Arcana</strong> (56 cards) reflecting everyday situations, emotions, and events. Each card carries its own symbolism, interpreted based on whether it appears upright or reversed and how it relates to the surrounding cards in the spread.</p>
+            <p>The most widely used Tarot deck today is the <strong>Rider-Waite-Smith</strong>, published in 1909, which was the first to feature detailed illustrations on every card rather than just numerical symbols. Thousands of versions have followed since, but the core system of meanings has remained consistent.</p>
         </div>
     </div>
 
     <div class="trt-landing-section">
-        <h2 class="trt-ls-heading">Bốn chất bài trong Minor Arcana</h2>
-        <p class="trt-ls-lead">Minor Arcana gồm 4 chất (suit), mỗi chất gồm 14 lá (Ace đến 10, Page, Knight, Queen, King), mỗi chất cai quản một lĩnh vực khác nhau của trải nghiệm sống.</p>
+        <h2 class="trt-ls-heading">The Four Suits of the Minor Arcana</h2>
+        <p class="trt-ls-lead">The Minor Arcana contains 4 suits, each with 14 cards (Ace through 10, Page, Knight, Queen, King), and each suit governs a different area of human experience.</p>
         <div class="trt-suit-grid">
             <div class="trt-suit-card">
                 <div class="trt-suit-symbol">🔥</div>
-                <div class="trt-suit-name">Gậy · Wands</div>
-                <div class="trt-suit-desc">Ngọn lửa, ý chí, đam mê, sáng tạo và hành động. Liên quan đến sự nghiệp, dự án và năng lượng khởi sự.</div>
+                <div class="trt-suit-name">Wands</div>
+                <div class="trt-suit-desc">Fire, willpower, passion, creativity, and action. Associated with career, projects, and the energy of beginnings.</div>
             </div>
             <div class="trt-suit-card">
                 <div class="trt-suit-symbol">💧</div>
-                <div class="trt-suit-name">Cốc · Cups</div>
-                <div class="trt-suit-desc">Nước, cảm xúc, trực giác và các mối quan hệ. Liên quan đến tình yêu, gia đình và thế giới nội tâm.</div>
+                <div class="trt-suit-name">Cups</div>
+                <div class="trt-suit-desc">Water, emotions, intuition, and relationships. Associated with love, family, and the inner world.</div>
             </div>
             <div class="trt-suit-card">
                 <div class="trt-suit-symbol">⚡</div>
-                <div class="trt-suit-name">Kiếm · Swords</div>
-                <div class="trt-suit-desc">Không khí, trí tuệ, xung đột và sự thật. Liên quan đến tư duy, giao tiếp, thách thức và quyết định khó khăn.</div>
+                <div class="trt-suit-name">Swords</div>
+                <div class="trt-suit-desc">Air, intellect, conflict, and truth. Associated with thinking, communication, challenges, and difficult decisions.</div>
             </div>
             <div class="trt-suit-card">
                 <div class="trt-suit-symbol">🌱</div>
-                <div class="trt-suit-name">Đồng tiền · Pentacles</div>
-                <div class="trt-suit-desc">Đất, vật chất, tiền bạc và sức khỏe. Liên quan đến tài chính, công việc, cơ thể và những gì hữu hình.</div>
+                <div class="trt-suit-name">Pentacles</div>
+                <div class="trt-suit-desc">Earth, material matters, money, and health. Associated with finances, work, the physical body, and tangible things.</div>
             </div>
         </div>
     </div>
 
     <div class="trt-landing-section">
-        <h2 class="trt-ls-heading">22 lá Major Arcana — Hành trình của Kẻ Ngốc</h2>
+        <h2 class="trt-ls-heading">The 22 Major Arcana — The Fool's Journey</h2>
         <div class="trt-ls-prose">
-            <p>22 lá Major Arcana bắt đầu bằng lá số 0 — <strong>The Fool (Kẻ Ngốc)</strong> — và kết thúc ở lá số 21 — <strong>The World (Thế Giới)</strong>. Chuỗi này thường được gọi là "Hành trình của Kẻ Ngốc": từ sự ngây thơ chưa trải đời, qua các bài học về quyền lực, tình yêu, cái chết, sự tái sinh, cho đến khi đạt tới sự viên mãn.</p>
-            <p>Khi một lá Major Arcana xuất hiện trong trải bài, nó thường chỉ ra những lực lượng lớn hơn đang vận hành — những bài học nghiệp (karma), bước ngoặt quan trọng, hoặc các chủ đề mang tính quyết định trong cuộc sống. Ngược lại, Minor Arcana phản ánh những sự kiện và cảm xúc hàng ngày mà con người có thể chủ động điều chỉnh.</p>
+            <p>The 22 Major Arcana begins with card 0 — <strong>The Fool</strong> — and ends with card 21 — <strong>The World</strong>. This sequence is often called "The Fool's Journey": from innocence and inexperience, through lessons of power, love, death, and rebirth, until a state of wholeness is reached.</p>
+            <p>When a Major Arcana card appears in a spread, it typically points to larger forces at work — karmic lessons, significant turning points, or themes that carry real weight in one's life. Minor Arcana cards, by contrast, reflect the everyday events and emotions that a person can more actively shape and adjust.</p>
         </div>
     </div>
 
     <div class="trt-landing-section">
-        <h2 class="trt-ls-heading">Lá bài xuôi và lá bài ngược</h2>
+        <h2 class="trt-ls-heading">Upright and Reversed Cards</h2>
         <div class="trt-dir-grid">
             <div class="trt-dir-card trt-dir-upright">
-                <div class="trt-dir-label">Lá xuôi · Upright</div>
-                <div class="trt-dir-body">Năng lượng của lá bài đang vận hành thuận, biểu hiện ra bên ngoài hoặc đang trong quá trình phát triển rõ ràng. Không nhất thiết có nghĩa là "tốt" — một lá như The Tower xuôi vẫn báo hiệu sụp đổ đột ngột.</div>
+                <div class="trt-dir-label">Upright</div>
+                <div class="trt-dir-body">The card's energy is flowing openly, expressing itself outwardly or developing in a clear direction. Upright does not automatically mean positive — a card like The Tower upright still signals a sudden collapse.</div>
             </div>
             <div class="trt-dir-card trt-dir-reversed">
-                <div class="trt-dir-label">Lá ngược · Reversed</div>
-                <div class="trt-dir-body">Năng lượng bị chặn, hướng vào nội tâm, bị trì hoãn hoặc đang phục hồi. Một số người đọc bài chỉ dùng lá xuôi; một số khác đọc cả ngược để có thêm sắc thái. Không có cách đọc nào là duy nhất đúng.</div>
+                <div class="trt-dir-label">Reversed</div>
+                <div class="trt-dir-body">The energy is blocked, turned inward, delayed, or in the process of recovery. Some readers use only upright cards; others read reversed cards for additional nuance. Neither approach is the one correct method.</div>
             </div>
         </div>
     </div>
 
     <div class="trt-landing-section">
-        <h2 class="trt-ls-heading">Các kiểu trải bài phổ biến</h2>
+        <h2 class="trt-ls-heading">Common Tarot Spreads</h2>
         <div class="trt-spread-table">
             <div class="trt-st-row trt-st-header">
-                <span>Trải bài</span>
-                <span>Số lá</span>
-                <span>Phù hợp</span>
+                <span>Spread</span>
+                <span>Cards</span>
+                <span>Best For</span>
             </div>
             <div class="trt-st-row">
-                <span>1 lá — Lời khuyên ngày</span>
+                <span>1 Card — Daily Guidance</span>
                 <span>1</span>
-                <span>Câu hỏi đơn, định hướng nhanh</span>
+                <span>Single questions, quick direction</span>
             </div>
             <div class="trt-st-row">
-                <span>3 lá — Quá khứ · Hiện tại · Tương lai</span>
+                <span>3 Cards — Past · Present · Future</span>
                 <span>3</span>
-                <span>Xem diễn biến theo thời gian</span>
+                <span>Tracking how things unfold over time</span>
             </div>
             <div class="trt-st-row">
-                <span>5 lá — Chữ thập</span>
+                <span>5 Cards — Cross Spread</span>
                 <span>5</span>
-                <span>Phân tích tình huống, thách thức, lời khuyên</span>
+                <span>Situation analysis, challenges, advice</span>
             </div>
             <div class="trt-st-row">
-                <span>7 lá — Móng ngựa</span>
+                <span>7 Cards — Horseshoe</span>
                 <span>7</span>
-                <span>Nguyên nhân sâu, ảnh hưởng bên ngoài, kết quả</span>
+                <span>Root causes, external influences, outcome</span>
             </div>
             <div class="trt-st-row">
                 <span>Celtic Cross</span>
                 <span>10</span>
-                <span>Phân tích toàn diện, phức tạp, đa chiều</span>
+                <span>Full analysis of complex, multi-layered situations</span>
             </div>
         </div>
     </div>
 
     <div class="trt-landing-section">
-        <h3 class="trt-ls-heading">Câu hỏi thường gặp</h3>
+        <h3 class="trt-ls-heading">Frequently Asked Questions</h3>
         <div class="trt-faq-list">
             <details class="trt-faq-item">
-                <summary class="trt-faq-q">Tarot có đoán được tương lai chính xác không?</summary>
-                <div class="trt-faq-a">Tarot không đưa ra một tương lai cố định và duy nhất. Các lá bài phản ánh năng lượng và xu hướng hiện tại — tương lai thay đổi khi hành động và nhận thức thay đổi. Vai trò của Tarot là soi sáng những gì đang vận hành, không phải phán quyết điều gì sẽ xảy ra.</div>
+                <summary class="trt-faq-q">Can Tarot accurately predict the future?</summary>
+                <div class="trt-faq-a">Tarot does not offer a fixed, singular future. The cards reflect current energies and tendencies — the future shifts as actions and awareness shift. Tarot's role is to illuminate what is already in motion, not to declare what will happen.</div>
             </details>
             <details class="trt-faq-item">
-                <summary class="trt-faq-q">Bao lâu nên bói một lần?</summary>
-                <div class="trt-faq-a">Không có quy tắc cứng. Nhiều người bói mỗi sáng một lá để định hướng ngày, hoặc bói khi đứng trước quyết định quan trọng. Tuy nhiên, việc bói lại cùng một câu hỏi nhiều lần trong ngày thường ít hữu ích — các lá bài phản ánh trạng thái hiện tại, và trạng thái đó cần thời gian để thay đổi.</div>
+                <summary class="trt-faq-q">How often should I do a reading?</summary>
+                <div class="trt-faq-a">There are no strict rules. Many people draw one card each morning for daily direction, or do a full reading when facing an important decision. That said, pulling cards repeatedly for the same question within a single day rarely helps — the cards reflect a current state, and that state needs time to shift.</div>
             </details>
             <details class="trt-faq-item">
-                <summary class="trt-faq-q">Lá bài ngược có nghĩa là điều xấu?</summary>
-                <div class="trt-faq-a">Không nhất thiết. Lá ngược thường cho thấy năng lượng bị chặn, hướng vào bên trong, hoặc đang trong giai đoạn chuyển hóa. Một lá vốn có ý nghĩa thách thức khi xuôi (như The Tower hay Five of Swords) đôi khi lại mang ý nghĩa tích cực hơn khi ngược — tùy vào bối cảnh toàn bộ trải bài.</div>
+                <summary class="trt-faq-q">Does a reversed card mean something bad?</summary>
+                <div class="trt-faq-a">Not necessarily. Reversed cards often point to blocked energy, an inward focus, or a period of transformation. A card that carries difficult energy upright — like The Tower or Five of Swords — can sometimes take on a more constructive meaning when reversed, depending on the context of the full spread.</div>
             </details>
             <details class="trt-faq-item">
-                <summary class="trt-faq-q">Nên đặt câu hỏi như thế nào để được kết quả rõ ràng?</summary>
-                <div class="trt-faq-a">Câu hỏi mở thường cho kết quả sâu hơn câu hỏi có/không. Thay vì "Anh ấy có yêu tôi không?", thử "Điều gì đang chi phối mối quan hệ này lúc này?" — câu sau cho Tarot không gian để chỉ ra nhiều chiều hơn. Câu hỏi càng cụ thể về vấn đề, không phải về người khác, càng hữu ích.</div>
+                <summary class="trt-faq-q">How should I phrase my question for a clearer reading?</summary>
+                <div class="trt-faq-a">Open-ended questions tend to produce more depth than yes/no ones. Instead of "Does he love me?", try "What is shaping this relationship right now?" — the second gives Tarot room to show more dimensions. Questions focused on your own situation rather than another person's inner state tend to be the most useful.</div>
             </details>
             <details class="trt-faq-item">
-                <summary class="trt-faq-q">Sự khác nhau giữa Major và Minor Arcana trong một trải bài?</summary>
-                <div class="trt-faq-a">Major Arcana xuất hiện nhiều trong một trải bài thường báo hiệu giai đoạn có tính bước ngoặt, với những lực lượng lớn đang vận hành vượt ra ngoài tầm kiểm soát thông thường. Minor Arcana chiếm ưu thế cho thấy tình huống phụ thuộc nhiều hơn vào quyết định và hành động hàng ngày của bản thân.</div>
+                <summary class="trt-faq-q">What is the difference between Major and Minor Arcana in a spread?</summary>
+                <div class="trt-faq-a">A spread heavy with Major Arcana cards often signals a turning-point period, with larger forces at work that go beyond everyday control. When Minor Arcana cards dominate, the situation tends to depend more on the person's own daily choices and actions.</div>
             </details>
         </div>
     </div>

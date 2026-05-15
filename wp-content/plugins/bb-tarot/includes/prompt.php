@@ -40,7 +40,7 @@ function tarot_build_prompt_topic(string $name, string $topic, array $cards, str
         $ol = $orient_labels[$c['orientation']] ?? '';
         $kw = implode(', ', $c['keywords']);
 
-        $card_lines .= "- [{$pos_label}]: {$c['name_vi']} ({$c['name']}) — {$ol}\n";
+        $card_lines .= "- [{$pos_label}]: {$c['name']} — {$ol}\n";
         $card_lines .= "  Message: {$kw}\n";
         if (!empty($c['timing'])) {
             $card_lines .= "  Timing: {$c['timing']}\n";
@@ -119,7 +119,7 @@ function tarot_build_prompt_question(string $name, string $question, array $card
         $ol = $orient_labels[$c['orientation']] ?? '';
         $kw = implode(', ', $c['keywords']);
 
-        $card_lines .= "- [{$pos_label}]: {$c['name_vi']} ({$c['name']}) — {$ol}\n";
+        $card_lines .= "- [{$pos_label}]: {$c['name']} — {$ol}\n";
         $card_lines .= "  Message: {$kw}\n";
         if (!empty($c['timing'])) {
             $card_lines .= "  Timing: {$c['timing']}\n";

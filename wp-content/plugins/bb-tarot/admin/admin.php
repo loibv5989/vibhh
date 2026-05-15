@@ -40,8 +40,8 @@ class TR_Admin {
     public function register_settings_page() {
         add_submenu_page(
                 'fortune-settings',
-                'Bói Bài Tarot',
-                'Bói Bài Tarot',
+                'Tarot Reading',
+                'Tarot Reading',
                 'manage_options',
                 'bb-tarot-settings',
                 [$this, 'render_settings_page']
@@ -65,22 +65,22 @@ class TR_Admin {
         ?>
 
         <div class="wrap">
-            <h1>Cấu hình Bói Bài Tarot</h1>
+            <h1>Tarot Reading Settings</h1>
             <form method="post">
                 <?php wp_nonce_field('bb_tarot_settings_form'); ?>
                 
                 <!-- SECTION 0: AI Enable/Disable -->
-                <h2>🤖 Bật/Tắt AI</h2>
+                <h2>🤖 Enable / Disable AI</h2>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Cho phép sử dụng AI</th>
+                        <th scope="row">Allow AI usage</th>
                         <td>
                             <label>
                                 <input type="checkbox" name="allow_ai" value="1" <?php checked($allow_ai, '1'); ?>>
-                                Bật chức năng AI (Gatekeeper + Giải bài)
+                                Enable AI features (Gatekeeper + Reading)
                             </label>
                             <p class="description" style="color: #d63638;">
-                                <strong>⚠️ Lưu ý:</strong> Nếu tắt, tất cả chức năng AI sẽ bị vô hiệu hóa. Người dùng sẽ không thể sử dụng tính năng giải bài Tarot.
+                                <strong>⚠️ Note:</strong> If disabled, all AI features will be turned off. Users will not be able to use the Tarot reading feature.
                             </p>
                         </td>
                     </tr>
@@ -88,13 +88,13 @@ class TR_Admin {
                 
                 <hr style="margin: 30px 0;">
                 
-                <h2>⚙️ Thứ tự ưu tiên Model (Fallback)</h2>
-                <p style="margin-top: 0; color: #666;">Hệ thống sẽ tự động chuyển sang model dự phòng nếu model chính gặp lỗi.</p>
+                <h2>⚙️ Model Priority Order (Fallback)</h2>
+                <p style="margin-top: 0; color: #666;">The system will automatically switch to a fallback model if the primary model fails.</p>
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <strong>Step 1:</strong> Kiểm duyệt câu hỏi
-                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Quyết định có tiếp tục Step 2 không</p>
+                            <strong>Step 1:</strong> Question Gatekeeper
+                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Decide whether to proceed to Step 2</p>
                         </th>
                         <td>
                             <select name="gatekeeper_order" style="min-width: 250px;">
@@ -109,8 +109,8 @@ class TR_Admin {
                     </tr>
                     <tr>
                         <th scope="row">
-                            <strong>Step 2:</strong> Giải lá bài
-                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Phân tích và giải đáp</p>
+                            <strong>Step 2:</strong> Card Reading
+                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Analysis and interpretation</p>
                         </th>
                         <td>
                             <select name="analysis_order" style="min-width: 250px;">
@@ -128,7 +128,7 @@ class TR_Admin {
                 <hr style="margin: 30px 0;">
                 
                 <!-- SECTION 2: API Configuration -->
-                <h2>🔑 Cấu hình API Keys & Models</h2>
+                <h2>🔑 API Keys & Models Configuration</h2>
                 
                 <h3 style="margin-top: 20px;">Google Gemini</h3>
                 <table class="form-table">
@@ -147,8 +147,8 @@ class TR_Admin {
                     <tr>
                         <th scope="row">Gemini API Keys</th>
                         <td>
-                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($gemini_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($gemini_key); ?></textarea>
+                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
                         </td>
                     </tr>
                 </table>
@@ -168,8 +168,8 @@ class TR_Admin {
                     <tr>
                         <th scope="row">Groq API Keys</th>
                         <td>
-                            <textarea name="groq_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($groq_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="groq_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($groq_key); ?></textarea>
+                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
                         </td>
                     </tr>
                 </table>
@@ -192,8 +192,8 @@ class TR_Admin {
                     <tr>
                         <th scope="row">Mistral API Keys</th>
                         <td>
-                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($mistral_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($mistral_key); ?></textarea>
+                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
                         </td>
                     </tr>
                 </table>
@@ -201,7 +201,7 @@ class TR_Admin {
                 <h3 style="margin-top: 30px;">Test Connection</h3>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Chọn provider để test</th>
+                        <th scope="row">Select provider to test</th>
                         <td>
                             <select name="provider" id="bb_tarot_provider_select" style="min-width: 250px;">
                                 <option value="gemini" <?php selected($provider, 'gemini'); ?>>Google Gemini</option>
@@ -217,29 +217,29 @@ class TR_Admin {
                 <hr style="margin: 30px 0;">
                 
                 <!-- SECTION 3: Page Creation -->
-                <h2>📄 Tạo trang</h2>
+                <h2>📄 Create Pages</h2>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Tạo trang</th>
+                        <th scope="row">Create pages</th>
                         <td>
-                            <button type="button" id="create-pages-btn" class="button button-primary">Tạo trang</button>
+                            <button type="button" id="create-pages-btn" class="button button-primary">Create Pages</button>
                             <div id="create-pages-results" style="margin-top: 10px;"></div>
                             <p class="description">
-                                Tạo 6 trang với cấu trúc hierarchy cho Bói Bài Tarot:<br>
-                                • Bói Bài Tarot Online Miễn Phí (LV 1)<br>
-                                • Bói Bài Tarot 3 Lá (LV 2)<br>
-                                • Bói Bài Tarot 5 Lá (LV 2)<br>
-                                • Bói Bài Móng Ngựa 7 Lá (LV 2)<br>
-                                • Bói Bài Tarot 10 Lá (LV 2)<br>
-                                • Bói Tarot Theo Câu Hỏi (LV 2)<br><br>
-                                <strong>URLs sẽ được tạo:</strong><br>
-                                • /tarot-online/ (trang chính)<br>
-                                • /tarot-3-la/ (Tarot 3 lá)<br>
-                                • /tarot-5-la/ (Tarot 5 lá)<br>
-                                • /tarot-7-la/ (Tarot 7 lá)<br>
-                                • /tarot-10-la/ (Tarot 10 lá)<br>
-                                • /tarot-cau-hoi/ (Tarot câu hỏi)<br><br>
-                                <em>Lưu ý: Trang đã tồn tại sẽ được bỏ qua.</em>
+                                Create 6 pages with a hierarchy for Tarot Reading:<br>
+                                • Free Online Tarot Reading (LV 1)<br>
+                                • 3-Card Tarot Reading (LV 2)<br>
+                                • 5-Card Tarot Reading (LV 2)<br>
+                                • 7-Card Horseshoe Tarot Reading (LV 2)<br>
+                                • 10-Card Celtic Cross Tarot Reading (LV 2)<br>
+                                • Ask Tarot a Question (LV 2)<br><br>
+                                <strong>URLs to be created:</strong><br>
+                                • /tarot-online/ (main page)<br>
+                                • /tarot-3-la/ (3-card Tarot)<br>
+                                • /tarot-5-la/ (5-card Tarot)<br>
+                                • /tarot-7-la/ (7-card Tarot)<br>
+                                • /tarot-10-la/ (10-card Tarot)<br>
+                                • /tarot-cau-hoi/ (Tarot question)<br><br>
+                                <em>Note: Existing pages will be skipped.</em>
                             </p>
                         </td>
                     </tr>
@@ -414,38 +414,38 @@ class TR_Admin {
 
         $pages_config = [
             [
-                'title' => 'Bói Bài Tarot Online Miễn Phí',
+                'title' => 'Free Online Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="hub"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'boi-bai-tarot-online',
                 'parent' => 0
             ],
 
             [
-                'title' => 'Bói Bài Tarot 3 Lá',
+                'title' => '3-Card Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'tarot-3-la',
                 'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => 'Bói Bài Tarot 5 Lá',
+                'title' => '5-Card Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="5_cards"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'tarot-5-la',
                 'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => 'Bói Bài Móng Ngựa 7 Lá',
+                'title' => '7-Card Horseshoe Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="7_cards"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'tarot-7-la',
                 'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => 'Bói Bài Tarot 10 Lá',
+                'title' => '10-Card Celtic Cross Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="10_cards"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'tarot-10-la',
                 'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => 'Bói Tarot Theo Câu Hỏi',
+                'title' => 'Ask Tarot a Question',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="question" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
                 'slug' => 'tarot-cau-hoi',
                 'parent' => 'boi-bai-tarot-online'
@@ -478,11 +478,11 @@ class TR_Admin {
             ]);
 
             if (!empty($existing)) {
-                $parent_ids[$page_config['slug']] = $existing[0]->ID; // vẫn cần lưu để các trang con dùng
+                $parent_ids[$page_config['slug']] = $existing[0]->ID; // still need to save for child pages
                 $created_pages[] = [
                         'title'    => $page_config['title'],
                         'edit_url' => get_edit_post_link($existing[0]->ID),
-                        'status'   => 'đã tồn tại (bỏ qua)',
+                        'status'   => 'already exists (skipped)',
                 ];
                 continue;
             }
@@ -503,18 +503,18 @@ class TR_Admin {
                 $created_pages[] = [
                         'title'    => $page_config['title'],
                         'edit_url' => get_edit_post_link($page_id),
-                        'status'   => 'đã tạo',
+                        'status'   => 'created',
                 ];
             }
         }
 
         if (!empty($created_pages)) {
             wp_send_json_success([
-                    'message' => 'Đã xử lý ' . count($created_pages) . ' trang',
+                    'message' => 'Processed ' . count($created_pages) . ' pages',
                     'pages'   => $created_pages,
             ]);
         } else {
-            wp_send_json_error(['message' => 'Không thể tạo trang']);
+            wp_send_json_error(['message' => 'Unable to create pages']);
         }
     }
 }

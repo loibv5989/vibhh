@@ -6,22 +6,22 @@
 ?>
 <div class="trt-step <?= ($mode === 'topic') ? 'active' : '' ?>" id="trt-step-input-a">
     <div class="trt-step-header">
-        <a href="/tarot-online/" class="trt-back-btn">← Trang chủ Tarot</a>
+        <a href="/tarot-online/" class="trt-back-btn">← Tarot Home</a>
         <span class="trt-step-label">🃏 <?= esc_html($current_spread['name']) ?></span>
     </div>
-    <h1 class="trt-hero-title">Trải bài Tarot <span><?= esc_html($total_cards) ?> lá</span></h1>
+    <h1 class="trt-hero-title">Tarot Reading <span><?= esc_html($total_cards) ?> Cards</span></h1>
     <div class="trt-topic-section">
-        <p class="trt-label">Chọn chủ đề bạn muốn hỏi</p>
-        <p class="trt-topic-hint">✦ Nhắm mắt, nghĩ về vấn đề đang vướng mắc, rồi chọn chủ đề</p>
+        <p class="trt-label">Choose the topic you want to ask about</p>
+        <p class="trt-topic-hint">✦ Close your eyes, think about the issue troubling you, then choose a topic</p>
         <div class="trt-topic-grid">
             <?php
             $topics = [
-                'love' => ['icon' => '❤️', 'label' => 'Tình Yêu'],
-                'career' => ['icon' => '💼', 'label' => 'Công Việc'],
-                'finance' => ['icon' => '💰', 'label' => 'Tài Chính'],
-                'study' => ['icon' => '📚', 'label' => 'Học Tập'],
-                'health' => ['icon' => '🌿', 'label' => 'Sức Khỏe'],
-                'future' => ['icon' => '🔮', 'label' => 'Tương Lai'],
+                'love' => ['icon' => '❤️', 'label' => 'Love'],
+                'career' => ['icon' => '💼', 'label' => 'Career'],
+                'finance' => ['icon' => '💰', 'label' => 'Finance'],
+                'study' => ['icon' => '📚', 'label' => 'Study'],
+                'health' => ['icon' => '🌿', 'label' => 'Health'],
+                'future' => ['icon' => '🔮', 'label' => 'Future'],
             ];
             foreach ($topics as $val => $t): ?>
                 <button class="trt-topic-card" data-topic="<?= $val ?>">

@@ -41,7 +41,7 @@ class TR_Handle {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'tarot_form')) return;
         wp_enqueue_style('tarot', TAROT_PLUGIN_URL . 'assets/tarot.css', [], TAROT_VERSION);
-        wp_enqueue_script('tarot', TAROT_PLUGIN_URL . 'assets/tarot.min.js', ['jquery'], TAROT_VERSION, true);
+        wp_enqueue_script('tarot', TAROT_PLUGIN_URL . 'assets/tarot.js', ['jquery'], TAROT_VERSION, true);
         wp_localize_script('tarot', 'TarotAjax', [
                 'api_url' => esc_url_raw(rest_url('tarot/v1/')),
         ]);
@@ -140,7 +140,7 @@ class TR_Handle {
         $html_content = is_array($renderHTML) ? ($renderHTML['html'] ?? '') : $renderHTML;
         $hints = [];
         foreach ($fullCards as $pos_key => $card) {
-            $hints[$pos_key] = $card['hint'] ?? 'Có thông điệp ẩn';
+            $hints[$pos_key] = $card['hint'] ?? 'A hidden message';
         }
 
         return new WP_REST_Response([
@@ -187,7 +187,7 @@ class TR_Handle {
             return new WP_REST_Response(
                 [
                     'success' => false,
-                    'message' => 'Vui lòng đăng nhập để sử dụng tính năng này.'
+                    'message' => 'Please log in to use this feature.'
                 ], 200);
         }
 
@@ -196,12 +196,12 @@ class TR_Handle {
         if ($allow_ai !== '1') {
             return new WP_REST_Response([
                 'success' => false,
-                'message' => 'Chức năng hiện đang tạm ngưng. Vui lòng quay lại sau.'
+                'message' => 'This feature is currently paused. Please try again later.'
             ], 200);
         }
 
         if (!$this->tarot_quota()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Đã đạt giới hạn phân tích trong ngày. Vui lòng quay lại vào ngày mai.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Daily analysis limit reached. Please come back tomorrow.'], 200);
         }
 
         $name       = mb_substr(sanitize_text_field($request->get_param('full_name') ?? ''), 0, 60);
@@ -214,15 +214,15 @@ class TR_Handle {
         $hp_trap = $request->get_param('hp_trap') ?? '';
 
         if (!empty($hp_trap)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vũ trụ từ chối kết nối với bạn.'], 403);
+            return new WP_REST_Response(['success' => false, 'message' => 'The universe declines to connect with you.'], 403);
         }
 
         if (empty($name)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập họ và tên.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter your full name.'], 200);
         }
 
         if (($mode === 'question' || $mode === 'love') && empty($question)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ. Vui lòng thực hiện lại.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid reading data. Please try again.'], 200);
         }
 
         $cardsLiteRaw = $request->get_param('cards');
@@ -231,12 +231,12 @@ class TR_Handle {
                 : $cardsLiteRaw;
 
         if (!is_array($liteCards) || empty($liteCards) || count($liteCards) > 10) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid reading data.'], 200);
         }
 
         foreach ($liteCards as $pos => $c) {
             if (!is_array($c) || empty($c['key']) || !isset($c['orientation'])) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Cấu trúc lá bài bị sai lệch.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'Card structure is malformed.'], 200);
             }
         }
 
@@ -246,7 +246,7 @@ class TR_Handle {
 
         $static_hints = [];
         foreach ($fullCards as $pos_key => $card) {
-            $static_hints[$pos_key] = $card['hint'] ?? 'Có thông điệp ẩn';
+            $static_hints[$pos_key] = $card['hint'] ?? 'A hidden message';
         }
 
         $providers = [
@@ -285,11 +285,11 @@ class TR_Handle {
                 }
             }
 
-            if (strpos($gk_response, 'KHÔNG') !== false || strpos($gk_response, 'KH') !== false || empty($gk_response)) {
+            if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'N') !== false || empty($gk_response)) {
                 if ($mode === 'love') {
-                    $html_fallback = '<br><br>Vui lòng thực hiện lại hành động. <span class="trt-reload" onclick="window.location.reload()">Đặt câu hỏi</span> rõ ràng hơn về tình cảm của bạn/hai bạn nhé!';
+                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> more clearly about your love life.';
                 } else {
-                    $html_fallback = '<br><br>Vui lòng thực hiện lại hành động. <span class="trt-reload" onclick="window.location.reload()">Đặt câu hỏi</span> rõ ràng hơn về vấn đề của bạn nhé!';
+                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> more clearly about your issue.';
                 }
 
                 return new WP_REST_Response([
@@ -345,7 +345,7 @@ class TR_Handle {
             }
 
             if (!$is_valid) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Hệ thống đang quá tải. Vui lòng thử lại sau giây lát.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'The system is overloaded. Please try again shortly.'], 200);
             }
 
             if (preg_match('/\[AST_RESULT\]([\s\S]*?)\[\/AST_RESULT\]/', $rawResponse, $matches)) {
@@ -364,7 +364,7 @@ class TR_Handle {
             ], 200);
 
         } catch (Exception $e) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Lỗi kết nối. Vui lòng thử lại sau.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Connection error. Please try again later.'], 200);
         }
     }
 
