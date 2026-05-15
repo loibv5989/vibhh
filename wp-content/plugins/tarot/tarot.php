@@ -13,7 +13,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('TAROT_VERSION', '26.5.10');
+define('TAROT_VERSION', time());
 define('TAROT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('TAROT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('TAROT_RATE_LIMIT', 10);
