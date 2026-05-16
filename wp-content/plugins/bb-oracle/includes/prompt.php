@@ -29,7 +29,7 @@ function _bb_oracle_prompt(string $name, string $context_line, array $cards, str
         $c = $cards[$pos_key];
         $kw = implode(', ', $c['keywords']);
 
-        $card_lines .= "- Vị trí [{$pos_label}]: Lá {$c['name_vi']} ({$c['name_en']})\n";
+        $card_lines .= "- Position [{$pos_label}]: Card {$c['name']}\n";
         $card_lines .= "  (Thông điệp: {$kw})\n";
         $card_lines .= "  (Năng lượng Ánh sáng: {$c['light']})\n";
         $card_lines .= "  (Năng lượng Bóng tối: {$c['shadow']})\n";

@@ -39,7 +39,7 @@ class BbOracle_Calc {
             $d = $oracle_deck[$key];
             $lite[$positions[$i]] = [
                 'key'     => $key,
-                'name_vi' => $d['name_vi'],
+                'name'    => $d['name'],
                 'element' => $d['element'],
             ];
         }
@@ -56,8 +56,7 @@ class BbOracle_Calc {
             $d = $oracle_deck[$key];
             $fullCards[$pos] = [
                 'key'      => $key,
-                'name_vi'  => $d['name_vi']  ?? '',
-                'name_en'  => $d['name_en']  ?? '',
+                'name'     => $d['name']     ?? '',
                 'element'  => $d['element']  ?? '',
                 'theme'    => $d['theme']    ?? '',
                 'keywords' => $d['keywords'] ?? [],

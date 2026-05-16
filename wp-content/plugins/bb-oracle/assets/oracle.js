@@ -339,7 +339,7 @@ jQuery(function ($) {
                     `<div class="trt-card-3d">
                         <div class="trt-face trt-face-back"><div class="trt-card-back-face"></div></div>
                         <div class="trt-face trt-face-front">
-                            <div class="trt-front-name">${cardData.name_vi}</div>
+                            <div class="trt-front-name">${cardData.name}</div>
                             <div class="trt-front-orient"></div>
                         </div>
                     </div>`

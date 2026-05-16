@@ -3,27 +3,27 @@ if (!defined('ABSPATH')) exit;
 
 return [
     '1_card' => [
-        'name'  => 'Rút 1 lá (Daily Card)',
+        'name'  => '1 Card Draw (Daily Card)',
         'count' => 1,
         'positions' => [
-            'message' => 'Thông Điệp Hôm Nay',
+            'message' => "Today's Message",
         ],
     ],
     '2_cards' => [
-        'name'  => 'Rút 2 lá',
+        'name'  => '2 Card Draw',
         'count' => 2,
         'positions' => [
-            'situation' => 'Tình Huống',
-            'guidance'  => 'Hướng Dẫn',
+            'situation' => 'Situation',
+            'guidance'  => 'Guidance',
         ],
     ],
     '3_cards' => [
-        'name'  => 'Rút 3 lá',
+        'name'  => '3 Card Draw',
         'count' => 3,
         'positions' => [
-            'mind'   => 'Tâm Trí',
-            'heart'  => 'Trái Tim',
-            'spirit' => 'Linh Hồn',
+            'mind'   => 'Mind',
+            'heart'  => 'Heart',
+            'spirit' => 'Spirit',
         ],
     ],
 ];

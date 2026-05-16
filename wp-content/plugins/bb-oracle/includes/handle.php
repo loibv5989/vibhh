@@ -55,7 +55,7 @@ class BbOracle_Handle {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'oracle_form')) return;
         wp_enqueue_style('bb-oracle',   BB_ORACLE_PLUGIN_URL . 'assets/oracle.css',  [], BB_ORACLE_VERSION);
-        wp_enqueue_script('bb-oracle', BB_ORACLE_PLUGIN_URL . 'assets/oracle.min.js', ['jquery'], BB_ORACLE_VERSION, true);
+        wp_enqueue_script('bb-oracle', BB_ORACLE_PLUGIN_URL . 'assets/oracle.js', ['jquery'], BB_ORACLE_VERSION, true);
         wp_localize_script('bb-oracle', 'OracleAjax', [
             'api_url'   => rest_url('oracle/v1')
         ]);
@@ -136,7 +136,7 @@ class BbOracle_Handle {
                 'type'  => 'index',
                 'key'   => $pos_key,
                 'label' => 'Lá bài',
-                'value' => $c['name_vi'] . ' (' . $pos_label . ')',
+                'value' => $c['name'] . ' (' . $pos_label . ')',
                 'color' => $colors_palette[$color_idx % count($colors_palette)],
             ];
             $color_idx++;

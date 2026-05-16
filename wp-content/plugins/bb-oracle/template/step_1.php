@@ -19,22 +19,22 @@ if (!defined('ABSPATH')) exit;
 
     <div class="trt-step <?= ($mode === 'topic') ? 'active' : '' ?>" id="trt-step-input-a">
         <div class="trt-step-header">
-            <a href="/oracle-cards-online/" class="trt-back-btn">← Trang chủ Oracle</a>
+            <a href="/oracle-cards-online/" class="trt-back-btn">← Oracle Home</a>
             <span class="trt-step-label">🔮 <?= esc_html($current_spread['name']) ?></span>
         </div>
-        <h1 class="trt-hero-title">Trải bài Oracle <span><?= esc_html($total_cards) ?> lá</span></h1>
+        <h1 class="trt-hero-title">Oracle <span><?= esc_html($total_cards) ?> Card</span> Spread</h1>
         <div class="trt-topic-section">
-            <p class="trt-label">Chọn chủ đề năng lượng bạn muốn khám phá</p>
-            <p class="trt-topic-hint">✦ Hít thở sâu, đặt tay lên trái tim, nghĩ về điều đang chiếm trọn tâm trí bạn</p>
+            <p class="trt-label">Choose a theme to explore</p>
+            <p class="trt-topic-hint">✦ Take a deep breath, place your hand on your heart, and think about what's on your mind</p>
             <div class="trt-topic-grid">
                 <?php
                 $topics = [
-                        'love'    => ['icon' => '💗', 'label' => 'Tình Yêu'],
-                        'career'  => ['icon' => '💼', 'label' => 'Sự Nghiệp'],
-                        'finance' => ['icon' => '💰', 'label' => 'Tài Chính'],
-                        'study'   => ['icon' => '📚', 'label' => 'Học Tập'],
-                        'health'  => ['icon' => '🌿', 'label' => 'Sức Khỏe'],
-                        'future'  => ['icon' => '🌌', 'label' => 'Tương Lai'],
+                        'love'    => ['icon' => '💗', 'label' => 'Love'],
+                        'career'  => ['icon' => '💼', 'label' => 'Career'],
+                        'finance' => ['icon' => '💰', 'label' => 'Finance'],
+                        'study'   => ['icon' => '📚', 'label' => 'Study'],
+                        'health'  => ['icon' => '🌿', 'label' => 'Health'],
+                        'future'  => ['icon' => '🌌', 'label' => 'Future'],
                 ];
                 foreach ($topics as $val => $t): ?>
                     <button class="trt-topic-card" data-topic="<?= esc_attr($val) ?>">
@@ -54,44 +54,44 @@ if (!defined('ABSPATH')) exit;
 
     <div class="trt-step <?= ($mode === 'question') ? 'active' : '' ?>" id="trt-step-spread-b">
         <div class="trt-step-header">
-            <a href="/oracle-cards-online/" class="trt-back-btn">← Trang chủ Oracle</a>
-            <span class="trt-step-label">✍️ Hỏi Oracle</span>
+            <a href="/oracle-cards-online/" class="trt-back-btn">← Oracle Home</a>
+            <span class="trt-step-label">✍️ Ask Oracle</span>
         </div>
-        <h1 class="trt-hero-title">Hỏi Oracle Cards Online</h1>
+        <h1 class="trt-hero-title">Ask Oracle Cards Online</h1>
         <div class="trt-input-section trt-margin-b-24">
-            <p class="trt-label">Câu hỏi của bạn</p>
-            <textarea id="trt-question" class="trt-input trt-textarea" placeholder="Ví dụ: Tôi cần tập trung vào điều gì lúc này?" maxlength="300" rows="3"></textarea>
+            <p class="trt-label">Your question</p>
+            <textarea id="trt-question" class="trt-input trt-textarea" placeholder="e.g. What should I focus on right now?" maxlength="300" rows="3"></textarea>
             <div class="trt-char-count"><span id="trt-q-count">0</span>/300</div>
             <span class="trt-error" id="trt-err-question"></span>
         </div>
         <div class="trt-user-question" aria-hidden="true">
-            <label for="trt-user-label">Nhập câu trả lời?</label>
+            <label for="trt-user-label">Enter answer?</label>
             <input type="text" id="trt-user-question-trap" name="trt-user-question" tabindex="-1" autocomplete="off">
         </div>
         <div class="trt-input-section">
-            <p class="trt-label">Bạn muốn rút bao nhiêu lá?</p>
+            <p class="trt-label">How many cards would you like to draw?</p>
             <div class="trt-mode-grid trt-grid-spreads">
                 <div class="trt-mode-card trt-spread-btn" data-spread="1_card" data-count="1">
-                    <div class="trt-spread-header"><div class="trt-mode-icon">🌟</div><div class="trt-mode-title">1 Lá</div></div>
-                    <div class="trt-mode-desc">Một thông điệp súc tích, tập trung.</div>
+                    <div class="trt-spread-header"><div class="trt-mode-icon">🌟</div><div class="trt-mode-title">1 Card</div></div>
+                    <div class="trt-mode-desc">One focused, concise message.</div>
                 </div>
                 <div class="trt-mode-card trt-spread-btn" data-spread="2_cards" data-count="2">
-                    <div class="trt-spread-header"><div class="trt-mode-icon">✨</div><div class="trt-mode-title">2 Lá</div></div>
-                    <div class="trt-mode-desc">Tình huống và hướng dẫn.</div>
+                    <div class="trt-spread-header"><div class="trt-mode-icon">✨</div><div class="trt-mode-title">2 Cards</div></div>
+                    <div class="trt-mode-desc">Situation and guidance.</div>
                 </div>
                 <div class="trt-mode-card trt-spread-btn" data-spread="3_cards" data-count="3">
-                    <div class="trt-spread-header"><div class="trt-mode-icon">🔮</div><div class="trt-mode-title">3 Lá</div></div>
-                    <div class="trt-mode-desc">Tâm Trí · Trái Tim · Linh Hồn.</div>
+                    <div class="trt-spread-header"><div class="trt-mode-icon">🔮</div><div class="trt-mode-title">3 Cards</div></div>
+                    <div class="trt-mode-desc">Mind · Heart · Spirit.</div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="trt-step" id="trt-step-deck">
-        <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Hít thở sâu, tập trung vào câu hỏi và chọn lá bài</p>
+        <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Take a deep breath, focus on your question, and choose your cards</p>
         <div class="trt-deck-wrap" id="trt-deck-wrap"></div>
         <div class="trt-selected-slots" id="trt-dynamic-slots"></div>
-        <div class="trt-deck-counter">Đã chọn: <span id="trt-selected-count">0</span>/<span id="trt-target-count">0</span></div>
+        <div class="trt-deck-counter">Selected: <span id="trt-selected-count">0</span>/<span id="trt-target-count">0</span></div>
     </div>
 
     <div id="trt-result-box"></div>

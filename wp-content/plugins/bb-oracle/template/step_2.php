@@ -34,8 +34,7 @@ if (!defined('ABSPATH')) exit;
             <div class="trt-cd-header" style="border-left:3px solid <?= esc_attr($pcolor) ?>">
                 <span class="trt-cd-pos" style="color:<?= esc_attr($pcolor) ?>"><?= esc_html($pos_label) ?></span>
                 <span class="trt-cd-name">
-                            <?= esc_html($c['name_vi']) ?>
-                            <small>(<?= esc_html($c['name_en']) ?>)</small>
+                            <?= esc_html($c['name']) ?>
                         </span>
                 <?php if (!empty($element)): ?>
                     <span class="trt-badge-minor"><?= esc_html($element_labels[$element] ?? $element) ?></span>
@@ -43,13 +42,13 @@ if (!defined('ABSPATH')) exit;
             </div>
             <div class="trt-cd-body">
                 <?php if (!empty($c['light'])): ?>
-                    <p><strong>✦ Ánh sáng:</strong> <?= esc_html($c['light']) ?></p>
+                    <p><strong>✦ Light:</strong> <?= esc_html($c['light']) ?></p>
                 <?php endif; ?>
                 <?php if (!empty($c['shadow'])): ?>
-                    <p><strong>◆ Bóng tối:</strong> <?= esc_html($c['shadow']) ?></p>
+                    <p><strong>◆ Shadow:</strong> <?= esc_html($c['shadow']) ?></p>
                 <?php endif; ?>
                 <?php if (!empty($kw)): ?>
-                    <p style="font-size:.8rem;margin-top:8px"><strong>🔑 Thông điệp: </strong> <?= esc_html($kw) ?></p>
+                    <p style="font-size:.8rem;margin-top:8px"><strong>🔑 Message: </strong> <?= esc_html($kw) ?></p>
                 <?php endif; ?>
                 <?php if (!empty($c['mantra'])): ?>
                     <p class="oracle-mantra" style="font-style:italic;margin-top:10px;padding:10px;border-left:2px solid <?= esc_attr($pcolor) ?>;font-size:.85rem">"<?= esc_html($c['mantra']) ?>"</p>
@@ -62,18 +61,18 @@ if (!defined('ABSPATH')) exit;
     $allow_ai  = get_option('bb_oracle_allow_ai', '0');
     if ($allow_ai === '1'): ?>
         <div id="trt-deep-analyze-form">
-            <h3>Luận giải thông điệp</h3>
-            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:20px;">Tiếp tục phân tích, giải mã ý nghĩa thông điệp của lá bài.</p>
+            <h3>Interpret the Message</h3>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:20px;">Continue analyzing and decoding the meaning behind your cards.</p>
             <div class="trt-input-section">
                 <div class="trt-input-trap" aria-hidden="true">
                     <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                 </div>
-                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Họ và tên của bạn..." maxlength="40">
+                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your name..." maxlength="40">
                 <span class="trt-error" id="trt-err-deep-name"></span>
             </div>
             <button class="trt-submit-btn" id="trt-btn-deep-analyze">
-                <span class="trt-btn-text">Giải nghĩa</span>
-                <span class="trt-btn-loading"><span class="trt-spinner"></span> Đang kết nối...</span>
+                <span class="trt-btn-text">Interpret</span>
+                <span class="trt-btn-loading"><span class="trt-spinner"></span> Connecting...</span>
             </button>
             <span class="trt-error trt-error-analyze" id="trt-err-analyze"></span>
         </div>
@@ -88,12 +87,12 @@ if (!defined('ABSPATH')) exit;
     <?php endif; ?>
 
     <div class="ast-action-footer" style="display:none;">
-        <span id="ast-btn-comment" class="ast-btn-comment">Thảo Luận</span>
-        <span class="ast-reload" onclick="window.location.reload()">↺ Rút bài khác</span>
+        <span id="ast-btn-comment" class="ast-btn-comment">Discuss</span>
+        <span class="ast-reload" onclick="window.location.reload()">↺ Draw again</span>
     </div>
 
     <p class="trt-disclaimer" id="trt-disclaimer" style="display:none;">
-        ✦ Đây là kết quả tham khảo theo hệ thống Oracle Cards. Mọi hành động và hướng đi tiếp theo nằm ở sự lựa chọn sáng suốt cũng như nỗ lực của bản thân.
+        ✦ This is a reference reading based on the Oracle Cards system. All actions and directions ahead depend on your own wise choices and effort.
     </p>
 
 </div>
