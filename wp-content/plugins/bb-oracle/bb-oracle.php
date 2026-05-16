@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Oracle Cards Online
  * Plugin URI: https://nbblo.com
- * Description: Plugin rút bài Oracle online
+ * Description: Online Oracle card reading plugin
  * Version: 26.5.10
  * Author: Loibv
  * Requires PHP: 8.2 or higher
@@ -13,7 +13,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('BB_ORACLE_VERSION', '26.5.10');
+define('BB_ORACLE_VERSION', time());
 define('BB_ORACLE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BB_ORACLE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BB_ORACLE_RATE_LIMIT', 5);

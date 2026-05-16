@@ -106,21 +106,21 @@ class BbOracle_Handle {
         $allow_ai      = get_option('bb_oracle_allow_ai', '0');
 
         $element_labels = [
-            'earth' => 'Đất 🌍', 'water' => 'Nước 💧', 'fire'  => 'Lửa 🔥',
-            'air'   => 'Gió 🌬', 'wind'  => 'Gió 🌬',  'wood'  => 'Mộc 🌿',
-            'light' => 'Ánh Sáng ✨', 'moon' => 'Mặt Trăng 🌙',
-            'sun'   => 'Mặt Trời ☀️', 'ether' => 'Ether 🌌', 'heart' => 'Trái Tim 💜',
+            'earth' => 'Earth 🌍', 'water' => 'Water 💧', 'fire'  => 'Fire 🔥',
+            'air'   => 'Air 🌬', 'wind'  => 'Air 🌬',  'wood'  => 'Wood 🌿',
+            'light' => 'Light ✨', 'moon' => 'Moon 🌙',
+            'sun'   => 'Sun ☀️', 'ether' => 'Ether 🌌', 'heart' => 'Heart 💜',
         ];
         $topic_labels = [
-            'love' => 'Tình yêu', 'career' => 'Công việc', 'finance' => 'Tài chính',
-            'study' => 'Học tập', 'health' => 'Sức khỏe', 'future' => 'Tương lai',
+            'love' => 'Love', 'career' => 'Career', 'finance' => 'Finance',
+            'study' => 'Study', 'health' => 'Health', 'future' => 'Future',
         ];
         $colors_palette = ['#8b5cf6', '#d4af37', '#10b981', '#f43f5e', '#0ea5e9'];
 
         $count      = $spread_config['count'];
         $intro_text = ($mode === 'question' && !empty($question))
-            ? 'Phương pháp: ' . $spread_config['name']
-            : 'Chủ đề: ' . ($topic_labels[$topic] ?? $topic) . ' · ' . $count . ' lá bài đã rút:';
+            ? 'Method: ' . $spread_config['name']
+            : 'Topic: ' . ($topic_labels[$topic] ?? $topic) . ' · ' . $count . ' cards drawn:';
 
         $lines = [
             ['type' => 'greeting', 'text' => $intro_text],
@@ -135,7 +135,7 @@ class BbOracle_Handle {
             $lines[] = [
                 'type'  => 'index',
                 'key'   => $pos_key,
-                'label' => 'Lá bài',
+                'label' => 'Card',
                 'value' => $c['name'] . ' (' . $pos_label . ')',
                 'color' => $colors_palette[$color_idx % count($colors_palette)],
             ];
@@ -148,13 +148,13 @@ class BbOracle_Handle {
 
         <?php if ($mode === 'question' && !empty($question)): ?>
             <div class="trt-context-badge">
-                <span class="trt-context-icon">Câu hỏi » </span>
+                <span class="trt-context-icon">Question » </span>
                 <span class="trt-context-text"><?= esc_html(mb_substr($question, 0, 120)) ?></span>
             </div>
         <?php elseif (!empty($topic)): ?>
             <div class="trt-context-badge">
                 <span class="trt-context-icon">» </span>
-                <span class="trt-context-text">Chủ đề: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
+                <span class="trt-context-text">Topic: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
             </div>
         <?php endif; ?>
 
@@ -215,22 +215,22 @@ class BbOracle_Handle {
 
     public function apiAnalyze(WP_REST_Request $request): WP_REST_Response {
         if (!$this->validate_logged_in()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng đăng nhập để sử dụng tính năng này.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please log in to use this feature.'], 200);
         }
 
         if (get_option('bb_oracle_allow_ai', '0') !== '1') {
-            return new WP_REST_Response(['success' => false, 'message' => 'Chức năng hiện đang tạm ngưng. Vui lòng quay lại sau.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'This feature is temporarily unavailable. Please check back later.'], 200);
         }
 
         if (!$this->oracle_quota()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Đã đạt giới hạn phân tích trong ngày. Vui lòng quay lại vào ngày mai.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Daily analysis limit reached. Please come back tomorrow.'], 200);
         }
 
         $params = $request->get_json_params();
         $hp_trap = $params['hp_trap'] ?? '';
 
         if (!empty($hp_trap)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vũ trụ từ chối kết nối với bạn.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Connection refused.'], 200);
         }
 
         $name       = mb_substr(sanitize_text_field($params['full_name']    ?? ''), 0, 60);
@@ -243,21 +243,21 @@ class BbOracle_Handle {
         if (!BbOracle_Calc::isValidSpread($spread_key)) $spread_key = '3_cards';
 
         if (empty($name)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập họ và tên.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter your name.'], 200);
         }
         if ($mode === 'question' && empty($question)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập câu hỏi trước khi giải mã.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter a question before analyzing.'], 200);
         }
 
         $liteCards = $params['cards'] ?? [];
 
         if (!is_array($liteCards) || empty($liteCards) || count($liteCards) > 10) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ.'], 403);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data.'], 403);
         }
 
         foreach ($liteCards as $c) {
             if (!is_array($c) || empty($c['key'])) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Cấu trúc lá bài bị sai lệch.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'Card structure is malformed.'], 200);
             }
         }
 
@@ -296,8 +296,8 @@ class BbOracle_Handle {
                         }
                     }
 
-                    if (strpos($gk_response, 'KHÔNG') !== false || strpos($gk_response, 'KH') !== false || empty($gk_response)) {
-                        $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Hãy đặt lại câu hỏi</span> cụ thể và chi tiết hơn nhé!';
+                    if (strpos($gk_response, 'NO') !== false || empty($gk_response)) {
+                        $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Please rephrase your question</span> with more detail and clarity.';
 
                         return new WP_REST_Response([
                             'success'   => true,
@@ -363,7 +363,7 @@ class BbOracle_Handle {
             return new WP_REST_Response(
                 [
                     'success' => false,
-                    'message' => $last_error ?: 'Lỗi kết nối. Vui lòng thử lại sau.'
+                    'message' => $last_error ?: 'Connection error. Please try again later.'
                 ], 200);
         }
     }

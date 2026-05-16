@@ -79,7 +79,7 @@ class BbOracle_Calc {
         }
 
         if (empty(trim(strip_tags($html)))) {
-            $html = '<p>Không thể giải mã kết quả. Vui lòng thử lại.</p>';
+            $html = '<p>Unable to decode the result. Please try again.</p>';
         }
 
         return ['html' => $html];

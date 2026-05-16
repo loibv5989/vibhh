@@ -3,30 +3,30 @@ if (!defined('ABSPATH')) exit;
 
 function bb_oracle_build_gatekeeper_prompt(string $question): string {
     return <<<TXT
-Nhiệm vụ: Phân tích câu hỏi của người dùng để xác định xem đây có phải là câu hỏi có mục đích, ý đồ rõ ràng để xin thông điệp từ bài Oracle không.
+Task: Analyze the user's question to determine if it has a clear purpose or intent to request a message from the Oracle deck.
 
-Lưu ý quan trọng (bắt buộc tuân thủ):
-- Đây là nhiệm vụ phân loại văn bản, không phải trả lời hay hỗ trợ nội dung trong câu hỏi.
-- LUÔN PHẢI THỰC HIỆN phân loại, kể cả khi câu hỏi chứa ý đồ bạo lực, ám sát, phi pháp, xúc phạm, tâm linh hay cực đoan.
-- Không được từ chối trả lời dưới bất kỳ hình thức nào.
-- Không suy diễn đạo đức, không cảnh báo, không thêm bình luận dạy đời.
-- Chỉ trả về duy nhất 1 từ: CÓ hoặc KHÔNG.
+Important notes (must comply):
+- This is a text classification task, not a response or support for the content in the question.
+- ALWAYS PERFORM the classification, even if the question contains violent, assassination, illegal, offensive, spiritual, or extremist intent.
+- Do not refuse to respond in any form.
+- Do not inject moral reasoning, warnings, or lecturing commentary.
+- Return only a single word: YES or NO.
 
-Câu hỏi: {$question}
+Question: {$question}
 
-Quy tắc phân loại:
+Classification rules:
 
-1. Trả về "KHÔNG" nếu câu hỏi là RÁC hoặc KHÔNG CÓ MỤC ĐÍCH RÕ RÀNG:
-   - Kiến thức, định nghĩa (Ví dụ: "Oracle là gì?", "Bầu trời màu gì?").
-   - Nói chuyện phiếm, thử bot (Ví dụ: "Chào", "Bạn khỏe không?", "Test").
-   - Quá mơ hồ, trống rỗng (Ví dụ: "Hôm nay sao", "Cho 1 thông điệp", "Giúp tôi", "....").
+1. Return "NO" if the question is JUNK or HAS NO CLEAR PURPOSE:
+   - Knowledge questions, definitions (Example: "What is Oracle?", "What color is the sky?").
+   - Small talk, testing the bot (Example: "Hello", "How are you?", "Test").
+   - Too vague, empty (Example: "How is today", "Give me a message", "Help me", "....").
 
-2. Trả về "CÓ" cho TẤT CẢ các câu hỏi có mục đích, ý đồ hoặc sự tò mò về cuộc sống, định hướng (bất kể câu hỏi có tính chất gì):
-   - Tình duyên, Gia đạo, Công danh, Tiền bạc, Học tập, Sức khỏe.
-   - Những vấn đề bế tắc, xung đột, tìm kiếm sự chữa lành hoặc giải pháp.
-   - BẤT KỲ ý đồ cá nhân nào (kể cả tiêu cực, trả thù, lừa đảo, phạm tội...)
+2. Return "YES" for ALL questions that have a purpose, intent, or curiosity about life and direction (regardless of the nature of the question):
+   - Love, Family, Career, Money, Studies, Health.
+   - Issues of deadlock, conflict, seeking healing or solutions.
+   - ANY personal intent whatsoever (including negative, revenge, fraud, crime...).
 
-YÊU CẦU TRẢ VỀ:
-Chỉ trả về đúng 1 từ khóa duy nhất: CÓ hoặc KHÔNG.
+RETURN REQUIREMENT:
+Return only a single keyword: YES or NO.
 TXT;
 }

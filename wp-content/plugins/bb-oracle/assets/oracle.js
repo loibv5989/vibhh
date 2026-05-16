@@ -55,22 +55,22 @@ jQuery(function ($) {
 
         name(val, errorId) {
             this._setError(errorId);
-            if (!val)              { this._setError(errorId, 'Vui lòng nhập họ và tên.');       return false; }
-            if (val.length > 40)   { this._setError(errorId, 'Họ tên tối đa 40 ký tự.');         return false; }
-            if (/\d/.test(val))    { this._setError(errorId, 'Họ tên không được chứa số.');       return false; }
+            if (!val)              { this._setError(errorId, 'Please enter your name.');       return false; }
+            if (val.length > 40)   { this._setError(errorId, 'Name must be 40 characters or fewer.');         return false; }
+            if (/\d/.test(val))    { this._setError(errorId, 'Name must not contain numbers.');       return false; }
             return true;
         },
 
         topic(val, errorId) {
             this._setError(errorId);
-            if (!val) { this._setError(errorId, 'Vui lòng chọn chủ đề.'); return false; }
+            if (!val) { this._setError(errorId, 'Please select a topic.'); return false; }
             return true;
         },
 
         question(val, errorId) {
             this._setError(errorId);
             if (!val || val.trim().length < 5) {
-                this._setError(errorId, 'Vui lòng nhập câu hỏi (tối thiểu 5 ký tự).');
+                this._setError(errorId, 'Please enter a question (at least 5 characters).');
                 return false;
             }
             return true;
@@ -174,11 +174,11 @@ jQuery(function ($) {
                     spread  : State.spread,
                 }),
             }).then(res => {
-                if (!res.html) return $.Deferred().reject(res.message || 'Đã có lỗi xảy ra.').promise();
+                if (!res.html) return $.Deferred().reject(res.message || 'An error occurred.').promise();
                 State.cardsLite = res.cards;
                 $('#trt-result-box').html(res.html);
                 return res;
-            }, xhr => $.Deferred().reject(xhr.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.').promise());
+            }, xhr => $.Deferred().reject(xhr.responseJSON?.message || 'Connection error. Please try again.').promise());
 
             return this.drawPromise;
         },
@@ -198,9 +198,9 @@ jQuery(function ($) {
                     hp_trap  : $('#trt-deep-trap').val(),
                 }),
             }).then(res => {
-                if (res.success === false) return $.Deferred().reject(res.message || 'Đã có lỗi xảy ra.').promise();
+                if (res.success === false) return $.Deferred().reject(res.message || 'An error occurred.').promise();
                 return res;
-            }, xhr => $.Deferred().reject(xhr.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.').promise());
+            }, xhr => $.Deferred().reject(xhr.responseJSON?.message || 'Connection error. Please try again.').promise());
         },
     };
 
@@ -254,7 +254,7 @@ jQuery(function ($) {
         _resetUI() {
             $('#trt-deck-instruction')
                 .show()
-                .html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`)
+                .html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`)
                 .css('opacity', 1);
             $('#trt-selected-count').text('0');
             $('#trt-target-count').text(this.targetCount);
@@ -362,15 +362,15 @@ jQuery(function ($) {
             };
 
             if (!State.cardsLite) {
-                $('#trt-deck-instruction').html('✦ Đang kết nối với các lá bài...').css('opacity', 0.6);
+                $('#trt-deck-instruction').html('✦ Connecting to the cards...').css('opacity', 0.6);
 
                 $.when(Ajax.drawPromise).then(() => {
                     $('#trt-deck-instruction')
-                        .html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`)
+                        .html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`)
                         .css('opacity', 1);
                     proceed();
                 }).fail(() => {
-                    $('#trt-deck-instruction').html('Lỗi kết nối. Vui lòng tải lại trang.').css('color', 'red');
+                    $('#trt-deck-instruction').html('Connection error. Please reload the page.').css('color', 'red');
                     $card.removeClass('selected-card');
                     this.picking = false;
                 });
@@ -411,7 +411,7 @@ jQuery(function ($) {
                     scrollTop: $('#trt-result-box').offset().top - 60,
                 }, 500);
 
-                /* Typewriter nếu có lines */
+                /* Typewriter if there are lines */
                 const lines = Utils.parseJSON($('#ast-chat-body').attr('data-lines'));
                 const tw$   = $.Deferred();
                 if (lines) {
@@ -438,7 +438,7 @@ jQuery(function ($) {
                     $('#trt-deep-analyze-form').slideUp(300);
                 })
                 .fail((msg) => {
-                    $('#trt-err-analyze').text(msg || 'Lỗi kết nối. Vui lòng thử lại sau.');
+                    $('#trt-err-analyze').text(msg || 'Connection error. Please try again later.');
                     $('#ast-final-result').html('').hide();
                     $('html, body').animate({ scrollTop: $('#trt-deep-analyze-form').offset().top - 50 }, 400);
                     $btn.removeClass('loading').prop('disabled', false);
