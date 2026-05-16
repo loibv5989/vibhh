@@ -344,9 +344,8 @@ class TR_Handle {
                 }
             }
 
-            file_put_contents(plugin_dir_path(__FILE__) . 'prompt.log', $prompt);
-
-            file_put_contents(plugin_dir_path(__FILE__) . 'rawResponse.log', $rawResponse);
+//            file_put_contents(plugin_dir_path(__FILE__) . 'prompt.log', $prompt);
+//            file_put_contents(plugin_dir_path(__FILE__) . 'rawResponse.log', $rawResponse);
 
             if (!$is_valid) {
                 return new WP_REST_Response(['success' => false, 'message' => 'The system is overloaded. Please try again shortly.'], 200);

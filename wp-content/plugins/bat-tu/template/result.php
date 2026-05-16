@@ -154,7 +154,7 @@ $rows = [
                             <div class="nh-title-stack">
                                 <span>Lá số bát tự</span>
                             </div>
-                            <div class="nh-brand-name">nbblo.com</div>
+                            <div class="nh-brand-name"><?= parse_url(get_bloginfo('url'), PHP_URL_HOST) ?></div>
                         </div>
                     </div>
                     <div class="nh-meta-grid">

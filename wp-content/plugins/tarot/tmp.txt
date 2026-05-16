@@ -1,21 +1,17 @@
-Về mặt **kỹ thuật thì không có vấn đề gì**, nhưng về **ngữ nghĩa thì hơi lệch:**
+Keyword data trong minor_1.php đang khá mỏng — "keywords_upright" => ["beginnings"] một từ thôi, trong khi prompt dùng keywords này làm input cho AI. Nếu data nghèo thì output AI cũng nghèo theo. Cần enrich thêm 2-3 keywords/card.
 
----
+Cụ thể như này:
 
-**"Decode"** nghĩa là *giải mã* — thường dùng cho dữ liệu mã hóa, code bí mật. Nghe có vẻ kỹ thuật/lạnh lùng, không hợp với không khí huyền bí của Tarot.
+Hiện tại AI nhận được:
+- [Past]: Ace of Wands — Upright ↑
+  Message: beginnings
+  Timing: Very fast, within days to 2 weeks
+Sau khi enrich:
+- [Past]: Ace of Wands — Upright ↑
+  Message: new beginnings, creative spark, bold action, passion ignited
+  Timing: Very fast, within days to 2 weeks
 
-**Gợi ý thay thế phù hợp hơn:**
-
-| Thay bằng | Cảm giác |
-|---|---|
-| **Reveal** / Revealing... | Huyền bí, khám phá |
-| **Interpret** / Interpreting... | Chuyên nghiệp, đúng nghĩa |
-| **Unveil** / Unveiling... | Bí ẩn, thu hút |
-| **Read the Cards** / Reading... | Đúng với Tarot |
-| **Illuminate** / Illuminating... | Spiritual, đẹp |
-
----
-
-Tương tự, `<h3>Decode the Cards</h3>` cũng nên đổi thành ví dụ **"Reveal the Cards"** hoặc **"Interpret the Cards"** cho đồng bộ.
-
-Bạn muốn giữ tiếng Anh hay đổi sang tiếng Việt?
+Chỉ cần làm đúng 1 việc: enrich keywords_upright và keywords_reversed từ 1 từ lên 3-4 từ cho 56 lá Minor Arcana trong 2 file PHP.
+Không cần đụng gì khác — prompt không cần sửa, logic không cần sửa, handle.php không cần sửa. Vì prompt đã có sẵn dòng:
+php$card_lines .= "  Message: {$kw}\n";
+Chỗ $kw là implode(', ', $c['keywords']) — tức là tự động nối keywords bằng dấu phẩy. Enrich data là output thay đổi ngay, không cần đụng code.

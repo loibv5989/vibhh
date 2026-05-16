@@ -50,13 +50,13 @@ class TR_Admin {
 
     public function render_settings_page() {
 
-        $model      = get_option('tarot_ai_model', 'gemini-flash-latest');
+        $model      = get_option('tarot_ai_model', 'gemini-flash-cardtest');
         $provider   = get_option('tarot_ai_provider', 'gemini');
         $groq_model = get_option('tarot_groq_model', 'llama-3.3-70b-versatile');
         $gemini_key = get_option('tarot_gemini_key', '');
         $groq_key   = get_option('tarot_groq_key', '');
         $mistral_key = get_option('tarot_mistral_key', '');
-        $mistral_model = get_option('tarot_mistral_model', 'mistral-small-latest');
+        $mistral_model = get_option('tarot_mistral_model', 'mistral-small-cardtest');
 
         $gatekeeper_order = get_option('tarot_gatekeeper_order', 'groq,mistral,gemini');
         $analysis_order = get_option('tarot_analysis_order', 'gemini,mistral,groq');
@@ -136,11 +136,11 @@ class TR_Admin {
                         <th scope="row">Gemini Model</th>
                         <td>
                             <select name="model" style="min-width: 250px;">
-                                <option value="gemini-flash-latest" <?php selected($model, 'gemini-flash-latest'); ?>>gemini-flash-latest</option>
+                                <option value="gemini-flash-cardtest" <?php selected($model, 'gemini-flash-cardtest'); ?>>gemini-flash-cardtest</option>
                                 <option value="gemini-2.5-flash" <?php selected($model, 'gemini-2.5-flash'); ?>>gemini-2.5-flash</option>
                                 <option value="gemini-3-flash-preview" <?php selected($model, 'gemini-3-flash-preview'); ?>>gemini-3-flash-preview</option>
                                 <option value="gemini-2.5-flash-lite" <?php selected($model, 'gemini-2.5-flash-lite'); ?>>gemini-2.5-flash-lite</option>
-                                <option value="gemini-flash-lite-latest" <?php selected($model, 'gemini-flash-lite-latest'); ?>>gemini-flash-lite-latest</option>
+                                <option value="gemini-flash-lite-cardtest" <?php selected($model, 'gemini-flash-lite-cardtest'); ?>>gemini-flash-lite-cardtest</option>
                             </select>
                         </td>
                     </tr>
@@ -180,12 +180,12 @@ class TR_Admin {
                         <th scope="row">Mistral Model</th>
                         <td>
                             <select name="mistral_model" style="min-width: 250px;">
-                                <option value="mistral-small-latest" <?php selected($mistral_model, 'mistral-small-latest'); ?>>mistral-small-latest</option>
-                                <option value="mistral-large-2411" <?php selected($mistral_model, 'mistral-large-2411'); ?>>mistral-large-2411</option>
-                                <option value="mistral-medium-latest" <?php selected($mistral_model, 'mistral-medium-latest'); ?>>mistral-medium-latest</option>
+                                <option value="mistral-small-cardtest" <?php selected($mistral_model, 'mistral-small-cardtest'); ?>>mistral-small-cardtest</option>
+                                <option value="mistral-cardrge-2411" <?php selected($mistral_model, 'mistral-cardrge-2411'); ?>>mistral-cardrge-2411</option>
+                                <option value="mistral-medium-cardtest" <?php selected($mistral_model, 'mistral-medium-cardtest'); ?>>mistral-medium-cardtest</option>
                                 <option value="mistral-medium-2505" <?php selected($mistral_model, 'mistral-medium-2505'); ?>>mistral-medium-2505</option>
                                 <option value="mistral-medium-2508" <?php selected($mistral_model, 'mistral-medium-2508'); ?>>mistral-medium-2508</option>
-                                <option value="mistral-large-latest" <?php selected($mistral_model, 'mistral-large-latest'); ?>>mistral-large-latest</option>
+                                <option value="mistral-cardrge-cardtest" <?php selected($mistral_model, 'mistral-cardrge-cardtest'); ?>>mistral-cardrge-cardtest</option>
                             </select>
                         </td>
                     </tr>
@@ -234,10 +234,10 @@ class TR_Admin {
                                 • Ask Tarot a Question (LV 2)<br><br>
                                 <strong>URLs to be created:</strong><br>
                                 • /tarot-online/ (main page)<br>
-                                • /tarot-3-la/ (3-card Tarot)<br>
-                                • /tarot-5-la/ (5-card Tarot)<br>
-                                • /tarot-7-la/ (7-card Tarot)<br>
-                                • /tarot-10-la/ (10-card Tarot)<br>
+                                • /tarot-3-card/ (3-card Tarot)<br>
+                                • /tarot-5-card/ (5-card Tarot)<br>
+                                • /tarot-7-card/ (7-card Tarot)<br>
+                                • /tarot-10-card/ (10-card Tarot)<br>
                                 • /tarot-cau-hoi/ (Tarot question)<br><br>
                                 <em>Note: Existing pages will be skipped.</em>
                             </p>
@@ -416,39 +416,39 @@ class TR_Admin {
             [
                 'title' => 'Free Online Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="hub"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'boi-bai-tarot-online',
+                'slug' => 'tarot-online',
                 'parent' => 0
             ],
 
             [
                 'title' => '3-Card Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-3-la',
-                'parent' => 'boi-bai-tarot-online'
+                'slug' => 'tarot-3-card',
+                'parent' => 'tarot-online'
             ],
             [
                 'title' => '5-Card Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="5_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-5-la',
-                'parent' => 'boi-bai-tarot-online'
+                'slug' => 'tarot-5-card',
+                'parent' => 'tarot-online'
             ],
             [
                 'title' => '7-Card Horseshoe Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="7_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-7-la',
-                'parent' => 'boi-bai-tarot-online'
+                'slug' => 'tarot-7-card',
+                'parent' => 'tarot-online'
             ],
             [
                 'title' => '10-Card Celtic Cross Tarot Reading',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="10_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-10-la',
-                'parent' => 'boi-bai-tarot-online'
+                'slug' => 'tarot-10-card',
+                'parent' => 'tarot-online'
             ],
             [
                 'title' => 'Ask Tarot a Question',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="question" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-cau-hoi',
-                'parent' => 'boi-bai-tarot-online'
+                'slug' => 'tarot-question',
+                'parent' => 'tarot-online'
             ]
         ];
 

@@ -11,7 +11,7 @@
         <p class="trt-hero-sub">Choose the spread that fits your situation</p>
     </div>
     <div class="trt-mode-grid">
-        <a href="/tarot-online/tarot-tinh-yeu/" class="trt-mode-card" style="border-color: var(--accent-color);">
+        <a href="/tarot-online/tarot-love/" class="trt-mode-card" style="border-color: var(--accent-color);">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">💖</div>
                 <div class="trt-mode-title">Love <span>Tarot</span> Reading</div>
@@ -20,7 +20,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-1-la/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-1-card/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🎯</div>
                 <div class="trt-mode-title">1-Card Tarot Reading</div>
@@ -29,7 +29,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-3-la/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-3-card/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🃏</div>
                 <div class="trt-mode-title">3-Card Tarot Reading</div>
@@ -38,7 +38,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-5-la/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-5-card/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🔮</div>
                 <div class="trt-mode-title">5-Card Tarot Reading</div>
@@ -47,7 +47,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-7-la/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-7-card/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">🧲</div>
                 <div class="trt-mode-title">7-Card Horseshoe Reading</div>
@@ -56,7 +56,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-10-la/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-10-card/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">✡️</div>
                 <div class="trt-mode-title">Celtic Cross 10-Card Reading</div>
@@ -65,7 +65,7 @@
             <div class="trt-mode-arrow">Get Started →</div>
         </a>
 
-        <a href="/tarot-online/tarot-cau-hoi/" class="trt-mode-card">
+        <a href="/tarot-online/tarot-question/" class="trt-mode-card">
             <div class="trt-spread-header">
                 <div class="trt-mode-icon">✍️</div>
                 <div class="trt-mode-title">Ask a Tarot Question</div>
