@@ -1,0 +1,87 @@
+Based on all the drawn cards, synthesize the insights and interpret the reading on the topic of "Love / Relationships".
+
+INFORMATION:
+- Full name: Loibv
+- Topic of interest: Love / Relationships
+
+CARDS:
+- [Heart of the Matter]: Nine of Wands — Upright ↑
+  Message: persistence
+  Timing: 9 weeks
+
+- [Challenge]: Ace of Pentacles — Reversed ↓
+  Message: missed
+  Timing: A few months (often linked to Autumn/Winter)
+
+- [Root Cause]: Three of Wands — Reversed ↓
+  Message: delay
+  Timing: 3 months
+
+- [Past]: Eight of Swords — Reversed ↓
+  Message: liberation
+  Timing: About 8 weeks
+
+- [Goal]: Seven of Pentacles — Reversed ↓
+  Message: rashness
+  Timing: 7 months to several years
+
+- [Near Future]: Ten of Cups — Reversed ↓
+  Message: disharmony
+  Timing: 10 weeks
+
+- [Self]: The Magician — Reversed ↓
+  Message: manipulation, deception
+  Timing: Immediately to very soon
+
+- [Environment]: Knight of Pentacles — Reversed ↓
+  Message: stagnation
+  Timing: Many months to 1 year (slow and steady)
+
+- [Hopes / Fears]: Two of Cups — Reversed ↓
+  Message: division
+  Timing: 2 weeks
+
+- [Outcome]: Wheel of Fortune — Reversed ↓
+  Message: stagnation
+  Timing: When the cycle shifts direction
+
+
+
+TOPIC CONTEXT:
+Focus on love, romantic relationships, marriage, and partnerships. Interpret the cards from the angle of emotion, feelings, and the connection between two people.
+
+RULES:
+- DO NOT analyze each card individually
+- DO NOT explain card meanings
+- Address the user as "you" or extract their first name (e.g., "John Smith" → "John"), use consistently
+- DO NOT use gendered or informal pronouns
+- SYNTHESIZE insights from all cards to answer the question
+- DO NOT infer beyond the card data
+
+STYLE REQUIREMENTS:
+- Natural, clear, and easy-to-understand language
+- Professional tone, get straight to the point
+- Coherent and concise presentation
+- Use **bold** and *italic* appropriately for emphasis
+
+OUTPUT REQUIREMENTS:
+1. NEVER use lettered or numbered section headers such as a), b), c) or 1, 2, 3 as headings in the output.
+2. (Hint:) sections and instructions are for INTERNAL GUIDANCE ONLY and must NOT appear in the output.
+3. Return output strictly in [AST_RESULT][/AST_RESULT] format, using Markdown for readable formatting.
+4. Use bold and italic sparingly and appropriately. Do NOT use ---, ***, ___, or hr tags.
+5. Do NOT print any headings or internal instructions in the output. Content only.
+
+[AST_RESULT]
+(Hint: Scan all the cards and their positions. What is the overall energy? (Positive, negative, conflicted, or in transition?) Identify the single core message that runs through the entire spread to use as the opening sentence.)
+[Write 1 opening paragraph: Go straight to an overall assessment of Loibv's current situation regarding the question or topic. Begin with: Hello, (or Hello Loibv,).]
+
+(Hint: Weave the cards into a narrative following a cause-and-effect or spread-flow structure (e.g., Root cause / Past -> Current tension -> Future trend).
+- REQUIRED: Naturally embed card names (and their orientation) into the sentences as evidence for your interpretation.
+- STRICTLY FORBIDDEN: Do not use a list structure like "Card 1 in position X shows... Card 2 says...".
+- Point out interaction: Is this card supporting or blocking the other?)
+[Write 2-3 coherent analytical paragraphs. Interpret the hidden layers, the obstacles being faced, and the trends ahead. Objective, insightful, and psychologically empathetic tone.]
+
+(Hint: Draw on the resolution or outcome card to arrive at a closing point.)
+If the overall reading is positive: Write 1 brief, fitting sentence — a congratulation or light praise appropriate to the situation.
+If the overall reading is average or below: Write 1 short, gentle sentence of advice or emotional support, while keeping the Tarot reading authentic. No moralizing or life lessons.
+[/AST_RESULT]

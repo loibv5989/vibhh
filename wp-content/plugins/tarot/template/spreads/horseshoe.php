@@ -168,18 +168,18 @@ function tarot_horseshoe(string $topic, array $cards, string $mode = 'topic', st
 
         <?php if (get_option('tarot_allow_ai', '0') === '1'): ?>
         <div id="trt-deep-analyze-form">
-            <h3>Decode the Cards</h3>
-            <p class="analyze-desc">Continue to interpret the detailed meaning and connections between the cards.</p>
+            <h3>Interpret the Cards</h3>
+            <p class="analyze-desc">Continue to explore the deeper meaning and connections between the cards.</p>
             <div class="trt-input-section">
                 <div class="trt-input-trap" aria-hidden="true">
                     <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                 </div>
-                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your full name..." maxlength="40">
+                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your name..." maxlength="40">
                 <span class="trt-error" id="trt-err-deep-name"></span>
             </div>
             <button class="trt-submit-btn" id="trt-btn-deep-analyze">
-                <span class="trt-btn-text">Decode</span>
-                <span class="trt-btn-loading"><span class="trt-spinner"></span> Decoding...</span>
+                <span class="trt-btn-text">Interpret</span>
+                <span class="trt-btn-loading"><span class="trt-spinner"></span> Interpreting...</span>
             </button>
             <span class="trt-error trt-error-analyze" id="trt-err-analyze"></span>
         </div>

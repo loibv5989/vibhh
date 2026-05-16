@@ -1,0 +1,21 @@
+Về mặt **kỹ thuật thì không có vấn đề gì**, nhưng về **ngữ nghĩa thì hơi lệch:**
+
+---
+
+**"Decode"** nghĩa là *giải mã* — thường dùng cho dữ liệu mã hóa, code bí mật. Nghe có vẻ kỹ thuật/lạnh lùng, không hợp với không khí huyền bí của Tarot.
+
+**Gợi ý thay thế phù hợp hơn:**
+
+| Thay bằng | Cảm giác |
+|---|---|
+| **Reveal** / Revealing... | Huyền bí, khám phá |
+| **Interpret** / Interpreting... | Chuyên nghiệp, đúng nghĩa |
+| **Unveil** / Unveiling... | Bí ẩn, thu hút |
+| **Read the Cards** / Reading... | Đúng với Tarot |
+| **Illuminate** / Illuminating... | Spiritual, đẹp |
+
+---
+
+Tương tự, `<h3>Decode the Cards</h3>` cũng nên đổi thành ví dụ **"Reveal the Cards"** hoặc **"Interpret the Cards"** cho đồng bộ.
+
+Bạn muốn giữ tiếng Anh hay đổi sang tiếng Việt?
