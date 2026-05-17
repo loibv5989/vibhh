@@ -5,279 +5,695 @@ if (!defined('ABSPATH')) exit;
 $western_deck = [
 
     /* =========================
-       CHẤT CƠ (TÌNH CẢM, GIA ĐẠO, HỶ SỰ)
+       CHẤT CƠ (TÌNH YÊU, HÔN NHÂN, GIA ĐÌNH, NIỀM VUI)
     ========================= */
     'ace_of_hearts' => [
         'name' => 'Ace of Hearts', 'name_vi' => 'Át Cơ', 'suit' => 'hearts',
-        'upright' => 'Đại cát về gia đạo. Trong nhà có hỷ sự, tin vui tới tấp, hoặc một tình yêu viên mãn.',
-        'keywords_upright' => ['hỷ sự', 'gia đạo bình an', 'tin vui']
+        'upright' => 'Tình yêu mới bắt đầu, niềm vui lớn, hạnh phúc trong gia đạo hoặc tin vui về tình cảm.',
+        'keywords_upright' => ['tình yêu mới', 'hạnh phúc', 'tin vui'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình yêu mới bắt đầu, niềm vui lớn, hạnh phúc trong gia đạo hoặc tin vui về tình cảm.',
+            'career'  => 'Cơ hội mới trong công việc, khởi đầu đầy cảm hứng, đồng nghiệp thân thiện hỗ trợ.',
+            'finance' => 'Tin vui về tài chính, lộc bất ngờ từ người thân hoặc đối tác.',
+            'study'   => 'Cảm hứng học tập dâng cao, khởi đầu thuận lợi cho kỳ thi hoặc khóa học mới.',
+            'health'  => 'Năng lượng tích cực, cơ thể khỏe mạnh, tinh thần phấn chấn.',
+            'future'  => 'Một khởi đầu mới đầy hứa hẹn, vận may đang đến gần.',
+        ],
     ],
     'two_of_hearts' => [
         'name' => 'Two of Hearts', 'name_vi' => 'Hai Cơ', 'suit' => 'hearts',
-        'upright' => 'Gặp được người tâm đầu ý hợp, duyên nợ đến gần, có sự gặp gỡ ân ái.',
-        'keywords_upright' => ['tình duyên', 'gặp gỡ', 'hòa hợp']
+        'upright' => 'Tình yêu nồng nhiệt, sự hòa hợp giữa hai người, hôn nhân hoặc mối quan hệ lãng mạn.',
+        'keywords_upright' => ['tình yêu', 'hòa hợp', 'hôn nhân'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình yêu nồng nhiệt, sự hòa hợp giữa hai người, hôn nhân hoặc mối quan hệ lãng mạn.',
+            'career'  => 'Hợp tác ăn ý với đồng nghiệp, đối tác tin cậy, làm việc nhóm hiệu quả.',
+            'finance' => 'Tài chính ổn định nhờ sự hỗ trợ của người bạn đời hoặc đối tác.',
+            'study'   => 'Học nhóm hiệu quả, có bạn đồng hành cùng tiến bộ.',
+            'health'  => 'Sức khỏe cân bằng, tinh thần thoải mái nhờ mối quan hệ tốt đẹp.',
+            'future'  => 'Mối quan hệ bền chặt sẽ dẫn lối cho tương lai tươi sáng.',
+        ],
     ],
     'three_of_hearts' => [
         'name' => 'Three of Hearts', 'name_vi' => 'Ba Cơ', 'suit' => 'hearts',
-        'upright' => 'Ăn uống, tiệc tùng, có người mời mọc hoặc một mối quan hệ tay ba cần đề phòng.',
-        'keywords_upright' => ['tiệc tùng', 'mời mọc', 'tình tay ba']
+        'upright' => 'Tình bạn, sự lãng mạn, tiệc vui. Cẩn thận với mối quan hệ tay ba hoặc người thứ ba xen vào.',
+        'keywords_upright' => ['tình bạn', 'lãng mạn', 'tiệc vui'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình bạn, sự lãng mạn, tiệc vui. Cẩn thận với mối quan hệ tay ba hoặc người thứ ba xen vào.',
+            'career'  => 'Mở rộng mạng lưới quan hệ, giao lưu đồng nghiệp, nhưng tránh phe cánh gây mất đoàn kết.',
+            'finance' => 'Chi tiêu cho vui chơi, tiệc tùng, cần kiểm soát ngân sách.',
+            'study'   => 'Học hỏi từ bạn bè, tham gia nhóm học tập, nhưng tránh phân tâm.',
+            'health'  => 'Tinh thần vui vẻ, nhưng tránh rượu bia quá độ trong các buổi tụ tập.',
+            'future'  => 'Các mối quan hệ xã hội sẽ mở ra nhiều cơ hội bất ngờ.',
+        ],
     ],
     'four_of_hearts' => [
         'name' => 'Four of Hearts', 'name_vi' => 'Bốn Cơ', 'suit' => 'hearts',
-        'upright' => 'Gia đạo yên ổn nhưng nhàm chán, tình cảm không có biến động lớn, mọi sự bình bình.',
-        'keywords_upright' => ['yên ổn', 'nhàm chán', 'bình bình']
+        'upright' => 'Bất an trong tình cảm, thay đổi chỗ ở hoặc chuyển biến trong mối quan hệ. Cần kiên nhẫn.',
+        'keywords_upright' => ['bất an', 'thay đổi', 'kiên nhẫn'],
+        'meanings_by_topic' => [
+            'love'    => 'Bất an trong tình cảm, thay đổi chỗ ở hoặc chuyển biến trong mối quan hệ. Cần kiên nhẫn.',
+            'career'  => 'Cảm thấy nhàm chán với công việc hiện tại, muốn thay đổi nhưng chưa rõ hướng đi.',
+            'finance' => 'Tài chính chững lại, không nên đầu tư lớn lúc này.',
+            'study'   => 'Mất tập trung, cần thay đổi môi trường học tập để lấy lại cảm hứng.',
+            'health'  => 'Cơ thể mệt mỏi, cần nghỉ ngơi và thay đổi thói quen sinh hoạt.',
+            'future'  => 'Giai đoạn chuyển tiếp, cần kiên nhẫn chờ thời cơ thích hợp.',
+        ],
     ],
     'five_of_hearts' => [
         'name' => 'Five of Hearts', 'name_vi' => 'Năm Cơ', 'suit' => 'hearts',
-        'upright' => 'Giận dỗi vu vơ, bực mình chuyện tình cảm gia đình nhưng rồi sẽ qua, không nghiêm trọng.',
-        'keywords_upright' => ['giận dỗi', 'bực mình', 'mau qua']
+        'upright' => 'Giận dỗi vu vơ, thất vọng nhẹ trong tình cảm. Sự bực mình sẽ qua nhanh, không nghiêm trọng.',
+        'keywords_upright' => ['giận dỗi', 'thất vọng', 'qua nhanh'],
+        'meanings_by_topic' => [
+            'love'    => 'Giận dỗi vu vơ, thất vọng nhẹ trong tình cảm. Sự bực mình sẽ qua nhanh.',
+            'career'  => 'Mâu thuẫn nhỏ với đồng nghiệp, hiểu lầm không đáng có, sẽ sớm hóa giải.',
+            'finance' => 'Chi tiêu vượt mức do cảm xúc, cần bình tĩnh trước khi mua sắm.',
+            'study'   => 'Thất vọng về kết quả tạm thời, đừng bỏ cuộc, sẽ cải thiện sớm.',
+            'health'  => 'Stress nhẹ, cần giải tỏa cảm xúc lành mạnh.',
+            'future'  => 'Sóng gió nhỏ sẽ qua nhanh, đừng để cảm xúc chi phối quyết định.',
+        ],
     ],
     'six_of_hearts' => [
         'name' => 'Six of Hearts', 'name_vi' => 'Sáu Cơ', 'suit' => 'hearts',
-        'upright' => 'Có người giúp đỡ ân tình, nhận được quà cáp hoặc sự quan tâm chân thành từ người khác.',
-        'keywords_upright' => ['ân tình', 'giúp đỡ', 'quà tặng']
+        'upright' => 'Hoài niệm quá khứ, nhận được quà cáp hoặc sự quan tâm chân thành từ người khác.',
+        'keywords_upright' => ['hoài niệm', 'quà tặng', 'ân tình'],
+        'meanings_by_topic' => [
+            'love'    => 'Hoài niệm quá khứ, nhận được quà cáp hoặc sự quan tâm chân thành từ người khác.',
+            'career'  => 'Được đồng nghiệp hoặc cấp trên quan tâm, tặng quà hoặc khen thưởng bất ngờ.',
+            'finance' => 'Nhận được tiền hoặc quà tặng giá trị từ người quen cũ.',
+            'study'   => 'Ôn lại kiến thức cũ mang lại kết quả tốt, được thầy cô khen ngợi.',
+            'health'  => 'Hồi phục sau ốm đau, nhận được sự chăm sóc chu đáo.',
+            'future'  => 'Quá khứ mang đến bài học quý giá, ân tình cũ sẽ quay lại giúp đỡ.',
+        ],
     ],
     'seven_of_hearts' => [
         'name' => 'Seven of Hearts', 'name_vi' => 'Bảy Cơ', 'suit' => 'hearts',
-        'upright' => 'Suy nghĩ viển vông, ảo tưởng trong tình cảm. Cẩn thận bị ru ngủ bởi những lời đường mật.',
-        'keywords_upright' => ['ảo tưởng', 'mơ mộng', 'lời đường mật']
+        'upright' => 'Lãng mạn, mơ mộng, có thể gặp đối tượng mới. Cẩn thận với ảo tưởng hoặc lời đường mật.',
+        'keywords_upright' => ['lãng mạn', 'mơ mộng', 'đối tượng mới'],
+        'meanings_by_topic' => [
+            'love'    => 'Lãng mạn, mơ mộng, có thể gặp đối tượng mới. Cẩn thận với ảo tưởng hoặc lời đường mật.',
+            'career'  => 'Ý tưởng sáng tạo, nhưng cần thực tế hóa, tránh mơ mộng viển vông.',
+            'finance' => 'Cơ hội đầu tư hấp dẫn nhưng cần kiểm tra kỹ, tránh bị lừa bởi lời hứa ngọt ngào.',
+            'study'   => 'Trí tưởng tượng phong phú, phù hợp với các môn nghệ thuật, sáng tạo.',
+            'health'  => 'Tâm trạng mơ mộng, dễ bị ảnh hưởng bởi cảm xúc tiêu cực.',
+            'future'  => 'Cơ hội mới đầy hấp dẫn nhưng cần tỉnh táo phân biệt thực - ảo.',
+        ],
     ],
     'eight_of_hearts' => [
         'name' => 'Eight of Hearts', 'name_vi' => 'Tám Cơ', 'suit' => 'hearts',
-        'upright' => 'Tình cảm có tiến triển tốt, duyên phận đến, người độc thân sắp có đôi có cặp.',
-        'keywords_upright' => ['duyên phận', 'tiến triển', 'có đôi']
+        'upright' => 'Tiệc tùng, vui vẻ, gặp gỡ xã hội. Duyên phận đến, người độc thân sắp có đôi có cặp.',
+        'keywords_upright' => ['tiệc tùng', 'duyên phận', 'gặp gỡ'],
+        'meanings_by_topic' => [
+            'love'    => 'Tiệc tùng, vui vẻ, gặp gỡ xã hội. Duyên phận đến, người độc thân sắp có đôi có cặp.',
+            'career'  => 'Networking hiệu quả, gặp gỡ đối tác tiềm năng trong các sự kiện xã hội.',
+            'finance' => 'Cơ hội kiếm tiền từ các mối quan hệ xã hội, hợp tác làm ăn mới.',
+            'study'   => 'Học hỏi từ các buổi giao lưu, hội thảo, mở rộng kiến thức xã hội.',
+            'health'  => 'Tinh thần phấn chấn, năng lượng dồi dào từ các hoạt động xã hội.',
+            'future'  => 'Cánh cửa mới mở ra từ các mối quan hệ xã hội rộng mở.',
+        ],
     ],
     'nine_of_hearts' => [
         'name' => 'Nine of Hearts', 'name_vi' => 'Chín Cơ', 'suit' => 'hearts',
-        'upright' => 'Cầu được ước thấy, mãn nguyện trong tình duyên, vạn sự như ý.',
-        'keywords_upright' => ['viên mãn', 'như ý', 'toại nguyện']
+        'upright' => 'Mong ước tình cảm thành hiện thực, sự mãn nguyện và viên mãn trong tình duyên.',
+        'keywords_upright' => ['ước mơ', 'mãn nguyện', 'viên mãn'],
+        'meanings_by_topic' => [
+            'love'    => 'Mong ước tình cảm thành hiện thực, sự mãn nguyện và viên mãn trong tình duyên.',
+            'career'  => 'Đạt được mục tiêu nghề nghiệp, thăng tiến như mong đợi, mãn nguyện với vị trí hiện tại.',
+            'finance' => 'Tài chính đạt đỉnh, các khoản đầu tư sinh lời như ý.',
+            'study'   => 'Thi cử đỗ đạt, đạt được học bổng hoặc thành tích như mong ước.',
+            'health'  => 'Sức khỏe viên mãn, tinh thần thư thái, đạt trạng thái cân bằng.',
+            'future'  => 'Điều ước sẽ thành hiện thực, tương lai rực rỡ đang chờ đón.',
+        ],
     ],
     'ten_of_hearts' => [
         'name' => 'Ten of Hearts', 'name_vi' => 'Mười Cơ', 'suit' => 'hearts',
-        'upright' => 'Hạnh phúc tột đỉnh, đám cưới, đoàn tụ gia đình, sự gắn kết không thể chia lìa.',
-        'keywords_upright' => ['đoàn tụ', 'đám cưới', 'viên mãn']
+        'upright' => 'Hạnh phúc tột đỉnh, đoàn tụ gia đình, đám cưới hoặc sự gắn kết không thể chia lìa.',
+        'keywords_upright' => ['đoàn tụ', 'hạnh phúc', 'gắn kết'],
+        'meanings_by_topic' => [
+            'love'    => 'Hạnh phúc tột đỉnh, đoàn tụ gia đình, đám cưới hoặc sự gắn kết không thể chia lìa.',
+            'career'  => 'Thành công viên mãn trong sự nghiệp, được cả tập thể công nhận và yêu mến.',
+            'finance' => 'Tài chính sung túc, gia đình hòa thuận cùng hưởng thịnh vượng.',
+            'study'   => 'Tốt nghiệp xuất sắc, gia đình tự hào, thành quả học tập trọn vẹn.',
+            'health'  => 'Sức khỏe toàn diện, gia đình sum vầy, tinh thần hạnh phúc.',
+            'future'  => 'Đỉnh cao hạnh phúc, mọi mặt cuộc sống đều viên mãn trọn vẹn.',
+        ],
     ],
     'jack_of_hearts' => [
         'name' => 'Jack of Hearts', 'name_vi' => 'Bồi Cơ', 'suit' => 'hearts',
-        'upright' => 'Người thanh niên đào hoa, dẻo miệng, mang lại niềm vui hoặc tin nhắn tình cảm.',
-        'keywords_upright' => ['nam trẻ', 'đào hoa', 'dẻo miệng']
+        'upright' => 'Người thanh niên đào hoa, tốt bụng, mang lại niềm vui hoặc tin nhắn tình cảm tích cực.',
+        'keywords_upright' => ['thanh niên', 'đào hoa', 'tin vui'],
+        'meanings_by_topic' => [
+            'love'    => 'Người thanh niên đào hoa, tốt bụng, mang lại niềm vui hoặc tin nhắn tình cảm tích cực.',
+            'career'  => 'Đồng nghiệp trẻ nhiệt tình, người mang tin vui về công việc hoặc cơ hội mới.',
+            'finance' => 'Người trẻ mang đến cơ hội kiếm tiền hoặc tin tức tài chính tích cực.',
+            'study'   => 'Bạn học thông minh, người truyền cảm hứng học tập.',
+            'health'  => 'Người trẻ mang năng lượng tích cực, giúp tinh thần phấn chấn.',
+            'future'  => 'Một người trẻ tuổi sẽ xuất hiện mang theo cơ hội và niềm vui.',
+        ],
     ],
     'queen_of_hearts' => [
         'name' => 'Queen of Hearts', 'name_vi' => 'Đầm Cơ', 'suit' => 'hearts',
-        'upright' => 'Người đàn bà nhân hậu, hay giúp người, hoặc ám chỉ người vợ/người mẹ đang lo toan.',
-        'keywords_upright' => ['nữ giới', 'nhân hậu', 'vợ/mẹ']
+        'upright' => 'Người phụ nữ nhân hậu, hay giúp người, hoặc ám chỉ người vợ, người mẹ lý tưởng.',
+        'keywords_upright' => ['phụ nữ', 'nhân hậu', 'vợ mẹ'],
+        'meanings_by_topic' => [
+            'love'    => 'Người phụ nữ nhân hậu, hay giúp người, hoặc ám chỉ người vợ, người mẹ lý tưởng.',
+            'career'  => 'Nữ đồng nghiệp hoặc sếp nữ tận tâm, luôn hỗ trợ và dìu dắt người khác.',
+            'finance' => 'Người phụ nữ giúp đỡ về tài chính, có thể là người bảo trợ hoặc cố vấn.',
+            'study'   => 'Cô giáo hoặc người hướng dẫn tận tình, truyền cảm hứng học tập.',
+            'health'  => 'Người phụ nữ chăm sóc sức khỏe tận tâm, có thể là bác sĩ hoặc y tá tốt bụng.',
+            'future'  => 'Một người phụ nữ nhân hậu sẽ là chỗ dựa vững chắc trong tương lai.',
+        ],
     ],
     'king_of_hearts' => [
         'name' => 'King of Hearts', 'name_vi' => 'Già Cơ', 'suit' => 'hearts',
-        'upright' => 'Người đàn ông chững chạc, tốt bụng, nặng tình cảm, sẵn sàng che chở bảo bọc.',
-        'keywords_upright' => ['nam lớn tuổi', 'bao dung', 'che chở']
+        'upright' => 'Người đàn ông chững chạc, tốt bụng, nặng tình cảm, sẵn sàng che chở và bảo vệ gia đình.',
+        'keywords_upright' => ['đàn ông', 'tốt bụng', 'che chở'],
+        'meanings_by_topic' => [
+            'love'    => 'Người đàn ông chững chạc, tốt bụng, nặng tình cảm, sẵn sàng che chở và bảo vệ gia đình.',
+            'career'  => 'Sếp hoặc đàn anh tốt bụng, người lãnh đạo có tâm, bảo vệ nhân viên.',
+            'finance' => 'Người đàn ông hào phóng, nhà đầu tư hoặc đối tác đáng tin cậy.',
+            'study'   => 'Thầy giáo hoặc người hướng dẫn uyên bác, tận tâm dìu dắt.',
+            'health'  => 'Người đàn ông quan tâm đến sức khỏe gia đình, bác sĩ nam tận tâm.',
+            'future'  => 'Người đàn ông chững chạc sẽ là trụ cột vững chắc cho tương lai.',
+        ],
     ],
 
     /* =========================
-       CHẤT RÔ (TIỀN BẠC, TIN TỨC, ĐI LẠI)
+       CHẤT RÔ (TIỀN BẠC, GIẤY TỜ, CÔNG VIỆC, VẬT CHẤT)
     ========================= */
     'ace_of_diamonds' => [
         'name' => 'Ace of Diamonds', 'name_vi' => 'Át Rô', 'suit' => 'diamonds',
-        'upright' => 'Có thư từ, giấy tờ quan trọng, hoặc tin tức tài chính mang lại lợi lộc.',
-        'keywords_upright' => ['giấy tờ', 'thư từ', 'tin tài chính']
+        'upright' => 'Thư từ, giấy tờ quan trọng, hoặc tin tức tài chính mang lại lợi lộc và cơ hội mới.',
+        'keywords_upright' => ['giấy tờ', 'thư từ', 'tin tài chính'],
+        'meanings_by_topic' => [
+            'love'    => 'Tin nhắn, thư từ hoặc lời tỏ tình bất ngờ. Giấy tờ liên quan đến hôn nhân hoặc quan hệ.',
+            'career'  => 'Thư mời làm việc, hợp đồng mới, giấy tờ quan trọng mở ra cơ hội nghề nghiệp.',
+            'finance' => 'Tin tức tài chính quan trọng, cơ hội đầu tư mới, giấy tờ mang lại lợi lộc.',
+            'study'   => 'Giấy báo nhập học, học bổng, hoặc thư từ quan trọng về học tập.',
+            'health'  => 'Kết quả xét nghiệm hoặc giấy tờ y tế quan trọng, thường là tin tốt.',
+            'future'  => 'Một văn bản hoặc thông báo quan trọng sẽ thay đổi cục diện tương lai.',
+        ],
     ],
     'two_of_diamonds' => [
         'name' => 'Two of Diamonds', 'name_vi' => 'Hai Rô', 'suit' => 'diamonds',
-        'upright' => 'Trục trặc nhỏ về tiền bạc, phải tính toán, xoay sở dòng tiền hoặc cãi vã nhẹ vì tiền.',
-        'keywords_upright' => ['xoay tiền', 'trục trặc', 'tính toán']
+        'upright' => 'Trục trặc nhỏ về tiền bạc, phải tính toán và xoay sở dòng tiền. Có thể cãi vã nhẹ vì lợi ích.',
+        'keywords_upright' => ['xoay tiền', 'trục trặc', 'tính toán'],
+        'meanings_by_topic' => [
+            'love'    => 'Trục trặc nhỏ về tiền bạc ảnh hưởng đến tình cảm, cần thẳng thắn chia sẻ với đối phương.',
+            'career'  => 'Xoay sở dòng tiền trong công việc, tính toán chi phí, cần linh hoạt.',
+            'finance' => 'Trục trặc nhỏ về tiền bạc, phải tính toán và xoay sở dòng tiền. Có thể cãi vã nhẹ vì lợi ích.',
+            'study'   => 'Cân đối chi phí học tập, cần tính toán kỹ ngân sách cho việc học.',
+            'health'  => 'Chi phí y tế phát sinh, cần chuẩn bị tài chính cho sức khỏe.',
+            'future'  => 'Cần lên kế hoạch tài chính cẩn thận, tránh những quyết định vội vàng.',
+        ],
     ],
     'three_of_diamonds' => [
         'name' => 'Three of Diamonds', 'name_vi' => 'Ba Rô', 'suit' => 'diamonds',
-        'upright' => 'Rắc rối liên quan đến hợp đồng, kiện tụng nhỏ hoặc phải thương lượng căng thẳng.',
-        'keywords_upright' => ['hợp đồng', 'tranh chấp', 'thương lượng']
+        'upright' => 'Xung đột liên quan đến hợp đồng, tranh chấp nhỏ hoặc phải thương lượng căng thẳng về vật chất.',
+        'keywords_upright' => ['tranh chấp', 'hợp đồng', 'thương lượng'],
+        'meanings_by_topic' => [
+            'love'    => 'Tranh chấp về tài sản hoặc tiền bạc trong mối quan hệ, cần thương lượng hòa bình.',
+            'career'  => 'Xung đột liên quan đến hợp đồng, tranh chấp nhỏ hoặc phải thương lượng căng thẳng.',
+            'finance' => 'Tranh chấp hợp đồng, thương lượng căng thẳng về vật chất, cần giữ lập trường.',
+            'study'   => 'Tranh luận học thuật, bảo vệ luận án hoặc ý kiến cá nhân trước tập thể.',
+            'health'  => 'Căng thẳng do mâu thuẫn, cần giữ bình tĩnh để tránh ảnh hưởng sức khỏe.',
+            'future'  => 'Sẽ có tranh chấp cần giải quyết, chuẩn bị tinh thần và lập luận vững chắc.',
+        ],
     ],
     'four_of_diamonds' => [
         'name' => 'Four of Diamonds', 'name_vi' => 'Bốn Rô', 'suit' => 'diamonds',
-        'upright' => 'Tiền bạc ổn định, giữ chặt được đồng vốn, nhưng thiếu sự linh hoạt để sinh lời.',
-        'keywords_upright' => ['giữ của', 'ổn định', 'ít biến động']
+        'upright' => 'Tiền bạc ổn định, giữ chặt được đồng vốn, nhưng thiếu linh hoạt để sinh lời hoặc thay đổi.',
+        'keywords_upright' => ['ổn định', 'giữ vốn', 'ít biến động'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm ổn định nhưng thiếu lãng mạn, cần chủ động làm mới mối quan hệ.',
+            'career'  => 'Công việc ổn định, giữ vững vị trí, nhưng thiếu đột phá để thăng tiến.',
+            'finance' => 'Tiền bạc ổn định, giữ chặt được đồng vốn, nhưng thiếu linh hoạt để sinh lời.',
+            'study'   => 'Kiến thức nền tảng vững chắc, nhưng cần mở rộng tầm nhìn ra ngoài sách vở.',
+            'health'  => 'Sức khỏe ổn định, không có biến động lớn, duy trì nếp sống lành mạnh.',
+            'future'  => 'Giai đoạn ổn định kéo dài, thích hợp để củng cố nền tảng trước khi bứt phá.',
+        ],
     ],
     'five_of_diamonds' => [
         'name' => 'Five of Diamonds', 'name_vi' => 'Năm Rô', 'suit' => 'diamonds',
         'upright' => 'Hao tài tốn của, mất mát tiền bạc hoặc bực mình vì chi tiêu không đáng có.',
-        'keywords_upright' => ['hao tài', 'bực mình', 'mất tiền']
+        'keywords_upright' => ['hao tài', 'mất tiền', 'bực mình'],
+        'meanings_by_topic' => [
+            'love'    => 'Hao tài vì tình, chi tiêu quá mức cho đối phương hoặc mối quan hệ không xứng đáng.',
+            'career'  => 'Mất mát trong công việc, thất thoát ngân sách hoặc bị cắt giảm thu nhập.',
+            'finance' => 'Hao tài tốn của, mất mát tiền bạc hoặc bực mình vì chi tiêu không đáng có.',
+            'study'   => 'Lãng phí thời gian và tiền bạc vào việc học không hiệu quả, cần thay đổi phương pháp.',
+            'health'  => 'Tốn kém cho việc chữa bệnh, cần chú ý phòng bệnh hơn chữa bệnh.',
+            'future'  => 'Cảnh báo hao tài, cần kiểm soát chi tiêu và tránh đầu tư mạo hiểm.',
+        ],
     ],
     'six_of_diamonds' => [
         'name' => 'Six of Diamonds', 'name_vi' => 'Sáu Rô', 'suit' => 'diamonds',
-        'upright' => 'Được lộc, có tiền thưởng hoặc được người khác cho tiền, tặng quà.',
-        'keywords_upright' => ['có lộc', 'tiền thưởng', 'được cho']
+        'upright' => 'Được lộc, có tiền thưởng hoặc được người khác cho tiền, tặng quà vật chất.',
+        'keywords_upright' => ['có lộc', 'tiền thưởng', 'được cho'],
+        'meanings_by_topic' => [
+            'love'    => 'Được người yêu hoặc gia đình hỗ trợ tài chính, nhận quà giá trị từ người thương.',
+            'career'  => 'Được thưởng, tăng lương hoặc nhận trợ cấp bất ngờ từ công ty.',
+            'finance' => 'Được lộc, có tiền thưởng hoặc được người khác cho tiền, tặng quà vật chất.',
+            'study'   => 'Nhận học bổng hoặc trợ cấp học tập, được gia đình hỗ trợ tài chính cho việc học.',
+            'health'  => 'Được hỗ trợ chi phí y tế, có người giúp đỡ trong lúc ốm đau.',
+            'future'  => 'Lộc bất ngờ sẽ đến, tài chính được cải thiện nhờ sự giúp đỡ từ người khác.',
+        ],
     ],
     'seven_of_diamonds' => [
         'name' => 'Seven of Diamonds', 'name_vi' => 'Bảy Rô', 'suit' => 'diamonds',
-        'upright' => 'Tin vui về tiền bạc đang đến gần, lộc làm ăn buôn bán thuận lợi.',
-        'keywords_upright' => ['tin vui', 'lộc buôn bán', 'tiền đến']
+        'upright' => 'Bất ngờ về tiền bạc, tin vui kinh doanh hoặc tranh chấp tài chính cần giải quyết khôn khéo.',
+        'keywords_upright' => ['bất ngờ', 'kinh doanh', 'tin tài chính'],
+        'meanings_by_topic' => [
+            'love'    => 'Bất ngờ về quà cáp hoặc tiền bạc từ người yêu, nhưng có thể kèm theo điều kiện.',
+            'career'  => 'Tin vui kinh doanh bất ngờ, cơ hội làm ăn mới cần giải quyết khôn khéo.',
+            'finance' => 'Bất ngờ về tiền bạc, tin vui kinh doanh hoặc tranh chấp tài chính cần giải quyết.',
+            'study'   => 'Kết quả học tập bất ngờ, có thể là học bổng hoặc cơ hội du học.',
+            'health'  => 'Biến chuyển bất ngờ về sức khỏe, cần theo dõi sát sao.',
+            'future'  => 'Biến động tài chính bất ngờ sắp đến, cần chuẩn bị tinh thần đón nhận.',
+        ],
     ],
     'eight_of_diamonds' => [
         'name' => 'Eight of Diamonds', 'name_vi' => 'Tám Rô', 'suit' => 'diamonds',
-        'upright' => 'Sự di chuyển, đi xa, xuất ngoại hoặc phải đi lại nhiều để kiếm tiền.',
-        'keywords_upright' => ['đi xa', 'di chuyển', 'chạy xuôi ngược']
+        'upright' => 'Công việc tiến triển, cần đi lại nhiều hoặc di chuyển để phát triển sự nghiệp và tài chính.',
+        'keywords_upright' => ['tiến triển', 'đi lại', 'di chuyển'],
+        'meanings_by_topic' => [
+            'love'    => 'Đi lại nhiều cho mối quan hệ, yêu xa hoặc gặp gỡ người mới khi di chuyển.',
+            'career'  => 'Công việc tiến triển, cần đi lại nhiều hoặc di chuyển để phát triển sự nghiệp.',
+            'finance' => 'Thu nhập tăng nhờ di chuyển, công tác hoặc mở rộng địa bàn kinh doanh.',
+            'study'   => 'Du học hoặc chuyển trường, học hỏi từ những chuyến đi thực tế.',
+            'health'  => 'Cần vận động, đi lại nhiều để cải thiện sức khỏe, tránh ngồi một chỗ.',
+            'future'  => 'Di chuyển và thay đổi môi trường sẽ mang đến cơ hội phát triển mới.',
+        ],
     ],
     'nine_of_diamonds' => [
         'name' => 'Nine of Diamonds', 'name_vi' => 'Chín Rô', 'suit' => 'diamonds',
         'upright' => 'Làm ăn khấm khá, tiền bạc dư dả, thu nhập tăng cao, đạt được thành quả kinh tế.',
-        'keywords_upright' => ['khấm khá', 'dư dả', 'thu nhập cao']
+        'keywords_upright' => ['khấm khá', 'dư dả', 'thu nhập cao'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm đi kèm với vật chất, mối quan hệ mang lại sự sung túc và an toàn.',
+            'career'  => 'Làm ăn khấm khá, thu nhập tăng cao, đạt được thành quả kinh tế trong sự nghiệp.',
+            'finance' => 'Làm ăn khấm khá, tiền bạc dư dả, thu nhập tăng cao.',
+            'study'   => 'Đầu tư cho học tập mang lại kết quả xứng đáng, kiến thức tạo ra giá trị.',
+            'health'  => 'Sức khỏe tốt nhờ điều kiện vật chất đầy đủ, có khả năng chăm sóc bản thân tốt.',
+            'future'  => 'Thành quả tài chính vững chắc, cuộc sống sung túc và ổn định.',
+        ],
     ],
     'ten_of_diamonds' => [
         'name' => 'Ten of Diamonds', 'name_vi' => 'Mười Rô', 'suit' => 'diamonds',
         'upright' => 'Thay đổi lớn mang lại giàu sang, mua bán đất đai nhà cửa thành công, đại phú quý.',
-        'keywords_upright' => ['đại phú', 'nhà đất', 'thay đổi lớn']
+        'keywords_upright' => ['đại phú', 'nhà đất', 'thay đổi lớn'],
+        'meanings_by_topic' => [
+            'love'    => 'Hôn nhân mang lại sự giàu sang, nhà cửa khang trang, cuộc sống sung túc bên nhau.',
+            'career'  => 'Thay đổi lớn mang lại giàu sang, mua bán đất đai nhà cửa thành công.',
+            'finance' => 'Thay đổi lớn mang lại giàu sang, mua bán đất đai nhà cửa thành công, đại phú quý.',
+            'study'   => 'Đầu tư lớn cho giáo dục mang lại thành công vượt bậc, bằng cấp giá trị.',
+            'health'  => 'Sức khỏe ổn định nhờ điều kiện sống tốt, có khả năng tiếp cận dịch vụ y tế cao cấp.',
+            'future'  => 'Bước ngoặt tài chính lớn, thay đổi cuộc đời theo hướng giàu sang phú quý.',
+        ],
     ],
     'jack_of_diamonds' => [
         'name' => 'Jack of Diamonds', 'name_vi' => 'Bồi Rô', 'suit' => 'diamonds',
-        'upright' => 'Thanh niên lanh lợi, tính toán nhanh, hoặc một người đưa tin tức về tiền bạc.',
-        'keywords_upright' => ['nhanh nhẹn', 'thực dụng', 'đưa tin']
+        'upright' => 'Thanh niên lanh lợi, tính toán nhanh, hoặc một người đưa tin tức về tiền bạc và công việc.',
+        'keywords_upright' => ['lanh lợi', 'thực dụng', 'đưa tin'],
+        'meanings_by_topic' => [
+            'love'    => 'Người trẻ thực dụng trong tình cảm, có thể mang đến tin tức về tiền bạc liên quan đến mối quan hệ.',
+            'career'  => 'Thanh niên lanh lợi, tính toán nhanh, hoặc người đưa tin tức về công việc.',
+            'finance' => 'Thanh niên lanh lợi, tính toán nhanh, hoặc một người đưa tin tức về tiền bạc.',
+            'study'   => 'Bạn học thông minh, giỏi tính toán, có thể giúp đỡ trong các môn logic.',
+            'health'  => 'Người trẻ mang lời khuyên về sức khỏe thiết thực, chú trọng phòng bệnh.',
+            'future'  => 'Một người trẻ thực tế sẽ xuất hiện mang theo cơ hội tài chính cụ thể.',
+        ],
     ],
     'queen_of_diamonds' => [
         'name' => 'Queen of Diamonds', 'name_vi' => 'Đầm Rô', 'suit' => 'diamonds',
         'upright' => 'Người đàn bà sắc sảo, thực dụng, giỏi giữ tiền hoặc là nữ cường nhân trong làm ăn.',
-        'keywords_upright' => ['sắc sảo', 'giỏi làm ăn', 'thực dụng']
+        'keywords_upright' => ['sắc sảo', 'giỏi làm ăn', 'thực dụng'],
+        'meanings_by_topic' => [
+            'love'    => 'Người phụ nữ thực tế trong tình yêu, coi trọng sự ổn định vật chất, có thể là mẹ vợ hoặc người quản lý tài chính gia đình.',
+            'career'  => 'Người đàn bà sắc sảo, thực dụng, giỏi giữ tiền hoặc là nữ cường nhân trong làm ăn.',
+            'finance' => 'Người đàn bà sắc sảo, thực dụng, giỏi giữ tiền hoặc là nữ cường nhân trong làm ăn.',
+            'study'   => 'Cô giáo hoặc người hướng dẫn thực tế, dạy những kỹ năng thiết thực cho cuộc sống.',
+            'health'  => 'Người phụ nữ chú trọng sức khỏe thực tế, khuyên bảo về chế độ ăn uống khoa học.',
+            'future'  => 'Một người phụ nữ quyền lực về kinh tế sẽ ảnh hưởng lớn đến tương lai.',
+        ],
     ],
     'king_of_diamonds' => [
         'name' => 'King of Diamonds', 'name_vi' => 'Già Rô', 'suit' => 'diamonds',
-        'upright' => 'Người đàn ông giàu có, quyền lực về kinh tế, có thể là đối tác lớn hoặc sếp.',
-        'keywords_upright' => ['quyền lực', 'giàu có', 'sếp lớn']
+        'upright' => 'Người đàn ông giàu có, quyền lực về kinh tế, có thể là đối tác lớn hoặc sếp cao.',
+        'keywords_upright' => ['quyền lực', 'giàu có', 'sếp lớn'],
+        'meanings_by_topic' => [
+            'love'    => 'Người đàn ông giàu có ảnh hưởng đến mối quan hệ, có thể là người chu cấp hoặc đối tác quyền lực.',
+            'career'  => 'Người đàn ông giàu có, quyền lực về kinh tế, có thể là đối tác lớn hoặc sếp cao.',
+            'finance' => 'Người đàn ông giàu có, quyền lực về kinh tế, có thể là đối tác lớn hoặc sếp cao.',
+            'study'   => 'Nhà tài trợ hoặc người bảo trợ cho việc học, mang đến cơ hội giáo dục giá trị.',
+            'health'  => 'Người đàn ông có khả năng chi trả cho dịch vụ y tế tốt nhất, bác sĩ nam uy tín.',
+            'future'  => 'Một người đàn ông quyền lực sẽ là chìa khóa mở ra cánh cửa thịnh vượng.',
+        ],
     ],
 
     /* =========================
-       CHẤT CHUỒN (CÔNG DANH, NỖ LỰC, SỰ NGHIỆP)
+       CHẤT CHUỒN (CÔNG DANH, SỰ NGHIỆP, HỢP ĐỒNG, MAY MẮN)
     ========================= */
     'ace_of_clubs' => [
         'name' => 'Ace of Clubs', 'name_vi' => 'Át Chuồn', 'suit' => 'clubs',
-        'upright' => 'Lộc lớn cởi trói, cơ hội vàng trong sự nghiệp, hoặc một bản hợp đồng quyết định vận mệnh.',
-        'keywords_upright' => ['cơ hội vàng', 'lộc lớn', 'bứt phá']
+        'upright' => 'Cơ hội lớn trong sự nghiệp, may mắn bất ngờ, hoặc một bản hợp đồng quyết định vận mệnh.',
+        'keywords_upright' => ['cơ hội vàng', 'may mắn', 'bứt phá'],
+        'meanings_by_topic' => [
+            'love'    => 'Cơ hội gặp gỡ định mệnh, may mắn trong tình duyên, mối quan hệ bước ngoặt thay đổi cuộc đời.',
+            'career'  => 'Cơ hội lớn trong sự nghiệp, may mắn bất ngờ, hoặc một bản hợp đồng quyết định vận mệnh.',
+            'finance' => 'Cơ hội đầu tư vàng, may mắn tài chính bất ngờ, hợp đồng mang lại lợi nhuận lớn.',
+            'study'   => 'Cơ hội học tập vàng, trúng tuyển trường mong muốn, bước ngoặt học vấn.',
+            'health'  => 'Cơ hội tiếp cận phương pháp chữa trị mới hiệu quả, sức khỏe chuyển biến tích cực.',
+            'future'  => 'Vận may lớn đang đến, cơ hội chỉ đến một lần, phải nắm bắt ngay.',
+        ],
     ],
     'two_of_clubs' => [
         'name' => 'Two of Clubs', 'name_vi' => 'Hai Chuồn', 'suit' => 'clubs',
-        'upright' => 'Bắt tay hợp tác làm ăn, có đối tác nhưng cần sòng phẳng, phân minh ngay từ đầu.',
-        'keywords_upright' => ['hợp tác', 'đối tác', 'sòng phẳng']
+        'upright' => 'Khó khăn nhỏ, cần kiên nhẫn chờ thời. Không nên hấp tấp quyết định trong công việc.',
+        'keywords_upright' => ['khó khăn', 'kiên nhẫn', 'chờ thời'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm gặp trở ngại nhỏ, cần kiên nhẫn chờ đợi đối phương thay đổi, đừng vội vàng chia tay.',
+            'career'  => 'Khó khăn nhỏ, cần kiên nhẫn chờ thời. Không nên hấp tấp quyết định trong công việc.',
+            'finance' => 'Tài chính tạm thời khó khăn, không nên vay mượn hoặc đầu tư lúc này.',
+            'study'   => 'Học tập gặp trở ngại, cần kiên trì ôn luyện, kết quả sẽ đến sau.',
+            'health'  => 'Sức khỏe có vấn đề nhỏ, cần kiên nhẫn điều trị, không nên nóng vội.',
+            'future'  => 'Giai đoạn chờ đợi, mọi việc cần thời gian chín muồi, đừng ép buộc.',
+        ],
     ],
     'three_of_clubs' => [
         'name' => 'Three of Clubs', 'name_vi' => 'Ba Chuồn', 'suit' => 'clubs',
-        'upright' => 'Khởi sự có chút trắc trở nhỏ, bị ngáng đường nhưng cứ lì lợm sẽ vượt qua.',
-        'keywords_upright' => ['trắc trở', 'ngáng đường', 'lì lợm']
+        'upright' => 'Hợp tác thuận lợi, hôn nhân hạnh phúc hoặc có người giúp đỡ trong công việc.',
+        'keywords_upright' => ['hợp tác', 'hôn nhân', 'giúp đỡ'],
+        'meanings_by_topic' => [
+            'love'    => 'Hôn nhân hạnh phúc, tình cảm ba bên (gia đình hai bên) thuận hòa, có quý nhân se duyên.',
+            'career'  => 'Hợp tác thuận lợi, có người giúp đỡ trong công việc, dự án nhóm thành công.',
+            'finance' => 'Hợp tác làm ăn có lợi, liên doanh mang lại lợi nhuận, được người hỗ trợ vốn.',
+            'study'   => 'Học nhóm hiệu quả, có bạn tốt giúp đỡ, môi trường học tập hỗ trợ lẫn nhau.',
+            'health'  => 'Sức khỏe cải thiện nhờ người thân hỗ trợ, tinh thần lạc quan nhờ cộng đồng.',
+            'future'  => 'Hợp tác và sự hỗ trợ từ người khác sẽ là chìa khóa thành công tương lai.',
+        ],
     ],
     'four_of_clubs' => [
         'name' => 'Four of Clubs', 'name_vi' => 'Bốn Chuồn', 'suit' => 'clubs',
-        'upright' => 'Công việc bắt đầu bám rễ, vững chắc, không sợ lung lay. Chậm nhưng chắc.',
-        'keywords_upright' => ['bám rễ', 'vững chắc', 'chậm mà chắc']
+        'upright' => 'Công việc bám rễ, vững chắc, không sợ lung lay. Hôn nhân bền vững và hạnh phúc.',
+        'keywords_upright' => ['bám rễ', 'vững chắc', 'hạnh phúc'],
+        'meanings_by_topic' => [
+            'love'    => 'Hôn nhân bền vững và hạnh phúc, tình cảm đã bám rễ sâu, không ai có thể chia cắt.',
+            'career'  => 'Công việc bám rễ, vững chắc, không sợ lung lay. Vị trí ổn định lâu dài.',
+            'finance' => 'Tài chính vững chắc, nền tảng kinh tế gia đình ổn định, không lo thiếu hụt.',
+            'study'   => 'Kiến thức nền tảng vững chắc, kết quả học tập ổn định, không bị dao động.',
+            'health'  => 'Sức khỏe nền tảng tốt, thể trạng vững vàng, ít bệnh vặt.',
+            'future'  => 'Nền tảng vững chắc đã xây dựng sẽ bảo vệ bạn trước mọi biến cố tương lai.',
+        ],
     ],
     'five_of_clubs' => [
         'name' => 'Five of Clubs', 'name_vi' => 'Năm Chuồn', 'suit' => 'clubs',
         'upright' => 'Đấu đá chốn công sở, cạnh tranh gay gắt, có người dòm ngó vị trí của mình.',
-        'keywords_upright' => ['đấu đá', 'cạnh tranh', 'thị phi công sở']
+        'keywords_upright' => ['đấu đá', 'cạnh tranh', 'thị phi'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm bị cạnh tranh, có đối thủ tình ái xuất hiện, cần giữ gìn mối quan hệ.',
+            'career'  => 'Đấu đá chốn công sở, cạnh tranh gay gắt, có người dòm ngó vị trí của mình.',
+            'finance' => 'Cạnh tranh thương trường khốc liệt, có người muốn giành giật khách hàng hoặc thị phần.',
+            'study'   => 'Áp lực cạnh tranh trong học tập, bạn bè ganh đua, cần giữ vững tâm lý.',
+            'health'  => 'Stress do cạnh tranh, căng thẳng tinh thần, cần biết buông bỏ.',
+            'future'  => 'Sẽ phải đối mặt với cạnh tranh và đối thủ, chuẩn bị tinh thần chiến đấu.',
+        ],
     ],
     'six_of_clubs' => [
         'name' => 'Six of Clubs', 'name_vi' => 'Sáu Chuồn', 'suit' => 'clubs',
         'upright' => 'Gặt hái thành quả, được cấp trên khen ngợi, thi cử đỗ đạt, nở mày nở mặt.',
-        'keywords_upright' => ['thành quả', 'khen ngợi', 'đỗ đạt']
+        'keywords_upright' => ['thành quả', 'khen ngợi', 'đỗ đạt'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm được gia đình công nhận, mối quan hệ nở mày nở mặt, đám cưới vinh dự.',
+            'career'  => 'Gặt hái thành quả, được cấp trên khen ngợi, thăng chức hoặc đạt thành tích.',
+            'finance' => 'Thu hoạch tài chính, các khoản đầu tư đến kỳ thu lợi, tiền bạc vào tay.',
+            'study'   => 'Thi cử đỗ đạt, được thầy cô khen ngợi, nở mày nở mặt với gia đình.',
+            'health'  => 'Sức khỏe hồi phục sau thời gian điều trị, kết quả khám tốt đẹp.',
+            'future'  => 'Giai đoạn gặt hái thành quả từ những nỗ lực trước đó, vinh quang đang đến.',
+        ],
     ],
     'seven_of_clubs' => [
         'name' => 'Seven of Clubs', 'name_vi' => 'Bảy Chuồn', 'suit' => 'clubs',
         'upright' => 'Tiền vô đều đều túc tắc, công việc có thành tựu nhưng phải giữ gìn kẻo hao hụt.',
-        'keywords_upright' => ['tiền đều', 'giữ thành quả', 'túc tắc']
+        'keywords_upright' => ['tiền đều', 'giữ thành quả', 'túc tắc'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm đều đặn, không sóng gió nhưng cũng không quá lãng mạn, cần giữ gìn.',
+            'career'  => 'Tiền vô đều đều túc tắc, công việc có thành tựu nhưng phải giữ gìn kẻo hao hụt.',
+            'finance' => 'Thu nhập đều đặn, tài chính ổn nhưng cần tiết kiệm, tránh hao hụt không đáng.',
+            'study'   => 'Kết quả học tập đều đặn, không nổi bật nhưng ổn định, cần duy trì nỗ lực.',
+            'health'  => 'Sức khỏe ổn định nhưng cần duy trì thói quen tốt, đừng chủ quan.',
+            'future'  => 'Cuộc sống bình ổn, thu nhập đều, nhưng cần cảnh giác để không bị hao hụt dần.',
+        ],
     ],
     'eight_of_clubs' => [
         'name' => 'Eight of Clubs', 'name_vi' => 'Tám Chuồn', 'suit' => 'clubs',
         'upright' => 'Vạn sự hanh thông, tiến triển cực nhanh, công việc vào guồng quay bận rộn kiếm ra tiền.',
-        'keywords_upright' => ['hanh thông', 'vào guồng', 'tiến triển nhanh']
+        'keywords_upright' => ['hanh thông', 'vào guồng', 'tiến triển'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm phát triển nhanh chóng, mối quan hệ tiến triển tốt đẹp, mọi thứ vào guồng.',
+            'career'  => 'Vạn sự hanh thông, tiến triển cực nhanh, công việc vào guồng quay bận rộn kiếm ra tiền.',
+            'finance' => 'Dòng tiền chảy mạnh, công việc kinh doanh vào guồng, thu nhập tăng vùn vụt.',
+            'study'   => 'Tiến bộ nhanh chóng, kiến thức tiếp thu dễ dàng, mọi thứ thuận lợi.',
+            'health'  => 'Năng lượng dồi dào, cơ thể hoạt động trơn tru, tinh thần phấn chấn.',
+            'future'  => 'Mọi thứ đang vào guồng tốt đẹp, tốc độ phát triển vượt mong đợi.',
+        ],
     ],
     'nine_of_clubs' => [
         'name' => 'Nine of Clubs', 'name_vi' => 'Chín Chuồn', 'suit' => 'clubs',
         'upright' => 'Mưu sự tất thành, có quý nhân chống lưng, vạn sự thuận lợi vượt mức mong đợi.',
-        'keywords_upright' => ['mưu sự thành', 'quý nhân', 'vượt mong đợi']
+        'keywords_upright' => ['mưu sự thành', 'quý nhân', 'vượt mong đợi'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình duyên thuận lợi vượt mong đợi, có quý nhân giúp đỡ chuyện tình cảm, mưu cầu tất thành.',
+            'career'  => 'Mưu sự tất thành, có quý nhân chống lưng, vạn sự thuận lợi vượt mức mong đợi.',
+            'finance' => 'Đầu tư sinh lời vượt kỳ vọng, có quý nhân hỗ trợ tài chính, mọi việc thuận buồm.',
+            'study'   => 'Thi cử vượt mong đợi, có người giúp đỡ, kết quả ngoài sức tưởng tượng.',
+            'health'  => 'Sức khỏe hồi phục thần kỳ, gặp thầy gặp thuốc, vượt qua bệnh tật.',
+            'future'  => 'Mọi kế hoạch đều thành công, quý nhân phù trợ, vận may lớn bao trùm.',
+        ],
     ],
     'ten_of_clubs' => [
         'name' => 'Ten of Clubs', 'name_vi' => 'Mười Chuồn', 'suit' => 'clubs',
         'upright' => 'Lên đỉnh vinh quang, tiền tài danh vọng đủ đầy, nhưng gánh nặng trách nhiệm cũng cực lớn.',
-        'keywords_upright' => ['vinh quang', 'trách nhiệm', 'đỉnh cao']
+        'keywords_upright' => ['vinh quang', 'trách nhiệm', 'đỉnh cao'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình yêu viên mãn nhưng đi kèm trách nhiệm lớn, gia đình hạnh phúc nhưng áp lực.',
+            'career'  => 'Lên đỉnh vinh quang, tiền tài danh vọng đủ đầy, nhưng gánh nặng trách nhiệm cũng cực lớn.',
+            'finance' => 'Giàu có đỉnh cao, nhưng gánh nặng quản lý tài sản và trách nhiệm xã hội.',
+            'study'   => 'Đạt đỉnh cao học vấn, bằng cấp danh giá, nhưng áp lực duy trì thành tích.',
+            'health'  => 'Sức khỏe tốt nhưng cần cân bằng vì gánh nặng công việc quá lớn.',
+            'future'  => 'Đỉnh cao thành công đang chờ đón, nhưng đi kèm trách nhiệm nặng nề.',
+        ],
     ],
     'jack_of_clubs' => [
         'name' => 'Jack of Clubs', 'name_vi' => 'Bồi Chuồn', 'suit' => 'clubs',
-        'upright' => 'Người thanh niên năng nổ, tháo vát chốn quan trường hoặc người mang đến cơ hội việc làm.',
-        'keywords_upright' => ['tháo vát', 'năng nổ', 'cơ hội mới']
+        'upright' => 'Người thanh niên năng nổ, tháo vát chốn quan trường hoặc mang đến cơ hội việc làm mới.',
+        'keywords_upright' => ['tháo vát', 'năng nổ', 'cơ hội mới'],
+        'meanings_by_topic' => [
+            'love'    => 'Chàng trai năng động, nhiệt tình theo đuổi, mang đến sự tươi mới cho tình cảm.',
+            'career'  => 'Người thanh niên năng nổ, tháo vát chốn quan trường hoặc mang đến cơ hội việc làm mới.',
+            'finance' => 'Người trẻ mang đến cơ hội kinh doanh mới, đối tác trẻ tuổi năng động.',
+            'study'   => 'Bạn học năng nổ, trưởng nhóm giỏi, mang đến cơ hội học tập mới.',
+            'health'  => 'Người trẻ tràn đầy năng lượng, khuyến khích vận động và lối sống khỏe mạnh.',
+            'future'  => 'Một thanh niên năng nổ sẽ xuất hiện mang theo cơ hội nghề nghiệp quan trọng.',
+        ],
     ],
     'queen_of_clubs' => [
         'name' => 'Queen of Clubs', 'name_vi' => 'Đầm Chuồn', 'suit' => 'clubs',
-        'upright' => 'Bà chủ, người phụ nữ quyền lực trong công việc, sắc sảo, quán xuyến mọi việc.',
-        'keywords_upright' => ['bà chủ', 'quyền lực', 'quán xuyến']
+        'upright' => 'Người phụ nữ quyền lực trong công việc, sắc sảo, quán xuyến mọi việc hiệu quả.',
+        'keywords_upright' => ['bà chủ', 'quyền lực', 'quán xuyến'],
+        'meanings_by_topic' => [
+            'love'    => 'Người phụ nữ mạnh mẽ trong tình yêu, chủ động dẫn dắt mối quan hệ, nữ quyền.',
+            'career'  => 'Người phụ nữ quyền lực trong công việc, sắc sảo, quán xuyến mọi việc hiệu quả.',
+            'finance' => 'Nữ doanh nhân thành đạt, người phụ nữ quản lý tài chính giỏi giang.',
+            'study'   => 'Nữ giảng viên hoặc mentor quyền lực, dẫn dắt học trò đạt thành tích cao.',
+            'health'  => 'Bác sĩ nữ giỏi, người phụ nữ quyền lực trong lĩnh vực y tế chăm sóc bạn.',
+            'future'  => 'Một người phụ nữ quyền lực sẽ ảnh hưởng lớn đến hướng đi tương lai.',
+        ],
     ],
     'king_of_clubs' => [
         'name' => 'King of Clubs', 'name_vi' => 'Già Chuồn', 'suit' => 'clubs',
         'upright' => 'Ông chủ, sếp lớn, người đàn ông có tiếng nói quyết định tới bát cơm manh áo của bạn.',
-        'keywords_upright' => ['ông chủ', 'sếp lớn', 'tiếng nói']
+        'keywords_upright' => ['ông chủ', 'sếp lớn', 'tiếng nói'],
+        'meanings_by_topic' => [
+            'love'    => 'Người đàn ông quyền lực chi phối mối quan hệ, hoặc công việc đang lấn át đời sống tình cảm.',
+            'career'  => 'Ông chủ, sếp lớn, người đàn ông có tiếng nói quyết định tới bát cơm manh áo của bạn.',
+            'finance' => 'Đại gia, nhà đầu tư lớn, người nắm quyền sinh sát về tài chính.',
+            'study'   => 'Hiệu trưởng, giáo sư quyền lực, người quyết định vận mệnh học tập của bạn.',
+            'health'  => 'Bác sĩ trưởng khoa, chuyên gia y tế hàng đầu, lời nói mang tính quyết định.',
+            'future'  => 'Một người đàn ông quyền lực sẽ quyết định bước ngoặt quan trọng trong đời bạn.',
+        ],
     ],
 
     /* =========================
-       CHẤT BÍCH (TAI ƯƠNG, TIỂU NHÂN, BỆNH TẬT)
+       CHẤT BÍCH (TAI ƯƠNG, KHÓ KHĂN, BỆNH TẬT, TIỂU NHÂN)
     ========================= */
     'ace_of_spades' => [
         'name' => 'Ace of Spades', 'name_vi' => 'Át Bích', 'suit' => 'spades',
-        'upright' => 'Đại hung. Kiện cáo hầu tòa, tang tóc chia ly, hoặc một chấm dứt đau đớn không thể tránh.',
-        'keywords_upright' => ['đại hung', 'kiện cáo', 'chia ly']
+        'upright' => 'Thay đổi lớn, chia ly, kiện cáo hầu tòa, hoặc một chấm dứt đau đớn không thể tránh khỏi.',
+        'keywords_upright' => ['chia ly', 'kiện cáo', 'chấm dứt'],
+        'meanings_by_topic' => [
+            'love'    => 'Chia ly đau đớn, ly hôn hoặc chia tay không thể tránh khỏi, kiện cáo tình cảm.',
+            'career'  => 'Mất việc, chấm dứt hợp đồng, hoặc kiện cáo liên quan đến công việc.',
+            'finance' => 'Phá sản, mất trắng, kiện tụng tài chính, chấm dứt một giai đoạn kinh tế.',
+            'study'   => 'Bỏ học, bị đuổi học, hoặc thay đổi lớn trong con đường học vấn.',
+            'health'  => 'Phẫu thuật lớn, bệnh nặng cần can thiệp, hoặc thay đổi lớn về sức khỏe.',
+            'future'  => 'Một chương cũ khép lại đau đớn, nhưng cũng là khởi đầu mới bắt buộc.',
+        ],
     ],
     'two_of_spades' => [
         'name' => 'Two of Spades', 'name_vi' => 'Hai Bích', 'suit' => 'spades',
         'upright' => 'Bị lừa lọc, phản bội. Có kẻ đâm sau lưng hoặc sự đổ vỡ nặng nề trong quan hệ.',
-        'keywords_upright' => ['lừa lọc', 'phản bội', 'đâm sau lưng']
+        'keywords_upright' => ['lừa lọc', 'phản bội', 'đâm sau lưng'],
+        'meanings_by_topic' => [
+            'love'    => 'Bị phản bội trong tình yêu, người yêu lừa dối, đổ vỡ nặng nề.',
+            'career'  => 'Bị đồng nghiệp đâm sau lưng, phản bội lòng tin, mất vị trí do bị hãm hại.',
+            'finance' => 'Bị lừa tiền, đối tác phản bội, mất vốn do tin nhầm người.',
+            'study'   => 'Bị bạn học phản bội, gian lận bị phát hiện, hoặc bị vu oan.',
+            'health'  => 'Bệnh ẩn giấu, cơ thể đang phản bội bạn, cần kiểm tra sức khỏe ngay.',
+            'future'  => 'Cảnh báo bị lừa lọc, phản bội, cần đề phòng những người xung quanh.',
+        ],
     ],
     'three_of_spades' => [
         'name' => 'Three of Spades', 'name_vi' => 'Ba Bích', 'suit' => 'spades',
         'upright' => 'Nước mắt, đau khổ tột cùng. Có sự xuất hiện của kẻ thứ ba hoặc chia cắt phũ phàng.',
-        'keywords_upright' => ['đau khổ', 'kẻ thứ ba', 'nước mắt']
+        'keywords_upright' => ['đau khổ', 'kẻ thứ ba', 'nước mắt'],
+        'meanings_by_topic' => [
+            'love'    => 'Nước mắt, đau khổ tột cùng, kẻ thứ ba xuất hiện phá hoại tình yêu.',
+            'career'  => 'Mâu thuẫn ba bên trong công việc, bị kẹt giữa hai phe, đau đầu nhức óc.',
+            'finance' => 'Mất tiền vì bị lừa từ nhiều phía, tranh chấp tài chính ba bên.',
+            'study'   => 'Áp lực từ nhiều phía, bị kẹt giữa các lựa chọn, tinh thần suy sụp.',
+            'health'  => 'Đau khổ tinh thần ảnh hưởng sức khỏe, cần hỗ trợ tâm lý.',
+            'future'  => 'Giai đoạn đau khổ sắp đến, nhưng nước mắt sẽ rửa sạch để tái sinh.',
+        ],
     ],
     'four_of_spades' => [
         'name' => 'Four of Spades', 'name_vi' => 'Bốn Bích', 'suit' => 'spades',
         'upright' => 'Ốm đau dai dẳng, cơ thể suy nhược, hoặc công việc bị đình trệ chết lâm sàng.',
-        'keywords_upright' => ['ốm đau', 'suy nhược', 'đình trệ']
+        'keywords_upright' => ['ốm đau', 'suy nhược', 'đình trệ'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm đóng băng, mối quan hệ rơi vào trạng thái chết lâm sàng, không còn cảm xúc.',
+            'career'  => 'Công việc bị đình trệ chết lâm sàng, mọi thứ dậm chân tại chỗ.',
+            'finance' => 'Tài chính đóng băng, không vào không ra, giai đoạn khó khăn kéo dài.',
+            'study'   => 'Học tập trì trệ, mất hứng thú hoàn toàn, cần nghỉ ngơi để hồi phục.',
+            'health'  => 'Ốm đau dai dẳng, cơ thể suy nhược, cần nghỉ ngơi tuyệt đối.',
+            'future'  => 'Giai đoạn đình trệ kéo dài, cần chấp nhận và chờ đợi phục hồi.',
+        ],
     ],
     'five_of_spades' => [
         'name' => 'Five of Spades', 'name_vi' => 'Năm Bích', 'suit' => 'spades',
         'upright' => 'Tai nạn, mất trộm, hao tài tốn của vì những chuyện xui xẻo từ trên trời rơi xuống.',
-        'keywords_upright' => ['tai nạn', 'mất trộm', 'xui xẻo']
+        'keywords_upright' => ['tai nạn', 'mất trộm', 'xui xẻo'],
+        'meanings_by_topic' => [
+            'love'    => 'Xui xẻo trong tình cảm, mất mát bất ngờ, tai họa ập đến không báo trước.',
+            'career'  => 'Tai nạn lao động, mất việc bất ngờ, xui xẻo từ trên trời rơi xuống.',
+            'finance' => 'Tai nạn, mất trộm, hao tài tốn của vì những chuyện xui xẻo bất ngờ.',
+            'study'   => 'Mất tài liệu, trượt thi bất ngờ, sự cố không lường trước phá hỏng kế hoạch.',
+            'health'  => 'Tai nạn bất ngờ, chấn thương, cần cẩn thận khi đi lại và sinh hoạt.',
+            'future'  => 'Cảnh báo tai nạn và mất mát bất ngờ, cần cảnh giác và phòng bị.',
+        ],
     ],
     'six_of_spades' => [
         'name' => 'Six of Spades', 'name_vi' => 'Sáu Bích', 'suit' => 'spades',
         'upright' => 'Bế tắc kéo dài, cạm bẫy giăng sẵn. Đi lại cẩn thận tai nạn xe cộ, sông nước.',
-        'keywords_upright' => ['cạm bẫy', 'bế tắc', 'hạn đi lại']
+        'keywords_upright' => ['cạm bẫy', 'bế tắc', 'hạn đi lại'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình cảm bế tắc, cạm bẫy tình ái, cẩn thận bị lừa dối bởi bề ngoài hào nhoáng.',
+            'career'  => 'Bế tắc kéo dài trong công việc, cạm bẫy do đối thủ giăng sẵn.',
+            'finance' => 'Cạm bẫy tài chính, bế tắc dòng tiền, cẩn thận lừa đảo và đầu tư rủi ro.',
+            'study'   => 'Bế tắc trong học tập, không tìm ra hướng đi, cạm bẫy từ thông tin sai.',
+            'health'  => 'Hạn đi lại, cẩn thận tai nạn xe cộ, sông nước. Tránh xa các hoạt động nguy hiểm.',
+            'future'  => 'Cạm bẫy đang giăng sẵn phía trước, cần cẩn trọng từng bước đi.',
+        ],
     ],
     'seven_of_spades' => [
         'name' => 'Seven of Spades', 'name_vi' => 'Bảy Bích', 'suit' => 'spades',
         'upright' => 'Tiểu nhân quấy phá, đâm thọc hãm hại ngầm. Cực kỳ cẩn trọng người xung quanh.',
-        'keywords_upright' => ['tiểu nhân', 'hãm hại', 'đâm thọc']
+        'keywords_upright' => ['tiểu nhân', 'hãm hại', 'đâm thọc'],
+        'meanings_by_topic' => [
+            'love'    => 'Tiểu nhân xen vào tình cảm, có người nói xấu phá hoại mối quan hệ.',
+            'career'  => 'Tiểu nhân quấy phá, đâm thọc hãm hại ngầm. Cực kỳ cẩn trọng người xung quanh.',
+            'finance' => 'Bị người khác hãm hại về tài chính, đâm thọc sau lưng để giành lợi.',
+            'study'   => 'Bạn học ganh ghét, nói xấu sau lưng, cẩn thận bị phá hoại kết quả.',
+            'health'  => 'Tinh thần bất an do bị quấy phá, stress gây suy giảm sức khỏe.',
+            'future'  => 'Tiểu nhân đang rình rập, cần giữ kín kế hoạch và cẩn trọng lời nói.',
+        ],
     ],
     'eight_of_spades' => [
         'name' => 'Eight of Spades', 'name_vi' => 'Tám Bích', 'suit' => 'spades',
         'upright' => 'Bệnh tật ập đến nằm bẹp giường, trói buộc chân tay, tiến thoái lưỡng nan.',
-        'keywords_upright' => ['bệnh tật', 'tiến thoái lưỡng nan', 'trói buộc']
+        'keywords_upright' => ['bệnh tật', 'tiến thoái lưỡng nan', 'trói buộc'],
+        'meanings_by_topic' => [
+            'love'    => 'Bị trói buộc trong mối quan hệ độc hại, tiến thoái lưỡng nan, không thoát ra được.',
+            'career'  => 'Công việc bế tắc hoàn toàn, bị trói buộc bởi hợp đồng hoặc hoàn cảnh.',
+            'finance' => 'Nợ nần trói buộc, tài chính tiến thoái lưỡng nan, không lối thoát.',
+            'study'   => 'Bị mắc kẹt trong con đường học tập sai, tiến thoái lưỡng nan.',
+            'health'  => 'Bệnh tật ập đến nằm bẹp giường, trói buộc chân tay, cần điều trị lâu dài.',
+            'future'  => 'Giai đoạn bị mắc kẹt, mọi hướng đều bế tắc, cần chấp nhận và chờ thời.',
+        ],
     ],
     'nine_of_spades' => [
         'name' => 'Nine of Spades', 'name_vi' => 'Chín Bích', 'suit' => 'spades',
         'upright' => 'Lo âu đến mất ngủ, hoảng loạn tinh thần, điềm báo có chuyện cực kỳ tồi tệ sắp xảy ra.',
-        'keywords_upright' => ['hoảng loạn', 'lo âu', 'điềm gở']
+        'keywords_upright' => ['hoảng loạn', 'lo âu', 'điềm gở'],
+        'meanings_by_topic' => [
+            'love'    => 'Lo âu cực độ về tình cảm, ám ảnh bị bỏ rơi, hoảng loạn vì mối quan hệ.',
+            'career'  => 'Lo lắng tột độ về công việc, điềm báo sa thải hoặc thất bại lớn sắp đến.',
+            'finance' => 'Hoảng loạn tài chính, mất ngủ vì nợ nần, điềm báo mất mát lớn.',
+            'study'   => 'Lo âu thi cử đến mất ngủ, áp lực học tập gây hoảng loạn tinh thần.',
+            'health'  => 'Mất ngủ triền miên, lo âu ảnh hưởng nghiêm trọng đến sức khỏe tinh thần.',
+            'future'  => 'Điềm báo chuyện tồi tệ sắp xảy ra, cần chuẩn bị tinh thần đối mặt.',
+        ],
     ],
     'ten_of_spades' => [
         'name' => 'Ten of Spades', 'name_vi' => 'Mười Bích', 'suit' => 'spades',
         'upright' => 'Nghiệp quật, họa vô đơn chí. Mọi thứ sụp đổ hoàn toàn, bại sản hoặc tán gia bại sản.',
-        'keywords_upright' => ['sụp đổ', 'họa vô đơn chí', 'bại sản']
+        'keywords_upright' => ['sụp đổ', 'họa vô đơn chí', 'bại sản'],
+        'meanings_by_topic' => [
+            'love'    => 'Tình yêu sụp đổ hoàn toàn, gia đình tan nát, họa vô đơn chí trong tình cảm.',
+            'career'  => 'Sự nghiệp sụp đổ, mất tất cả, họa vô đơn chí trong công việc.',
+            'finance' => 'Tán gia bại sản, phá sản hoàn toàn, mất trắng mọi thứ.',
+            'study'   => 'Thất bại toàn diện trong học tập, bị đuổi hoặc mất tất cả cơ hội.',
+            'health'  => 'Bệnh nặng nghiêm trọng, sức khỏe sụp đổ hoàn toàn, cần can thiệp khẩn cấp.',
+            'future'  => 'Giai đoạn đen tối nhất, nhưng chạm đáy rồi sẽ phải đi lên.',
+        ],
     ],
     'jack_of_spades' => [
         'name' => 'Jack of Spades', 'name_vi' => 'Bồi Bích', 'suit' => 'spades',
         'upright' => 'Kẻ lưu manh, côn đồ hoặc nam thanh niên mang tới rắc rối pháp luật, thị phi.',
-        'keywords_upright' => ['lưu manh', 'thị phi', 'kẻ thù']
+        'keywords_upright' => ['lưu manh', 'thị phi', 'kẻ thù'],
+        'meanings_by_topic' => [
+            'love'    => 'Kẻ tán tỉnh xấu xa, người yêu cũ quay lại phá hoại, thanh niên gây rắc rối tình cảm.',
+            'career'  => 'Kẻ lưu manh trong công sở, côn đồ mang tới rắc rối pháp luật liên quan công việc.',
+            'finance' => 'Kẻ lừa đảo trẻ tuổi, tên trộm, người mang đến rắc rối tài chính.',
+            'study'   => 'Bạn xấu lôi kéo sa ngã, kẻ gây rắc rối trong trường học.',
+            'health'  => 'Người trẻ gây hại sức khỏe, có thể liên quan đến bạo lực hoặc chất cấm.',
+            'future'  => 'Cảnh báo một nam thanh niên nguy hiểm sẽ xuất hiện mang theo rắc rối.',
+        ],
     ],
     'queen_of_spades' => [
         'name' => 'Queen of Spades', 'name_vi' => 'Đầm Bích', 'suit' => 'spades',
         'upright' => 'Góa phụ, người đàn bà cay độc, thâm hiểm, chọc gậy bánh xe phá hoại hạnh phúc người khác.',
-        'keywords_upright' => ['thâm hiểm', 'cay độc', 'phá hoại']
+        'keywords_upright' => ['thâm hiểm', 'cay độc', 'phá hoại'],
+        'meanings_by_topic' => [
+            'love'    => 'Người đàn bà cay độc phá hoại hạnh phúc, mẹ chồng/mẹ vợ khó tính, tiểu tam thâm hiểm.',
+            'career'  => 'Nữ đồng nghiệp hoặc sếp nữ thâm hiểm, chọc gậy bánh xe phá hoại sự nghiệp.',
+            'finance' => 'Người đàn bà cay độc gây hại tài chính, bị phụ nữ lừa tiền.',
+            'study'   => 'Cô giáo khó tính hoặc bạn nữ ganh ghét, gây khó dễ trong học tập.',
+            'health'  => 'Người đàn bà gây hại tinh thần, stress do bị chèn ép bởi phụ nữ độc hại.',
+            'future'  => 'Cảnh báo một người phụ nữ thâm hiểm sẽ gây hại, cần đề phòng.',
+        ],
     ],
     'king_of_spades' => [
         'name' => 'King of Spades', 'name_vi' => 'Già Bích', 'suit' => 'spades',
         'upright' => 'Người đàn ông độc ác, cửa quyền, quan tòa, công an mang tới án phạt hoặc sự trừng phạt nặng nề.',
-        'keywords_upright' => ['quan tòa', 'áp chế', 'trừng phạt']
+        'keywords_upright' => ['quan tòa', 'áp chế', 'trừng phạt'],
+        'meanings_by_topic' => [
+            'love'    => 'Người đàn ông bạo lực, kiểm soát, mối quan hệ độc hại với kẻ cửa quyền.',
+            'career'  => 'Sếp độc ác, cửa quyền, mang tới án phạt hoặc sự trừng phạt nặng nề trong công việc.',
+            'finance' => 'Quan tòa, công an liên quan đến kiện tụng tài chính, án phạt tiền lớn.',
+            'study'   => 'Giám thị khắt khe, người chấm thi nghiêm khắc, bị kỷ luật hoặc đuổi học.',
+            'health'  => 'Bệnh nặng do người khác gây ra, tai nạn do bạo lực, cần tránh xa kẻ nguy hiểm.',
+            'future'  => 'Một người đàn ông quyền lực sẽ mang đến án phạt hoặc thử thách nghiêm trọng.',
+        ],
     ]
 ];
 

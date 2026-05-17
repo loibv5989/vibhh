@@ -1263,6 +1263,7 @@
 .trt-cv-corner {
     display: flex;
     flex-direction: column;
+    align-items: center;
     line-height: 1;
 }
 .trt-cv-corner-top {
@@ -1285,14 +1286,16 @@
 .trt-cv-suit-top {
     font-size: 14px;
     line-height: 1;
-    margin-top: -2px;
 }
 
 .trt-cv-suit-big {
     font-size: 34px;
     line-height: 1;
     font-weight: 500;
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .trt-cv-suit-bot {
@@ -1338,11 +1341,10 @@
     z-index: 1;
     width: 320px;
     max-width: 85vw;
-    aspect-ratio: 5/7;
+    aspect-ratio: 5/7.5;
     max-height: 85vh;
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,.4);
     animation: .3s ease-out trt-modal-in;
 }
 
@@ -1364,10 +1366,10 @@
     z-index: 0;
 }
 
-.trt-card-modal-body > .trt-cd-visual .trt-cv-rank { font-size: clamp(28px, 14vw, 44px); }
-.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-top { font-size: clamp(22px, 10vw, 34px); }
-.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-big { font-size: clamp(80px, 40vw, 145px); }
-.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-bot { font-size: clamp(22px, 10vw, 36px); }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-rank { font-size: clamp(28px, 14vw, 36px); }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-top { font-size: clamp(22px, 10vw, 28px); }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-big { font-size: clamp(80px, 40vw, 138px); }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-bot { font-size: clamp(22px, 10vw, 28px); }
 
 .trt-card-modal-close {
     position: absolute;
@@ -1397,10 +1399,19 @@
     overflow-y: auto;
     color: #fff;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .trt-card-modal-content .trt-cd-content {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+.trt-card-modal-content .trt-cd-body {
+    margin-top: auto;
 }
 
 .trt-card-modal-content .trt-cd-header {

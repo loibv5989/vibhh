@@ -430,7 +430,7 @@ jQuery(function ($) {
         $body.css('background', suitGradients[suit] || 'linear-gradient(160deg, #2a2a2a, #111)');
 
         const $content = $cardDetail.find('.trt-cd-content').clone();
-        $content.css('display', 'block');
+        $content.css('display', 'flex');
         $('#trt-modal-content').html($content);
 
         $('#trt-card-modal').fadeIn(200).css('display', 'flex');

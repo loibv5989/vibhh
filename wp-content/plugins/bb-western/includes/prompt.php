@@ -54,6 +54,7 @@ function _western_build_core_prompt(string $name, string $context_line, string $
         $kw = implode(', ', $c['keywords']);
 
         $card_lines .= "- [{$pos_label}]: {$c['name_vi']} ({$c['name']}) — Chất {$suit}\n";
+        $card_lines .= "  Ý nghĩa: {$c['meaning']}\n";
         $card_lines .= "  Thông điệp: {$kw}\n\n";
 
         if (isset($c['suit']) && isset($counts[$c['suit']])) {

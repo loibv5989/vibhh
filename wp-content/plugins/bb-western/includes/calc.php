@@ -64,7 +64,7 @@ class Western_Calc {
         return $map[$parts[0] ?? ''] ?? '?';
     }
 
-    public static function hydrate(array $liteCards): array {
+    public static function hydrate(array $liteCards, string $topic = ''): array {
         $western_deck = self::getData();
 
         $fullCards = [];
@@ -73,6 +73,12 @@ class Western_Calc {
             if (!$key || !isset($western_deck[$key])) continue;
 
             $d = $western_deck[$key];
+
+            $meaning = $d['upright'] ?? '';
+            if ($topic && !empty($d['meanings_by_topic'][$topic])) {
+                $meaning = $d['meanings_by_topic'][$topic];
+            }
+
             $fullCards[$pos] = [
                 'key'      => $key,
                 'name'     => $d['name']    ?? '',
@@ -81,7 +87,7 @@ class Western_Calc {
                 'rank'     => self::parseRank($key),
                 'upright'  => $d['upright'] ?? '',
                 'keywords' => $d['keywords_upright'] ?? [],
-                'meaning'  => $d['upright'] ?? '',
+                'meaning'  => $meaning,
             ];
         }
         return $fullCards;

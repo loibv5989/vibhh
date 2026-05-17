@@ -112,7 +112,7 @@ class BB_Western_Handle {
         if (!Western_Calc::isValidSpread($spread_key)) $spread_key = '3_cards';
 
         $liteCards  = Western_Calc::drawLite($spread_key);
-        $fullCards  = Western_Calc::hydrate($liteCards);
+        $fullCards  = Western_Calc::hydrate($liteCards, $topic);
         
         self::loadRender();
         $renderHTML = western_render($name, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question, $spread_key);
@@ -206,7 +206,7 @@ class BB_Western_Handle {
             }
         }
 
-        $fullCards = Western_Calc::hydrate($liteCards);
+        $fullCards = Western_Calc::hydrate($liteCards, $topic);
 
         self::loadAIProviders();
 
