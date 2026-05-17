@@ -1,125 +1,124 @@
 <?php
 if (!defined('ABSPATH')) exit;
-
 ?>
 <div class="trt-wrap" id="trt-wrap">
     <div class="trt-step active" id="trt-step-landing">
         <div class="trt-hero">
-            <div class="trt-hero-badge">✦ 52 Lá Bài Tây · Bộ Bài Truyền Thống</div>
-            <h1 class="trt-hero-title"><span>Bói Bài Tây</span> Online<br> Miễn Phí</h1>
-            <p class="trt-hero-sub">Chọn phương pháp trải bài phù hợp với vấn đề của bạn</p>
+            <div class="trt-hero-badge">✦ 52 Playing Cards · Standard Deck</div>
+            <h1 class="trt-hero-title"><span>Playing Card Reading</span> Online<br> Free</h1>
+            <p class="trt-hero-sub">Choose the spread that fits your question</p>
         </div>
         <div class="trt-mode-grid">
             <a href="/boi-bai-tay/3-la/" class="trt-mode-card">
                 <div class="trt-spread-header">
                     <div class="trt-mode-icon">🃏</div>
-                    <div class="trt-mode-title">Bói Bài Tây 3 Lá</div>
+                    <div class="trt-mode-title">3-Card Reading</div>
                 </div>
-                <div class="trt-mode-desc">Trải bài 3 lá xem Quá khứ, Hiện tại và Tương lai. Nhanh, chính xác, phù hợp mọi câu hỏi.</div>
-                <div class="trt-mode-arrow">Bắt đầu →</div>
+                <div class="trt-mode-desc">A 3-card spread covering Past, Present, and Future. Quick, clear, and works for almost any question.</div>
+                <div class="trt-mode-arrow">Start →</div>
             </a>
             <a href="/boi-bai-tay/5-la/" class="trt-mode-card">
                 <div class="trt-spread-header">
                     <div class="trt-mode-icon">🔮</div>
-                    <div class="trt-mode-title">Bói Bài Tây 5 Lá</div>
+                    <div class="trt-mode-title">5-Card Reading</div>
                 </div>
-                <div class="trt-mode-desc">Trải bài 5 lá phân tích tình huống, thử thách, lời khuyên và kết quả.</div>
-                <div class="trt-mode-arrow">Bắt đầu →</div>
+                <div class="trt-mode-desc">A 5-card spread that breaks down the situation, challenges, advice, and outcome.</div>
+                <div class="trt-mode-arrow">Start →</div>
             </a>
             <a href="/boi-bai-tay/7-la/" class="trt-mode-card">
                 <div class="trt-spread-header">
                     <div class="trt-mode-icon">🧲</div>
-                    <div class="trt-mode-title">Bói Bài Tây 7 Lá</div>
+                    <div class="trt-mode-title">7-Card Reading</div>
                 </div>
-                <div class="trt-mode-desc">Trải bài 7 lá Móng ngựa, khám phá nguyên nhân, trở ngại và hướng phát triển.</div>
-                <div class="trt-mode-arrow">Bắt đầu →</div>
+                <div class="trt-mode-desc">The Horseshoe spread with 7 cards. Uncovers root causes, obstacles, and the path forward.</div>
+                <div class="trt-mode-arrow">Start →</div>
             </a>
             <a href="/boi-bai-tay/cau-hoi/" class="trt-mode-card">
                 <div class="trt-spread-header">
                     <div class="trt-mode-icon">✍️</div>
-                    <div class="trt-mode-title">Bói Theo Câu Hỏi</div>
+                    <div class="trt-mode-title">Question-Based Reading</div>
                 </div>
-                <div class="trt-mode-desc">Hỏi điều bạn muốn biết và luận giải các lá bài theo câu hỏi.</div>
-                <div class="trt-mode-arrow">Bắt đầu →</div>
+                <div class="trt-mode-desc">Ask your own question and the cards are interpreted specifically around it.</div>
+                <div class="trt-mode-arrow">Start →</div>
             </a>
         </div>
         <div class="trt-ls">
-            <h2 class="trt-ls-h">Bói bài Tây là gì?</h2>
+            <h2 class="trt-ls-h">What Is Playing Card Reading</h2>
             <div class="trt-ls-prose">
-                <p>Bói bài Tây là phương pháp xem bói dùng bộ bài <strong>52 lá</strong> tiêu chuẩn — bộ bài phổ biến khắp thế giới gồm bốn chất Cơ, Rô, Chuồn, Bích — để luận giải vận số, tình duyên và những vấn đề đang hiện diện trong cuộc sống.</p>
-                <p>Khác với Tarot vốn có nguồn gốc từ huyền học châu Âu thế kỷ 15 với 78 lá bài chuyên biệt, bói bài Tây tại Việt Nam hình thành từ truyền thống dân gian riêng: mỗi chất bài được gán một lĩnh vực cai quản, mỗi lá số và hình mang một thông điệp cụ thể. Hệ thống ý nghĩa này được truyền miệng qua nhiều thế hệ và tuy không có một chuẩn thống nhất, vẫn giữ lại những quy tắc cốt lõi được thừa nhận rộng rãi.</p>
-                <p>Điểm khác biệt nổi bật của bói bài Tây so với các phương pháp khác là tính <strong>trực tiếp và rõ lời</strong> — mỗi lá bài đưa ra thông điệp cụ thể, ít mang tính ẩn dụ hơn Tarot, phù hợp với những ai muốn câu trả lời thẳng vào vấn đề.</p>
+                <p>Playing card reading uses a standard <strong>52-card</strong> deck — the familiar four suits of Hearts, Diamonds, Clubs, and Spades — to interpret situations, relationships, and questions about everyday life.</p>
+                <p>Tarot draws from 15th-century European occultism and uses 78 specially designed cards. Playing card reading developed separately through Vietnamese folk tradition, where each suit and card value carries a specific meaning. These meanings passed down through generations. While no single official standard exists, the core rules are widely shared and recognized.</p>
+                <p>The main difference from other methods is how <strong>direct</strong> playing card readings tend to be. Each card gives a concrete message, with less symbolism than Tarot. It suits people who want a straight answer rather than an open-ended interpretation.</p>
             </div>
         </div>
         <div class="trt-ls">
-            <h2 class="trt-ls-h">Bốn chất bài và lĩnh vực cai quản</h2>
-            <p class="trt-ls-lead">Mỗi chất bài trong bộ 52 lá cai quản một lĩnh vực riêng của đời sống. Khi nhiều lá cùng chất xuất hiện trong một trải bài, đó là dấu hiệu năng lượng của lĩnh vực đó đang nổi trội.</p>
+            <h2 class="trt-ls-h">What Each Suit Covers</h2>
+            <p class="trt-ls-lead">Each of the four suits governs a different area of life. When several cards from the same suit appear in one spread, that area is likely the dominant theme.</p>
             <div class="trt-suit-grid">
                 <div class="trt-suit-card">
                     <div class="trt-suit-wrap">
                         <div class="trt-suit-sym">♥</div>
-                        <div class="trt-suit-name">Cơ · Hearts</div>
+                        <div class="trt-suit-name">Hearts</div>
                     </div>
-                    <div class="trt-suit-domain">Tình cảm · Gia đạo · Hỷ sự</div>
-                    <div class="trt-suit-desc">Chất Cơ cai quản thế giới cảm xúc và các mối quan hệ thân thiết: tình yêu, hôn nhân, gia đình và những tin vui trong đời sống cá nhân. Lá Cơ xuất hiện nhiều báo hiệu chủ đề cảm xúc đang chi phối.</div>
+                    <div class="trt-suit-domain">Emotions · Family · Good News</div>
+                    <div class="trt-suit-desc">Hearts covers emotional life and close relationships: love, marriage, family, and personal milestones. Many Hearts cards in a spread point to emotions as the driving force behind the situation.</div>
                 </div>
                 <div class="trt-suit-card">
                     <div class="trt-suit-wrap">
                         <div class="trt-suit-sym">♦</div>
-                        <div class="trt-suit-name">Rô · Diamonds</div>
+                        <div class="trt-suit-name">Diamonds</div>
                     </div>
-                    <div class="trt-suit-domain">Tiền bạc · Tin tức · Đi lại</div>
-                    <div class="trt-suit-desc">Chất Rô gắn với tiền bạc, tài chính, giấy tờ và sự dịch chuyển. Lá Rô thường xuất hiện khi câu hỏi liên quan đến thu nhập, mua bán, hợp đồng hoặc những chuyến đi xa.</div>
+                    <div class="trt-suit-domain">Money · Messages · Travel</div>
+                    <div class="trt-suit-desc">Diamonds relates to money, finances, paperwork, and movement. It often appears when the question involves income, transactions, contracts, or trips away from home.</div>
                 </div>
                 <div class="trt-suit-card">
                     <div class="trt-suit-wrap">
                         <div class="trt-suit-sym">♣</div>
-                        <div class="trt-suit-name">Chuồn · Clubs</div>
+                        <div class="trt-suit-name">Clubs</div>
                     </div>
-                    <div class="trt-suit-domain">Công danh · Sự nghiệp · Nỗ lực</div>
-                    <div class="trt-suit-desc">Chất Chuồn cai quản sự nghiệp, công danh và thành quả từ nỗ lực cá nhân. Nhiều lá Chuồn trong trải bài thường báo hiệu giai đoạn bận rộn, có cơ hội phát triển hoặc đang đứng trước quyết định nghề nghiệp.</div>
+                    <div class="trt-suit-domain">Career · Ambition · Effort</div>
+                    <div class="trt-suit-desc">Clubs governs work, reputation, and results built through personal effort. Several Clubs cards often signal a busy period, a career opportunity, or a decision point in someone's professional life.</div>
                 </div>
                 <div class="trt-suit-card">
                     <div class="trt-suit-wrap">
                         <div class="trt-suit-sym">♠</div>
-                        <div class="trt-suit-name">Bích · Spades</div>
+                        <div class="trt-suit-name">Spades</div>
                     </div>
-                    <div class="trt-suit-domain">Trở ngại · Thị phi · Cảnh báo</div>
-                    <div class="trt-suit-desc">Chất Bích mang năng lượng nặng nhất: tai ương, tiểu nhân, bệnh tật và những thách thức khó tránh. Không nhất thiết là điềm xấu tuyệt đối — Bích nhắc nhở cần thận trọng và nhìn nhận rõ rủi ro đang hiện diện.</div>
+                    <div class="trt-suit-domain">Obstacles · Conflict · Warnings</div>
+                    <div class="trt-suit-desc">Spades carries the heaviest energy: setbacks, rivals, illness, and challenges that are hard to avoid. It is not an absolute sign of bad luck. Spades points to risks that are present and worth paying attention to.</div>
                 </div>
             </div>
         </div>
         <div class="trt-ls">
-            <h2 class="trt-ls-h">Các kiểu trải bài và cách dùng</h2>
+            <h2 class="trt-ls-h">The Four Spreads</h2>
             <div class="trt-spread-rows">
                 <div class="trt-sr-item">
                     <div class="trt-sr-left">
                         <div class="trt-sr-num">3</div>
-                        <div class="trt-sr-lbl">lá</div>
+                        <div class="trt-sr-lbl">cards</div>
                     </div>
                     <div class="trt-sr-body">
-                        <div class="trt-sr-title">Quá khứ · Hiện tại · Tương lai</div>
-                        <div class="trt-sr-desc">Kiểu trải bài nhanh và phổ biến nhất. Ba lá lần lượt phản ánh nguồn gốc của vấn đề, trạng thái hiện tại và hướng diễn tiến sắp tới. Phù hợp với hầu hết mọi câu hỏi, đặc biệt khi cần câu trả lời rõ ràng trong thời gian ngắn.</div>
+                        <div class="trt-sr-title">Past · Present · Future</div>
+                        <div class="trt-sr-desc">The most common spread. Three cards show where a situation started, where it stands now, and where it's likely heading. Works well for most questions, especially when you want a clear answer quickly.</div>
                     </div>
                 </div>
                 <div class="trt-sr-item">
                     <div class="trt-sr-left">
                         <div class="trt-sr-num">5</div>
-                        <div class="trt-sr-lbl">lá</div>
+                        <div class="trt-sr-lbl">cards</div>
                     </div>
                     <div class="trt-sr-body">
-                        <div class="trt-sr-title">Tình huống · Thử thách · Lời khuyên · Tác động ngoài · Kết quả</div>
-                        <div class="trt-sr-desc">Phân tích đa chiều hơn trải bài 3 lá. Ngoài diễn biến chính, trải bài 5 lá làm rõ lực cản đang hiện diện, yếu tố bên ngoài đang tác động (người khác, hoàn cảnh) và lời khuyên cụ thể để xử lý tình huống.</div>
+                        <div class="trt-sr-title">Situation · Challenge · Advice · Outside Influence · Outcome</div>
+                        <div class="trt-sr-desc">More layered than the 3-card spread. The five positions also show what outside forces are at play (other people, circumstances) and what action makes sense given everything in the spread.</div>
                     </div>
                 </div>
                 <div class="trt-sr-item">
                     <div class="trt-sr-left">
                         <div class="trt-sr-num">7</div>
-                        <div class="trt-sr-lbl">lá</div>
+                        <div class="trt-sr-lbl">cards</div>
                     </div>
                     <div class="trt-sr-body">
-                        <div class="trt-sr-title">Móng ngựa — Horseshoe</div>
-                        <div class="trt-sr-desc">Trải bài toàn diện nhất trong bộ bài Tây. Bảy vị trí bao phủ quá khứ, hiện tại, yếu tố ẩn, trở ngại, môi trường xung quanh, lời khuyên và kết quả. Phù hợp với những vấn đề phức tạp, cần nhìn rõ toàn cảnh trước khi ra quyết định lớn.</div>
+                        <div class="trt-sr-title">Horseshoe Spread</div>
+                        <div class="trt-sr-desc">The most detailed spread in the deck. Seven positions cover past, present, hidden factors, obstacles, surroundings, advice, and outcome. Best used for complex situations where you need the full picture before making a significant decision.</div>
                     </div>
                 </div>
                 <div class="trt-sr-item">
@@ -128,37 +127,36 @@ if (!defined('ABSPATH')) exit;
                         <div class="trt-sr-lbl"></div>
                     </div>
                     <div class="trt-sr-body">
-                        <div class="trt-sr-title">Bói theo câu hỏi</div>
-                        <div class="trt-sr-desc">Thay vì chọn chủ đề có sẵn, bạn tự đặt câu hỏi cụ thể trước khi rút bài. Các lá bài và AI sẽ luận giải trực tiếp theo nội dung câu hỏi đó. Phù hợp khi bạn đang có một vấn đề rất cụ thể và muốn câu trả lời tập trung vào đúng điều đó.</div>
+                        <div class="trt-sr-title">Ask Your Own Question</div>
+                        <div class="trt-sr-desc">Instead of picking a preset theme, you write your specific question before drawing. The cards and AI interpret everything in direct relation to what you asked. Good when your situation is particular and you want focused answers rather than general guidance.</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="trt-ls">
-            <h3 class="trt-ls-h">Câu hỏi thường gặp</h3>
+            <h3 class="trt-ls-h">Common Questions</h3>
             <div class="trt-faq">
                 <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Bói bài Tây có khác với Tarot không?</summary>
-                    <div class="trt-faq-a">Có. Tarot dùng bộ 78 lá chuyên biệt với hệ thống biểu tượng riêng (Major Arcana, Minor Arcana) và có nguồn gốc từ huyền học phương Tây. Bói bài Tây dùng bộ bài 52 lá thông thường với hệ thống ý nghĩa được xây dựng theo truyền thống dân gian Việt Nam. Ngôn ngữ và giọng luận giải của bài Tây thường trực tiếp và cụ thể hơn Tarot.</div>
+                    <summary class="trt-faq-q">How is this different from Tarot?</summary>
+                    <div class="trt-faq-a">Tarot uses a 78-card deck with its own symbol system (Major Arcana, Minor Arcana) rooted in Western occultism. Playing card reading uses a standard 52-card deck with a meaning system built through Vietnamese folk tradition. The language and tone of playing card readings tend to be more direct and specific than Tarot.</div>
                 </details>
                 <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Lá Bích có luôn luôn mang điềm xấu?</summary>
-                    <div class="trt-faq-a">Không nhất thiết. Chất Bích cảnh báo rủi ro, trở ngại và cần thận trọng — nhưng ý nghĩa của từng lá còn phụ thuộc vào vị trí trong trải bài và các lá xung quanh. Một lá Bích xuất hiện ở vị trí "lời khuyên" khác hoàn toàn với cùng lá đó ở vị trí "kết quả". Bài Tây không đưa ra phán quyết tuyệt đối — nó chỉ ra những gì đang vận hành.</div>
+                    <summary class="trt-faq-q">Do Spades always mean something bad?</summary>
+                    <div class="trt-faq-a">No. Spades signal risk, obstacles, and the need for caution, but the meaning of any card depends on its position in the spread and the surrounding cards. A Spades card in the "advice" position reads very differently from the same card in the "outcome" position. The cards point to what's at play, not what's fixed.</div>
                 </details>
                 <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Nên đặt câu hỏi thế nào để được kết quả rõ?</summary>
-                    <div class="trt-faq-a">Câu hỏi cụ thể về tình huống của bạn thường cho kết quả sâu hơn câu hỏi chung chung. Thay vì "Tôi có may mắn không?", thử "Công việc mới tôi đang cân nhắc có nên nhận không?" hoặc "Mối quan hệ này đang ở đâu trong giai đoạn hiện tại?". Câu hỏi mở để bài luận giải nhiều chiều; câu hỏi cụ thể cho câu trả lời tập trung hơn.</div>
+                    <summary class="trt-faq-q">How should I phrase my question?</summary>
+                    <div class="trt-faq-a">Specific questions about your actual situation tend to give clearer results than vague ones. Instead of "Will I be lucky?", try "Should I take the job offer I'm considering?" or "Where does this relationship stand right now?" Open questions give broader readings; specific ones give tighter answers.</div>
                 </details>
                 <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Bao lâu nên bói một lần với cùng một câu hỏi?</summary>
-                    <div class="trt-faq-a">Bói lại cùng một câu hỏi nhiều lần trong ngày thường ít có giá trị — bài phản ánh năng lượng tại thời điểm rút, và trạng thái đó cần thời gian để thay đổi. Nếu bạn đang chờ một sự kiện cụ thể hoặc đã có hành động mới, đó mới là lúc hợp lý để hỏi lại.</div>
+                    <summary class="trt-faq-q">How often can I ask the same question?</summary>
+                    <div class="trt-faq-a">Repeating the same question multiple times in one day rarely adds anything useful. The cards reflect the energy at the moment you draw them, and that takes time to shift. If a specific event has happened or you've taken new action, that's a reasonable time to ask again.</div>
                 </details>
                 <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Kết quả AI giải bài có đáng tin không?</summary>
-                    <div class="trt-faq-a">AI luận giải dựa trên hệ thống ý nghĩa của từng lá bài, vị trí trong trải bài và năng lượng tổng hợp của các chất — không phải ngẫu nhiên. Kết quả mang tính tham khảo và gợi mở, giúp bạn nhìn ra những góc độ có thể chưa chú ý. Quyết định cuối cùng vẫn thuộc về bạn.</div>
+                    <summary class="trt-faq-q">Can I trust the AI interpretations?</summary>
+                    <div class="trt-faq-a">The AI reads based on each card's established meaning, its position in the spread, and the overall pattern of suits. It's not random. The results are a reference point, a way to notice angles you might have missed. What you do with that is your call.</div>
                 </details>
             </div>
         </div>
-
     </div>
 </div>

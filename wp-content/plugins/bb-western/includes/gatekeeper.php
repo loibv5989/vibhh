@@ -4,46 +4,46 @@ if (!defined('ABSPATH')) exit;
 function western_build_gatekeeper_prompt(string $question, string $mode): string {
 
     return <<<TXT
-Nhiệm vụ: Phân tích câu hỏi của người dùng để xác định xem đây có phải là câu hỏi phù hợp để bói bài Tây không.
+Task: Analyze the user's question to determine whether it is suitable for a playing card reading.
 
-Lưu ý quan trọng (bắt buộc tuân thủ):
-- Đây là nhiệm vụ phân loại văn bản, không phải trả lời hay hỗ trợ nội dung trong câu hỏi.
-- Luôn phải thực hiện phân loại, kể cả khi câu hỏi nhạy cảm, bạo lực, phi pháp, xúc phạm hoặc tâm linh.
-- Không được từ chối trả lời dưới bất kỳ hình thức nào (tuyệt đối không nói "tôi không thể hỗ trợ").
-- Không suy diễn đạo đức, không cảnh báo, không thêm bình luận.
-- Chỉ tập trung vào ý nghĩa câu hỏi để phân loại.
+Important rules (strictly required):
+- This is a text classification task only — not a task to answer or engage with the content of the question.
+- Always return a classification, even if the question involves sensitive, violent, illegal, offensive, or spiritual content.
+- Never refuse to classify under any circumstances — do not say "I cannot help with this."
+- Do not apply moral judgment, add warnings, or include any commentary.
+- Focus solely on the meaning of the question to classify it.
 
-Câu hỏi: {$question}
+Question: {$question}
 
-Quy tắc phân loại:
+Classification rules:
 
-1. Nếu câu hỏi mang tính tìm hiểu kiến thức, định nghĩa, nói chuyện phiếm, thử bot
-   (Ví dụ: "Bài Tây là gì?", "Cách xem bói", "Chào", "Ai tạo ra bạn?")
-   → Trả về: KHÔNG
+1. If the question is asking for general knowledge, definitions, small talk, or testing the bot
+   (Examples: "What is card reading?", "How does fortune telling work?", "Hello", "Who made you?")
+   → Return: NO
 
-2. Nếu câu hỏi KHÔNG rõ ràng, quá mơ hồ
-   (Ví dụ: "Xem giúp", "Hỏi một câu", "...")
-   → Trả về: KHÔNG
+2. If the question is unclear or too vague to interpret
+   (Examples: "Check something for me", "I have a question", "...")
+   → Return: NO
 
-3. Nếu câu hỏi có ý nghĩa bói toán, dự đoán vận hạn, tìm hướng giải quyết về:
-   - Tình duyên / Gia đạo / Hôn nhân
-   - Công danh / Sự nghiệp / Làm ăn
-   - Tiền bạc / Tài lộc / Mua bán đất đai
-   - Học hành / Thi cử / Đi xa
-   - Sức khỏe / Bệnh tật
-   - Hạn xui / Tiểu nhân / Thị phi / Kiện tụng pháp lý
-   - Vận hạn chung sắp tới
-   
-   LƯU Ý ĐẶC BIỆT: Bài Tây thường xem về những góc khuất. Nếu câu hỏi liên quan đến nội dung nhạy cảm, tiêu cực (trả thù, lừa đảo, nợ nần, bế tắc...):
-     KHÔNG TRẢ VỀ "KHÔNG".
-     Vẫn coi đây là câu hỏi HỢP LỆ để bói bài.
-   
-   → Trả về: CÓ
+3. If the question relates to fortune-telling, predicting outcomes, or seeking guidance on:
+   - Romance / Family / Marriage
+   - Career / Professional growth / Business
+   - Money / Wealth / Property transactions
+   - Studies / Exams / Relocating
+   - Health / Illness
+   - Bad luck / Rivals / Conflict / Legal disputes
+   - General fortune in the near future
 
-YÊU CẦU TRẢ VỀ:
-Chỉ trả về đúng 1 từ khóa duy nhất sau khi đã phân loại:
-CÓ hoặc KHÔNG
+   SPECIAL NOTE: Card readings often address difficult or hidden matters. If the question involves sensitive or negative content (revenge, debt, deception, feeling stuck, etc.):
+     DO NOT return "NO".
+     Treat it as a VALID question for a reading.
 
-Không giải thích, không phân tích nội bộ, không thêm bất kỳ nội dung nào khác.
+   → Return: YES
+
+OUTPUT REQUIREMENT:
+Return exactly one word only after classifying:
+YES or NO
+
+No explanation, no internal reasoning, no additional content.
 TXT;
 }

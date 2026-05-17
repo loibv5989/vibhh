@@ -1,45 +1,42 @@
 <?php
-/**
- * Western Spreads Configuration
- */
 
 if (!defined('ABSPATH')) exit;
 
 $spreads = [
     '3_cards' => [
-        'name'     => 'Trải bài 3 lá',
+        'name'     => '3-Card Spread',
         'count'    => 3,
         'template' => 'default',
         'positions' => [
-            'past'    => 'Quá khứ',
-            'present' => 'Hiện tại',
-            'future'  => 'Tương lai'
+            'past'    => 'Past',
+            'present' => 'Present',
+            'future'  => 'Future'
         ]
     ],
     '5_cards' => [
-        'name'     => 'Trải bài 5 lá (Chữ thập)',
+        'name'     => '5-Card Spread (Cross)',
         'count'    => 5,
         'template' => 'default',
         'positions' => [
-            'situation' => 'Hiện tại',
-            'challenge' => 'Thử thách',
-            'advice'    => 'Lời khuyên',
-            'external'  => 'Tác động ngoài',
-            'outcome'   => 'Kết quả'
+            'situation' => 'Present',
+            'challenge' => 'Challenge',
+            'advice'    => 'Advice',
+            'external'  => 'Outside Influence',
+            'outcome'   => 'Outcome'
         ]
     ],
     '7_cards' => [
-        'name'     => 'Trải bài 7 lá (Móng ngựa)',
+        'name'     => '7-Card Spread (Horseshoe)',
         'count'    => 7,
         'template' => 'default',
         'positions' => [
-            'past'        => 'Quá khứ',
-            'present'     => 'Hiện tại',
-            'hidden'      => 'Yếu tố ẩn',
-            'obstacle'    => 'Trở ngại',
-            'environment' => 'Môi trường',
-            'advice'      => 'Lời khuyên',
-            'outcome'     => 'Kết quả'
+            'past'        => 'Past',
+            'present'     => 'Present',
+            'hidden'      => 'Hidden Factor',
+            'obstacle'    => 'Obstacle',
+            'environment' => 'Surroundings',
+            'advice'      => 'Advice',
+            'outcome'     => 'Outcome'
         ]
     ],
 ];

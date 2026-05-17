@@ -46,9 +46,8 @@ class Western_Calc {
             $d = $western_deck[$key];
             $pos_key = $positions[$i];
             $lite[$pos_key] = [
-                'key'     => $key,
-                'name_vi' => $d['name_vi'],
-                'suit'    => $d['suit'],
+                'key'  => $key,
+                'suit' => $d['suit'],
             ];
         }
         return $lite;
@@ -82,7 +81,6 @@ class Western_Calc {
             $fullCards[$pos] = [
                 'key'      => $key,
                 'name'     => $d['name']    ?? '',
-                'name_vi'  => $d['name_vi'] ?? '',
                 'suit'     => $d['suit']    ?? '',
                 'rank'     => self::parseRank($key),
                 'upright'  => $d['upright'] ?? '',
