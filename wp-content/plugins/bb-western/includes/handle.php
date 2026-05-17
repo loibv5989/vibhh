@@ -65,7 +65,7 @@ class BB_Western_Handle {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'western_form')) return;
         wp_enqueue_style('western',  BB_WESTERN_PLUGIN_URL . 'assets/western.css',  [], BB_WESTERN_VERSION);
-        wp_enqueue_script('western', BB_WESTERN_PLUGIN_URL . 'assets/western.js', ['jquery'], BB_WESTERN_VERSION, true);
+        wp_enqueue_script('western', BB_WESTERN_PLUGIN_URL . 'assets/western.min.js', ['jquery'], BB_WESTERN_VERSION, true);
         wp_localize_script('western', 'WesternAjax', [
                 'api_url' => esc_url_raw(rest_url('western/v1/')),
                 'nonce'    => wp_create_nonce('wp_rest'),
