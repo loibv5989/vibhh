@@ -32,15 +32,19 @@ function western_render(string $name, string $topic, array $cards, string $mode 
             ?>
             <?php $sym = $suit_symbols[$suit] ?? ''; $rank = $c['rank'] ?? ''; ?>
             <div class="trt-card-detail" data-card-name="<?= esc_attr($c['name_vi']) ?>">
-                <div class="trt-cd-visual" role="button" tabindex="0" style="--card-color:<?= esc_attr($pcolor) ?>;--card-rot:<?= $rot ?>deg">
-                    <span class="trt-cv-rank"><?= esc_html($rank) ?></span>
-                    <span class="trt-cv-suit-top"><?= esc_html($sym) ?></span>
+                <div class="trt-cd-visual trt-cd-<?= esc_attr($suit) ?> trt-cd-rank-<?= esc_attr($rank) ?>" role="button" tabindex="0" data-suit="<?= esc_attr($suit) ?>" style="--card-color:<?= esc_attr($pcolor) ?>;--card-rot:<?= $rot ?>deg">
+                    <div class="trt-cv-corner trt-cv-corner-top">
+                        <span class="trt-cv-rank"><?= esc_html($rank) ?></span>
+                        <span class="trt-cv-suit-top"><?= esc_html($sym) ?></span>
+                    </div>
                     <span class="trt-cv-suit-big"><?= esc_html($sym) ?></span>
-                    <span class="trt-cv-suit-bot"><?= esc_html($sym) ?></span>
+                    <div class="trt-cv-corner trt-cv-corner-bot">
+                        <span class="trt-cv-suit-bot"><?= esc_html($sym) ?></span>
+                    </div>
                 </div>
                 <span class="trt-cd-pos-label"><?= esc_html($pos_label) ?></span>
                 <div class="trt-cd-content">
-                    <div class="trt-cd-header" style="border-left:3px solid <?= esc_attr($pcolor) ?>">
+                    <div class="trt-cd-header">
                         <span class="trt-cd-pos" style="color:<?= esc_attr($pcolor) ?>"><?= esc_html($pos_label) ?></span>
                         <span class="trt-cd-name"><?= esc_html($c['name_vi']) ?> <small style="font-weight:400">(<?= esc_html($c['name']) ?>)</small></span>
                         <?php if (!empty($suit)): ?>

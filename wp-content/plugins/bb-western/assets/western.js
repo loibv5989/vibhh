@@ -419,8 +419,18 @@ jQuery(function ($) {
         $bgCard.addClass('trt-modal-bg-card');
         $body.prepend($bgCard);
 
+        // Gradient background theo chất bài
+        const suitGradients = {
+            hearts:   'linear-gradient(160deg, #be1a1a, #6b0000)',
+            diamonds: 'linear-gradient(160deg, #b45a00, #5a2800)',
+            clubs:    'linear-gradient(160deg, #035c35, #012415)',
+            spades:   'linear-gradient(160deg, #2d2b8f, #0d0b40)',
+        };
+        const suit = $cardDetail.find('.trt-cd-visual').data('suit') || '';
+        $body.css('background', suitGradients[suit] || 'linear-gradient(160deg, #2a2a2a, #111)');
+
         const $content = $cardDetail.find('.trt-cd-content').clone();
-        $content.find('.trt-cd-content').css('display', '');
+        $content.css('display', 'block');
         $('#trt-modal-content').html($content);
 
         $('#trt-card-modal').fadeIn(200).css('display', 'flex');
@@ -429,6 +439,7 @@ jQuery(function ($) {
 
     function closeCardModal() {
         $('#trt-card-modal').fadeOut(150);
+        $('#trt-modal-body').css('background', '');
         $('body').css('overflow', '');
     }
 

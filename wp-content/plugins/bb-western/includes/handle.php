@@ -183,7 +183,7 @@ class BB_Western_Handle {
 
         $hp_trap = $request->get_param('hp_trap') ?? '';
         if (!empty($hp_trap)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vũ trụ từ chối kết nối với bạn.'], 403);
+            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ.'], 403);
         }
 
         if (empty($name)) {
@@ -248,7 +248,7 @@ class BB_Western_Handle {
             }
         }
 
-        $cache_str = $name . $mode . $spread_key . ($mode === 'question' ? md5($question) : $topic);
+        $cache_str = mb_strtolower(trim($name)) . $mode . $spread_key . ($mode === 'question' ? md5($question) : $topic);
         foreach ($liteCards as $pos => $c) {
             $cache_str .= $c['key'];
         }
@@ -268,26 +268,37 @@ class BB_Western_Handle {
                 ? western_build_prompt_question($name, $question, $fullCards, $spread_key)
                 : western_build_prompt_topic($name, $topic, $fullCards, $spread_key);
 
-        try {
-            $provider = get_option('western_ai_provider', 'gemini');
-            $response = ($providers[$provider] ?? $providers['gemini'])($prompt);
+        $analysis_order_str = get_option('western_analysis_order', get_option('western_ai_provider', 'gemini'));
+        $analysis_order = array_map('trim', explode(',', $analysis_order_str));
 
-            if (!str_contains($response, '[AST_RESULT]') || !str_contains($response, '[/AST_RESULT]')) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Lỗi kết nối. Vui lòng thử lại.'], 200);
+        $response = '';
+        foreach ($analysis_order as $current_provider) {
+            if (!isset($providers[$current_provider])) continue;
+            try {
+                $res = $providers[$current_provider]($prompt);
+                if (!empty($res) && !str_starts_with($res, '[Error]') &&
+                    str_contains($res, '[AST_RESULT]') && str_contains($res, '[/AST_RESULT]')) {
+                    $response = $res;
+                    break;
+                }
+            } catch (Exception $e) {
+                continue;
             }
+        }
 
-            if (preg_match('/\[AST_RESULT\]([\s\S]*?)\[\/AST_RESULT\]/', $response, $matches)) {
-                $response = '[AST_RESULT]' . trim($matches[1]) . '[/AST_RESULT]';
-            }
-
-            $this->saveCache($cache_key, $response);
-            $parsed = Western_Calc::parseResponse($response);
-            $parsed['success'] = true;
-            $parsed['is_cached'] = false;
-            return new WP_REST_Response($parsed, 200);
-        } catch (Exception $e) {
+        if (empty($response)) {
             return new WP_REST_Response(['success' => false, 'message' => 'Lỗi kết nối. Vui lòng thử lại sau.'], 200);
         }
+
+        if (preg_match('/\[AST_RESULT\]([\s\S]*?)\[\/AST_RESULT\]/', $response, $matches)) {
+            $response = '[AST_RESULT]' . trim($matches[1]) . '[/AST_RESULT]';
+        }
+
+        $this->saveCache($cache_key, $response);
+        $parsed = Western_Calc::parseResponse($response);
+        $parsed['success'] = true;
+        $parsed['is_cached'] = false;
+        return new WP_REST_Response($parsed, 200);
     }
 
     private function ensureCacheDir(): void {
