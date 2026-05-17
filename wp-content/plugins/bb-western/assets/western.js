@@ -411,13 +411,13 @@ jQuery(function ($) {
     });
 
     function openCardModal($cardDetail) {
-        const $visual = $cardDetail.find('.trt-cd-visual').clone();
-        $visual.find('.trt-cv-hint').remove();
-        $('#trt-modal-visual').html($visual);
+        const $body = $('#trt-modal-body');
+        $body.find('.trt-cd-visual').remove();
 
-        const $bg = $cardDetail.find('.trt-cd-visual').clone();
-        $bg.find('.trt-cv-hint').remove();
-        $('#trt-modal-bg').html($bg);
+        const $bgCard = $cardDetail.find('.trt-cd-visual').clone();
+        $bgCard.find('.trt-cv-hint').remove();
+        $bgCard.addClass('trt-modal-bg-card');
+        $body.prepend($bgCard);
 
         const $content = $cardDetail.find('.trt-cd-content').clone();
         $content.find('.trt-cd-content').css('display', '');

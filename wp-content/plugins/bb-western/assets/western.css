@@ -1307,7 +1307,7 @@
     display: none;
 }
 
-/* Modal - card-shaped with blurred card background */
+/* Modal - card visual IS the background */
 .trt-card-modal {
     position: fixed;
     inset: 0;
@@ -1321,20 +1321,19 @@
 .trt-card-modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,.6);
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,.55);
 }
 
 .trt-card-modal-body {
     position: relative;
     z-index: 1;
-    width: 300px;
+    width: 320px;
     max-width: 85vw;
     aspect-ratio: 5/7;
     max-height: 85vh;
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08);
+    box-shadow: 0 24px 64px rgba(0,0,0,.4);
     animation: .3s ease-out trt-modal-in;
 }
 
@@ -1343,92 +1342,59 @@
     to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.trt-card-modal-bg {
+.trt-card-modal-body > .trt-cd-visual {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.trt-card-modal-bg .trt-cd-visual {
     width: 100% !important;
     height: 100% !important;
     border-radius: 0 !important;
     transform: none !important;
-    filter: blur(18px) brightness(0.5);
     box-shadow: none !important;
     border: none !important;
     cursor: default !important;
-    background: transparent !important;
+    z-index: 0;
 }
 
-.trt-card-modal-bg .trt-cv-rank { font-size: 48px; }
-.trt-card-modal-bg .trt-cv-suit-top { font-size: 36px; }
-.trt-card-modal-bg .trt-cv-suit-big { font-size: 140px; }
-.trt-card-modal-bg .trt-cv-suit-bot { font-size: 36px; }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-rank { font-size: 56px; }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-top { font-size: 42px; }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-big { font-size: 160px; }
+.trt-card-modal-body > .trt-cd-visual .trt-cv-suit-bot { font-size: 42px; }
 
-.trt-card-modal-bg::after {
-    content: '';
+.trt-card-modal-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,.35);
+    background: rgba(0,0,0,.55);
     z-index: 1;
 }
 
-.trt-card-modal-inner {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 18px;
-    overflow-y: auto;
-    color: #fff;
-}
-
 .trt-card-modal-close {
-    align-self: flex-end;
-    background: rgba(0,0,0,.25);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    background: rgba(0,0,0,.35);
     border: none;
     font-size: 22px;
     line-height: 1;
     cursor: pointer;
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.85);
     padding: 4px 10px;
     border-radius: 8px;
-    transition: background .2s, color .2s;
-    margin-bottom: 8px;
+    transition: background .2s;
 }
 
 .trt-card-modal-close:hover {
-    background: rgba(0,0,0,.45);
-    color: #fff;
-}
-
-.trt-card-modal-visual {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 14px;
-    flex-shrink: 0;
-}
-
-.trt-card-modal-visual .trt-cd-visual {
-    width: 90px;
-    height: 130px;
-    cursor: default;
-    transform: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,.3);
-    background: rgba(255,255,255,.95);
-}
-
-.trt-card-modal-visual .trt-cd-visual:hover {
-    transform: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    background: rgba(0,0,0,.55);
 }
 
 .trt-card-modal-content {
-    flex: 1;
-    min-height: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 50px 18px 18px;
+    overflow-y: auto;
+    color: #fff;
+    box-sizing: border-box;
 }
 
 .trt-card-modal-content .trt-cd-content {
@@ -1437,7 +1403,7 @@
 
 .trt-card-modal-content .trt-cd-header {
     padding-left: 0;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
@@ -1445,17 +1411,19 @@
 
 .trt-card-modal-content .trt-cd-name {
     color: #fff;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .trt-card-modal-content .trt-cd-pos {
-    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,.7);
+    font-size: .82rem;
 }
 
 .trt-card-modal-content .trt-cd-body p {
-    font-size: .9rem;
+    font-size: .92rem;
     line-height: 1.7;
-    color: rgba(255,255,255,.9);
+    color: rgba(255,255,255,.92);
 }
 
 .trt-card-modal-content .trt-cd-body em {
@@ -1463,8 +1431,8 @@
 }
 
 .trt-card-modal-content .trt-badge-minor {
-    background: rgba(255,255,255,.12);
-    padding: 2px 8px;
+    background: rgba(255,255,255,.15);
+    padding: 2px 10px;
     border-radius: 99px;
     font-size: .78rem;
 }
