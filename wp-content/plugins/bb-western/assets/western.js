@@ -74,74 +74,16 @@ jQuery(function ($) {
         }
     };
 
-    const Typewriter = {
-        fastMode: false,
-        typeText($el, text, speed, cb) {
-            let i = 0;
-            const tick = () => {
-                if (i >= text.length) {
-                    if (cb) cb();
-                    return;
-                }
-                $el.append(document.createTextNode(text[i++]));
-                setTimeout(tick, this.fastMode ? 0 : speed + Math.random() * 12);
-            };
-            tick();
-        },
-        run(lines, onDone) {
-            this.fastMode = false;
-            const $cursor = $('#ast-chat-body .ast-cursor');
-            let idx = 0;
-            const next = () => {
-                if (idx >= lines.length) {
-                    $cursor.addClass('ast-cursor-blink');
-                    if (onDone) onDone();
-                    return;
-                }
-                const line = lines[idx++];
-                if (line.type === 'divider') {
-                    $cursor.before('\n\n');
-                    setTimeout(next, this.fastMode ? 20 : 90);
-                    return;
-                }
-                if (line.type === 'index') {
-                    const $el = $('<span class="ast-tw-index"></span>');
-                    $cursor.before($el);
-                    this.typeText($el, line.label + ': ', 24, () => {
-                        $el.append($('<span class="ast-tw-num" style="color:' + line.color + '">' + line.value + '</span>'));
-                        if (line.hint) {
-                            $el.append($('<span class="ast-tw-hint-text"> — ' + line.hint + '</span>'));
-                        }
-                        setTimeout(next, this.fastMode ? 20 : 60);
-                    });
-                    return;
-                }
-                const cssMap = {greeting: 'ast-tw-greeting', intro: 'ast-tw-intro', closing: 'ast-tw-closing'};
-                const $el = $('<span class="' + (cssMap[line.type] || 'ast-tw-text') + '"></span>');
-                $cursor.before($el);
-                this.typeText($el, line.text, line.type === 'greeting' ? 30 : 18, () => {
-                    setTimeout(next, this.fastMode ? 20 : 120);
-                });
-            };
-            next();
-        }
-    };
-
     const AIResult = {
         injectHints(hints) {
             Object.entries(hints).forEach(([key, hint]) => {
                 $('[data-hint-key="' + key + '"]')
                     .stop(true, true).css('display', '')
-                    .text(' — ' + hint)
-                    .removeClass('ast-hint-skeleton')
-                    .addClass('ast-tw-hint-text');
+                    .text(' — ' + hint);
             });
-            $('.ast-hint-skeleton').fadeOut(200);
         },
         tryInject(result) {
             if (!result) return;
-
-            $('.ast-tw-closing, #ast-chat-body .ast-cursor').fadeOut(300);
 
             const $c = $('#ast-final-result');
             $c.empty().addClass('ast-content-loaded');
@@ -355,11 +297,6 @@ jQuery(function ($) {
             $('#trt-result-box').html(State.resultHtml).fadeIn(400);
             $('html,body').animate({scrollTop: $('#trt-result-box').offset().top - 60}, 500);
 
-            const linesText = $('#ast-chat-body').attr('data-lines');
-            if (linesText) {
-                const lines = JSON.parse(linesText);
-                await new Promise(res => Typewriter.run(lines, res));
-            }
             $('.ast-action-footer').fadeIn(400);
             $('#trt-detail-container').slideDown(600);
         },
@@ -370,8 +307,6 @@ jQuery(function ($) {
 
             try {
                 const analyzeResult = await Ajax.analyze();
-                if (analyzeResult.is_cached) Typewriter.fastMode = true;
-
                 AIResult.tryInject(analyzeResult);
 
                 $('#trt-deep-analyze-form').slideUp(300);
@@ -473,5 +408,39 @@ jQuery(function ($) {
             });
             $(this).addClass('active');
         }
+    });
+
+    function openCardModal($cardDetail) {
+        const $visual = $cardDetail.find('.trt-cd-visual').clone();
+        $visual.find('.trt-cv-hint').remove();
+        $('#trt-modal-visual').html($visual);
+
+        const $bg = $cardDetail.find('.trt-cd-visual').clone();
+        $bg.find('.trt-cv-hint').remove();
+        $('#trt-modal-bg').html($bg);
+
+        const $content = $cardDetail.find('.trt-cd-content').clone();
+        $content.find('.trt-cd-content').css('display', '');
+        $('#trt-modal-content').html($content);
+
+        $('#trt-card-modal').fadeIn(200).css('display', 'flex');
+        $('body').css('overflow', 'hidden');
+    }
+
+    function closeCardModal() {
+        $('#trt-card-modal').fadeOut(150);
+        $('body').css('overflow', '');
+    }
+
+    $(document).on('click', '.trt-cd-visual', function () {
+        openCardModal($(this).closest('.trt-card-detail'));
+    });
+
+    $(document).on('click', '.trt-card-modal-backdrop, .trt-card-modal-close', function () {
+        closeCardModal();
+    });
+
+    $(document).on('keydown', function (e) {
+        if (e.key === 'Escape') closeCardModal();
     });
 });

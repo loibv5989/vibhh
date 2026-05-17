@@ -119,4 +119,16 @@ if (!defined('ABSPATH')) exit;
     </div>
 
     <div id="trt-result-box" style="display:none"></div>
+
+    <div id="trt-card-modal" class="trt-card-modal" style="display:none">
+        <div class="trt-card-modal-backdrop"></div>
+        <div class="trt-card-modal-body">
+            <div class="trt-card-modal-bg" id="trt-modal-bg"></div>
+            <div class="trt-card-modal-inner">
+                <button class="trt-card-modal-close" aria-label="Đóng">&times;</button>
+                <div class="trt-card-modal-visual" id="trt-modal-visual"></div>
+                <div class="trt-card-modal-content" id="trt-modal-content"></div>
+            </div>
+        </div>
+    </div>
 </div>

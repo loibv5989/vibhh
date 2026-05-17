@@ -8,88 +8,57 @@ function western_render(string $name, string $topic, array $cards, string $mode 
     $positions      = $spread_config['positions'];
 
     $suit_labels  = ['hearts' => 'Cơ ♥', 'diamonds' => 'Rô ♦', 'clubs' => 'Chuồn ♣', 'spades' => 'Bích ♠'];
-    $suit_colors  = ['hearts' => '#ef4444', 'diamonds' => '#f59e0b', 'clubs' => '#10b981', 'spades' => '#6366f1'];
+    $suit_colors  = ['hearts' => '#dc2626', 'diamonds' => '#dc2626', 'clubs' => '#1f2937', 'spades' => '#1f2937'];
+    $suit_symbols = ['hearts' => '♥', 'diamonds' => '♦', 'clubs' => '♣', 'spades' => '♠'];
     $topic_labels = ['love' => 'Tình yêu', 'career' => 'Công việc', 'finance' => 'Tài chính', 'study' => 'Học tập', 'health' => 'Sức khỏe', 'future' => 'Tương lai'];
-    $colors_palette = ['#8b5cf6', '#d4af37', '#10b981', '#f43f5e', '#0ea5e9', '#f59e0b', '#ec4899'];
-
-    $intro_text = ($mode === 'question' && !empty($question))
-        ? 'Phương pháp: ' . $spread_config['name']
-        : 'Chủ đề: ' . ($topic_labels[$topic] ?? $topic) . ' · ' . $spread_config['name'] . ':';
-
-    $lines = [
-            ['type' => 'greeting', 'text' => 'Thông điệp từ các lá bài:'],
-            ['type' => 'divider',  'text' => ''],
-    ];
-
-    $color_idx = 0;
-    foreach ($positions as $pos_key => $pos_label) {
-        if (!isset($cards[$pos_key])) continue;
-        $c = $cards[$pos_key];
-        $hint_text = !empty($c['keywords']) ? implode(', ', $c['keywords']) : '';
-        $lines[] = [
-            'type'  => 'index',
-            'key'   => $pos_key,
-            'label' => $pos_label,
-            'value' => $c['name_vi'],
-            'color' => $colors_palette[$color_idx % count($colors_palette)],
-            'hint'  => $hint_text
-        ];
-        $color_idx++;
-    }
-    $lines[] = ['type' => 'divider', 'text' => ''];
-    $lines_json = json_encode($lines, JSON_UNESCAPED_UNICODE);
 
     ob_start(); ?>
 
-    <?php if ($mode === 'question' && !empty($question)): ?>
-        <div class="trt-context-badge">
-            <span class="trt-context-icon">» </span>
-            <span class="trt-context-text"><?= esc_html(mb_substr($question, 0, 120)) ?></span>
-        </div>
-    <?php elseif (!empty($topic)): ?>
-        <div class="trt-context-badge">
-            <span class="trt-context-icon">» </span>
-            <span class="trt-context-text">Chủ đề: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
-        </div>
-    <?php endif; ?>
-
-    <div class="trt-chat-wrap" id="trt-chat-wrap">
-        <div class="ast-chat-bubble">
-            <div class="ast-chat-body" id="ast-chat-body" data-lines="<?= esc_attr($lines_json) ?>">
-                <span class="ast-cursor">|</span>
-            </div>
-        </div>
-    </div>
-
     <div id="trt-detail-container" style="display:none">
 
+        <div class="trt-card-spread">
         <?php
         $color_idx = 0;
+        $rotations = [-4, 0, 4, -2, 2, -3, 3];
+        $idx = 0;
         foreach ($positions as $pos_key => $pos_label):
             if (!isset($cards[$pos_key])) continue;
             $c      = $cards[$pos_key];
             $suit   = $c['suit'] ?? '';
             $pcolor = $suit_colors[$suit] ?? '#888';
             $kw     = implode(', ', $c['keywords'] ?? []);
-            $suit   = $c['suit'] ?? '';
+            $rot    = $rotations[$idx % count($rotations)];
+            $idx++;
             ?>
-            <div class="trt-card-detail">
-                <div class="trt-cd-header" style="border-left:3px solid <?= esc_attr($pcolor) ?>">
-                    <span class="trt-cd-pos" style="color:<?= esc_attr($pcolor) ?>"><?= esc_html($pos_label) ?></span>
-                    <span class="trt-cd-name"><?= esc_html($c['name_vi']) ?> <small style="font-weight:400">(<?= esc_html($c['name']) ?>)</small></span>
-                    <?php if (!empty($suit)): ?>
-                        <span class="trt-badge-minor" style="color:<?= esc_attr($suit_colors[$suit] ?? 'inherit') ?>"><?= esc_html($suit_labels[$suit] ?? $suit) ?></span>
-                    <?php endif; ?>
+            <?php $sym = $suit_symbols[$suit] ?? ''; $rank = $c['rank'] ?? ''; ?>
+            <div class="trt-card-detail" data-card-name="<?= esc_attr($c['name_vi']) ?>">
+                <div class="trt-cd-visual" role="button" tabindex="0" style="--card-color:<?= esc_attr($pcolor) ?>;--card-rot:<?= $rot ?>deg">
+                    <span class="trt-cv-rank"><?= esc_html($rank) ?></span>
+                    <span class="trt-cv-suit-top"><?= esc_html($sym) ?></span>
+                    <span class="trt-cv-suit-big"><?= esc_html($sym) ?></span>
+                    <span class="trt-cv-suit-bot"><?= esc_html($sym) ?></span>
                 </div>
-                <div class="trt-cd-body">
-                    <p><?= esc_html($c['meaning'] ?? '') ?></p>
-                    <?php if (!empty($kw)): ?><p style="font-size:.8rem">✦ Thông điệp: <em><?= esc_html($kw) ?></em></p><?php endif; ?>
+                <span class="trt-cd-pos-label"><?= esc_html($pos_label) ?></span>
+                <div class="trt-cd-content">
+                    <div class="trt-cd-header" style="border-left:3px solid <?= esc_attr($pcolor) ?>">
+                        <span class="trt-cd-pos" style="color:<?= esc_attr($pcolor) ?>"><?= esc_html($pos_label) ?></span>
+                        <span class="trt-cd-name"><?= esc_html($c['name_vi']) ?> <small style="font-weight:400">(<?= esc_html($c['name']) ?>)</small></span>
+                        <?php if (!empty($suit)): ?>
+                            <span class="trt-badge-minor" style="color:<?= esc_attr($suit_colors[$suit] ?? 'inherit') ?>"><?= esc_html($suit_labels[$suit] ?? $suit) ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="trt-cd-body">
+                        <p><?= esc_html($c['meaning'] ?? '') ?></p>
+                        <?php if (!empty($kw)): ?><p style="font-size:.8rem">✦ Thông điệp: <em><?= esc_html($kw) ?></em></p><?php endif; ?>
+                    </div>
                 </div>
             </div>
             <?php $color_idx++; endforeach; ?>
+        </div>
 
 
-        <?php $allow_ai = get_option('western_allow_ai', '0');
+        <?php
+        $allow_ai = get_option('western_allow_ai', '0');
         if ($allow_ai === '1'):  ?>
         <div id="trt-deep-analyze-form">
             <h3>Luận giải các lá bài</h3>

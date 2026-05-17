@@ -54,6 +54,16 @@ class Western_Calc {
         return $lite;
     }
 
+    private static function parseRank(string $key): string {
+        $map = [
+            'ace' => 'A', 'two' => '2', 'three' => '3', 'four' => '4',
+            'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8',
+            'nine' => '9', 'ten' => '10', 'jack' => 'J', 'queen' => 'Q', 'king' => 'K',
+        ];
+        $parts = explode('_', $key);
+        return $map[$parts[0] ?? ''] ?? '?';
+    }
+
     public static function hydrate(array $liteCards): array {
         $western_deck = self::getData();
 
@@ -68,6 +78,7 @@ class Western_Calc {
                 'name'     => $d['name']    ?? '',
                 'name_vi'  => $d['name_vi'] ?? '',
                 'suit'     => $d['suit']    ?? '',
+                'rank'     => self::parseRank($key),
                 'upright'  => $d['upright'] ?? '',
                 'keywords' => $d['keywords_upright'] ?? [],
                 'meaning'  => $d['upright'] ?? '',
