@@ -1157,6 +1157,19 @@
     .trt-sr-body {
         padding: 16px 14px
     }
+
+    .trt-card-spread {
+        gap: clamp(4px, 1.5vw, 10px);
+        padding: 20px 6px;
+    }
+
+    .trt-cd-visual {
+        padding: 5px 3px;
+    }
+
+    .trt-cd-pos-label {
+        padding: 2px 6px;
+    }
 }
 
 .trt-suit-name, .trt-suit-sym {
@@ -1214,15 +1227,21 @@
     border-color: var(--lbv-color-1)
 }
 
-/* Card spread - laid out on table */
+.trt-spread-hint {
+    text-align: center;
+    font-size: .85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
 .trt-card-spread {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 40px 20px;
+    align-items: flex-start;
+    gap: clamp(8px, 2vw, 20px);
+    padding: 30px clamp(8px, 3vw, 20px);
     margin: 20px auto;
-    max-width: 900px;
+    max-width: 1200px;
     flex-wrap: wrap;
     perspective: 1000px;
 }
@@ -1236,8 +1255,8 @@
 }
 
 .trt-cd-visual {
-    width: 100px;
-    height: 145px;
+    width: clamp(140px, calc((100vw - 60px) / var(--card-count, 3) - 16px), 240px);
+    aspect-ratio: 5 / 7.2;
     border-radius: 10px;
     border: 1px solid var(--border-color);
     background: #fff;
@@ -1245,7 +1264,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 5px;
+    padding: 14px 8px;
     position: relative;
     box-shadow: 0 4px 12px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.08);
     cursor: pointer;
@@ -1254,10 +1273,12 @@
     color: var(--card-color);
 }
 
-.trt-cd-visual:hover {
-    transform: rotate(0deg) translateY(-12px) scale(1.06);
-    box-shadow: 0 16px 40px rgba(0,0,0,.22), 0 4px 8px rgba(0,0,0,.1);
-    z-index: 10;
+@media (hover: hover) {
+    .trt-cd-visual:hover {
+        transform: rotate(0deg) translateY(-12px) scale(1.06);
+        box-shadow: 0 16px 40px rgba(0,0,0,.22), 0 4px 8px rgba(0,0,0,.1);
+        z-index: 10;
+    }
 }
 
 .trt-cv-corner {
@@ -1278,18 +1299,18 @@
 }
 
 .trt-cv-rank {
-    font-size: 16px;
+    font-size: clamp(22px, 3.2vw, 32px);
     font-weight: 700;
     line-height: 1;
 }
 
 .trt-cv-suit-top {
-    font-size: 14px;
+    font-size: clamp(18px, 2.8vw, 28px);
     line-height: 1;
 }
 
 .trt-cv-suit-big {
-    font-size: 34px;
+    font-size: clamp(44px, 7vw, 68px);
     line-height: 1;
     font-weight: 500;
     position: absolute;
@@ -1299,13 +1320,13 @@
 }
 
 .trt-cv-suit-bot {
-    font-size: 14px;
+    font-size: clamp(18px, 2.8vw, 28px);
     line-height: 1;
     transform: rotate(180deg);
 }
 
 .trt-cd-pos-label {
-    font-size: 12px;
+    font-size: clamp(11px, 1.5vw, 14px);
     font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -1339,7 +1360,7 @@
 .trt-card-modal-body {
     position: relative;
     z-index: 1;
-    width: 320px;
+    width: 350px;
     max-width: 85vw;
     aspect-ratio: 5/7.5;
     max-height: 85vh;
@@ -1376,14 +1397,14 @@
     top: 10px;
     right: 10px;
     z-index: 3;
-    background: rgba(0,0,0,.35);
+    background: rgba(0, 0, 0, .35);
     border: none;
     font-size: 22px;
     line-height: 1;
     cursor: pointer;
-    color: rgba(255,255,255,.85);
-    padding: 4px 10px;
-    border-radius: 8px;
+    color: rgba(255, 255, 255, .85);
+    padding: 4px 8px;
+    border-radius: 5px;
     transition: background .2s;
 }
 
@@ -1430,7 +1451,7 @@
 }
 
 .trt-card-modal-content .trt-cd-body p {
-    font-size: .92rem;
+    font-size: .875rem;
     color: #111827;
     line-height: 1.7;
 }

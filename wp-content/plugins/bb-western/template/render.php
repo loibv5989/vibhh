@@ -15,8 +15,8 @@ function western_render(string $name, string $topic, array $cards, string $mode 
     ob_start(); ?>
 
     <div id="trt-detail-container" style="display:none">
-
-        <div class="trt-card-spread">
+        <p class="trt-spread-hint">Chạm vào lá bài để xem thông tin chi tiết</p>
+        <div class="trt-card-spread" style="--card-count:<?= count($cards) ?>">
         <?php
         $color_idx = 0;
         $rotations = [-4, 0, 4, -2, 2, -3, 3];
