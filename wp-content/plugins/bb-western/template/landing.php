@@ -195,6 +195,10 @@ if (!defined('ABSPATH')) exit;
                 <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
                 <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
                 <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
             </div>
         </div>
 
