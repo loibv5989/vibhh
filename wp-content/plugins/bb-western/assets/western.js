@@ -13,7 +13,7 @@ jQuery(function ($) {
     const State = {
         mode: $config.data('mode') || 'hub',
         spread: $config.data('spread') || '3_cards',
-        name: '', topic: '', question: '', cardsLite: null, resultHtml: ''
+        name: '', topic: '', question: '', cardsLite: null, resultHtml: '', shuffledDeck: null, pickedCards: []
     };
 
     const Auth = {
@@ -118,7 +118,7 @@ jQuery(function ($) {
                     success: res => {
                         if (res.success) {
                             State.cardsLite = res.cards;
-                            State.resultHtml = res.html;
+                            State.shuffledDeck = res.shuffled_deck;
                             resolve(res);
                         } else {
                             reject(res.message || 'An error occurred.');
@@ -151,6 +151,28 @@ jQuery(function ($) {
                     error: () => reject('Connection error. Please try again.')
                 });
             });
+        },
+        reveal() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: WesternAjax.api_url + 'reveal',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    headers: {
+                        'X-WP-Nonce': WesternAjax.nonce
+                    },
+                    data: JSON.stringify({
+                        full_name: State.name,
+                        mode: State.mode,
+                        topic: State.topic,
+                        question: State.question,
+                        spread: State.spread,
+                        picked: State.pickedCards
+                    }),
+                    success: res => res.success ? resolve(res) : reject(res.message || 'An error occurred.'),
+                    error: () => reject('Connection error. Please try again.')
+                });
+            });
         }
     };
 
@@ -162,6 +184,8 @@ jQuery(function ($) {
         init() {
             this.selectedCount = 0;
             State.cardsLite = null;
+            State.shuffledDeck = null;
+            State.pickedCards = [];
 
             const spreadData = window.WESTERN_SPREADS[State.spread];
             this.positions = Object.keys(spreadData.positions);
@@ -243,7 +267,7 @@ jQuery(function ($) {
             if (this.selectedCount >= this.targetCount) return;
             $card.addClass('selected-card').css({zIndex: 9999}).off('mouseenter mouseleave');
 
-            if (!State.cardsLite) {
+            if (!State.shuffledDeck) {
                 $('#trt-deck-instruction').html('✦ Connecting to the cards...').css('opacity', 0.6);
                 try {
                     await Ajax.drawPromise;
@@ -253,8 +277,23 @@ jQuery(function ($) {
                 $('#trt-deck-instruction').html(`✦ Focus on your question and pick <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
             }
 
+            const clickedIndex = parseInt($card.data('index'));
+            const cardData = State.shuffledDeck[clickedIndex];
             const posKey = this.positions[this.selectedCount];
-            const cardData = State.cardsLite[posKey];
+
+            if (!State.cardsLite) State.cardsLite = {};
+            State.cardsLite[posKey] = {
+                key: cardData.key,
+                name: cardData.name,
+                suit: cardData.suit
+            };
+            if (!State.pickedCards) State.pickedCards = [];
+            State.pickedCards.push({
+                key: cardData.key,
+                name: cardData.name,
+                suit: cardData.suit
+            });
+
             const $slot = $('.trt-slot').eq(this.selectedCount);
             $slot.addClass('filled');
             $slot.find('.trt-slot-pos').hide();
@@ -291,14 +330,19 @@ jQuery(function ($) {
             Ajax.draw().catch(e => { });
             await Deck.init();
 
-            if (!State.cardsLite) return;
+            if (!State.cardsLite || !State.pickedCards || State.pickedCards.length === 0) return;
 
-            $('#trt-step-deck').removeClass('active');
-            $('#trt-result-box').html(State.resultHtml).fadeIn(400);
-            $('html,body').animate({scrollTop: $('#trt-result-box').offset().top - 60}, 500);
+            try {
+                const revealResult = await Ajax.reveal();
+                $('#trt-step-deck').removeClass('active');
+                $('#trt-result-box').html(revealResult.html).fadeIn(400);
+                $('html,body').animate({scrollTop: $('#trt-result-box').offset().top - 60}, 500);
 
-            $('.ast-action-footer').fadeIn(400);
-            $('#trt-detail-container').slideDown(600);
+                $('.ast-action-footer').fadeIn(400);
+                $('#trt-detail-container').slideDown(600);
+            } catch (e) {
+                $('#trt-deck-instruction').html('Connection error. Please try again.').css('opacity', 1).show();
+            }
         },
 
         async runDeepAnalyze() {
@@ -419,7 +463,6 @@ jQuery(function ($) {
         $bgCard.addClass('trt-modal-bg-card');
         $body.prepend($bgCard);
 
-        // Gradient background by suit
         const suitGradients = {
             hearts:   'linear-gradient(160deg, #be1a1a, #6b0000)',
             diamonds: 'linear-gradient(160deg, #b45a00, #5a2800)',

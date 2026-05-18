@@ -54,6 +54,11 @@ class BB_Western_Handle {
             'callback'            => [$this, 'handleRestDraw'],
             'permission_callback' => '__return_true',
         ]);
+        register_rest_route('western/v1', '/reveal', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'handleRestReveal'],
+            'permission_callback' => '__return_true',
+        ]);
         register_rest_route('western/v1', '/analyze', [
             'methods'             => 'POST',
             'callback'            => [$this, 'handleRestAnalyze'],
@@ -111,16 +116,60 @@ class BB_Western_Handle {
         self::loadCalc();
         if (!Western_Calc::isValidSpread($spread_key)) $spread_key = '3_cards';
 
-        $liteCards  = Western_Calc::drawLite($spread_key);
+        $drawResult = Western_Calc::drawShuffled($spread_key);
+        $liteCards  = $drawResult['cards'];
         $fullCards  = Western_Calc::hydrate($liteCards, $topic);
-        
+
+        self::loadRender();
+        $renderHTML = western_render($name, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question, $spread_key);
+
+        return new WP_REST_Response([
+            'success'       => true,
+            'html'          => $renderHTML,
+            'cards'         => $liteCards,
+            'shuffled_deck' => $drawResult['shuffled_deck'],
+        ], 200);
+    }
+
+    public function handleRestReveal(WP_REST_Request $request): WP_REST_Response {
+        $name       = sanitize_text_field($request->get_param('full_name') ?? '');
+        $mode       = sanitize_text_field($request->get_param('mode')      ?? 'topic');
+        $topic      = sanitize_text_field($request->get_param('topic')     ?? '');
+        $question   = sanitize_text_field($request->get_param('question')  ?? '');
+        $spread_key = sanitize_text_field($request->get_param('spread')    ?? '3_cards');
+
+        $pickedRaw = $request->get_param('picked');
+        $picked    = is_string($pickedRaw) ? json_decode(wp_unslash($pickedRaw), true) : $pickedRaw;
+
+        if (!is_array($picked) || empty($picked)) {
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card selection.'], 200);
+        }
+
+        self::loadCalc();
+        if (!Western_Calc::isValidSpread($spread_key)) $spread_key = '3_cards';
+
+        $spreads    = Western_Calc::getSpreads();
+        $spread     = $spreads[$spread_key] ?? $spreads['3_cards'];
+        $positions  = array_keys($spread['positions']);
+
+        $liteCards = [];
+        foreach ($picked as $i => $card) {
+            $pos_key = $positions[$i] ?? 'extra_' . $i;
+            $liteCards[$pos_key] = [
+                'key'  => $card['key']  ?? '',
+                'name' => $card['name'] ?? '',
+                'suit' => $card['suit'] ?? '',
+            ];
+        }
+
+        $fullCards = Western_Calc::hydrate($liteCards, $topic);
+
         self::loadRender();
         $renderHTML = western_render($name, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question, $spread_key);
 
         return new WP_REST_Response([
             'success' => true,
             'html'    => $renderHTML,
-            'cards'   => $liteCards,
         ], 200);
     }
 

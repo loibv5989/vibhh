@@ -54,6 +54,41 @@ class Western_Calc {
         return $lite;
     }
 
+    public static function drawShuffled(string $spread_key = '3_cards'): array {
+        $western_deck = self::getData();
+        $spreads      = self::getSpreads();
+
+        $spread    = $spreads[$spread_key] ?? $spreads['3_cards'];
+        $positions = array_keys($spread['positions']);
+        $count     = $spread['count'];
+
+        $keys = array_keys($western_deck);
+        shuffle($keys);
+
+        $shuffled = [];
+        foreach ($keys as $key) {
+            $d = $western_deck[$key];
+            $shuffled[] = [
+                'key'  => $key,
+                'name' => $d['name'],
+                'suit' => $d['suit'],
+            ];
+        }
+
+        $lite = [];
+        foreach (array_slice($keys, 0, $count) as $i => $key) {
+            $d = $western_deck[$key];
+            $pos_key = $positions[$i];
+            $lite[$pos_key] = [
+                'key'  => $key,
+                'name' => $d['name'],
+                'suit' => $d['suit'],
+            ];
+        }
+
+        return ['shuffled_deck' => $shuffled, 'cards' => $lite];
+    }
+
     private static function parseRank(string $key): string {
         $map = [
             'ace' => 'A', 'two' => '2', 'three' => '3', 'four' => '4',
