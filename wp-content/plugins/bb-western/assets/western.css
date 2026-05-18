@@ -109,6 +109,12 @@
     box-shadow: 0 8px 40px color-mix(in srgb, var(--lbv-color-1) 25%, transparent)
 }
 
+.trt-mode-card.selected {
+    border-color: var(--lbv-color-1);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--lbv-color-1) 25%, transparent), 0 0 40px color-mix(in srgb, var(--lbv-color-1) 25%, transparent);
+    transform: translateY(-4px) scale(1.02)
+}
+
 .trt-mode-icon {
     font-size: 2rem;
     margin-bottom: 14px
@@ -161,15 +167,14 @@
 }
 
 .trt-input-section {
-    margin-bottom: 10px
+    margin-bottom: 30px
 }
 
 .trt-label {
     display: block;
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 8px;
-    text-align: center
+    margin-bottom: 16px;
 }
 
 .trt-input {
@@ -331,14 +336,14 @@
 }
 
 .trt-submit-btn {
-    width: 100%;
+    max-width: 250px;
     padding: 14px;
     background: linear-gradient(135deg, var(--lbv-color-1), var(--lbv-color-2));
     color: #fff !important;
     border: none;
     border-radius: 14px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1468,4 +1473,183 @@
     padding: 2px 10px;
     border-radius: 99px;
     font-size: .78rem
+}
+
+/* ── UNIFIED FLOW ── */
+.trt-unified-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 32px;
+    margin: 0 auto
+}
+
+.trt-unified-hint {
+    font-size: .88rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0 0 24px;
+    letter-spacing: .03em
+}
+
+.trt-spread-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.trt-spread-opt {
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 99px;
+    border: 1px solid var(--border-color);
+    background: color-mix(in srgb, var(--bg-primary) 96%, #fff 4%);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all .2s;
+    font-weight: 600
+}
+
+.trt-spread-opt.active {
+    color: var(--lbv-color-1);
+    border-color: color-mix(in srgb, var(--lbv-color-1) 50%, transparent);
+    background: color-mix(in srgb, var(--lbv-color-1) 8%, transparent)
+}
+
+.trt-spread-opt:hover {
+    color: var(--lbv-color-1);
+    border-color: color-mix(in srgb, var(--lbv-color-1) 35%, transparent)
+}
+
+.trt-stack-wrap {
+    position: relative;
+    width: 90px;
+    height: 126px;
+    margin: 0 auto 8px;
+    cursor: pointer
+}
+
+.trt-stack-card {
+    position: absolute;
+    width: 90px;
+    height: 126px;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    transition: transform .3s
+}
+
+.trt-stack-card:nth-child(1) {
+    transform: translate(-4px, -4px) rotate(-2deg)
+}
+
+.trt-stack-card:nth-child(2) {
+    transform: translate(-2px, -2px) rotate(-1deg)
+}
+
+.trt-stack-card:nth-child(3) {
+    transform: translate(0, 0)
+}
+
+.trt-card-back-pattern {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--lbv-color-1) 30%, transparent);
+    position: relative;
+    overflow: hidden
+}
+
+.trt-card-back-pattern::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid color-mix(in srgb, var(--lbv-color-1) 20%, transparent);
+    border-radius: 5px
+}
+
+.trt-card-back-pattern::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: color-mix(in srgb, var(--lbv-color-1) 40%, transparent)
+}
+
+.trt-shuffle-btn {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 8px auto 0;
+    padding: 14px;
+    font-size: .82rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--lbv-color-1);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--lbv-color-1) 40%, transparent);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all .3s
+}
+
+.trt-shuffle-btn:hover {
+    background: color-mix(in srgb, var(--lbv-color-1) 8%, transparent);
+    border-color: var(--lbv-color-1);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--lbv-color-1) 15%, transparent)
+}
+
+.trt-shuffle-btn:active {
+    transform: scale(.97)
+}
+
+.trt-shuffle-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed
+}
+
+.trt-shuffle-btn .trt-btn-loading {
+    display: none
+}
+
+.trt-shuffle-btn.loading .trt-btn-text {
+    display: none
+}
+
+.trt-shuffle-btn.loading .trt-btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center
+}
+
+/* Shuffle animation */
+@keyframes trtShuffleLeft {
+    0%   { transform: translate(-4px, -4px) rotate(-2deg); }
+    50%  { transform: translate(-30px, 5px) rotate(-8deg); }
+    100% { transform: translate(-4px, -4px) rotate(-2deg); }
+}
+
+@keyframes trtShuffleRight {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    50%  { transform: translate(30px, 5px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.trt-shuffling .trt-stack-card:nth-child(1) {
+    animation: trtShuffleLeft .35s ease 0s, trtShuffleRight .35s ease .35s, trtShuffleLeft .35s ease .7s
+}
+
+.trt-shuffling .trt-stack-card:nth-child(2) {
+    animation: trtShuffleRight .35s ease .05s, trtShuffleLeft .35s ease .4s, trtShuffleRight .35s ease .75s
+}
+
+.trt-shuffling .trt-stack-card:nth-child(3) {
+    animation: trtShuffleLeft .35s ease .1s, trtShuffleRight .35s ease .45s, trtShuffleLeft .35s ease .8s
 }

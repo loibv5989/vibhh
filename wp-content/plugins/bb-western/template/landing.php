@@ -2,45 +2,71 @@
 if (!defined('ABSPATH')) exit;
 ?>
 <div class="trt-wrap" id="trt-wrap">
-    <div class="trt-step active" id="trt-step-landing">
+    <div id="trt-app-config" data-spread="3_cards" style="display:none;"></div>
+    <script>
+        window.WESTERN_SPREADS = <?= json_encode($spreads_config, JSON_UNESCAPED_UNICODE) ?>;
+    </script>
+
+    <div class="trt-step active" id="trt-step-hub">
         <div class="trt-hero">
             <div class="trt-hero-badge">✦ 52 Playing Cards · Standard Deck</div>
             <h1 class="trt-hero-title"><span>Playing Card Reading</span> Online<br> Free</h1>
-            <p class="trt-hero-sub">Choose the spread that fits your question</p>
+            <p class="trt-hero-sub">Focus on your question, pick a topic, then draw your cards</p>
         </div>
-        <div class="trt-mode-grid">
-            <a href="/boi-bai-tay/3-la/" class="trt-mode-card">
-                <div class="trt-spread-header">
-                    <div class="trt-mode-icon">🃏</div>
-                    <div class="trt-mode-title">3-Card Reading</div>
-                </div>
-                <div class="trt-mode-desc">A 3-card spread covering Past, Present, and Future. Quick, clear, and works for almost any question.</div>
-                <div class="trt-mode-arrow">Start →</div>
-            </a>
-            <a href="/boi-bai-tay/5-la/" class="trt-mode-card">
-                <div class="trt-spread-header">
-                    <div class="trt-mode-icon">🔮</div>
-                    <div class="trt-mode-title">5-Card Reading</div>
-                </div>
-                <div class="trt-mode-desc">A 5-card spread that breaks down the situation, challenges, advice, and outcome.</div>
-                <div class="trt-mode-arrow">Start →</div>
-            </a>
-            <a href="/boi-bai-tay/7-la/" class="trt-mode-card">
-                <div class="trt-spread-header">
-                    <div class="trt-mode-icon">🧲</div>
-                    <div class="trt-mode-title">7-Card Reading</div>
-                </div>
-                <div class="trt-mode-desc">The Horseshoe spread with 7 cards. Uncovers root causes, obstacles, and the path forward.</div>
-                <div class="trt-mode-arrow">Start →</div>
-            </a>
-            <a href="/boi-bai-tay/cau-hoi/" class="trt-mode-card">
-                <div class="trt-spread-header">
-                    <div class="trt-mode-icon">✍️</div>
-                    <div class="trt-mode-title">Question-Based Reading</div>
-                </div>
-                <div class="trt-mode-desc">Ask your own question and the cards are interpreted specifically around it.</div>
-                <div class="trt-mode-arrow">Start →</div>
-            </a>
+        <div class="trt-topic-section">
+            <p class="trt-label">What area would you like insight on?</p>
+            <p class="trt-topic-hint">✦ Close your eyes, think about what's on your mind, then pick a topic</p>
+            <div class="trt-topic-grid">
+                <button class="trt-topic-card" data-topic="love">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">❤️</span>
+                            <span class="trt-topic-label">Love</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="trt-topic-card" data-topic="career">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">💼</span>
+                            <span class="trt-topic-label">Career</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="trt-topic-card" data-topic="finance">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">💰</span>
+                            <span class="trt-topic-label">Finance</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="trt-topic-card" data-topic="study">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">📚</span>
+                            <span class="trt-topic-label">Studies</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="trt-topic-card" data-topic="health">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">🌿</span>
+                            <span class="trt-topic-label">Health</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="trt-topic-card" data-topic="future">
+                    <div class="trt-topic-card-back">
+                        <div class="trt-topic-card-inner">
+                            <span class="trt-topic-icon">🔮</span>
+                            <span class="trt-topic-label">Future</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <span class="trt-error" id="trt-err-hub-topic"></span>
         </div>
         <div class="trt-ls">
             <h2 class="trt-ls-h">What Is Playing Card Reading</h2>
@@ -121,16 +147,6 @@ if (!defined('ABSPATH')) exit;
                         <div class="trt-sr-desc">The most detailed spread in the deck. Seven positions cover past, present, hidden factors, obstacles, surroundings, advice, and outcome. Best used for complex situations where you need the full picture before making a significant decision.</div>
                     </div>
                 </div>
-                <div class="trt-sr-item">
-                    <div class="trt-sr-left">
-                        <div class="trt-sr-num">✍</div>
-                        <div class="trt-sr-lbl"></div>
-                    </div>
-                    <div class="trt-sr-body">
-                        <div class="trt-sr-title">Ask Your Own Question</div>
-                        <div class="trt-sr-desc">Instead of picking a preset theme, you write your specific question before drawing. The cards and AI interpret everything in direct relation to what you asked. Good when your situation is particular and you want focused answers rather than general guidance.</div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="trt-ls">
@@ -157,6 +173,60 @@ if (!defined('ABSPATH')) exit;
                     <div class="trt-faq-a">The AI reads based on each card's established meaning, its position in the spread, and the overall pattern of suits. It's not random. The results are a reference point, a way to notice angles you might have missed. What you do with that is your call.</div>
                 </details>
             </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: Spread Selection & Shuffle -->
+    <div class="trt-step" id="trt-step-spread">
+        <div class="trt-step-header">
+            <button class="trt-back-btn" data-back="hub">← Back</button>
+            <span class="trt-step-label" id="trt-spread-label">Choose Your Spread</span>
+        </div>
+
+        <div class="trt-unified-top">
+            <p class="trt-unified-hint">✦ Focus on your question, then choose your spread and shuffle</p>
+
+            <div class="trt-spread-selector">
+                <button class="trt-spread-opt active" data-spread="3_cards" data-count="3">3 Cards</button>
+                <button class="trt-spread-opt" data-spread="5_cards" data-count="5">5 Cards</button>
+                <button class="trt-spread-opt" data-spread="7_cards" data-count="7">7 Cards</button>
+            </div>
+            <span class="trt-error" id="trt-err-spread"></span>
+
+            <div class="trt-stack-wrap" id="trt-stack-wrap">
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+                <div class="trt-stack-card"><div class="trt-card-back-pattern"></div></div>
+            </div>
+        </div>
+
+        <div class="trt-user-question" aria-hidden="true">
+            <label for="trt-user-label">Enter your answer?</label>
+            <input type="text" id="trt-user-question-trap" name="trt-user-question" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="trt-shuffle-btn" id="trt-btn-unified-shuffle">
+            <span class="trt-btn-text">✦ Shuffle Cards ✦</span>
+            <span class="trt-btn-loading"><span class="trt-spinner"></span> Shuffling...</span>
+        </button>
+    </div>
+
+    <!-- STEP 3: Deck -->
+    <div class="trt-step" id="trt-step-deck">
+        <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Focus on your question and choose your cards</p>
+        <div class="trt-deck-wrap" id="trt-deck-wrap"></div>
+        <div class="trt-selected-slots" id="trt-dynamic-slots"></div>
+        <div class="trt-deck-counter">Selected: <span id="trt-selected-count">0</span>/<span id="trt-target-count">0</span></div>
+    </div>
+
+    <div id="trt-result-box" style="display:none"></div>
+
+    <div id="trt-card-modal" class="trt-card-modal" style="display:none">
+        <div class="trt-card-modal-backdrop"></div>
+        <div class="trt-card-modal-body" id="trt-modal-body">
+            <div class="trt-card-modal-overlay"></div>
+            <button class="trt-card-modal-close" aria-label="Close">&times;</button>
+            <div class="trt-card-modal-content" id="trt-modal-content"></div>
         </div>
     </div>
 </div>

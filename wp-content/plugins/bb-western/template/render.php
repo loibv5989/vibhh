@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-function western_render(string $name, string $topic, array $cards, string $mode = 'topic', string $question = '', string $spread_key = '3_cards'): string {
+function western_render(string $topic, array $cards, string $spread_key = '3_cards'): string {
     $spreads        = Western_Calc::getSpreads();
     $spread_config  = $spreads[$spread_key] ?? $spreads['3_cards'];
     $positions      = $spread_config['positions'];
@@ -10,7 +10,6 @@ function western_render(string $name, string $topic, array $cards, string $mode 
     $suit_labels  = ['hearts' => 'Hearts ♥', 'diamonds' => 'Diamonds ♦', 'clubs' => 'Clubs ♣', 'spades' => 'Spades ♠'];
     $suit_colors  = ['hearts' => '#dc2626', 'diamonds' => '#dc2626', 'clubs' => '#1f2937', 'spades' => '#1f2937'];
     $suit_symbols = ['hearts' => '♥', 'diamonds' => '♦', 'clubs' => '♣', 'spades' => '♠'];
-    $topic_labels = ['love' => 'Love', 'career' => 'Career', 'finance' => 'Finance', 'study' => 'Studies', 'health' => 'Health', 'future' => 'Future'];
 
     ob_start(); ?>
 
@@ -18,7 +17,6 @@ function western_render(string $name, string $topic, array $cards, string $mode 
         <p class="trt-spread-hint">Tap a card to see its details</p>
         <div class="trt-card-spread" style="--card-count:<?= count($cards) ?>">
             <?php
-            $color_idx = 0;
             $rotations = [-4, 0, 4, -2, 2, -3, 3];
             $idx = 0;
             foreach ($positions as $pos_key => $pos_label):
@@ -57,7 +55,7 @@ function western_render(string $name, string $topic, array $cards, string $mode 
                         </div>
                     </div>
                 </div>
-                <?php $color_idx++; endforeach; ?>
+                <?php endforeach; ?>
         </div>
 
 
@@ -65,14 +63,83 @@ function western_render(string $name, string $topic, array $cards, string $mode 
         $allow_ai = get_option('western_allow_ai', '0');
         if ($allow_ai === '1'):  ?>
             <div id="trt-deep-analyze-form">
-                <h3>Card Interpretation</h3>
-                <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:20px;">Get a detailed reading of each card's meaning and how they connect to each other.</p>
                 <div class="trt-input-section">
                     <div class="trt-input-trap" aria-hidden="true">
                         <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                     </div>
-                    <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your name..." maxlength="40">
-                    <span class="trt-error" id="trt-err-deep-name"></span>
+                    <label class="trt-label" for="trt-deep-question">Enter your question for the card interpretation?</label>
+                    <textarea id="trt-deep-question" class="trt-input trt-textarea" placeholder="Ex: Where is this relationship heading?..." maxlength="300" rows="3"></textarea>
+                    <div class="trt-char-count"><span id="trt-deep-q-count">0</span>/300</div>
+                    <span class="trt-error" id="trt-err-deep-question"></span>
+
+                    <?php
+                    $topic_chips = [
+                        'love' => [
+                                'Will this relationship work out?',
+                                'Is there someone new I should pay attention to?',
+                                'Am I really with the right person?',
+                                'How does my partner feel about me right now?',
+                                'How can I improve things in my relationship?',
+                                'Should I tell this person how I feel?'
+                        ],
+                        'career' => [
+                                'Will I get promoted soon?',
+                                'Is it time for me to change jobs?',
+                                'Does my boss actually support my growth?',
+                                'Will this project succeed?',
+                                'Is starting my own business a good idea right now?',
+                                'How can I get noticed at work?'
+                        ],
+                        'finance' => [
+                                'Will this investment actually pay off?',
+                                'Should I save money or spend it now?',
+                                'Is there a real financial opportunity ahead?',
+                                'Can I recover from this loss?',
+                                'Should I take this loan or wait?',
+                                'How can I improve my finances?'
+                        ],
+                        'study' => [
+                                'Will I pass this exam?',
+                                'Is this the right major for me?',
+                                'Am I studying in the right way?',
+                                'Will I get into the school I want?',
+                                'Should I keep pushing or take a break?',
+                                'What is holding back my progress in school?'
+                        ],
+                        'health' => [
+                                'Will my health get better soon?',
+                                'Should I see a doctor about this?',
+                                'Is my current routine helping me?',
+                                'Why have I been feeling so tired lately?',
+                                'Should I change my diet or exercise routine?',
+                                'Will I recover quickly?'
+                        ],
+                        'future' => [
+                                'What opportunity is coming my way?',
+                                'Should I take this risk or play it safe?',
+                                'Is a big change coming soon?',
+                                'What should I prepare for next?',
+                                'Will things start going better for me?',
+                                'What path should I focus on now?'
+                        ],
+                    ];
+
+                    $topic_labels = [
+                            'love' => ['Relationship', 'Someone new', 'Right person', "Partner's feelings", 'Improve things', 'Say how I feel'],
+                            'career' => ['Promotion', 'Change jobs', 'Boss support', 'Project success', 'Start business', 'Get noticed'],
+                            'finance' => ['Investment', 'Save or spend', 'Opportunity', 'Recover loss', 'Loan or wait', 'Improve finances'],
+                            'study' => ['Pass exam', 'Choose major', 'Study method', 'Get into school', 'Keep pushing', 'Progress block'],
+                            'health' => ['Get better', 'See a doctor', 'Routine help', 'Feeling tired', 'Diet or exercise', 'Recover quickly'],
+                            'future' => ['Opportunity', 'Risk or safe', 'Big change', 'Prepare next', 'Things improve', 'Focus now'],
+                    ];
+                    $current_chips  = $topic_chips[$topic] ?? $topic_chips['future'];
+                    $current_labels = $topic_labels[$topic] ?? $topic_labels['future'];
+                    ?>
+                    <div class="trt-chips">
+                        <?php foreach ($current_chips as $idx => $q): ?>
+                            <button type="button" class="trt-chip" data-q="<?= esc_attr($q) ?>"><?= esc_html($current_labels[$idx]) ?></button>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <button class="trt-submit-btn" id="trt-btn-deep-analyze">
                     <span class="trt-btn-text">Read My Cards</span>

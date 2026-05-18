@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-function western_build_gatekeeper_prompt(string $question, string $mode): string {
+function western_build_gatekeeper_prompt(string $question): string {
 
     return <<<TXT
 Task: Analyze the user's question to determine whether it is suitable for a playing card reading.

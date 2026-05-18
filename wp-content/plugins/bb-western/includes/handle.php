@@ -3,7 +3,6 @@ if (!defined('ABSPATH')) exit;
 
 class BB_Western_Handle {
     private static ?BB_Western_Handle $instance = null;
-    private bool $cache_dir_ready = false;
 
     public static function get_instance(): self {
         if (self::$instance === null) self::$instance = new self();
@@ -37,7 +36,7 @@ class BB_Western_Handle {
     }
 
     private static function loadPrompt(): void {
-        if (!function_exists('western_build_prompt_topic')) {
+        if (!function_exists('western_build_prompt_question')) {
             require_once BB_WESTERN_PLUGIN_DIR . 'includes/prompt.php';
         }
     }
@@ -85,32 +84,21 @@ class BB_Western_Handle {
 
     public function renderShortcode($atts): string {
         $atts = shortcode_atts([
-                'mode'   => 'hub',
                 'spread' => '3_cards'
         ], $atts);
 
-        $mode       = $atts['mode'];
         $spread_key = $atts['spread'];
 
         self::loadCalc();
         $spreads_config  = Western_Calc::getSpreads();
-        $current_spread  = $spreads_config[$spread_key] ?? $spreads_config['3_cards'];
-        $total_cards     = $current_spread['count'];
 
         ob_start();
-        if ($mode === 'hub') {
-            include_once BB_WESTERN_PLUGIN_DIR . 'template/landing.php';
-        } else {
-            include_once BB_WESTERN_PLUGIN_DIR . 'template/steps.php';
-        }
+        include_once BB_WESTERN_PLUGIN_DIR . 'template/landing.php';
         return ob_get_clean();
     }
 
     public function handleRestDraw(WP_REST_Request $request): WP_REST_Response {
-        $name       = sanitize_text_field($request->get_param('full_name') ?? '');
-        $mode       = sanitize_text_field($request->get_param('mode')      ?? 'topic');
         $topic      = sanitize_text_field($request->get_param('topic')     ?? '');
-        $question   = sanitize_text_field($request->get_param('question')  ?? '');
         $spread_key = sanitize_text_field($request->get_param('spread')    ?? '3_cards');
 
         self::loadCalc();
@@ -121,7 +109,7 @@ class BB_Western_Handle {
         $fullCards  = Western_Calc::hydrate($liteCards, $topic);
 
         self::loadRender();
-        $renderHTML = western_render($name, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question, $spread_key);
+        $renderHTML = western_render($topic, $fullCards, $spread_key);
 
         return new WP_REST_Response([
             'success'       => true,
@@ -132,10 +120,7 @@ class BB_Western_Handle {
     }
 
     public function handleRestReveal(WP_REST_Request $request): WP_REST_Response {
-        $name       = sanitize_text_field($request->get_param('full_name') ?? '');
-        $mode       = sanitize_text_field($request->get_param('mode')      ?? 'topic');
         $topic      = sanitize_text_field($request->get_param('topic')     ?? '');
-        $question   = sanitize_text_field($request->get_param('question')  ?? '');
         $spread_key = sanitize_text_field($request->get_param('spread')    ?? '3_cards');
 
         $pickedRaw = $request->get_param('picked');
@@ -165,7 +150,7 @@ class BB_Western_Handle {
         $fullCards = Western_Calc::hydrate($liteCards, $topic);
 
         self::loadRender();
-        $renderHTML = western_render($name, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question, $spread_key);
+        $renderHTML = western_render($topic, $fullCards, $spread_key);
 
         return new WP_REST_Response([
             'success' => true,
@@ -221,8 +206,6 @@ class BB_Western_Handle {
             return new WP_REST_Response(['success' => false, 'message' => 'Daily analysis limit reached. Please come back tomorrow.'], 200);
         }
 
-        $name       = mb_substr(sanitize_text_field($request->get_param('full_name')  ?? ''), 0, 60);
-        $mode       = sanitize_text_field($request->get_param('mode')                 ?? 'topic');
         $topic      = sanitize_text_field($request->get_param('topic')                ?? '');
         $question   = mb_substr(sanitize_textarea_field($request->get_param('question') ?? ''), 0, 500);
         $spread_key = sanitize_text_field($request->get_param('spread')               ?? '3_cards');
@@ -235,10 +218,7 @@ class BB_Western_Handle {
             return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data.'], 403);
         }
 
-        if (empty($name)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Please enter your full name.'], 200);
-        }
-        if ($mode === 'question' && empty($question)) {
+        if (empty($question)) {
             return new WP_REST_Response(['success' => false, 'message' => 'Please enter a question before reading.'], 200);
         }
 
@@ -265,57 +245,38 @@ class BB_Western_Handle {
                 'mistral' => fn($p) => BBW_Mistral::get_instance()->ftn_mistral_generate($p),
         ];
 
-        if ($mode === 'question') {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/gatekeeper.php';
-            $gatekeeper_prompt = western_build_gatekeeper_prompt($question, $mode);
-            $gk_response = '';
+        require_once BB_WESTERN_PLUGIN_DIR . 'includes/gatekeeper.php';
+        $gatekeeper_prompt = western_build_gatekeeper_prompt($question);
+        $gk_response = '';
 
-            $gatekeeper_order_str = get_option('western_gatekeeper_order', 'groq,mistral,gemini');
-            $gatekeeper_order = array_map('trim', explode(',', $gatekeeper_order_str));
+        $gatekeeper_order_str = get_option('western_gatekeeper_order', 'groq,mistral,gemini');
+        $gatekeeper_order = array_map('trim', explode(',', $gatekeeper_order_str));
 
-            foreach ($gatekeeper_order as $current_provider) {
-                if (!isset($providers[$current_provider])) continue;
-                try {
-                    $res = $providers[$current_provider]($gatekeeper_prompt);
-                    if (!empty($res) && !str_starts_with($res, '[Error]')) {
-                        $gk_response = trim(mb_strtoupper($res, 'UTF-8'));
-                        break;
-                    }
-                } catch (Exception $e) {
-                    continue;
+        foreach ($gatekeeper_order as $current_provider) {
+            if (!isset($providers[$current_provider])) continue;
+            try {
+                $res = $providers[$current_provider]($gatekeeper_prompt);
+                if (!empty($res) && !str_starts_with($res, '[Error]')) {
+                    $gk_response = trim(mb_strtoupper($res, 'UTF-8'));
+                    break;
                 }
-            }
-
-            if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'No') !== false || empty($gk_response)) {
-                $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Please rephrase your question</span> to be more specific, detailed, and focused on the reading.';
-
-                return new WP_REST_Response([
-                    'success'   => true,
-                    'is_cached' => false,
-                    'html'      => $html_fallback
-                ], 200);
+            } catch (Exception $e) {
+                continue;
             }
         }
 
-        $cache_str = mb_strtolower(trim($name)) . $mode . $spread_key . ($mode === 'question' ? md5($question) : $topic);
-        foreach ($liteCards as $pos => $c) {
-            $cache_str .= $c['key'];
-        }
-        $cache_key = md5($cache_str);
+        if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'No') !== false || empty($gk_response)) {
+            $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Please rephrase your question</span> to be more specific, detailed, and focused on the reading.';
 
-        $cached = $this->getCache($cache_key);
-        if ($cached !== null) {
-            $parsed = Western_Calc::parseResponse($cached);
-            $parsed['success'] = true;
-            $parsed['is_cached'] = true;
-            return new WP_REST_Response($parsed, 200);
+            return new WP_REST_Response([
+                'success'   => true,
+                'html'      => $html_fallback
+            ], 200);
         }
 
         self::loadPrompt();
 
-        $prompt = ($mode === 'question')
-                ? western_build_prompt_question($name, $question, $fullCards, $spread_key)
-                : western_build_prompt_topic($name, $topic, $fullCards, $spread_key);
+        $prompt = western_build_prompt_question($question, $fullCards, $spread_key, $topic);
 
         $analysis_order_str = get_option('western_analysis_order', get_option('western_ai_provider', 'gemini'));
         $analysis_order = array_map('trim', explode(',', $analysis_order_str));
@@ -343,47 +304,9 @@ class BB_Western_Handle {
             $response = '[AST_RESULT]' . trim($matches[1]) . '[/AST_RESULT]';
         }
 
-        $this->saveCache($cache_key, $response);
         $parsed = Western_Calc::parseResponse($response);
         $parsed['success'] = true;
-        $parsed['is_cached'] = false;
         return new WP_REST_Response($parsed, 200);
-    }
-
-    private function ensureCacheDir(): void {
-        if ($this->cache_dir_ready) return;
-        $upload_dir = wp_upload_dir();
-        $dir = $upload_dir['basedir'] . '/western';
-        if (!file_exists($dir)) {
-            wp_mkdir_p($dir);
-            chmod($dir, 0755);
-            file_put_contents($dir . '/.htaccess', "Deny from all\n");
-            file_put_contents($dir . '/index.php', "<?php // silence\n");
-        }
-        $this->cache_dir_ready = true;
-    }
-
-    private function getCacheFilePath(string $key): string {
-        $this->ensureCacheDir();
-        $upload_dir = wp_upload_dir();
-        return $upload_dir['basedir'] . '/western/' . $key . '.json';
-    }
-
-    private function getCache(string $key): ?string {
-        $file = $this->getCacheFilePath($key);
-        if (file_exists($file)) {
-            if (time() - filemtime($file) > 365 * DAY_IN_SECONDS) {
-                @unlink($file);
-                return null;
-            }
-            $data = json_decode(file_get_contents($file), true);
-            return $data['response'] ?? null;
-        }
-        return null;
-    }
-
-    private function saveCache(string $key, string $response): void {
-        file_put_contents($this->getCacheFilePath($key), json_encode(['response' => $response, 'created' => time()]));
     }
 
     public function removePageTitle($title, $post_id) {

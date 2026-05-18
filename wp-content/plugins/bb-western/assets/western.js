@@ -11,9 +11,8 @@ jQuery(function ($) {
     const $config = $('#trt-app-config');
 
     const State = {
-        mode: $config.data('mode') || 'hub',
         spread: $config.data('spread') || '3_cards',
-        name: '', topic: '', question: '', cardsLite: null, resultHtml: '', shuffledDeck: null, pickedCards: []
+        topic: '', question: '', cardsLite: null, shuffledDeck: null, pickedCards: []
     };
 
     const Auth = {
@@ -27,47 +26,12 @@ jQuery(function ($) {
         },
     };
 
-    const Utils = {
-        capitalizeName(str) {
-            return str.trim().replace(/\s+/g, ' ').split(' ').map(word =>
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-            ).join(' ');
-        },
-    };
-
-
     const Validator = {
-        name(val, errorId) {
-            const $e = $('#' + errorId);
-            $e.text('');
-            if (!val) {
-                $e.text('Please enter your full name.');
-                return false;
-            }
-            if (val.length > 40) {
-                $e.text('Name must be 40 characters or less.');
-                return false;
-            }
-            if (/\d/.test(val)) {
-                $e.text('Name must not contain numbers.');
-                return false;
-            }
-            return true;
-        },
-        topic(val, errorId) {
-            const $e = $('#' + errorId);
-            $e.text('');
-            if (!val) {
-                $e.text('Please select a topic.');
-                return false;
-            }
-            return true;
-        },
         question(val, errorId) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val || val.trim().length < 5) {
-                $e.text('Please enter a question (at least 5 characters).');
+                $e.text('Please enter a question.');
                 return false;
             }
             return true;
@@ -75,24 +39,13 @@ jQuery(function ($) {
     };
 
     const AIResult = {
-        injectHints(hints) {
-            Object.entries(hints).forEach(([key, hint]) => {
-                $('[data-hint-key="' + key + '"]')
-                    .stop(true, true).css('display', '')
-                    .text(' — ' + hint);
-            });
-        },
         tryInject(result) {
             if (!result) return;
 
             const $c = $('#ast-final-result');
             $c.empty().addClass('ast-content-loaded');
 
-            if (!result.is_cached) {
-                $c.html(result.html);
-            } else {
-                $c.css('opacity', 0).html(result.html).animate({ opacity: 1 }, 500);
-            }
+            $c.html(result.html);
             $('#trt-disclaimer').fadeIn(400);
         }
     };
@@ -109,8 +62,6 @@ jQuery(function ($) {
                         'X-WP-Nonce': WesternAjax.nonce
                     },
                     data: JSON.stringify({
-                        full_name: State.name,
-                        mode: State.mode,
                         topic: State.topic,
                         question: State.question,
                         spread: State.spread
@@ -139,8 +90,6 @@ jQuery(function ($) {
                         'X-WP-Nonce': WesternAjax.nonce
                     },
                     data: JSON.stringify({
-                        full_name: State.name,
-                        mode: State.mode,
                         topic: State.topic,
                         question: State.question,
                         spread: State.spread,
@@ -162,8 +111,6 @@ jQuery(function ($) {
                         'X-WP-Nonce': WesternAjax.nonce
                     },
                     data: JSON.stringify({
-                        full_name: State.name,
-                        mode: State.mode,
                         topic: State.topic,
                         question: State.question,
                         spread: State.spread,
@@ -221,9 +168,7 @@ jQuery(function ($) {
             const cardW = isMob ? 38 : isTablet ? 46 : 56;
             const gapY  = isMob ? 70 : isTablet ? 88 : 105;
             const wrapW = $('#trt-deck-wrap').width();
-            // Desktop  (≥1024): 4 rows × 13 — one row per suit
-            // Tablet   (768-1023): 5 rows — 11, 11, 10, 10, 10
-            // Mobile   (<768):    7 rows — 8, 8, 8, 7, 7, 7, 7
+
             const rowDefs = isMob
                 ? [8, 8, 8, 7, 7, 7, 7]
                 : isTablet
@@ -340,8 +285,16 @@ jQuery(function ($) {
 
                 $('.ast-action-footer').fadeIn(400);
                 $('#trt-detail-container').slideDown(600);
+
+                const $comments = $('#comments, .comments-area, #wp-comments').first();
+                if ($comments.length) {
+                    $comments.slideDown(400);
+                    $('#ast-btn-comment').addClass('active');
+                }
             } catch (e) {
                 $('#trt-deck-instruction').html('Connection error. Please try again.').css('opacity', 1).show();
+            } finally {
+                $('#trt-btn-unified-shuffle').removeClass('loading').attr('disabled', false);
             }
         },
 
@@ -380,63 +333,63 @@ jQuery(function ($) {
         $('#tab-' + tab).addClass('active');
     });
 
-    $('.trt-spread-btn').on('click', function() {
+    $('.trt-spread-btn, .trt-spread-opt').on('click', function() {
         State.spread = $(this).data('spread');
-        Steps.show('input-b');
+        $('.trt-spread-btn').removeClass('selected');
+        $('.trt-spread-opt').removeClass('active');
+        $(this).addClass('selected active');
+        $('#trt-err-spread').text('');
     });
 
     $(document).on('click', '.trt-topic-card', function () {
+        const topic = $(this).data('topic');
+
         $('.trt-topic-card').removeClass('selected');
         $(this).addClass('selected');
-        State.topic = $(this).data('topic');
-        $('#trt-topic-val').val(State.topic);
-        $('#trt-err-topic-a').text('');
 
-        AppLogic.runFlow();
+        $('#trt-err-hub-topic').text('');
+        State.topic = topic;
+        $('#trt-spread-label').text('🃏 Choose Your Spread');
+        Steps.show('spread');
     });
 
-    $('#trt-question').on('input', function () {
-        $('#trt-q-count').text($(this).val().length);
+    $('#trt-deep-question').on('input', function () {
+        const $count = $(this).closest('.trt-input-section').find('.trt-char-count span');
+        $count.text($(this).val().length);
     });
 
     $(document).on('click', '.trt-chip', function () {
-        $('#trt-question').val($(this).data('q')).trigger('input').focus();
+        const $ta = $('#trt-deep-question').filter(':visible');
+        if ($ta.length) $ta.val($(this).data('q')).trigger('input').focus();
     });
 
-    $('#trt-btn-submit-b').on('click', function () {
-        State.question = $('#trt-question').val().trim();
+    $('#trt-btn-unified-shuffle').on('click', function () {
+        const $btn = $(this);
 
-        if (!Validator.question(State.question, 'trt-err-question')) {
-            $('html, body').animate({
-                scrollTop: $('#trt-question').offset().top - 100
-            }, 300);
+        if (!State.spread) {
+            $('#trt-err-spread').text('Please select a spread.');
             return;
         }
-        $(this).addClass('loading').attr('disabled', true);
-        AppLogic.runFlow();
-    });
 
-    $(document).on('blur', '#trt-deep-name', function() {
-        let val = $(this).val();
-        if (val) {
-            val = Utils.capitalizeName(val);
-            $(this).val(val);
-        }
+        $btn.addClass('loading').attr('disabled', true);
+        $('#trt-stack-wrap').addClass('trt-shuffling');
+        setTimeout(() => {
+            $('#trt-stack-wrap').removeClass('trt-shuffling');
+            AppLogic.runFlow();
+        }, 1200);
     });
 
     $(document).on('click', '#trt-btn-deep-analyze', function() {
         if (!Auth.require()) return;
 
-        let val = $('#trt-deep-name').val();
-        if (val) {
-            val = Utils.capitalizeName(val);
-            $('#trt-deep-name').val(val);
-        }
-        State.name = val;
+        State.question = $('#trt-deep-question').val().trim();
 
-        if (Validator.name(State.name, 'trt-err-deep-name')) {
-            AppLogic.runDeepAnalyze();
+        if (!Validator.question(State.question, 'trt-err-deep-question')) {
+            $('html, body').animate({scrollTop: $('#trt-deep-question').offset().top - 100}, 300);
+            return;
         }
+
+        AppLogic.runDeepAnalyze();
     });
 
     $(document).on('click', '#ast-btn-comment', function () {

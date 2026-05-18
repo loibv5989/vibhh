@@ -5,36 +5,25 @@
 
 if (!defined('ABSPATH')) exit;
 
-function western_build_prompt_topic(string $name, string $topic, array $cards, string $spread_key): string {
-    $topic_labels = [
-        'love'    => 'Love / Relationships',
-        'career'  => 'Career / Work',
-        'finance' => 'Finance',
-        'study'   => 'Studies / Exams',
-        'health'  => 'Health',
-        'future'  => 'Future Direction',
-    ];
-
-    $topic_contexts = [
-        'love'    => 'Focus on love, relationships, family, and milestones. Read the cards through the lens of emotional connection, romantic ties, or signs of strain and third-party interference.',
-        'career'  => 'Focus on career, professional growth, and workplace dynamics. Read the cards through the lens of effort, opportunity, business partnerships, or rivals in the workplace.',
-        'finance' => 'Focus on finances, money, and business. Read the cards through the lens of income flow, investment, cash management, or risks of financial loss.',
-        'study'   => 'Focus on studies, exams, and learning. Read the cards through the lens of intellect, concentration, personal effort, and academic results.',
-        'health'  => 'Focus on physical health and wellbeing. Read the cards through the lens of energy levels, recovery, or warnings around illness, accidents, or physical strain.',
-        'future'  => 'Focus on overall fortune and upcoming turning points. Read the cards through the lens of general favorable or unfavorable trends, unexpected events, or sudden good fortune.',
-    ];
-
-    $topic_label = $topic_labels[$topic] ?? $topic;
-    $topic_context = "TOPIC CONTEXT:\n" . ($topic_contexts[$topic] ?? '') . "\n";
-
-    return _western_build_core_prompt($name, "Topic: {$topic_label}", $topic_context, $cards, $spread_key);
+function western_build_prompt_question(string $question, array $cards, string $spread_key, string $topic = ''): string {
+    $topic_context = '';
+    if ($topic) {
+        $topic_contexts = [
+            'love'    => 'Focus on love, relationships, family, and milestones. Read the cards through the lens of emotional connection, romantic ties, or signs of strain and third-party interference.',
+            'career'  => 'Focus on career, professional growth, and workplace dynamics. Read the cards through the lens of effort, opportunity, business partnerships, or rivals in the workplace.',
+            'finance' => 'Focus on finances, money, and business. Read the cards through the lens of income flow, investment, cash management, or risks of financial loss.',
+            'study'   => 'Focus on studies, exams, and learning. Read the cards through the lens of intellect, concentration, personal effort, and academic results.',
+            'health'  => 'Focus on physical health and wellbeing. Read the cards through the lens of energy levels, recovery, or warnings around illness, accidents, or physical strain.',
+            'future'  => 'Focus on overall fortune and upcoming turning points. Read the cards through the lens of general favorable or unfavorable trends, unexpected events, or sudden good fortune.',
+        ];
+        if (!empty($topic_contexts[$topic])) {
+            $topic_context = "TOPIC CONTEXT:\n" . $topic_contexts[$topic] . "\n";
+        }
+    }
+    return _western_build_core_prompt("Question: \"{$question}\"", $topic_context, $cards, $spread_key);
 }
 
-function western_build_prompt_question(string $name, string $question, array $cards, string $spread_key): string {
-    return _western_build_core_prompt($name, "Question: \"{$question}\"", "", $cards, $spread_key);
-}
-
-function _western_build_core_prompt(string $name, string $context_line, string $topic_context_block, array $cards, string $spread_key): string {
+function _western_build_core_prompt(string $context_line, string $topic_context_block, array $cards, string $spread_key): string {
     static $spreads = null;
     if ($spreads === null) {
         $spreads = require BB_WESTERN_PLUGIN_DIR . 'includes/spreads.php';
@@ -81,10 +70,9 @@ function _western_build_core_prompt(string $name, string $context_line, string $
     }
 
     return <<<TXT
-Based on all the drawn cards, synthesize the insights and deliver a reading for {$name}.
+Based on all the drawn cards, synthesize the insights and deliver a reading.
 
 DETAILS:
-- Name: {$name}
 - {$context_line}
 
 CARDS DRAWN:
@@ -93,7 +81,8 @@ CARDS DRAWN:
 RULES:
 - DO NOT analyze each card individually
 - DO NOT explain card meanings in a mechanical, list-like way
-- Address the person as "you" or use a short form of their name consistently (e.g. "Loi" from "Bui Van Loi")
+- Address the person as "bạn" consistently
+- DO NOT use the person's name anywhere in the response
 - DO NOT use formal gendered address forms
 - Synthesize insights from all cards and suit energies (Hearts / Diamonds / Clubs / Spades) to answer the question
 - DO NOT speculate beyond what the cards show
@@ -112,7 +101,7 @@ OUTPUT REQUIREMENTS:
 
 [AST_RESULT]
 (Suggestion: Scan all cards and their positions. What energy do the dominant suits — Hearts, Diamonds, Clubs, Spades — create together? Identify the single core message that runs across the whole spread.)
-[Write 1 opening paragraph: Go straight to an overall read of {$name}'s current situation. Open with: Hi, (or Hi {$name},).]
+[Write 1 opening paragraph: Go straight to an overall read of the current situation. Open with: Hi,]
 
 (Suggestion: Connect the cards into a narrative using cause and effect or a timeline — for example: Root cause / Past → Current tension → Likely direction ahead.
 - REQUIRED: Weave card names (e.g. Ace of Hearts, 9 of Spades) naturally into sentences as evidence for each point.
