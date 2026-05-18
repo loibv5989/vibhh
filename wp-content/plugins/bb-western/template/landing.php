@@ -150,7 +150,7 @@ if (!defined('ABSPATH')) exit;
             </div>
         </div>
         <div class="trt-ls">
-            <h3 class="trt-ls-h">Common Questions</h3>
+            <h3 class="trt-ls-h">FAQ</h3>
             <div class="trt-faq">
                 <details class="trt-faq-item">
                     <summary class="trt-faq-q">How is this different from Tarot?</summary>
@@ -167,10 +167,6 @@ if (!defined('ABSPATH')) exit;
                 <details class="trt-faq-item">
                     <summary class="trt-faq-q">How often can I ask the same question?</summary>
                     <div class="trt-faq-a">Repeating the same question multiple times in one day rarely adds anything useful. The cards reflect the energy at the moment you draw them, and that takes time to shift. If a specific event has happened or you've taken new action, that's a reasonable time to ask again.</div>
-                </details>
-                <details class="trt-faq-item">
-                    <summary class="trt-faq-q">Can I trust the AI interpretations?</summary>
-                    <div class="trt-faq-a">The AI reads based on each card's established meaning, its position in the spread, and the overall pattern of suits. It's not random. The results are a reference point, a way to notice angles you might have missed. What you do with that is your call.</div>
                 </details>
             </div>
         </div>
