@@ -176,7 +176,6 @@ if (!defined('ABSPATH')) exit;
         </div>
     </div>
 
-    <!-- STEP 2: Spread Selection & Shuffle -->
     <div class="trt-step" id="trt-step-spread">
         <div class="trt-step-header">
             <button class="trt-back-btn" data-back="hub">← Back</button>
@@ -211,7 +210,6 @@ if (!defined('ABSPATH')) exit;
         </button>
     </div>
 
-    <!-- STEP 3: Deck -->
     <div class="trt-step" id="trt-step-deck">
         <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Focus on your question and choose your cards</p>
         <div class="trt-deck-wrap" id="trt-deck-wrap"></div>
