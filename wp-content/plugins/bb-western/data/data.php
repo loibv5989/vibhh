@@ -527,7 +527,7 @@ $western_deck = [
        SPADES (CALAMITY, DIFFICULTY, ILLNESS, BACKSTABBERS)
     ========================= */
     'ace_of_spades' => [
-        'name' => 'Ace of Spades', 'name_vi' => 'Át Bích', 'suit' => 'spades',
+        'name' => 'Ace of Spades', 'suit' => 'spades',
         'upright' => 'A major change, separation, lawsuits or a painful ending that cannot be avoided.',
         'keywords_upright' => ['separation', 'lawsuit', 'ending'],
         'meanings_by_topic' => [
@@ -540,7 +540,7 @@ $western_deck = [
         ],
     ],
     'two_of_spades' => [
-        'name' => 'Two of Spades', 'name_vi' => 'Hai Bích', 'suit' => 'spades',
+        'name' => 'Two of Spades', 'suit' => 'spades',
         'upright' => 'Deceived, betrayed. Someone stabs you in the back or a serious breakdown in a relationship.',
         'keywords_upright' => ['deceived', 'betrayal', 'backstab'],
         'meanings_by_topic' => [
@@ -553,7 +553,7 @@ $western_deck = [
         ],
     ],
     'three_of_spades' => [
-        'name' => 'Three of Spades', 'name_vi' => 'Ba Bích', 'suit' => 'spades',
+        'name' => 'Three of Spades', 'suit' => 'spades',
         'upright' => 'Extreme grief, tears, a third party appears or a cruel separation.',
         'keywords_upright' => ['grief', 'third party', 'tears'],
         'meanings_by_topic' => [
@@ -566,7 +566,7 @@ $western_deck = [
         ],
     ],
     'four_of_spades' => [
-        'name' => 'Four of Spades', 'name_vi' => 'Bốn Bích', 'suit' => 'spades',
+        'name' => 'Four of Spades', 'suit' => 'spades',
         'upright' => 'Lingering illness, a weakened body. Work or love is stagnant.',
         'keywords_upright' => ['illness', 'weakened', 'stagnant'],
         'meanings_by_topic' => [
@@ -579,7 +579,7 @@ $western_deck = [
         ],
     ],
     'five_of_spades' => [
-        'name' => 'Five of Spades', 'name_vi' => 'Năm Bích', 'suit' => 'spades',
+        'name' => 'Five of Spades', 'suit' => 'spades',
         'upright' => 'Accidents, theft, losing money due to sudden, unlucky events.',
         'keywords_upright' => ['accident', 'theft', 'bad luck'],
         'meanings_by_topic' => [
@@ -592,7 +592,7 @@ $western_deck = [
         ],
     ],
     'six_of_spades' => [
-        'name' => 'Six of Spades', 'name_vi' => 'Sáu Bích', 'suit' => 'spades',
+        'name' => 'Six of Spades', 'suit' => 'spades',
         'upright' => 'Prolonged deadlock, hidden risks. Beware of accidents involving vehicles or water.',
         'keywords_upright' => ['risk', 'deadlock', 'caution'],
         'meanings_by_topic' => [
@@ -605,7 +605,7 @@ $western_deck = [
         ],
     ],
     'seven_of_spades' => [
-        'name' => 'Seven of Spades', 'name_vi' => 'Bảy Bích', 'suit' => 'spades',
+        'name' => 'Seven of Spades', 'suit' => 'spades',
         'upright' => 'Someone is making trouble, badmouthing, or competing unethically in the shadows.',
         'keywords_upright' => ['trouble-making', 'badmouthing', 'unethical competition'],
         'meanings_by_topic' => [
@@ -618,7 +618,7 @@ $western_deck = [
         ],
     ],
     'eight_of_spades' => [
-        'name' => 'Eight of Spades', 'name_vi' => 'Tám Bích', 'suit' => 'spades',
+        'name' => 'Eight of Spades', 'suit' => 'spades',
         'upright' => 'Bound, stuck between a rock and a hard place, unable to find a way out.',
         'keywords_upright' => ['bound', 'stuck', 'dead end'],
         'meanings_by_topic' => [
@@ -631,7 +631,7 @@ $western_deck = [
         ],
     ],
     'nine_of_spades' => [
-        'name' => 'Nine of Spades', 'name_vi' => 'Chín Bích', 'suit' => 'spades',
+        'name' => 'Nine of Spades', 'suit' => 'spades',
         'upright' => 'Anxiety, insomnia, mental panic. A warning sign to pay early attention to.',
         'keywords_upright' => ['anxiety', 'insomnia', 'panic'],
         'meanings_by_topic' => [
@@ -644,7 +644,7 @@ $western_deck = [
         ],
     ],
     'ten_of_spades' => [
-        'name' => 'Ten of Spades', 'name_vi' => 'Mười Bích', 'suit' => 'spades',
+        'name' => 'Ten of Spades', 'suit' => 'spades',
         'upright' => 'Severe crisis, multiple problems at once, everything collapses completely.',
         'keywords_upright' => ['collapse', 'crisis', 'total loss'],
         'meanings_by_topic' => [
@@ -657,7 +657,7 @@ $western_deck = [
         ],
     ],
     'jack_of_spades' => [
-        'name' => 'Jack of Spades', 'name_vi' => 'Bồi Bích', 'suit' => 'spades',
+        'name' => 'Jack of Spades', 'suit' => 'spades',
         'upright' => 'An unstable young man, likely to cause legal trouble or bring gossip.',
         'keywords_upright' => ['unstable', 'gossip', 'trouble'],
         'meanings_by_topic' => [
@@ -670,7 +670,7 @@ $western_deck = [
         ],
     ],
     'queen_of_spades' => [
-        'name' => 'Queen of Spades', 'name_vi' => 'Đầm Bích', 'suit' => 'spades',
+        'name' => 'Queen of Spades', 'suit' => 'spades',
         'upright' => 'A strong woman, difficult to approach, may cause pressure or hurt with words.',
         'keywords_upright' => ['difficult', 'pressure', 'sharp tongue'],
         'meanings_by_topic' => [
@@ -683,7 +683,7 @@ $western_deck = [
         ],
     ],
     'king_of_spades' => [
-        'name' => 'King of Spades', 'name_vi' => 'Già Bích', 'suit' => 'spades',
+        'name' => 'King of Spades', 'suit' => 'spades',
         'upright' => 'A powerful, stern man. A judge or police officer bringing a legal decision.',
         'keywords_upright' => ['judge', 'authority', 'legal decision'],
         'meanings_by_topic' => [

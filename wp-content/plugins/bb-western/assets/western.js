@@ -41,15 +41,15 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Vui lòng nhập họ và tên.');
+                $e.text('Please enter your full name.');
                 return false;
             }
             if (val.length > 40) {
-                $e.text('Họ tên tối đa 40 ký tự.');
+                $e.text('Name must be 40 characters or less.');
                 return false;
             }
             if (/\d/.test(val)) {
-                $e.text('Họ tên không được chứa số.');
+                $e.text('Name must not contain numbers.');
                 return false;
             }
             return true;
@@ -58,7 +58,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Vui lòng chọn chủ đề.');
+                $e.text('Please select a topic.');
                 return false;
             }
             return true;
@@ -67,7 +67,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val || val.trim().length < 5) {
-                $e.text('Vui lòng nhập câu hỏi (tối thiểu 5 ký tự).');
+                $e.text('Please enter a question (at least 5 characters).');
                 return false;
             }
             return true;
@@ -121,10 +121,10 @@ jQuery(function ($) {
                             State.resultHtml = res.html;
                             resolve(res);
                         } else {
-                            reject(res.message || 'Đã có lỗi xảy ra.');
+                            reject(res.message || 'An error occurred.');
                         }
                     },
-                    error: () => reject('Lỗi kết nối. Vui lòng thử lại.')
+                    error: () => reject('Connection error. Please try again.')
                 });
             });
             return this.drawPromise;
@@ -147,8 +147,8 @@ jQuery(function ($) {
                         cards: State.cardsLite,
                         hp_trap: $('#trt-deep-trap').val()
                     }),
-                    success: res => res.success ? resolve(res) : reject(res.message || 'Đã có lỗi xảy ra.'),
-                    error: () => reject('Lỗi kết nối. Vui lòng thử lại.')
+                    success: res => res.success ? resolve(res) : reject(res.message || 'An error occurred.'),
+                    error: () => reject('Connection error. Please try again.')
                 });
             });
         }
@@ -180,7 +180,7 @@ jQuery(function ($) {
                 $slotsWrap.append(`<div class="trt-slot" data-slot="${idx}"><span class="trt-slot-pos">${label}</span></div>`);
             });
 
-            $('#trt-deck-instruction').show().html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
+            $('#trt-deck-instruction').show().html(`✦ Focus on your question and pick <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
             $('#trt-selected-count').text('0');
             $('#trt-target-count').text(this.targetCount);
 
@@ -197,9 +197,9 @@ jQuery(function ($) {
             const cardW = isMob ? 38 : isTablet ? 46 : 56;
             const gapY  = isMob ? 70 : isTablet ? 88 : 105;
             const wrapW = $('#trt-deck-wrap').width();
-            // Desktop  (≥1024): 4 hàng × 13 — mỗi hàng 1 chất
-            // Tablet   (768-1023): 5 hàng — 11, 11, 10, 10, 10
-            // Mobile   (<768):    7 hàng — 8, 8, 8, 7, 7, 7, 7
+            // Desktop  (≥1024): 4 rows × 13 — one row per suit
+            // Tablet   (768-1023): 5 rows — 11, 11, 10, 10, 10
+            // Mobile   (<768):    7 rows — 8, 8, 8, 7, 7, 7, 7
             const rowDefs = isMob
                 ? [8, 8, 8, 7, 7, 7, 7]
                 : isTablet
@@ -244,13 +244,13 @@ jQuery(function ($) {
             $card.addClass('selected-card').css({zIndex: 9999}).off('mouseenter mouseleave');
 
             if (!State.cardsLite) {
-                $('#trt-deck-instruction').html('✦ Đang kết nối với các lá bài...').css('opacity', 0.6);
+                $('#trt-deck-instruction').html('✦ Connecting to the cards...').css('opacity', 0.6);
                 try {
                     await Ajax.drawPromise;
                 } catch (e) {
                     return;
                 }
-                $('#trt-deck-instruction').html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
+                $('#trt-deck-instruction').html(`✦ Focus on your question and pick <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
             }
 
             const posKey = this.positions[this.selectedCount];
@@ -263,7 +263,7 @@ jQuery(function ($) {
 <div class="trt-card-3d">
     <div class="trt-face trt-face-back"><div class="trt-card-back-face"></div></div>
     <div class="trt-face trt-face-front">
-    <div class="trt-front-name">${cardData.name_vi}</div>
+    <div class="trt-front-name">${cardData.name}</div>
 </div>
 </div>`;
             const $card3D = $(html3D).appendTo($slot);
@@ -312,7 +312,7 @@ jQuery(function ($) {
                 $('#trt-deep-analyze-form').slideUp(300);
 
             } catch (error) {
-                $('#trt-err-analyze').text(error || 'Lỗi kết nối. Vui lòng thử lại sau.');
+                $('#trt-err-analyze').text(error || 'Connection error. Please try again later.');
                 $('#ast-analysis-wrap').html('').hide();
                 $('html, body').animate({ scrollTop: $('#trt-deep-analyze-form').offset().top - 50 }, 400);
                 $btn.removeClass('loading').prop('disabled', false);
@@ -419,7 +419,7 @@ jQuery(function ($) {
         $bgCard.addClass('trt-modal-bg-card');
         $body.prepend($bgCard);
 
-        // Gradient background theo chất bài
+        // Gradient background by suit
         const suitGradients = {
             hearts:   'linear-gradient(160deg, #be1a1a, #6b0000)',
             diamonds: 'linear-gradient(160deg, #b45a00, #5a2800)',

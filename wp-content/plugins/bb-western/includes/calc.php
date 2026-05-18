@@ -47,6 +47,7 @@ class Western_Calc {
             $pos_key = $positions[$i];
             $lite[$pos_key] = [
                 'key'  => $key,
+                'name' => $d['name'],
                 'suit' => $d['suit'],
             ];
         }
@@ -100,7 +101,7 @@ class Western_Calc {
             $html = self::markdownToHtml(trim($raw));
         }
         if (empty(trim(strip_tags($html)))) {
-            $html = '<p>Không thể giải mã kết quả. Vui lòng thử lại.</p>';
+            $html = '<p>Unable to decode the result. Please try again.</p>';
         }
         return ['html' => $html];
     }

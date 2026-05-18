@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Bói Bài Tây
+ * Plugin Name: Western Card Reading
  * Plugin URI: https://nbblo.com
- * Description: Plugin bói bài Tây (52 lá) online
+ * Description: Online 52-card Western playing card reading plugin
  * Version: 26.5.17
  * Author: Loibv
  * Requires PHP: 8.2 or higher

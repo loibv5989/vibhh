@@ -157,19 +157,19 @@ class BB_Western_Handle {
 
     public function handleRestAnalyze(WP_REST_Request $request): WP_REST_Response {
         if (!$this->validate_logged_in()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng đăng nhập để sử dụng tính năng này.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please log in to use this feature.'], 200);
         }
 
         $allow_ai = get_option('western_allow_ai', '0');
         if ($allow_ai !== '1') {
             return new WP_REST_Response([
                     'success' => false,
-                    'message' => 'Chức năng hiện đang tạm ngưng. Vui lòng quay lại sau.'
+                    'message' => 'This feature is currently unavailable. Please try again later.'
             ], 200);
         }
 
         if (!$this->western_quota()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Đã đạt giới hạn phân tích trong ngày. Vui lòng quay lại vào ngày mai.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Daily analysis limit reached. Please come back tomorrow.'], 200);
         }
 
         $name       = mb_substr(sanitize_text_field($request->get_param('full_name')  ?? ''), 0, 60);
@@ -183,26 +183,26 @@ class BB_Western_Handle {
 
         $hp_trap = $request->get_param('hp_trap') ?? '';
         if (!empty($hp_trap)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ.'], 403);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data.'], 403);
         }
 
         if (empty($name)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập họ và tên.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter your full name.'], 200);
         }
         if ($mode === 'question' && empty($question)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập câu hỏi trước khi giải mã.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter a question before reading.'], 200);
         }
 
         $cardsLiteRaw = $request->get_param('cards');
         $liteCards    = is_string($cardsLiteRaw) ? json_decode(wp_unslash($cardsLiteRaw), true) : $cardsLiteRaw;
 
         if (!is_array($liteCards) || empty($liteCards) || count($liteCards) > 10) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu bài không hợp lệ.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data.'], 200);
         }
 
         foreach ($liteCards as $pos => $c) {
             if (!is_array($c) || empty($c['key'])) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Cấu trúc lá bài bị sai lệch.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'Card data structure is invalid.'], 200);
             }
         }
 
@@ -238,7 +238,7 @@ class BB_Western_Handle {
             }
 
             if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'No') !== false || empty($gk_response)) {
-                $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Hãy đặt lại câu hỏi</span> cụ thể, chi tiết và đúng trọng tâm bói toán hơn nhé!';
+                $html_fallback = '<br><span class="ast-reload" onclick="window.location.reload()">Please rephrase your question</span> to be more specific, detailed, and focused on the reading.';
 
                 return new WP_REST_Response([
                     'success'   => true,
@@ -287,7 +287,7 @@ class BB_Western_Handle {
         }
 
         if (empty($response)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Lỗi kết nối. Vui lòng thử lại sau.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Connection error. Please try again later.'], 200);
         }
 
         if (preg_match('/\[AST_RESULT\]([\s\S]*?)\[\/AST_RESULT\]/', $response, $matches)) {
