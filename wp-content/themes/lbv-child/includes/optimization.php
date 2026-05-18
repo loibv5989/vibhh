@@ -59,6 +59,8 @@ add_filter('rest_authentication_errors', function ($result) {
         '/wp-json/tuvi/v1/hoptuoi',
         '/wp-json/western/v1/draw',
         '/wp-json/western/v1/analyze',
+        '/wp-json/western/v1/draw',
+        '/wp-json/western/v1/reveal',
         '/wp-json/oracle/v1/draw',
         '/wp-json/oracle/v1/analyze',
         '/wp-json/tsh-love/v1/calculate',

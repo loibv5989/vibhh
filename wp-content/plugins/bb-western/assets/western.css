@@ -402,16 +402,20 @@
 
 .trt-deck-card {
     position: absolute;
-    width: 56px;
-    height: 90px;
+    width: 60px;
+    height: 98px;
     left: 50%;
-    margin-left: -28px;
+    margin-left: -30px;
     top: 0;
-    border-radius: 7px;
+    border-radius: 8px;
     cursor: pointer;
     opacity: 0;
     will-change: transform;
-    transition: transform .4s cubic-bezier(.34, 1.4, .64, 1), opacity .3s
+    transition: transform .4s cubic-bezier(.34, 1.4, .64, 1), opacity .3s;
+    box-shadow:
+        1px 1px 0 rgba(0,0,0,.06),
+        2px 2px 0 rgba(0,0,0,.05),
+        0 3px 8px rgba(0,0,0,.12)
 }
 
 .trt-deck-card.spread {
@@ -427,29 +431,29 @@
     width: 100%;
     height: 100%;
     border-radius: 8px;
-    background: linear-gradient(160deg, color-mix(in srgb, var(--bg-primary) 60%, #fff 40%) 0, var(--bg-primary) 100%);
-    border: 1px solid color-mix(in srgb, var(--lbv-color-1) 40%, transparent);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .6), inset 0 0 0 4px color-mix(in srgb, var(--lbv-color-1) 5%, transparent);
+    border: 1px solid #d4c5b0;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    background:
+        repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(0,0,0,.03) 3px, rgba(0,0,0,.03) 6px),
+        repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(0,0,0,.03) 3px, rgba(0,0,0,.03) 6px),
+        linear-gradient(160deg, #f8f4ef, #ece3d4)
 }
 
 .trt-card-back-face::before {
     content: '';
     position: absolute;
-    inset: 4px;
-    border: 1px solid color-mix(in srgb, var(--lbv-color-1) 25%, transparent);
+    inset: 5px;
+    border: 1.5px solid rgba(0,0,0,.08);
     border-radius: 5px
 }
 
 .trt-card-back-face::after {
-    content: '✦';
+    content: '';
     position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    font-size: 1rem;
-    color: color-mix(in srgb, var(--lbv-color-1) 35%, transparent)
+    inset: 10px;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 3px
 }
 
 .trt-deck-counter span, .trt-face-front .trt-front-name {
@@ -527,14 +531,49 @@
 }
 
 .trt-face-front {
-    background: color-mix(in srgb, var(--bg-primary) 80%, #fff 20%);
-    border: 1px solid var(--lbv-color-1);
+    background: #fff;
+    border: 1px solid #d4c5b0;
+    display: block;
+    position: relative;
+    padding: 0;
+    overflow: hidden
+}
+
+.trt-card-corner {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 4px;
-    text-align: center
+    line-height: 1
+}
+
+.trt-card-tl {
+    top: 5px;
+    left: 5px
+}
+
+.trt-card-br {
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg)
+}
+
+.trt-card-rank {
+    font-size: .7rem;
+    font-weight: 700
+}
+
+.trt-card-sym {
+    font-size: .6rem
+}
+
+.trt-card-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.2rem;
+    line-height: 1
 }
 
 .trt-face-front .trt-front-name {

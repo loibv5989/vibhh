@@ -236,19 +236,27 @@ jQuery(function ($) {
             State.pickedCards.push({
                 key: cardData.key,
                 name: cardData.name,
-                suit: cardData.suit
+                suit: cardData.suit,
+                rank: cardData.rank
             });
 
             const $slot = $('.trt-slot').eq(this.selectedCount);
             $slot.addClass('filled');
             $slot.find('.trt-slot-pos').hide();
 
+            const suitSymbols = { hearts: '♥', diamonds: '♦', clubs: '♣', spades: '♠' };
+            const suitColor = ['hearts', 'diamonds'].includes(cardData.suit) ? '#c0392b' : '#2c3e50';
+            const sym = suitSymbols[cardData.suit] || '';
+            const rank = cardData.rank || '';
+
             const html3D = `
 <div class="trt-card-3d">
     <div class="trt-face trt-face-back"><div class="trt-card-back-face"></div></div>
-    <div class="trt-face trt-face-front">
-    <div class="trt-front-name">${cardData.name}</div>
-</div>
+    <div class="trt-face trt-face-front" style="color:${suitColor}">
+        <div class="trt-card-corner trt-card-tl"><span class="trt-card-rank">${rank}</span><span class="trt-card-sym">${sym}</span></div>
+        <div class="trt-card-center">${sym}</div>
+        <div class="trt-card-corner trt-card-br"><span class="trt-card-rank">${rank}</span><span class="trt-card-sym">${sym}</span></div>
+    </div>
 </div>`;
             const $card3D = $(html3D).appendTo($slot);
             setTimeout(() => {

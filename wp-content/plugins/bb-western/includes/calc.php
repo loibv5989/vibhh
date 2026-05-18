@@ -72,6 +72,7 @@ class Western_Calc {
                 'key'  => $key,
                 'name' => $d['name'],
                 'suit' => $d['suit'],
+                'rank' => self::parseRank($key),
             ];
         }
 
