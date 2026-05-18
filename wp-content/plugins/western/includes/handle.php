@@ -1,8 +1,8 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-class BB_Western_Handle {
-    private static ?BB_Western_Handle $instance = null;
+class WESTERN_Handle {
+    private static ?WESTERN_Handle $instance = null;
 
     public static function get_instance(): self {
         if (self::$instance === null) self::$instance = new self();
@@ -19,31 +19,31 @@ class BB_Western_Handle {
 
     private static function loadCalc(): void {
         if (!class_exists('Western_Calc')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/calc.php';
+            require_once WESTERN_PLUGIN_DIR . 'includes/calc.php';
         }
     }
 
     private static function loadAIProviders(): void {
-        if (!class_exists('BBW_Gemini')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/gemini.php';
+        if (!class_exists('WESTERN_Gemini')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/gemini.php';
         }
-        if (!class_exists('BBW_Groq')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/groq.php';
+        if (!class_exists('WESTERN_Groq')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/groq.php';
         }
-        if (!class_exists('BBW_Mistral')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/mistral.php';
+        if (!class_exists('WESTERN_Mistral')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/mistral.php';
         }
     }
 
     private static function loadPrompt(): void {
         if (!function_exists('western_build_prompt_question')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/prompt.php';
+            require_once WESTERN_PLUGIN_DIR . 'includes/prompt.php';
         }
     }
 
     private static function loadRender(): void {
         if (!function_exists('western_render')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'template/render.php';
+            require_once WESTERN_PLUGIN_DIR . 'template/render.php';
         }
     }
 
@@ -68,8 +68,8 @@ class BB_Western_Handle {
     public function enqueueAssets(): void {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'western_form')) return;
-        wp_enqueue_style('western',  BB_WESTERN_PLUGIN_URL . 'assets/western.css',  [], BB_WESTERN_VERSION);
-        wp_enqueue_script('western', BB_WESTERN_PLUGIN_URL . 'assets/western.js', ['jquery'], BB_WESTERN_VERSION, true);
+        wp_enqueue_style('western',  WESTERN_PLUGIN_URL . 'assets/western.css',  [], WESTERN_VERSION);
+        wp_enqueue_script('western', WESTERN_PLUGIN_URL . 'assets/western.js', ['jquery'], WESTERN_VERSION, true);
         wp_localize_script('western', 'WesternAjax', [
                 'api_url' => esc_url_raw(rest_url('western/v1/')),
                 'nonce'    => wp_create_nonce('wp_rest'),
@@ -79,7 +79,7 @@ class BB_Western_Handle {
     public function preloadAssets(): void {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'western_form')) return;
-        echo '<link rel="preload" href="' . esc_url(BB_WESTERN_PLUGIN_URL . 'assets/western.css' . '?ver=' . BB_WESTERN_VERSION) . '" as="style">' . "\n";
+        echo '<link rel="preload" href="' . esc_url(WESTERN_PLUGIN_URL . 'assets/western.css' . '?ver=' . WESTERN_VERSION) . '" as="style">' . "\n";
     }
 
     public function renderShortcode($atts): string {
@@ -93,7 +93,7 @@ class BB_Western_Handle {
         $spreads_config  = Western_Calc::getSpreads();
 
         ob_start();
-        include_once BB_WESTERN_PLUGIN_DIR . 'template/landing.php';
+        include_once WESTERN_PLUGIN_DIR . 'template/landing.php';
         return ob_get_clean();
     }
 
@@ -168,7 +168,7 @@ class BB_Western_Handle {
         $key = 'western_quota_ai_' . $user['username'] . '_' . $today;
         $count = (int) get_transient($key);
 
-        if ($count >= BB_WESTERN_RATE_LIMIT) return false;
+        if ($count >= WESTERN_RATE_LIMIT) return false;
 
         $ttl = strtotime('tomorrow', current_time('timestamp')) - current_time('timestamp');
         set_transient($key, $count + 1, $ttl);
@@ -240,12 +240,12 @@ class BB_Western_Handle {
         self::loadAIProviders();
 
         $providers = [
-                'gemini'  => fn($p) => BBW_Gemini::get_instance()->ftn_gemini_generate($p),
-                'groq'    => fn($p) => BBW_Groq::get_instance()->ftn_groq_generate($p),
-                'mistral' => fn($p) => BBW_Mistral::get_instance()->ftn_mistral_generate($p),
+                'gemini'  => fn($p) => WESTERN_Gemini::get_instance()->ftn_gemini_generate($p),
+                'groq'    => fn($p) => WESTERN_Groq::get_instance()->ftn_groq_generate($p),
+                'mistral' => fn($p) => WESTERN_Mistral::get_instance()->ftn_mistral_generate($p),
         ];
 
-        require_once BB_WESTERN_PLUGIN_DIR . 'includes/gatekeeper.php';
+        require_once WESTERN_PLUGIN_DIR . 'includes/gatekeeper.php';
         $gatekeeper_prompt = western_build_gatekeeper_prompt($question);
         $gk_response = '';
 
@@ -317,4 +317,4 @@ class BB_Western_Handle {
         return $title;
     }
 }
-BB_Western_Handle::get_instance();
+WESTERN_Handle::get_instance();

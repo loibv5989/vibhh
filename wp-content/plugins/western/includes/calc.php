@@ -16,7 +16,7 @@ class Western_Calc {
 
     private static function getData(): array {
         if (self::$data_cache === null) {
-            self::$data_cache = require BB_WESTERN_PLUGIN_DIR . 'data/data.php';
+            self::$data_cache = require WESTERN_PLUGIN_DIR . 'data/data.php';
         }
         return self::$data_cache;
     }
@@ -24,7 +24,7 @@ class Western_Calc {
 
     public static function getSpreads(): array {
         if (self::$spreads_cache === null) {
-            self::$spreads_cache = require BB_WESTERN_PLUGIN_DIR . 'includes/spreads.php';
+            self::$spreads_cache = require WESTERN_PLUGIN_DIR . 'includes/spreads.php';
         }
         return self::$spreads_cache;
     }
@@ -155,7 +155,7 @@ class Western_Calc {
         $md = preg_replace('/^_{3,}$/m', '', $md);
 
         if (!class_exists('Parsedown')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'lib/Parsedown.php';
+            require_once WESTERN_PLUGIN_DIR . 'lib/Parsedown.php';
         }
         $parsedown = new Parsedown();
 

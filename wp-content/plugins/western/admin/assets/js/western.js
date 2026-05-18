@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $('#bb_western_provider_select').on('change', function() {
+    $('#western_provider_select').on('change', function() {
         var provider = $(this).val();
 
         $('#gemini-settings, #groq-settings, #mistral-settings').hide();
@@ -21,10 +21,10 @@ jQuery(document).ready(function($) {
         $button.prop('disabled', true).text('Testing...');
         $results.html('');
 
-        $.post(bbWesternAdmin.ajax_url, {
-            action: 'bb_western_test_provider',
-            provider:  $('#bb_western_provider_select').val(),
-            nonce: bbWesternAdmin.nonce
+        $.post(westernAdmin.ajax_url, {
+            action: 'western_test_provider',
+            provider:  $('#western_provider_select').val(),
+            nonce: westernAdmin.nonce
         }, function(response) {
             $button.prop('disabled', false).text('Test Connection');
             if (response.success) {
@@ -68,9 +68,9 @@ jQuery(document).ready(function($) {
         $button.prop('disabled', true).text('Creating pages...');
         $results.html('');
 
-        $.post(bbWesternAdmin.ajax_url, {
-            action: 'bb_western_create_pages',
-            nonce: bbWesternAdmin.create_pages_nonce
+        $.post(westernAdmin.ajax_url, {
+            action: 'western_create_pages',
+            nonce: westernAdmin.create_pages_nonce
         }, function(response) {
             $button.prop('disabled', false).text('Create Pages');
 

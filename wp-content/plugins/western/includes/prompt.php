@@ -26,7 +26,7 @@ function western_build_prompt_question(string $question, array $cards, string $s
 function _western_build_core_prompt(string $context_line, string $topic_context_block, array $cards, string $spread_key): string {
     static $spreads = null;
     if ($spreads === null) {
-        $spreads = require BB_WESTERN_PLUGIN_DIR . 'includes/spreads.php';
+        $spreads = require WESTERN_PLUGIN_DIR . 'includes/spreads.php';
     }
     $spread_config = $spreads[$spread_key] ?? $spreads['3_cards'];
     $positions = $spread_config['positions'];

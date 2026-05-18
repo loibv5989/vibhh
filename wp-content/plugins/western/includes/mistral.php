@@ -2,11 +2,11 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BBW_Groq {
+class WESTERN_Mistral {
 
     public $helpers = null;
 
-    private const BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
+    private const BASE_URL = "https://api.mistral.ai/v1/chat/completions";
 
     private static $instance = null;
 
@@ -31,46 +31,43 @@ class BBW_Groq {
 
     private function helpers() {
         if ($this->helpers === null) {
-            $this->helpers = BBW_Settings::get_instance();
+            $this->helpers = WESTERN_Settings::get_instance();
         }
         return $this->helpers;
     }
 
-    public function groqConfig($prompt) {
+    public function ftn_mistral_generate($prompt) {
 
-        return [
-            "model"               => $this->helpers()->groqModel(),
-            "messages"            => [
+        $helpers       = $this->helpers();
+        $mistral_keys  = $helpers->mistralKeysArray();
+        $mistral_model = $helpers->mistralModel();
+        $result        = null;
+
+        $body = [
+            "model"       => $mistral_model,
+            "messages"    => [
                 [
                     "role"    => "user",
                     "content" => $prompt,
                 ]
             ],
-            "temperature"         => 0.5,
-            "max_tokens"          => 4096,
-            "top_p"               => 0.5,
-            "stream"              => false,
-            "stop"                => null,
+            "temperature" => 0.5,
+            "max_tokens"  => 2048,
+            "top_p"       => 0.5,
+            "stream"      => false,
         ];
-    }
 
-    public function ftn_groq_generate($prompt) {
+        while (!empty($mistral_keys)) {
 
-        $helpers   = $this->helpers();
-        $groq_keys = $helpers->groqKeysArray();
-        $result    = null;
-
-        while (!empty($groq_keys)) {
-
-            $groq_key = $groq_keys[array_rand($groq_keys)];
+            $mistral_key = $mistral_keys[array_rand($mistral_keys)];
 
             $ch = curl_init(self::BASE_URL);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->groqConfig($prompt)));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 'Content-Type: application/json',
-                'Authorization: Bearer ' . $groq_key,
+                'Authorization: Bearer ' . $mistral_key,
             ]);
 
             $response_raw = curl_exec($ch);
@@ -78,40 +75,39 @@ class BBW_Groq {
 
             $response = json_decode($response_raw, true);
 
-            if ($httpCode === 429 || (isset($response['error']['code']) && $response['error']['code'] === 'rate_limit_exceeded')) {
-                $result = "[Error] Key limited (429): $groq_key";
-                unset($groq_keys[array_search($groq_key, $groq_keys)]);
+            // 429 - Rate limit
+            if ($httpCode === 429) {
+                $result = "[Error] Key limited (429): $mistral_key";
+                unset($mistral_keys[array_search($mistral_key, $mistral_keys)]);
                 $this->sendAdminNotification(
-                    "Groq API Key Limited",
-                    "API Key: $groq_key\nError: 429 - Rate limit exceeded\nTime: " . current_time("Y-m-d H:i:s")
+                    "Mistral API Key Limited",
+                    "API Key: $mistral_key\nError: 429 - Rate limit exceeded\nTime: " . current_time("Y-m-d H:i:s")
                 );
                 continue;
             }
 
-            if ($httpCode === 498) {
-                $result = "[Error] Key: $groq_key - Code 498: Flex Tier Capacity Exceeded.";
-                unset($groq_keys[array_search($groq_key, $groq_keys)]);
+            // 503 - Service Unavailable
+            if ($httpCode === 503) {
+                $result = "[Error] Key: $mistral_key - Code 503: Service unavailable.";
+                unset($mistral_keys[array_search($mistral_key, $mistral_keys)]);
                 continue;
             }
 
-            if ($httpCode === 503 || (isset($response['error']['code']) && $response['error']['code'] === 503)) {
-                $result = "[Error] Key: $groq_key - Code 503: Service unavailable.";
-                unset($groq_keys[array_search($groq_key, $groq_keys)]);
-                continue;
-            }
-
+            // Other errors
             if (isset($response['error'])) {
                 $code    = $response['error']['code']    ?? $httpCode;
                 $message = $response['error']['message'] ?? 'Unknown error';
-                $result  = "[Error] Key: $groq_key - Code $code: $message";
+                $result  = "[Error] Key: $mistral_key - Code $code: $message";
                 break;
             }
 
+            // Success — response format giống OpenAI/Groq
             if (isset($response['choices'][0]['message']['content'])) {
                 $result = $response['choices'][0]['message']['content'];
                 break;
             }
 
+            // Unexpected structure
             $finish_reason = $response['choices'][0]['finish_reason'] ?? 'UNKNOWN';
             if ($finish_reason === 'stop') {
                 $result = "no information available";
@@ -122,17 +118,17 @@ class BBW_Groq {
                     'hasMessage'    => isset($response['choices'][0]['message']),
                     'usage'         => $response['usage'] ?? [],
                 ];
-                $result = "[Error] Key: $groq_key - Response structure: " . json_encode($error_info);
+                $result = "[Error] Key: $mistral_key - Response structure: " . json_encode($error_info);
             }
             break;
         }
 
         if ($result === null) {
-            $result = "[Error] All Groq keys are limited (429).";
+            $result = "[Error] All Mistral keys are limited (429).";
         }
 
         return $result;
     }
 }
 
-BBW_Groq::get_instance();
+WESTERN_Mistral::get_instance();

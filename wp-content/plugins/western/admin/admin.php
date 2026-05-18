@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class BBW_Admin {
+class WESTERN_Admin {
     private $plugin_file;
 
     public function __construct($plugin_file) {
@@ -13,26 +13,26 @@ class BBW_Admin {
         add_action('admin_menu', [$this, 'register_settings_page'], 99);
         add_action('admin_init', [$this, 'save_settings']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
-        add_action('wp_ajax_bb_western_test_provider', [$this, 'test_provider']);
-        add_action('wp_ajax_bb_western_create_pages', [$this, 'create_pages']);
+        add_action('wp_ajax_western_test_provider', [$this, 'test_provider']);
+        add_action('wp_ajax_western_create_pages', [$this, 'create_pages']);
         add_filter('plugin_action_links_' . plugin_basename($this->plugin_file), [$this, 'settings_link']);
     }
 
     public function enqueue_admin_assets($hook) {
-        if (!str_contains($hook, 'bb-western-settings')) return;
+        if (!str_contains($hook, 'western-settings')) return;
 
-        wp_enqueue_style('bb-western', BB_WESTERN_PLUGIN_URL . 'admin/assets/css/western.css', [], TAROT_VERSION);
-        wp_enqueue_script('bb-western', BB_WESTERN_PLUGIN_URL . 'admin/assets/js/western.js', ['jquery'], TAROT_VERSION, true);
+        wp_enqueue_style('western', WESTERN_PLUGIN_URL . 'admin/assets/css/western.css', [], TAROT_VERSION);
+        wp_enqueue_script('western', WESTERN_PLUGIN_URL . 'admin/assets/js/western.js', ['jquery'], TAROT_VERSION, true);
 
-        wp_localize_script('bb-western', 'bbWesternAdmin', [
-            'nonce' => wp_create_nonce('bb_western_test_nonce'),
-            'create_pages_nonce' => wp_create_nonce('bb_western_create_pages_nonce'),
+        wp_localize_script('western', 'westernAdmin', [
+            'nonce' => wp_create_nonce('western_test_nonce'),
+            'create_pages_nonce' => wp_create_nonce('western_create_pages_nonce'),
             'ajax_url' => admin_url('admin-ajax.php'),
         ]);
     }
 
     public function settings_link($links) {
-        $settings_link = '<a href="admin.php?page=bb-western-settings">Settings</a>';
+        $settings_link = '<a href="admin.php?page=western-settings">Settings</a>';
         array_unshift($links, $settings_link);
         return $links;
     }
@@ -43,7 +43,7 @@ class BBW_Admin {
                 'Western Card Reading',
                 'Western Card Reading',
                 'manage_options',
-                'bb-western-settings',
+                'western-settings',
                 [$this, 'render_settings_page']
         );
     }
@@ -67,7 +67,7 @@ class BBW_Admin {
         <div class="wrap">
             <h1>Western Card Reading Settings</h1>
             <form method="post">
-                <?php wp_nonce_field('bb_western_settings_form'); ?>
+                <?php wp_nonce_field('western_settings_form'); ?>
                 
                 <!-- SECTION 0: AI Enable/Disable -->
                 <h2>🤖 Enable/Disable AI</h2>
@@ -203,7 +203,7 @@ class BBW_Admin {
                     <tr>
                         <th scope="row">Select provider to test</th>
                         <td>
-                            <select name="provider" id="bb_western_provider_select" style="min-width: 250px;">
+                            <select name="provider" id="western_provider_select" style="min-width: 250px;">
                                 <option value="gemini" <?php selected($provider, 'gemini'); ?>>Google Gemini</option>
                                 <option value="groq" <?php selected($provider, 'groq'); ?>>Groq</option>
                                 <option value="mistral" <?php selected($provider, 'mistral'); ?>>Mistral AI</option>
@@ -253,7 +253,7 @@ class BBW_Admin {
     }
 
     public function save_settings() {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'bb_western_settings_form')) {
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'western_settings_form')) {
             return;
         }
 
@@ -302,7 +302,7 @@ class BBW_Admin {
 
     public function test_provider() {
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (!wp_verify_nonce($nonce, 'bb_western_test_nonce')) {
+        if (!wp_verify_nonce($nonce, 'western_test_nonce')) {
             error_log('[Western Test] Invalid nonce. User=' . (get_current_user_id() ?: 0));
             wp_send_json_error([
                 'message' => 'Invalid nonce',
@@ -327,14 +327,14 @@ class BBW_Admin {
         $start_time = microtime(true);
         $test_info = [];
 
-        if (!class_exists('BBW_Gemini')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/gemini.php';
+        if (!class_exists('WESTERN_Gemini')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/gemini.php';
         }
-        if (!class_exists('BBW_Groq')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/groq.php';
+        if (!class_exists('WESTERN_Groq')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/groq.php';
         }
-        if (!class_exists('BBW_Mistral')) {
-            require_once BB_WESTERN_PLUGIN_DIR . 'includes/mistral.php';
+        if (!class_exists('WESTERN_Mistral')) {
+            require_once WESTERN_PLUGIN_DIR . 'includes/mistral.php';
         }
 
         error_log('[Western Test] Start. Provider=' . $provider . ' | User=' . (get_current_user_id() ?: 0));
@@ -342,13 +342,13 @@ class BBW_Admin {
         try {
             switch ($provider) {
                 case 'gemini':
-                    $response = BBW_Gemini::get_instance()->ftn_gemini_generate($test_prompt, $test_info);
+                    $response = WESTERN_Gemini::get_instance()->ftn_gemini_generate($test_prompt, $test_info);
                     break;
                 case 'groq':
-                    $response = BBW_Groq::get_instance()->ftn_groq_generate($test_prompt, $test_info);
+                    $response = WESTERN_Groq::get_instance()->ftn_groq_generate($test_prompt, $test_info);
                     break;
                 case 'mistral':
-                    $response = BBW_Mistral::get_instance()->ftn_mistral_generate($test_prompt, $test_info);
+                    $response = WESTERN_Mistral::get_instance()->ftn_mistral_generate($test_prompt, $test_info);
                     break;
                 default:
                     wp_send_json_error([
@@ -406,7 +406,7 @@ class BBW_Admin {
     }
 
     public function create_pages() {
-        check_ajax_referer('bb_western_create_pages_nonce', 'nonce');
+        check_ajax_referer('western_create_pages_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error(['message' => 'Permission denied']);

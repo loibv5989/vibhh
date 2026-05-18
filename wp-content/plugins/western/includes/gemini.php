@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BBW_Gemini {
+class WESTERN_Gemini {
 
     public $setiings = null;
 
@@ -32,7 +32,7 @@ class BBW_Gemini {
     private function setiings() {
 
         if ($this->setiings === null) {
-            $this->setiings = BBW_Settings::get_instance();
+            $this->setiings = WESTERN_Settings::get_instance();
         }
 
         return $this->setiings;
@@ -134,4 +134,4 @@ class BBW_Gemini {
     }
 }
 
-BBW_Gemini::get_instance();
+WESTERN_Gemini::get_instance();

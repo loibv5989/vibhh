@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class BBW_Settings {
+class WESTERN_Settings {
 
     private static $instance = null;
 
@@ -58,4 +58,4 @@ class BBW_Settings {
     }
 }
 
-BBW_Settings::get_instance();
+WESTERN_Settings::get_instance();
