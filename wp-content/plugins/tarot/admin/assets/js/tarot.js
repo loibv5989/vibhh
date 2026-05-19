@@ -65,14 +65,14 @@ jQuery(document).ready(function($) {
         var $button = $(this);
         var $results = $('#create-pages-results');
 
-        $button.prop('disabled', true).text('Creating pages...');
+        $button.prop('disabled', true).text('Đang tạo trang...');
         $results.html('');
 
         $.post(bbTarotAdmin.ajax_url, {
             action: 'bb_tarot_create_pages',
             nonce: bbTarotAdmin.create_pages_nonce
         }, function(response) {
-            $button.prop('disabled', false).text('Create all Tarot pages');
+            $button.prop('disabled', false).text('Tạo tất cả trang Kinh Dịch');
 
             if (response.success) {
                 $results.html('<div style="color: green;">✓ ' + response.data.message + '</div>');
@@ -88,8 +88,8 @@ jQuery(document).ready(function($) {
                 $results.html('<div style="color: red;">✗ ' + response.data.message + '</div>');
             }
         }).fail(function() {
-            $button.prop('disabled', false).text('Create all Tarot pages');
-            $results.html('<div style="color: red;">✗ An error occurred</div>');
+            $button.prop('disabled', false).text('Tạo tất cả trang Kinh Dịch');
+            $results.html('<div style="color: red;">✗ Có lỗi xảy ra</div>');
         });
     });
 });

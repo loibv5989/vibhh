@@ -18,33 +18,18 @@ class WESTERN_Handle {
     }
 
     private static function loadCalc(): void {
-        if (!class_exists('Western_Calc')) {
-            require_once WESTERN_PLUGIN_DIR . 'includes/calc.php';
-        }
+        require_once WESTERN_PLUGIN_DIR . 'includes/calc.php';
     }
 
     private static function loadAIProviders(): void {
-        if (!class_exists('WESTERN_Gemini')) {
-            require_once WESTERN_PLUGIN_DIR . 'includes/gemini.php';
-        }
-        if (!class_exists('WESTERN_Groq')) {
-            require_once WESTERN_PLUGIN_DIR . 'includes/groq.php';
-        }
-        if (!class_exists('WESTERN_Mistral')) {
-            require_once WESTERN_PLUGIN_DIR . 'includes/mistral.php';
-        }
-    }
-
-    private static function loadPrompt(): void {
-        if (!function_exists('western_build_prompt_question')) {
-            require_once WESTERN_PLUGIN_DIR . 'includes/prompt.php';
-        }
+        require_once WESTERN_PLUGIN_DIR . 'includes/gemini.php';
+        require_once WESTERN_PLUGIN_DIR . 'includes/groq.php';
+        require_once WESTERN_PLUGIN_DIR . 'includes/mistral.php';
+        require_once WESTERN_PLUGIN_DIR . 'includes/prompt.php';
     }
 
     private static function loadRender(): void {
-        if (!function_exists('western_render')) {
-            require_once WESTERN_PLUGIN_DIR . 'template/render.php';
-        }
+        require_once WESTERN_PLUGIN_DIR . 'template/render.php';
     }
 
     public function registerRestRoutes(): void {
@@ -246,7 +231,8 @@ class WESTERN_Handle {
         ];
 
         require_once WESTERN_PLUGIN_DIR . 'includes/gatekeeper.php';
-        $gatekeeper_prompt = western_build_gatekeeper_prompt($question);
+        $gatekeeper_prompt = Western_Prompt::gatekeeper_western($question);
+
         $gk_response = '';
 
         $gatekeeper_order_str = get_option('western_gatekeeper_order', 'groq,mistral,gemini');
@@ -274,9 +260,7 @@ class WESTERN_Handle {
             ], 200);
         }
 
-        self::loadPrompt();
-
-        $prompt = western_build_prompt_question($question, $fullCards, $spread_key, $topic);
+        $prompt = Western_Prompt::western_prompt($question, $fullCards, $spread_key, $topic);
 
         $analysis_order_str = get_option('western_analysis_order', get_option('western_ai_provider', 'gemini'));
         $analysis_order = array_map('trim', explode(',', $analysis_order_str));

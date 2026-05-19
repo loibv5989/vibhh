@@ -34,6 +34,7 @@ class BbOracle_Calc {
         shuffle($keys);
         $drawn = array_slice($keys, 0, $count);
 
+        $image_base = BB_ORACLE_PLUGIN_URL . 'data/images/';
         $lite = [];
         foreach ($drawn as $i => $key) {
             $d = $oracle_deck[$key];
@@ -41,6 +42,7 @@ class BbOracle_Calc {
                 'key'     => $key,
                 'name'    => $d['name'],
                 'element' => $d['element'],
+                'image'   => !empty($d['image']) ? $image_base . $d['image'] : '',
             ];
         }
         return $lite;
@@ -49,6 +51,7 @@ class BbOracle_Calc {
     public static function hydrate(array $liteCards): array {
         $oracle_deck = self::getDeck();
         $fullCards   = [];
+        $image_base  = BB_ORACLE_PLUGIN_URL . 'data/images/';
 
         foreach ($liteCards as $pos => $cardData) {
             $key = $cardData['key'] ?? null;
@@ -65,6 +68,7 @@ class BbOracle_Calc {
                 'advice'   => $d['advice']   ?? '',
                 'fortune'  => $d['fortune']  ?? '',
                 'mantra'   => $d['mantra']   ?? '',
+                'image'    => !empty($d['image']) ? $image_base . $d['image'] : '',
             ];
         }
         return $fullCards;

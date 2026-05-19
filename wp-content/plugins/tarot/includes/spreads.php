@@ -7,7 +7,7 @@ $spreads = [
         'count'    => 1,
         'template' => 'one-card',
         'positions' => [
-            'answer' => 'The Card'
+            'answer' => 'Card'
         ]
     ],
     '3_cards' => [
@@ -21,26 +21,26 @@ $spreads = [
         ]
     ],
     '5_cards' => [
-        'name'     => '5-Card Cross Spread',
+        'name'     => '5-Card Spread (Cross)',
         'count'    => 5,
         'template' => 'cross',
         'positions' => [
-            'situation' => 'Current Situation',
+            'situation' => 'Present',
             'challenge' => 'Challenge',
             'advice'    => 'Advice',
-            'external'  => 'External Influences',
+            'external'  => 'Outside Influence',
             'outcome'   => 'Outcome'
         ]
     ],
     '7_cards' => [
-        'name'     => '7-Card Horseshoe Spread',
+        'name'     => '7-Card Spread (Horseshoe)',
         'count'    => 7,
         'template' => 'horseshoe',
         'positions' => [
             'past'        => 'Past',
             'present'     => 'Present',
-            'hidden'      => 'Hidden Factors',
-            'obstacle'    => 'Obstacles',
+            'hidden'      => 'Hidden Factor',
+            'obstacle'    => 'Obstacle',
             'environment' => 'Environment',
             'advice'      => 'Advice',
             'outcome'     => 'Outcome'
@@ -65,17 +65,17 @@ $spreads = [
     ],
 
     'love_3_cards' => [
-        'name'     => 'Love 3-Card Spread',
+        'name'     => 'Love — 3 Cards',
         'count'    => 3,
         'template' => 'three-cards',
         'positions' => [
             'you'        => 'You (Energy & Position)',
-            'partner'    => 'Partner (Thoughts & Feelings)',
+            'partner'    => 'Them (Thoughts & Feelings)',
             'connection' => 'Connection (Future & Advice)'
         ]
     ],
     'love_5_cards' => [
-        'name'     => 'Love 5-Card Contrast Spread',
+        'name'     => 'Love — 5 Cards (Mirror)',
         'count'    => 5,
         'template' => 'cross',
         'positions' => [
@@ -87,30 +87,30 @@ $spreads = [
         ]
     ],
     'love_7_cards' => [
-        'name'     => 'Love 7-Card Horseshoe Spread',
+        'name'     => 'Love — 7 Cards (Horseshoe)',
         'count'    => 7,
         'template' => 'horseshoe',
         'positions' => [
-            'past_love'      => 'Past Love',
-            'present_status' => 'Present Status',
+            'past_love'      => 'Romantic Past',
+            'present_status' => 'Current Status',
             'your_desire'    => 'Your Desire',
             'their_desire'   => 'Their Desire',
-            'hidden_factors' => 'Hidden Blocks',
+            'hidden_factors' => 'Blocking Factors',
             'advice'         => 'Advice',
             'future_outcome' => 'Future Outcome'
         ]
     ],
     'love_9_cards' => [
-        'name'     => 'Love 9-Card Overview',
+        'name'     => 'Love — 9 Cards (Full Picture)',
         'count'    => 9,
         'template' => 'love-nine',
         'positions' => [
-            'you_now'       => 'You Now',
-            'them_now'      => 'Them Now',
+            'you_now'       => 'You Right Now',
+            'them_now'      => 'Them Right Now',
             'core_issue'    => 'Core Issue',
             'past_bond'     => 'Shared Past',
-            'your_hope'     => 'Your Hope',
-            'their_hope'    => 'Their Hope',
+            'your_hope'     => 'Your Hopes',
+            'their_hope'    => 'Their Hopes',
             'challenge'     => 'Upcoming Challenge',
             'advice'        => 'Advice from the Universe',
             'final_outcome' => 'Final Outcome'
@@ -118,7 +118,6 @@ $spreads = [
     ],
 ];
 
-// Alias
 $spreads['celtic_cross'] = $spreads['10_cards'];
 
 return $spreads;

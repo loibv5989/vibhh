@@ -48,6 +48,25 @@ class Tarot_Calc {
         return $lite;
     }
 
+    public static function drawShuffled(): array {
+        $tarot_deck = self::getData();
+
+        $keys = array_keys($tarot_deck);
+        shuffle($keys);
+
+        $shuffled = [];
+        foreach ($keys as $key) {
+            $d = $tarot_deck[$key];
+            $shuffled[] = [
+                'key'         => $key,
+                'orientation' => rand(0, 1) ? 'upright' : 'reversed',
+                'name'        => $d['name'],
+            ];
+        }
+
+        return ['shuffled_deck' => $shuffled];
+    }
+
     public static function hydrate(array $liteCards): array {
         $tarot_deck = self::getData();
 
@@ -66,6 +85,9 @@ class Tarot_Calc {
             }
 
             $d = $tarot_deck[$key];
+            
+            $image_filename = strtolower(str_replace('_', '', $key)) . '.jpg';
+            $image_url = TAROT_PLUGIN_URL . 'images/' . $image_filename;
 
             $fullCards[$pos] = [
                 'key'               => $key,
@@ -88,6 +110,7 @@ class Tarot_Calc {
                 'themes'            => $d['themes'] ?? [],
                 'timing'            => $d['timing'] ?? '',
                 'related_cards'     => $d['related_cards'] ?? [],
+                'image_url'         => $image_url,
             ];
         }
 
@@ -104,7 +127,7 @@ class Tarot_Calc {
         }
 
         if (empty(trim(strip_tags($html)))) {
-            $html = '<p>Unable to decode result. Please try again.</p>';
+            $html = '<p>Không thể giải mã kết quả. Vui lòng thử lại.</p>';
         }
 
         return ['hints' => [], 'html' => $html];

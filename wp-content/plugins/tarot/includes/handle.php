@@ -4,7 +4,6 @@ if (!defined('ABSPATH')) exit;
 
 class TR_Handle {
     private static ?TR_Handle $instance = null;
-    private bool $cache_dir_ready = false;
 
     public static function get_instance(): self {
         if (self::$instance === null) self::$instance = new self();
@@ -20,21 +19,10 @@ class TR_Handle {
     }
 
     private static function loadAIProviders(): void {
-        if (!class_exists('TR_Gemini')) {
-            require_once TAROT_PLUGIN_DIR . 'includes/gemini.php';
-        }
-        if (!class_exists('TR_Groq')) {
-            require_once TAROT_PLUGIN_DIR . 'includes/groq.php';
-        }
-        if (!class_exists('TR_Mistral')) {
-            require_once TAROT_PLUGIN_DIR . 'includes/mistral.php';
-        }
-    }
-
-    private static function loadPrompt(): void {
-        if (!function_exists('tarot_build_prompt_topic')) {
-            require_once TAROT_PLUGIN_DIR . 'includes/prompt.php';
-        }
+        require_once TAROT_PLUGIN_DIR . 'includes/gemini.php';
+        require_once TAROT_PLUGIN_DIR . 'includes/groq.php';
+        require_once TAROT_PLUGIN_DIR . 'includes/mistral.php';
+        require_once TAROT_PLUGIN_DIR . 'includes/prompt.php';
     }
 
     public function enqueueAssets(): void {
@@ -82,6 +70,12 @@ class TR_Handle {
                 'permission_callback' => '__return_true',
         ]);
 
+        register_rest_route('tarot/v1', '/reveal', [
+                'methods'             => 'POST',
+                'callback'            => [$this, 'handleRestReveal'],
+                'permission_callback' => '__return_true',
+        ]);
+
         register_rest_route('tarot/v1', '/analyze', [
                 'methods'             => 'POST',
                 'callback'            => [$this, 'handleRestAnalyze'],
@@ -115,39 +109,65 @@ class TR_Handle {
             <?php endif; ?>
 
             <?php include TAROT_PLUGIN_DIR . 'template/pages/topic-selection.php'; ?>
-
             <?php include TAROT_PLUGIN_DIR . 'template/pages/question-input.php'; ?>
-
             <?php include TAROT_PLUGIN_DIR . 'template/pages/love-input.php'; ?>
-
+            <?php include TAROT_PLUGIN_DIR . 'template/pages/shuffle-step.php'; ?>
             <?php include TAROT_PLUGIN_DIR . 'template/pages/deck-selection.php'; ?>
         </div>
         <?php return ob_get_clean();
     }
 
     public function handleRestDraw(WP_REST_Request $request): WP_REST_Response {
-        $mode = sanitize_text_field($request->get_param('mode') ?? 'topic');
-        $topic = sanitize_text_field($request->get_param('topic') ?? '');
-        $question = sanitize_text_field($request->get_param('question') ?? '');
+        $drawResult = Tarot_Calc::drawShuffled();
+
+        return new WP_REST_Response([
+                'success'       => true,
+                'shuffled_deck' => $drawResult['shuffled_deck'],
+        ], 200);
+    }
+
+    public function handleRestReveal(WP_REST_Request $request): WP_REST_Response {
+        $mode       = sanitize_text_field($request->get_param('mode') ?? 'topic');
+        $topic      = sanitize_text_field($request->get_param('topic') ?? '');
+        $question   = sanitize_text_field($request->get_param('question') ?? '');
         $spread_key = sanitize_text_field($request->get_param('spread') ?? '3_cards');
         if (!Tarot_Calc::isValidSpread($spread_key)) $spread_key = '3_cards';
 
-        $liteCards = Tarot_Calc::drawLite($spread_key);
-        $fullCards = Tarot_Calc::hydrate($liteCards);
-        
+        $pickedRaw = $request->get_param('picked');
+        $picked    = is_string($pickedRaw) ? json_decode(wp_unslash($pickedRaw), true) : $pickedRaw;
+
+        if (!is_array($picked) || empty($picked)) {
+            return new WP_REST_Response(['success' => false, 'message' => 'Lựa chọn lá bài không hợp lệ.'], 200);
+        }
+
+        $spreads   = require TAROT_PLUGIN_DIR . 'includes/spreads.php';
+        $spread    = $spreads[$spread_key] ?? $spreads['3_cards'];
+        $positions = array_keys($spread['positions']);
+
+        $liteCards = [];
+        foreach ($picked as $i => $card) {
+            $pos_key = $positions[$i] ?? 'extra_' . $i;
+            $liteCards[$pos_key] = [
+                'key'         => $card['key']         ?? '',
+                'orientation' => $card['orientation']  ?? 'upright',
+                'name'        => $card['name']         ?? '',
+            ];
+        }
+
+        $fullCards  = Tarot_Calc::hydrate($liteCards);
         $renderHTML = $this->renderSpread($spread_key, $mode === 'topic' ? $topic : '', $fullCards, $mode, $question);
 
         $html_content = is_array($renderHTML) ? ($renderHTML['html'] ?? '') : $renderHTML;
         $hints = [];
         foreach ($fullCards as $pos_key => $card) {
-            $hints[$pos_key] = $card['hint'] ?? 'A hidden message';
+            $hints[$pos_key] = $card['hint'] ?? 'Có thông điệp ẩn';
         }
 
         return new WP_REST_Response([
                 'success' => true,
                 'html'    => $html_content,
                 'cards'   => $liteCards,
-                'hints'   => $hints
+                'hints'   => $hints,
         ], 200);
     }
 
@@ -185,23 +205,23 @@ class TR_Handle {
     public function handleRestAnalyze(WP_REST_Request $request): WP_REST_Response {
         if (!$this->validate_logged_in()) {
             return new WP_REST_Response(
-                [
-                    'success' => false,
-                    'message' => 'Please log in to use this feature.'
-                ], 200);
+                    [
+                            'success' => false,
+                            'message' => 'Please log in to use this feature.'
+                    ], 200);
         }
 
         $allow_ai = get_option('tarot_allow_ai', '0');
 
         if ($allow_ai !== '1') {
             return new WP_REST_Response([
-                'success' => false,
-                'message' => 'This feature is currently paused. Please try again later.'
+                    'success' => false,
+                    'message' => 'This feature is temporarily unavailable. Please check back later.'
             ], 200);
         }
 
         if (!$this->tarot_quota()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Daily analysis limit reached. Please come back tomorrow.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'You have reached the daily reading limit. Please come back tomorrow.'], 200);
         }
 
         $name       = mb_substr(sanitize_text_field($request->get_param('full_name') ?? ''), 0, 60);
@@ -214,7 +234,7 @@ class TR_Handle {
         $hp_trap = $request->get_param('hp_trap') ?? '';
 
         if (!empty($hp_trap)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'The universe declines to connect with you.'], 403);
+            return new WP_REST_Response(['success' => false, 'message' => 'The universe refuses to connect with you.'], 403);
         }
 
         if (empty($name)) {
@@ -222,21 +242,19 @@ class TR_Handle {
         }
 
         if (($mode === 'question' || $mode === 'love') && empty($question)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid reading data. Please try again.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data. Please try again.'], 200);
         }
 
         $cardsLiteRaw = $request->get_param('cards');
-        $liteCards = is_string($cardsLiteRaw)
-                ? json_decode(wp_unslash($cardsLiteRaw), true)
-                : $cardsLiteRaw;
+        $liteCards = is_string($cardsLiteRaw) ? json_decode(wp_unslash($cardsLiteRaw), true) : $cardsLiteRaw;
 
         if (!is_array($liteCards) || empty($liteCards) || count($liteCards) > 10) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Invalid reading data.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card data.'], 200);
         }
 
         foreach ($liteCards as $pos => $c) {
             if (!is_array($c) || empty($c['key']) || !isset($c['orientation'])) {
-                return new WP_REST_Response(['success' => false, 'message' => 'Card structure is malformed.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'Card structure is invalid.'], 200);
             }
         }
 
@@ -246,28 +264,17 @@ class TR_Handle {
 
         $static_hints = [];
         foreach ($fullCards as $pos_key => $card) {
-            $static_hints[$pos_key] = $card['hint'] ?? 'A hidden message';
+            $static_hints[$pos_key] = $card['hint'] ?? 'A hidden message awaits';
         }
 
         $providers = [
-            'gemini'  => fn($p) => TR_Gemini::get_instance()->ftn_gemini_generate($p),
-            'groq'    => fn($p) => TR_Groq::get_instance()->ftn_groq_generate($p),
-            'mistral' => fn($p) => TR_Mistral::get_instance()->ftn_mistral_generate($p),
+                'gemini'  => fn($p) => TR_Gemini::get_instance()->ftn_gemini_generate($p),
+                'groq'    => fn($p) => TR_Groq::get_instance()->ftn_groq_generate($p),
+                'mistral' => fn($p) => TR_Mistral::get_instance()->ftn_mistral_generate($p),
         ];
-
-        $provider_models = [
-            'gemini' => get_option('tarot_ai_model', 'gemini-flash-latest'),
-            'groq' => get_option('tarot_groq_model', 'llama-3.3-70b-versatile'),
-            'mistral' => get_option('tarot_mistral_model', 'mistral-large-latest'),
-        ];
-
 
         if ($mode === 'question' || $mode === 'love') {
-            if (!function_exists('tarot_build_gatekeeper_prompt')) {
-                require_once TAROT_PLUGIN_DIR . 'includes/gatekeeper.php';
-            }
-
-            $gatekeeper_prompt = tarot_build_gatekeeper_prompt($question, $mode);
+            $gatekeeper_prompt = Tarot_Prompt::tarot_gatekeeper($question, $mode);
             $gk_response = '';
 
             $gatekeeper_order_str = get_option('tarot_gatekeeper_order', 'groq,mistral,gemini');
@@ -285,44 +292,24 @@ class TR_Handle {
                 }
             }
 
-            if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'N') !== false || empty($gk_response)) {
+            if (strpos($gk_response, 'NO') !== false || strpos($gk_response, 'No') !== false || empty($gk_response)) {
                 if ($mode === 'love') {
-                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> more clearly about your love life.';
+                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> that is more clearly about your relationship or feelings.';
                 } else {
-                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> more clearly about your issue.';
+                    $html_fallback = '<br><br>Please try again. <span class="trt-reload" onclick="window.location.reload()">Ask a question</span> that is more specific about your situation.';
                 }
 
                 return new WP_REST_Response([
-                    'success' => true,
-                    'html' => $html_fallback,
-                    'hints' => $static_hints,
+                        'success' => true,
+                        'html' => $html_fallback,
+                        'hints' => $static_hints,
                 ], 200);
             }
         }
 
-        $cache_str = $name . $mode . $spread_key . (($mode === 'question' || $mode === 'love') ? md5($question) : $topic);
-        foreach ($liteCards as $pos => $c) {
-            $cache_str .= $c['key'] . $c['orientation'];
-        }
-        $cache_key = md5($cache_str);
-
-        $cached = $this->getCache($cache_key);
-        if ($cached !== null) {
-            $parsed = Tarot_Calc::parseResponse($cached);
-
-            return new WP_REST_Response([
-                'success'   => true,
-                'is_cached' => true,
-                'html'      => $parsed['html'],
-                'hints'     => $static_hints
-            ], 200);
-        }
-
-        self::loadPrompt();
-
         $prompt = (($mode === 'question' || $mode === 'love'))
-            ? tarot_build_prompt_question($name, $question, $fullCards, $spread_key, $topic)
-            : tarot_build_prompt_topic($name, $topic, $fullCards, $spread_key);
+                ? Tarot_Prompt::tarot_question($name, $question, $fullCards, $spread_key, $topic)
+                : Tarot_Prompt::tarot_topic($name, $topic, $fullCards, $spread_key);
 
         try {
             $rawResponse = '';
@@ -335,7 +322,7 @@ class TR_Handle {
                 try {
                     $rawResponse = $providers[$current_provider]($prompt);
                     if (!empty($rawResponse) && !str_starts_with($rawResponse, '[Error]') &&
-                        str_contains($rawResponse, '[AST_RESULT]') && str_contains($rawResponse, '[/AST_RESULT]')) {
+                            str_contains($rawResponse, '[AST_RESULT]') && str_contains($rawResponse, '[/AST_RESULT]')) {
                         $is_valid = true;
                         break;
                     }
@@ -344,69 +331,26 @@ class TR_Handle {
                 }
             }
 
-//            file_put_contents(plugin_dir_path(__FILE__) . 'prompt.log', $prompt);
-//            file_put_contents(plugin_dir_path(__FILE__) . 'rawResponse.log', $rawResponse);
 
             if (!$is_valid) {
-                return new WP_REST_Response(['success' => false, 'message' => 'The system is overloaded. Please try again shortly.'], 200);
+                return new WP_REST_Response(['success' => false, 'message' => 'The system is currently overloaded. Please try again in a moment.'], 200);
             }
 
             if (preg_match('/\[AST_RESULT\]([\s\S]*?)\[\/AST_RESULT\]/', $rawResponse, $matches)) {
                 $rawResponse = '[AST_RESULT]' . trim($matches[1]) . '[/AST_RESULT]';
             }
 
-            $this->saveCache($cache_key, $rawResponse);
-
             $parsed = Tarot_Calc::parseResponse($rawResponse);
 
             return new WP_REST_Response([
-                'success'   => true,
-                'is_cached' => false,
-                'html'      => $parsed['html'],
-                'hints'     => $static_hints
+                    'success'   => true,
+                    'html'      => $parsed['html'],
+                    'hints'     => $static_hints
             ], 200);
 
         } catch (Exception $e) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Connection error. Please try again later.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Connection error. Please try again.'], 200);
         }
-    }
-
-    private function ensureCacheDir(): void {
-        if ($this->cache_dir_ready) return;
-        $upload_dir = wp_upload_dir();
-        $dir = $upload_dir['basedir'] . '/bb-tarot';
-        if (!file_exists($dir)) {
-            wp_mkdir_p($dir);
-            chmod($dir, 0755);
-            file_put_contents($dir . '/.htaccess', "Deny from all\n");
-            file_put_contents($dir . '/index.php', "<?php // silence\n");
-        }
-        $this->cache_dir_ready = true;
-    }
-
-    private function getCacheFilePath(string $key): string {
-        $this->ensureCacheDir();
-        $upload_dir = wp_upload_dir();
-        $dir = $upload_dir['basedir'] . '/bb-tarot';
-        return $dir . '/' . $key . '.json';
-    }
-    private function getCache(string $key): ?string {
-        $file = $this->getCacheFilePath($key);
-
-        if (file_exists($file)) {
-            if (time() - filemtime($file) > 365 * DAY_IN_SECONDS) {
-                @unlink($file);
-                return null;
-            }
-            $cache_data = json_decode(file_get_contents($file), true);
-            return $cache_data['response'] ?? null;
-        }
-
-        return null;
-    }
-
-    private function saveCache(string $key, string $response): void {
-        file_put_contents($this->getCacheFilePath($key), json_encode(['response' => $response, 'created' => time()]));
     }
 
     public function removePageTitle($title, $post_id) {

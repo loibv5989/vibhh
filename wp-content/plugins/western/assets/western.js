@@ -310,15 +310,33 @@ jQuery(function ($) {
             const $btn = $('#trt-btn-deep-analyze').addClass('loading').prop('disabled', true);
             $('#ast-analysis-wrap').slideDown(400);
 
+            const loadingTexts = [
+                'Connecting...', 'Initializing...', 'Analyzing cards...',
+                'Interpreting context...', 'Matching meanings...', 'Compiling results...',
+                'Interpreting...', 'Finalizing...', 'Please wait...'
+            ];
+            let textIdx = 0;
+            const $loadingSpan = $btn.find('.trt-btn-loading');
+            const textInterval = setInterval(() => {
+                textIdx++;
+                if (textIdx >= loadingTexts.length) {
+                    clearInterval(textInterval);
+                    return;
+                }
+                $loadingSpan.html('<span class="trt-spinner"></span> ' + loadingTexts[textIdx]);
+            }, 500);
+
             try {
                 const analyzeResult = await Ajax.analyze();
+                clearInterval(textInterval);
                 AIResult.tryInject(analyzeResult);
 
                 $('#trt-deep-analyze-form').slideUp(300);
 
             } catch (error) {
+                clearInterval(textInterval);
                 $('#trt-err-analyze').text(error || 'Connection error. Please try again later.');
-                $('#ast-analysis-wrap').html('').hide();
+                $('#ast-analysis-wrap').hide();
                 $('html, body').animate({ scrollTop: $('#trt-deep-analyze-form').offset().top - 50 }, 400);
                 $btn.removeClass('loading').prop('disabled', false);
             }

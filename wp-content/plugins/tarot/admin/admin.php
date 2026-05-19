@@ -40,8 +40,8 @@ class TR_Admin {
     public function register_settings_page() {
         add_submenu_page(
                 'fortune-settings',
-                'Tarot Reading',
-                'Tarot Reading',
+                'Bói Bài Tarot',
+                'Bói Bài Tarot',
                 'manage_options',
                 'bb-tarot-settings',
                 [$this, 'render_settings_page']
@@ -50,13 +50,13 @@ class TR_Admin {
 
     public function render_settings_page() {
 
-        $model      = get_option('tarot_ai_model', 'gemini-flash-cardtest');
+        $model      = get_option('tarot_ai_model', 'gemini-flash-latest');
         $provider   = get_option('tarot_ai_provider', 'gemini');
         $groq_model = get_option('tarot_groq_model', 'llama-3.3-70b-versatile');
         $gemini_key = get_option('tarot_gemini_key', '');
         $groq_key   = get_option('tarot_groq_key', '');
         $mistral_key = get_option('tarot_mistral_key', '');
-        $mistral_model = get_option('tarot_mistral_model', 'mistral-small-cardtest');
+        $mistral_model = get_option('tarot_mistral_model', 'mistral-small-latest');
 
         $gatekeeper_order = get_option('tarot_gatekeeper_order', 'groq,mistral,gemini');
         $analysis_order = get_option('tarot_analysis_order', 'gemini,mistral,groq');
@@ -65,22 +65,22 @@ class TR_Admin {
         ?>
 
         <div class="wrap">
-            <h1>Tarot Reading Settings</h1>
+            <h1>Cấu hình Bói Bài Tarot</h1>
             <form method="post">
                 <?php wp_nonce_field('bb_tarot_settings_form'); ?>
                 
                 <!-- SECTION 0: AI Enable/Disable -->
-                <h2>🤖 Enable / Disable AI</h2>
+                <h2>🤖 Bật/Tắt AI</h2>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Allow AI usage</th>
+                        <th scope="row">Cho phép sử dụng AI</th>
                         <td>
                             <label>
                                 <input type="checkbox" name="allow_ai" value="1" <?php checked($allow_ai, '1'); ?>>
-                                Enable AI features (Gatekeeper + Reading)
+                                Bật chức năng AI (Gatekeeper + Giải bài)
                             </label>
                             <p class="description" style="color: #d63638;">
-                                <strong>⚠️ Note:</strong> If disabled, all AI features will be turned off. Users will not be able to use the Tarot reading feature.
+                                <strong>⚠️ Lưu ý:</strong> Nếu tắt, tất cả chức năng AI sẽ bị vô hiệu hóa. Người dùng sẽ không thể sử dụng tính năng giải bài Tarot.
                             </p>
                         </td>
                     </tr>
@@ -88,13 +88,13 @@ class TR_Admin {
                 
                 <hr style="margin: 30px 0;">
                 
-                <h2>⚙️ Model Priority Order (Fallback)</h2>
-                <p style="margin-top: 0; color: #666;">The system will automatically switch to a fallback model if the primary model fails.</p>
+                <h2>⚙️ Thứ tự ưu tiên Model (Fallback)</h2>
+                <p style="margin-top: 0; color: #666;">Hệ thống sẽ tự động chuyển sang model dự phòng nếu model chính gặp lỗi.</p>
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <strong>Step 1:</strong> Question Gatekeeper
-                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Decide whether to proceed to Step 2</p>
+                            <strong>Step 1:</strong> Kiểm duyệt câu hỏi
+                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Quyết định có tiếp tục Step 2 không</p>
                         </th>
                         <td>
                             <select name="gatekeeper_order" style="min-width: 250px;">
@@ -109,8 +109,8 @@ class TR_Admin {
                     </tr>
                     <tr>
                         <th scope="row">
-                            <strong>Step 2:</strong> Card Reading
-                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Analysis and interpretation</p>
+                            <strong>Step 2:</strong> Giải lá bài
+                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Phân tích và giải đáp</p>
                         </th>
                         <td>
                             <select name="analysis_order" style="min-width: 250px;">
@@ -128,7 +128,7 @@ class TR_Admin {
                 <hr style="margin: 30px 0;">
                 
                 <!-- SECTION 2: API Configuration -->
-                <h2>🔑 API Keys & Models Configuration</h2>
+                <h2>🔑 Cấu hình API Keys & Models</h2>
                 
                 <h3 style="margin-top: 20px;">Google Gemini</h3>
                 <table class="form-table">
@@ -136,19 +136,19 @@ class TR_Admin {
                         <th scope="row">Gemini Model</th>
                         <td>
                             <select name="model" style="min-width: 250px;">
-                                <option value="gemini-flash-cardtest" <?php selected($model, 'gemini-flash-cardtest'); ?>>gemini-flash-cardtest</option>
+                                <option value="gemini-flash-latest" <?php selected($model, 'gemini-flash-latest'); ?>>gemini-flash-latest</option>
                                 <option value="gemini-2.5-flash" <?php selected($model, 'gemini-2.5-flash'); ?>>gemini-2.5-flash</option>
                                 <option value="gemini-3-flash-preview" <?php selected($model, 'gemini-3-flash-preview'); ?>>gemini-3-flash-preview</option>
                                 <option value="gemini-2.5-flash-lite" <?php selected($model, 'gemini-2.5-flash-lite'); ?>>gemini-2.5-flash-lite</option>
-                                <option value="gemini-flash-lite-cardtest" <?php selected($model, 'gemini-flash-lite-cardtest'); ?>>gemini-flash-lite-cardtest</option>
+                                <option value="gemini-flash-lite-latest" <?php selected($model, 'gemini-flash-lite-latest'); ?>>gemini-flash-lite-latest</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Gemini API Keys</th>
                         <td>
-                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($gemini_key); ?></textarea>
-                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
+                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($gemini_key); ?></textarea>
+                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
                         </td>
                     </tr>
                 </table>
@@ -168,8 +168,8 @@ class TR_Admin {
                     <tr>
                         <th scope="row">Groq API Keys</th>
                         <td>
-                            <textarea name="groq_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($groq_key); ?></textarea>
-                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
+                            <textarea name="groq_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($groq_key); ?></textarea>
+                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
                         </td>
                     </tr>
                 </table>
@@ -180,20 +180,20 @@ class TR_Admin {
                         <th scope="row">Mistral Model</th>
                         <td>
                             <select name="mistral_model" style="min-width: 250px;">
-                                <option value="mistral-small-cardtest" <?php selected($mistral_model, 'mistral-small-cardtest'); ?>>mistral-small-cardtest</option>
-                                <option value="mistral-cardrge-2411" <?php selected($mistral_model, 'mistral-cardrge-2411'); ?>>mistral-cardrge-2411</option>
-                                <option value="mistral-medium-cardtest" <?php selected($mistral_model, 'mistral-medium-cardtest'); ?>>mistral-medium-cardtest</option>
+                                <option value="mistral-small-latest" <?php selected($mistral_model, 'mistral-small-latest'); ?>>mistral-small-latest</option>
+                                <option value="mistral-large-2411" <?php selected($mistral_model, 'mistral-large-2411'); ?>>mistral-large-2411</option>
+                                <option value="mistral-medium-latest" <?php selected($mistral_model, 'mistral-medium-latest'); ?>>mistral-medium-latest</option>
                                 <option value="mistral-medium-2505" <?php selected($mistral_model, 'mistral-medium-2505'); ?>>mistral-medium-2505</option>
                                 <option value="mistral-medium-2508" <?php selected($mistral_model, 'mistral-medium-2508'); ?>>mistral-medium-2508</option>
-                                <option value="mistral-cardrge-cardtest" <?php selected($mistral_model, 'mistral-cardrge-cardtest'); ?>>mistral-cardrge-cardtest</option>
+                                <option value="mistral-large-latest" <?php selected($mistral_model, 'mistral-large-latest'); ?>>mistral-large-latest</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Mistral API Keys</th>
                         <td>
-                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($mistral_key); ?></textarea>
-                            <p class="description">Enter multiple keys so the system can auto-rotate when hitting rate limits.</p>
+                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($mistral_key); ?></textarea>
+                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
                         </td>
                     </tr>
                 </table>
@@ -201,7 +201,7 @@ class TR_Admin {
                 <h3 style="margin-top: 30px;">Test Connection</h3>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Select provider to test</th>
+                        <th scope="row">Chọn provider để test</th>
                         <td>
                             <select name="provider" id="bb_tarot_provider_select" style="min-width: 250px;">
                                 <option value="gemini" <?php selected($provider, 'gemini'); ?>>Google Gemini</option>
@@ -217,29 +217,29 @@ class TR_Admin {
                 <hr style="margin: 30px 0;">
                 
                 <!-- SECTION 3: Page Creation -->
-                <h2>📄 Create Pages</h2>
+                <h2>📄 Tạo trang</h2>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Create pages</th>
+                        <th scope="row">Tạo trang</th>
                         <td>
-                            <button type="button" id="create-pages-btn" class="button button-primary">Create Pages</button>
+                            <button type="button" id="create-pages-btn" class="button button-primary">Tạo trang</button>
                             <div id="create-pages-results" style="margin-top: 10px;"></div>
                             <p class="description">
-                                Create 6 pages with a hierarchy for Tarot Reading:<br>
-                                • Free Online Tarot Reading (LV 1)<br>
-                                • 3-Card Tarot Reading (LV 2)<br>
-                                • 5-Card Tarot Reading (LV 2)<br>
-                                • 7-Card Horseshoe Tarot Reading (LV 2)<br>
-                                • 10-Card Celtic Cross Tarot Reading (LV 2)<br>
-                                • Ask Tarot a Question (LV 2)<br><br>
-                                <strong>URLs to be created:</strong><br>
-                                • /tarot-online/ (main page)<br>
-                                • /tarot-3-card/ (3-card Tarot)<br>
-                                • /tarot-5-card/ (5-card Tarot)<br>
-                                • /tarot-7-card/ (7-card Tarot)<br>
-                                • /tarot-10-card/ (10-card Tarot)<br>
-                                • /tarot-cau-hoi/ (Tarot question)<br><br>
-                                <em>Note: Existing pages will be skipped.</em>
+                                Tạo 6 trang với cấu trúc hierarchy cho Bói Bài Tarot:<br>
+                                • Bói Bài Tarot Online Miễn Phí (LV 1)<br>
+                                • Bói Bài Tarot 3 Lá (LV 2)<br>
+                                • Bói Bài Tarot 5 Lá (LV 2)<br>
+                                • Bói Bài Móng Ngựa 7 Lá (LV 2)<br>
+                                • Bói Bài Tarot 10 Lá (LV 2)<br>
+                                • Bói Tarot Theo Câu Hỏi (LV 2)<br><br>
+                                <strong>URLs sẽ được tạo:</strong><br>
+                                • /tarot-online/ (trang chính)<br>
+                                • /tarot-3-la/ (Tarot 3 lá)<br>
+                                • /tarot-5-la/ (Tarot 5 lá)<br>
+                                • /tarot-7-la/ (Tarot 7 lá)<br>
+                                • /tarot-10-la/ (Tarot 10 lá)<br>
+                                • /tarot-cau-hoi/ (Tarot câu hỏi)<br><br>
+                                <em>Lưu ý: Trang đã tồn tại sẽ được bỏ qua.</em>
                             </p>
                         </td>
                     </tr>
@@ -414,41 +414,41 @@ class TR_Admin {
 
         $pages_config = [
             [
-                'title' => 'Free Online Tarot Reading',
+                'title' => 'Bói Bài Tarot Online Miễn Phí',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="hub"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-online',
+                'slug' => 'boi-bai-tarot-online',
                 'parent' => 0
             ],
 
             [
-                'title' => '3-Card Tarot Reading',
+                'title' => 'Bói Bài Tarot 3 Lá',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-3-card',
-                'parent' => 'tarot-online'
+                'slug' => 'tarot-3-la',
+                'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => '5-Card Tarot Reading',
+                'title' => 'Bói Bài Tarot 5 Lá',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="5_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-5-card',
-                'parent' => 'tarot-online'
+                'slug' => 'tarot-5-la',
+                'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => '7-Card Horseshoe Tarot Reading',
+                'title' => 'Bói Bài Móng Ngựa 7 Lá',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="7_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-7-card',
-                'parent' => 'tarot-online'
+                'slug' => 'tarot-7-la',
+                'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => '10-Card Celtic Cross Tarot Reading',
+                'title' => 'Bói Bài Tarot 10 Lá',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="topic" spread="10_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-10-card',
-                'parent' => 'tarot-online'
+                'slug' => 'tarot-10-la',
+                'parent' => 'boi-bai-tarot-online'
             ],
             [
-                'title' => 'Ask Tarot a Question',
+                'title' => 'Bói Tarot Theo Câu Hỏi',
                 'content' => '<!-- wp:shortcode -->' . "\n" . '[tarot_form mode="question" spread="3_cards"]' . "\n" . '<!-- /wp:shortcode -->',
-                'slug' => 'tarot-question',
-                'parent' => 'tarot-online'
+                'slug' => 'tarot-cau-hoi',
+                'parent' => 'boi-bai-tarot-online'
             ]
         ];
 
@@ -478,11 +478,11 @@ class TR_Admin {
             ]);
 
             if (!empty($existing)) {
-                $parent_ids[$page_config['slug']] = $existing[0]->ID; // still need to save for child pages
+                $parent_ids[$page_config['slug']] = $existing[0]->ID; // vẫn cần lưu để các trang con dùng
                 $created_pages[] = [
                         'title'    => $page_config['title'],
                         'edit_url' => get_edit_post_link($existing[0]->ID),
-                        'status'   => 'already exists (skipped)',
+                        'status'   => 'đã tồn tại (bỏ qua)',
                 ];
                 continue;
             }
@@ -503,18 +503,18 @@ class TR_Admin {
                 $created_pages[] = [
                         'title'    => $page_config['title'],
                         'edit_url' => get_edit_post_link($page_id),
-                        'status'   => 'created',
+                        'status'   => 'đã tạo',
                 ];
             }
         }
 
         if (!empty($created_pages)) {
             wp_send_json_success([
-                    'message' => 'Processed ' . count($created_pages) . ' pages',
+                    'message' => 'Đã xử lý ' . count($created_pages) . ' trang',
                     'pages'   => $created_pages,
             ]);
         } else {
-            wp_send_json_error(['message' => 'Unable to create pages']);
+            wp_send_json_error(['message' => 'Không thể tạo trang']);
         }
     }
 }

@@ -9,19 +9,19 @@
         <a href="/tarot-online/" class="trt-back-btn">← Tarot Home</a>
         <span class="trt-step-label">🃏 <?= esc_html($current_spread['name']) ?></span>
     </div>
-    <h1 class="trt-hero-title">Tarot Reading <span><?= esc_html($total_cards) ?> Cards</span></h1>
+    <h1 class="trt-hero-title">Tarot Spread <span><?= esc_html($total_cards) ?> Cards</span></h1>
     <div class="trt-topic-section">
-        <p class="trt-label">Choose the topic you want to ask about</p>
-        <p class="trt-topic-hint">✦ Close your eyes, think about the issue troubling you, then choose a topic</p>
+        <p class="trt-label">Choose a topic to explore</p>
+        <p class="trt-topic-hint">✦ Close your eyes, think about what's on your mind, then choose a topic</p>
         <div class="trt-topic-grid">
             <?php
             $topics = [
-                'love' => ['icon' => '❤️', 'label' => 'Love'],
-                'career' => ['icon' => '💼', 'label' => 'Career'],
-                'finance' => ['icon' => '💰', 'label' => 'Finance'],
-                'study' => ['icon' => '📚', 'label' => 'Study'],
-                'health' => ['icon' => '🌿', 'label' => 'Health'],
-                'future' => ['icon' => '🔮', 'label' => 'Future'],
+                    'love'    => ['icon' => '❤️', 'label' => 'Love'],
+                    'career'  => ['icon' => '💼', 'label' => 'Career'],
+                    'finance' => ['icon' => '💰', 'label' => 'Finance'],
+                    'study'   => ['icon' => '📚', 'label' => 'Study'],
+                    'health'  => ['icon' => '🌿', 'label' => 'Health'],
+                    'future'  => ['icon' => '🔮', 'label' => 'Future'],
             ];
             foreach ($topics as $val => $t): ?>
                 <button class="trt-topic-card" data-topic="<?= $val ?>">
@@ -36,5 +36,6 @@
         </div>
         <span class="trt-error" id="trt-err-topic-a"></span>
     </div>
+
     <input type="hidden" id="trt-topic-val" value="">
 </div>

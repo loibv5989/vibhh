@@ -13,7 +13,7 @@ jQuery(function ($) {
     const State = {
         mode: $config.data('mode') || 'hub',
         spread: $config.data('spread') || '3_cards',
-        name: '', topic: '', question: '', cardsLite: null, resultHtml: '', hints: null
+        name: '', topic: '', question: '', cardsLite: null, shuffledDeck: null, pickedCards: [], resultHtml: '', hints: null
     };
 
     const Auth = {
@@ -41,15 +41,15 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Please enter your full name.');
+                $e.text('Vui lòng nhập họ và tên.');
                 return false;
             }
             if (val.length > 40) {
-                $e.text('Name must be 40 characters or fewer.');
+                $e.text('Họ tên tối đa 40 ký tự.');
                 return false;
             }
             if (/\d/.test(val)) {
-                $e.text('Name must not contain numbers.');
+                $e.text('Họ tên không được chứa số.');
                 return false;
             }
             return true;
@@ -58,7 +58,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Please select a topic.');
+                $e.text('Vui lòng chọn chủ đề.');
                 return false;
             }
             return true;
@@ -67,7 +67,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val || val.trim().length < 5) {
-                $e.text('Please enter a question (at least 5 characters).');
+                $e.text('Vui lòng nhập câu hỏi (tối thiểu 5 ký tự).');
                 return false;
             }
             return true;
@@ -109,7 +109,7 @@ jQuery(function ($) {
                     $cursor.before($el);
                     this.typeText($el, line.label + ': ', 24, () => {
                         $el.append($('<span class="ast-tw-num" style="color:' + line.color + '">' + line.value + '</span>'));
-                        $el.append($('<span class="ast-hint-skeleton ast-tw-hint" data-hint-key="' + line.key + '"></span>'));
+                        $el.append($('<span class="ast-tw-hint" data-hint-key="' + line.key + '"></span>'));
                         setTimeout(next, this.fastMode ? 20 : 60);
                     });
                     return;
@@ -131,10 +131,8 @@ jQuery(function ($) {
                 $('[data-hint-key="' + key + '"]')
                     .stop(true, true).css('display', '')
                     .text(' — ' + hint)
-                    .removeClass('ast-hint-skeleton')
                     .addClass('ast-tw-hint-text');
             });
-            $('.ast-hint-skeleton').fadeOut(200);
         },
         tryInject(result) {
             if (!result) return;
@@ -143,18 +141,12 @@ jQuery(function ($) {
 
             if (result.hints && Object.keys(result.hints).length) {
                 this.injectHints(result.hints);
-            } else {
-                $('.ast-hint-skeleton').fadeOut(200);
             }
 
             const $c = $('#ast-final-result');
             $c.empty().addClass('ast-content-loaded');
 
-            if (!result.is_cached) {
-                $c.html(result.html);
-            } else {
-                $c.css('opacity', 0).html(result.html).animate({ opacity: 1 }, 500);
-            }
+            $c.html(result.html);
             $('#trt-disclaimer').fadeIn(400);
             $('.ast-action-footer').fadeIn(400);
         }
@@ -174,18 +166,32 @@ jQuery(function ($) {
                     },
                     success: res => {
                         if (res && res.success) {
-                            State.cardsLite = res.cards;
-                            State.resultHtml = res.html;
-                            State.hints = res.hints || null;
+                            State.shuffledDeck = res.shuffled_deck;
                             resolve(res);
                         } else {
-                            reject(res?.message || 'An error occurred.');
+                            reject(res?.message || 'Đã có lỗi xảy ra.');
                         }
                     },
-                    error: xhr => reject(xhr?.responseJSON?.message || 'Connection error. Please try again.')
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
                 });
             });
             return this.drawPromise;
+        },
+        reveal() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: TarotAjax.api_url + 'reveal', type: 'POST',
+                    data: {
+                        mode: State.mode,
+                        topic: State.topic,
+                        question: State.question,
+                        spread: State.spread,
+                        picked: JSON.stringify(State.pickedCards),
+                    },
+                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'Đã có lỗi xảy ra.'),
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
+                });
+            });
         },
         analyze() {
             return new Promise((resolve, reject) => {
@@ -200,8 +206,8 @@ jQuery(function ($) {
                         cards: JSON.stringify(State.cardsLite),
                         hp_trap: $('#trt-deep-trap').val(),
                     },
-                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'An error occurred.'),
-                    error: xhr => reject(xhr?.responseJSON?.message || 'Connection error. Please try again.')
+                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'Đã có lỗi xảy ra.'),
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
                 });
             });
         }
@@ -215,6 +221,8 @@ jQuery(function ($) {
         init() {
             this.selectedCount = 0;
             State.cardsLite = null;
+            State.shuffledDeck = null;
+            State.pickedCards = [];
 
             const spreadData = window.TAROT_SPREADS[State.spread];
             this.positions = Object.keys(spreadData.positions);
@@ -233,7 +241,7 @@ jQuery(function ($) {
                 $slotsWrap.append(`<div class="trt-slot" data-slot="${idx}"><span class="trt-slot-pos">${label}</span></div>`);
             });
 
-            $('#trt-deck-instruction').show().html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
+            $('#trt-deck-instruction').show().html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
             $('#trt-selected-count').text('0');
             $('#trt-target-count').text(this.targetCount);
 
@@ -289,28 +297,34 @@ jQuery(function ($) {
             if (this.selectedCount >= this.targetCount) return;
             $card.addClass('selected-card').css({zIndex: 9999}).off('mouseenter mouseleave');
 
-            if (!State.cardsLite) {
-                $('#trt-deck-instruction').html('✦ Connecting with the cards...').css('opacity', 0.6);
+            if (!State.shuffledDeck) {
+                $('#trt-deck-instruction').html('✦ Đang kết nối với các lá bài...').css('opacity', 0.6);
                 try {
                     await Ajax.drawPromise;
                 } catch (e) {
                     return;
                 }
-                $('#trt-deck-instruction').html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
+                $('#trt-deck-instruction').html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
             }
 
+            const clickedIndex = parseInt($card.data('index'));
+            const cardData = State.shuffledDeck[clickedIndex];
             const posKey = this.positions[this.selectedCount];
-            const cardData = State.cardsLite[posKey];
+
+            if (!State.cardsLite) State.cardsLite = {};
+            State.cardsLite[posKey] = { key: cardData.key, orientation: cardData.orientation, name: cardData.name };
+            State.pickedCards.push({ key: cardData.key, orientation: cardData.orientation, name: cardData.name });
             const $slot = $('.trt-slot').eq(this.selectedCount);
             $slot.addClass('filled');
             $slot.find('.trt-slot-pos').hide();
             const orientClass = cardData.orientation === 'reversed' ? 'is-reversed' : '';
+            const imageFilename = cardData.key.toLowerCase().replace(/_/g, '') + '.jpg';
+            const imageUrl = '/wp-content/plugins/tarot/images/' + imageFilename;
             const html3D = `
 <div class="trt-card-3d">
     <div class="trt-face trt-face-back"><div class="trt-card-back-face"></div></div>
     <div class="trt-face trt-face-front ${orientClass}">
-    <div class="trt-front-name">${cardData.name}</div>
-<div class="trt-front-orient">${cardData.orientation === 'upright' ? '↑ Upright' : '↓ Reversed'}</div>
+    <img src="${imageUrl}" alt="${cardData.name}" class="trt-front-image" loading="lazy">
 </div>
 </div>`;
             const $card3D = $(html3D).appendTo($slot);
@@ -338,25 +352,32 @@ jQuery(function ($) {
             Ajax.draw().catch(e => {});
             await Deck.init();
 
-            if (!State.cardsLite) return;
+            if (!State.pickedCards || State.pickedCards.length === 0) return;
 
-            $('#trt-step-deck').removeClass('active');
-            $('#trt-result-box').html(State.resultHtml).fadeIn(400);
-            $('html,body').animate({scrollTop: $('#trt-result-box').offset().top - 60}, 500);
+            try {
+                const revealResult = await Ajax.reveal();
+                State.resultHtml = revealResult.html;
+                State.hints = revealResult.hints || null;
 
-            const linesText = $('#ast-chat-body').attr('data-lines');
-            if (linesText) {
-                const lines = JSON.parse(linesText);
-                await new Promise(res => Typewriter.run(lines, res));
+                $('#trt-step-deck').removeClass('active');
+                $('#trt-result-box').html(State.resultHtml).fadeIn(400);
+                $('html,body').animate({scrollTop: $('#trt-result-box').offset().top - 60}, 500);
+
+                const linesText = $('#ast-chat-body').attr('data-lines');
+                if (linesText) {
+                    const lines = JSON.parse(linesText);
+                    await new Promise(res => Typewriter.run(lines, res));
+                }
+
+                if (State.hints) {
+                    AIResult.injectHints(State.hints);
+                }
+
+                $('.ast-action-footer').fadeIn(400);
+                $('#trt-detail-container').slideDown(600);
+            } catch (e) {
+                $('#trt-deck-instruction').html('Lỗi kết nối. Vui lòng thử lại.').css('opacity', 1).show();
             }
-
-            if (State.hints) {
-                AIResult.injectHints(State.hints);
-            }
-
-            $('.ast-action-footer').fadeIn(400);
-
-            $('#trt-detail-container').slideDown(600);
         },
 
         async runDeepAnalyze() {
@@ -364,15 +385,31 @@ jQuery(function ($) {
 
             $('#ast-analysis-wrap').slideDown(400);
 
+            const loadingTexts = [
+                'Đang kết nối...', 'Khởi tạo dữ liệu...', 'Phân tích lá bài...',
+                'Phân tích ngữ cảnh...', 'Đối chiếu ý nghĩa...', 'Tổng hợp kết quả...',
+                'Luận giải...', 'Hoàn tất xử lý...', 'Vui lòng chờ...'
+            ];
+            let textIdx = 0;
+            const $loadingSpan = $btn.find('.trt-btn-loading');
+            const textInterval = setInterval(() => {
+                textIdx++;
+                if (textIdx >= loadingTexts.length) {
+                    clearInterval(textInterval);
+                    return;
+                }
+                $loadingSpan.html('<span class="trt-spinner"></span> ' + loadingTexts[textIdx]);
+            }, 500);
+
             try {
                 const analyzeResult = await Ajax.analyze();
-                if (analyzeResult.is_cached) Typewriter.fastMode = true;
-
+                clearInterval(textInterval);
                 AIResult.tryInject(analyzeResult);
                 $('#trt-deep-analyze-form').slideUp(300);
 
             } catch (error) {
-                $('#trt-err-analyze').text(error || 'Connection error. Please try again later.');
+                clearInterval(textInterval);
+                $('#trt-err-analyze').text(error || 'Lỗi kết nối. Vui lòng thử lại sau.');
                 $('#ast-analysis-wrap').html('').hide();
                 $('html, body').animate({ scrollTop: $('#trt-deep-analyze-form').offset().top - 50 }, 400);
                 $btn.removeClass('loading').prop('disabled', false);
@@ -409,7 +446,11 @@ jQuery(function ($) {
         $('#trt-topic-val').val(State.topic);
         $('#trt-err-topic-a').text('');
 
-        AppLogic.runFlow();
+        Steps.show('shuffle');
+        $('#trt-stack-wrap').addClass('trt-shuffling');
+        setTimeout(() => {
+            AppLogic.runFlow();
+        }, 1200);
     });
 
     $('#trt-question').on('input', function () {
@@ -430,7 +471,11 @@ jQuery(function ($) {
             return;
         }
         $(this).addClass('loading').attr('disabled', true);
-        AppLogic.runFlow();
+        Steps.show('shuffle');
+        $('#trt-stack-wrap').addClass('trt-shuffling');
+        setTimeout(() => {
+            AppLogic.runFlow();
+        }, 1200);
     });
 
     $(document).on('blur', '#trt-deep-name', function() {
@@ -477,7 +522,11 @@ jQuery(function ($) {
         }
 
         $(this).addClass('loading').attr('disabled', true);
-        AppLogic.runFlow();
+        Steps.show('shuffle');
+        $('#trt-stack-wrap').addClass('trt-shuffling');
+        setTimeout(() => {
+            AppLogic.runFlow();
+        }, 1200);
     });
 
     $(document).on('click', '#ast-btn-comment', function () {

@@ -150,12 +150,7 @@ function western_render(string $topic, array $cards, string $spread_key = '3_car
         <?php endif; ?>
 
         <div id="ast-analysis-wrap" style="display:none;">
-            <div id="ast-final-result" style="margin-top:20px;">
-                <div class="ast-skeleton ast-sk-title"></div>
-                <div class="ast-skeleton ast-sk-line"></div>
-                <div class="ast-skeleton ast-sk-line ast-sk-short"></div>
-                <div class="ast-skeleton ast-sk-line"></div>
-            </div>
+            <div id="ast-final-result" style="margin-top:20px;"></div>
         </div>
     </div>
     <div class="ast-action-footer" style="display:none;">

@@ -5,7 +5,7 @@
  */
 ?>
 <div class="trt-step" id="trt-step-deck">
-    <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Focus on your question and choose a card</p>
+    <p class="trt-deck-instruction" id="trt-deck-instruction">✦ Focus on your question and choose your cards</p>
     <div class="trt-deck-wrap" id="trt-deck-wrap"></div>
 
     <div class="trt-selected-slots" id="trt-dynamic-slots"></div>

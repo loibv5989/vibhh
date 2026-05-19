@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Tarot Reading
+ * Plugin Name: Bói Bài Tarot
  * Plugin URI: https://nbblo.com
- * Description: Online Tarot reading plugin
- * Version: 26.5.10
+ * Description: Plugin bói bài Tarot online
+ * Version: 26.5.19
  * Author: Loibv
  * Requires PHP: 8.2 or higher
  * Author URI: https://nbblo.com

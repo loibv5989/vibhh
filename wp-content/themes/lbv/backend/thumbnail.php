@@ -12,6 +12,8 @@ class LBV_Thumbnail {
         if (strpos($_SERVER['REQUEST_URI'], 'post_type=product') === false) {
             add_filter( 'manage_posts_columns', array( $this, 'add_thumbnail_column'), 10, 1 );
             add_action( 'manage_posts_custom_column', array( $this, 'manage_posts_custom_column'), 10, 2 );
+            add_filter( 'manage_pages_columns', array( $this, 'add_thumbnail_column'), 10, 1 );
+            add_action( 'manage_pages_custom_column', array( $this, 'manage_posts_custom_column'), 10, 2 );
         }
     }
 

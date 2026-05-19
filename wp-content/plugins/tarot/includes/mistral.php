@@ -39,7 +39,7 @@ class TR_Mistral {
                 'top_p'       => 1,
             ],
             'instructions'    => '',
-            'store'           => false, // Do not store history on Mistral server
+            'store'           => false, // Không lưu history trên server Mistral
         ];
     }
 
