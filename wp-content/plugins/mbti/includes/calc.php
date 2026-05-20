@@ -47,9 +47,9 @@ class MBTI_Calc {
         $profiles = MBTI_Data::getProfiles();
         $profile  = $profiles[$type] ?? [
             'title'     => 'Người bí ẩn',
-            'tong_quan' => 'Chưa có thông tin.',
-            'su_nghiep' => 'Chưa có thông tin.',
-            'tinh_yeu'  => 'Chưa có thông tin.',
+            'overview' => 'Chưa có thông tin.',
+            'career'   => 'Chưa có thông tin.',
+            'love'     => 'Chưa có thông tin.',
         ];
 
         return [
@@ -62,10 +62,10 @@ class MBTI_Calc {
     }
 
     public static function parseResponse(string $raw): array {
-        $tabs = ['ai_tong_hop' => ''];
+        $tabs = ['mbti_result' => ''];
 
         if (preg_match('/\[TAB_RESULT\](.*?)\[\/TAB_RESULT\]/is', $raw, $m)) {
-            $tabs['ai_tong_hop'] = self::markdownToHtml(trim($m[1]));
+            $tabs['mbti_result'] = self::markdownToHtml(trim($m[1]));
         }
 
         return ['tabs' => $tabs];

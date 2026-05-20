@@ -20,22 +20,22 @@ class MBTI_Render {
 
             <?php if (!empty($data['borderline'])):
                 $borderline_desc = [
-                        'EI' => 'Hướng ngoại / Hướng nội',
-                        'SN' => 'Giác quan / Trực giác',
-                        'TF' => 'Lý trí / Cảm xúc',
-                        'JP' => 'Nguyên tắc / Linh hoạt',
+                        'EI' => 'Extraversion / Introversion',
+                        'SN' => 'Sensing / Intuition',
+                        'TF' => 'Thinking / Feeling',
+                        'JP' => 'Judging / Perceiving',
                 ];
                 $count_border = count($data['borderline']);
                 if ($count_border === 1) {
-                    $bot_text = 'Bạn không nghiêng hẳn về phía nào ở khía cạnh này. Điều đó không phải vấn đề, chỉ là kết quả chưa đủ rõ.';
+                    $bot_text = "You don't lean strongly either way on this one. That's fine — it just means the result isn't conclusive here.";
                 } elseif ($count_border === 2) {
-                    $bot_text = 'Bạn cân bằng ở khá nhiều khía cạnh. Điều này giúp bạn thích nghi tốt, nhưng đôi khi cũng khiến bạn khó chọn khi phải nghiêng về một phía.';
+                    $bot_text = "You're balanced across a few dimensions. That can make you adaptable, but it may also make it harder to pick a clear direction when you need to.";
                 } else {
-                    $bot_text = 'Kết quả của bạn không nghiêng rõ về nhóm nào. Làm lại bài test sau một thời gian có thể cho kết quả rõ hơn.';
+                    $bot_text = "Your results don't point clearly to any one group. Retaking the test after some time may give you a clearer picture.";
                 }
                 ?>
                 <div class="mbti-borderline-box">
-                    <strong>Kết quả của bạn khá cân bằng ở:</strong><br>
+                    <strong>Your results are fairly balanced on:</strong><br>
                     <?php foreach ($data['borderline'] as $ax): ?>
                         - <strong><?= $borderline_desc[$ax] ?? $ax ?></strong><br>
                     <?php endforeach; ?>
@@ -44,26 +44,26 @@ class MBTI_Render {
             <?php endif; ?>
 
             <div class="ftn-result-profile">
-                <p><?= nl2br(esc_html($p['tong_quan'])) ?></p>
-                <p><?= nl2br(esc_html($p['su_nghiep'])) ?></p>
-                <p><?= nl2br(esc_html($p['tinh_yeu'])) ?></p>
+                <p><?= nl2br(esc_html($p['overview'])) ?></p>
+                <p><?= nl2br(esc_html($p['career'])) ?></p>
+                <p><?= nl2br(esc_html($p['love'])) ?></p>
 
-                <?php if (!empty($p['diem_manh']) && is_array($p['diem_manh'])): ?>
+                <?php if (!empty($p['strengths']) && is_array($p['strengths'])): ?>
                     <div class="mbti-strengths">
-                        <strong>Điểm mạnh</strong>
+                        <strong>Strengths</strong>
                         <ul>
-                            <?php foreach ($p['diem_manh'] as $item): ?>
+                            <?php foreach ($p['strengths'] as $item): ?>
                                 <li><?= esc_html($item) ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
                 <?php endif; ?>
 
-                <?php if (!empty($p['diem_yeu']) && is_array($p['diem_yeu'])): ?>
+                <?php if (!empty($p['weaknesses']) && is_array($p['weaknesses'])): ?>
                     <div class="mbti-weaknesses">
-                        <strong>Điểm yếu</strong>
+                        <strong>Weaknesses</strong>
                         <ul>
-                            <?php foreach ($p['diem_yeu'] as $item): ?>
+                            <?php foreach ($p['weaknesses'] as $item): ?>
                                 <li><?= esc_html($item) ?></li>
                             <?php endforeach; ?>
                         </ul>
@@ -73,21 +73,21 @@ class MBTI_Render {
 
             <?php if (get_option('mbti_allow_ai', '0') === '1'): ?>
                 <div class="ftn-upsell-box">
-                    <p class="ftn-upsell-title">Phân tích thêm về tính cách của bạn</p>
-                    <p>MBTI của bạn là <strong style="color: red"><?= esc_html($data['type']) ?></strong>. Kết hợp thêm <a href="/than-so-hoc/" target="_blank">tên và ngày sinh</a> hoặc <a href="/cung-hoang-dao/" target="_blank">cung hoàng đạo</a> để xem thêm các góc nhìn khác.</p>
+                    <p class="ftn-upsell-title">Go deeper on your personality</p>
+                    <p>Your MBTI type is <strong style="color: red"><?= esc_html($data['type']) ?></strong>. Add your <a href="/than-so-hoc/" target="_blank">name and date of birth</a> or <a href="/cung-hoang-dao/" target="_blank">zodiac sign</a> to see more perspectives.</p>
 
                     <form id="mbti-ai-form">
                         <div class="ftn-form-group">
-                            <label for="ai-name" class="ftn-form-label">Họ và tên</label>
-                            <input type="text" id="ai-name" class="ftn-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+                            <label for="ai-name" class="ftn-form-label">Full name</label>
+                            <input type="text" id="ai-name" class="ftn-input" placeholder="e.g. John Smith" required>
                         </div>
                         <div class="ftn-form-group">
-                            <label for="ai-dob" class="ftn-form-label">Ngày sinh (Dương lịch)</label>
-                            <input type="text" id="ai-dob" class="ftn-input" placeholder="VD: 15/12/1999" required>
+                            <label for="ai-dob" class="ftn-form-label">Date of birth</label>
+                            <input type="text" id="ai-dob" class="ftn-input" placeholder="e.g. 15/12/1999" required>
                         </div>
                         <button type="submit" class="ftn-btn-submit" id="ai-submit-btn">
-                            <span class="ftn-btn-text">Tiếp tục phân tích</span>
-                            <span class="ftn-btn-loading" style="display:none;"><span class="ftn-spinner"></span> Đang xử lý...</span>
+                            <span class="ftn-btn-text">Continue analysis</span>
+                            <span class="ftn-btn-loading" style="display:none;"><span class="ftn-spinner"></span> Analyzing...</span>
                         </button>
                     </form>
 
@@ -97,14 +97,14 @@ class MBTI_Render {
             <?php endif; ?>
         </div>
         <div class="ast-action-footer" style="display:none;">
-            <span id="ast-btn-comment" class="ast-btn-comment">Thảo Luận</span>
-            <span class="ast-reload" onclick="window.location.reload()">↺ Làm lại</span>
+            <span id="ast-btn-comment" class="ast-btn-comment">Discussion</span>
+            <span class="ast-reload" onclick="window.location.reload()">↺ Retake</span>
         </div>
         <?php
         return ob_get_clean();
     }
 
     public static function resultAI(array $tabs): string {
-        return '<div class="ftn-ai-final-wrap">' . ($tabs['ai_tong_hop'] ?? '') . '</div>';
+        return '<div class="ftn-ai-final-wrap">' . ($tabs['mbti_result'] ?? '') . '</div>';
     }
 }

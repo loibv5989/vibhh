@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'LBV_THEME_VERSION', '26.5.9' );
+define( 'LBV_THEME_VERSION', '26.5.20' );
 define( 'LBV_THEME_DIR', trailingslashit( get_template_directory() ) );
 define( 'LBV_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
 

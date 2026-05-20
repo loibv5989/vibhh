@@ -158,35 +158,35 @@ class MBTI_Handler {
 
     public function handleRestAnalyze(WP_REST_Request $request): WP_REST_Response {
         if (!$this->validate_logged_in()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng đăng nhập để sử dụng tính năng này.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please log in to use this feature.'], 200);
         }
 
         if (get_option('mbti_allow_ai', '0') !== '1') {
-            return new WP_REST_Response(['success' => false, 'message' => 'Tính năng hiện đang tắt.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'This feature is currently disabled.'], 200);
         }
 
         if (!$this->mbti_quota()) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Đã đạt giới hạn phân tích hôm nay. Vui lòng thử lại ngày mai.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => "You've reached today's analysis limit. Please try again tomorrow."], 200);
         }
 
         $name = sanitize_text_field($request->get_param('full_name') ?? '');
         $dob  = sanitize_text_field($request->get_param('dob') ?? '');
 
         if (empty($name) || empty($dob)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập đầy đủ thông tin.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please fill in all required fields.'], 200);
         }
 
-        // Validate ngày sinh không được là ngày tương lai
+        // Validate date of birth is not in the future
         $dobNormalized = self::normalizeDob($dob);
         $dobDate = DateTime::createFromFormat('d/m/Y', $dobNormalized);
         $today = new DateTime('today');
         if ($dobDate && $dobDate > $today) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Vui lòng nhập ngày sinh thực tế của bạn.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Please enter a valid date of birth.'], 200);
         }
 
         $raw_answers = $request->get_param('answers');
         if (!is_array($raw_answers)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu không hợp lệ.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid data.'], 200);
         }
 
         $answers = [];
@@ -261,7 +261,7 @@ class MBTI_Handler {
         }
 
         if (empty($rawResponse)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Không thể kết nối AI, vui lòng thử lại.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Could not connect to AI. Please try again.'], 200);
         }
 
         $parsed = MBTI_Calc::parseResponse($rawResponse);
@@ -271,7 +271,7 @@ class MBTI_Handler {
             'html' => MBTI_Render::resultAI($parsed['tabs']),
         ];
 
-        if (!empty(trim($parsed['tabs']['ai_tong_hop'] ?? '')) && $successful_provider === 'gemini') {
+        if (!empty(trim($parsed['tabs']['mbti_result'] ?? '')) && $successful_provider === 'gemini') {
             file_put_contents($cacheFile, json_encode($payload, JSON_UNESCAPED_UNICODE), LOCK_EX);
         }
 
