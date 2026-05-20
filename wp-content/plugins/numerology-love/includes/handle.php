@@ -63,7 +63,7 @@ class TshLove_Handle {
         if (!has_shortcode($post->post_content, 'tsh_love_form')) return;
 
         wp_enqueue_style('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.css', [], TSH_LOVE_VERSION);
-        wp_enqueue_script('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.js', ['jquery'], TSH_LOVE_VERSION, true);
+        wp_enqueue_script('tsh-love', TSH_LOVE_PLUGIN_URL . 'assets/tsh-love.min.js', ['jquery'], TSH_LOVE_VERSION, true);
         wp_localize_script('tsh-love', 'ThsLove', [
                 'rest_url' => rest_url('tsh-love/v1')
         ]);
@@ -250,7 +250,7 @@ class TshLove_Handle {
             return new WP_REST_Response(['success' => false, 'message' => 'Name can only contain letters and spaces.'], 200);
         }
 
-        if (substr_count($dob1, '-') !== 2 || substr_count($dob2, '-') !== 2) {
+        if (substr_count($dob1, '/') !== 2 || substr_count($dob2, '/') !== 2) {
             return new WP_REST_Response(['success' => false, 'message' => 'Invalid date of birth format.'], 200);
         }
 

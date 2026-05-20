@@ -19,7 +19,7 @@ define('MBTI_PLUGIN_FILE', __FILE__);
 define('MBTI_PLUGIN_BASE', plugin_basename(MBTI_PLUGIN_FILE));
 define('MBTI_PLUGIN_DIR',  plugin_dir_path(MBTI_PLUGIN_FILE));
 define('MBTI_PLUGIN_URL',  plugin_dir_url(MBTI_PLUGIN_FILE));
-define('MBTI_RATE_LIMIT', 5);
+define('MBTI_RATE_LIMIT', 3);
 
 require_once MBTI_PLUGIN_DIR . 'includes/settings.php';
 require_once MBTI_PLUGIN_DIR . 'includes/handle.php';

@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define( 'LBV_CDN_URL', 'https://cdn.nbblo.com');
+define( 'LBV_CDN_URL', 'https://cdn.nbblo.top');
 
 add_filter('wp_mail_from', function($from_email) {
     return 'contact@nbblo.com';
@@ -32,7 +32,7 @@ function lbv_load_files() {
 
     $files = [
         '/includes/image-optimizer.php',
-//        '/includes/cdn-rewriter.php',
+        '/includes/cdn-rewriter.php',
         '/includes/webp-picture-wrapper.php',
         '/includes/optimization.php',
         '/includes/analytics.php',

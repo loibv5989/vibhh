@@ -91,7 +91,7 @@ class Zodiac_Handle {
         if (!$has) return;
 
         wp_enqueue_style('zodiac',   ZODIAC_PLUGIN_URL . 'assets/zodiac.css',  [], ZODIAC_VERSION);
-        wp_enqueue_script('zodiac', ZODIAC_PLUGIN_URL . 'assets/zodiac.js', ['jquery'], ZODIAC_VERSION, true);
+        wp_enqueue_script('zodiac', ZODIAC_PLUGIN_URL . 'assets/zodiac.min.js', ['jquery'], ZODIAC_VERSION, true);
         wp_localize_script('zodiac', 'ZodiacAjax', [
             'api_url'  => rest_url('zdc/v1/'),
         ]);

@@ -41,7 +41,7 @@ class Numerology {
         if (!has_shortcode($post->post_content, 'numerology_landing') && !has_shortcode($post->post_content, 'numerology_personal')) return;
 
         wp_enqueue_style('nrgy', NUMEROLOGY_PLUGIN_URL . 'assets/nrgy.css', [], NUMEROLOGY_VERSION);
-        wp_enqueue_script('nrgy', NUMEROLOGY_PLUGIN_URL . 'assets/nrgy.js', ['jquery'], NUMEROLOGY_VERSION, true);
+        wp_enqueue_script('nrgy', NUMEROLOGY_PLUGIN_URL . 'assets/nrgy.min.js', ['jquery'], NUMEROLOGY_VERSION, true);
         wp_localize_script('nrgy', 'nrgy', [
             'api_url' => esc_url_raw(rest_url('nrgy/v1/')),
         ]);

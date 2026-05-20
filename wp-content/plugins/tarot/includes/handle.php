@@ -29,7 +29,7 @@ class TR_Handle {
         global $post;
         if (!is_a($post, 'WP_Post') || !has_shortcode($post->post_content, 'tarot_form')) return;
         wp_enqueue_style('tarot', TAROT_PLUGIN_URL . 'assets/tarot.css', [], TAROT_VERSION);
-        wp_enqueue_script('tarot', TAROT_PLUGIN_URL . 'assets/tarot.js', ['jquery'], TAROT_VERSION, true);
+        wp_enqueue_script('tarot', TAROT_PLUGIN_URL . 'assets/tarot.min.js', ['jquery'], TAROT_VERSION, true);
         wp_localize_script('tarot', 'TarotAjax', [
                 'api_url' => esc_url_raw(rest_url('tarot/v1/')),
         ]);

@@ -22,7 +22,7 @@ INTERPRETATION PRINCIPLES:
 - NO SPECULATION: Do not invent specific details about actions, words, or real-life scenarios.
 
 TONE REQUIREMENTS:
-- ADDRESSING: Extract first names from "{$n1}" and "{$n2}" — e.g. Nguyen Van Long -> Long; keep it consistent throughout; or use "both of you".
+- ADDRESSING: use the names of the two people "{$n1}" and "{$n2}", consistently and naturally; or use the phrase "the two of you".
 - Natural, clear, easy to understand.
 - Professional and direct — no lecturing, no moralizing.
 - Logical flow, no lengthy lead-ins.
