@@ -145,7 +145,7 @@ if (!defined('ABSPATH')) exit;
                     <div class="nrgy-tool-icon">💗</div>
                     <h3>Love Numerology Compatibility</h3>
                     <p>Analyze compatibility and energy between two people to understand your relationship.</p>
-                    <a href="/numerology/boi-tinh-yeu/" class="nrgy-tool-btn">Start</a>
+                    <a href="/numerology/love/" class="nrgy-tool-btn">Start</a>
                 </div>
             </div>
         </div>
