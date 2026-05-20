@@ -40,7 +40,7 @@ class MBTI_Gemini {
         $model    = apply_filters('mbti_gemini_model', $model);
 
         if (empty($keys)) {
-            return '[Error] Chưa cấu hình Gemini API key.';
+            return '[Error] Gemini API key not configured.';
         }
 
         $result = null;
@@ -71,7 +71,7 @@ class MBTI_Gemini {
             $response = json_decode($raw, true);
             $errCode  = $response['error']['code'] ?? null;
 
-            // Rate limit hoặc overload — thử key khác
+            // Rate limit or overload — try another key
             if ($httpCode === 429 || $errCode === 429 || $httpCode === 503 || $errCode === 503) {
                 $this->notifyAdmin(
                     'Gemini API Key Limited',

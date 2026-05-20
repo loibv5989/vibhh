@@ -46,10 +46,10 @@ class MBTI_Calc {
 
         $profiles = MBTI_Data::getProfiles();
         $profile  = $profiles[$type] ?? [
-            'title'     => 'Người bí ẩn',
-            'overview' => 'Chưa có thông tin.',
-            'career'   => 'Chưa có thông tin.',
-            'love'     => 'Chưa có thông tin.',
+            'title'     => 'The Enigma',
+            'overview' => 'No information available.',
+            'career'   => 'No information available.',
+            'love'     => 'No information available.',
         ];
 
         return [

@@ -41,7 +41,7 @@ class MBTI_Handler {
         require_once MBTI_PLUGIN_DIR . 'includes/mistral.php';
     }
 
-    private static function loadThanSoHocCalc(): void {
+    private static function loadNumerologyCalc(): void {
         if (!class_exists('ThanSoHoc_Calc')) {
             $tsh_dir = WP_PLUGIN_DIR . '/than-so-hoc/';
             require_once $tsh_dir . 'includes/calc.php';
@@ -61,7 +61,7 @@ class MBTI_Handler {
         if (!has_shortcode($post->post_content, 'mbti_form')) return;
 
         wp_enqueue_style('bb-mbti',  MBTI_PLUGIN_URL . 'assets/mbti.css',  [], MBTI_VERSION);
-        wp_enqueue_script('bb-mbti', MBTI_PLUGIN_URL . 'assets/mbti.js', ['jquery'], MBTI_VERSION, true);
+        wp_enqueue_script('bb-mbti', MBTI_PLUGIN_URL . 'assets/mbti.min.js', ['jquery'], MBTI_VERSION, true);
         wp_localize_script('bb-mbti', 'MbtiRest', [
             'rest_url' => rest_url('mbti/v1'),
         ]);
@@ -136,7 +136,7 @@ class MBTI_Handler {
 
         $raw_answers = $request->get_param('answers');
         if (!is_array($raw_answers)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Dữ liệu không hợp lệ.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid data.'], 200);
         }
 
         $answers = [];
@@ -217,7 +217,7 @@ class MBTI_Handler {
             }
         }
 
-        self::loadThanSoHocCalc();
+        self::loadNumerologyCalc();
         self::loadZodiacCalc();
         self::loadPrompt();
         self::loadAIProviders();

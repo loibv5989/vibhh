@@ -38,7 +38,7 @@ class MBTI_Groq {
         $keys = $this->settings()->groqKeysArray();
 
         if (empty($keys)) {
-            return '[Error] Chưa cấu hình Groq API key.';
+            return '[Error] Groq API key not configured.';
         }
 
         $result = null;
@@ -70,7 +70,7 @@ class MBTI_Groq {
 
             $response = json_decode($raw, true);
 
-            // Rate limit / capacity / overload — thử key khác
+            // Rate limit / capacity / overload — try another key
             if (in_array($httpCode, [429, 498, 503], true)
                 || ($response['error']['code'] ?? '') === 'rate_limit_exceeded') {
                 $this->notifyAdmin('Groq API Key Limited', "Key: {$key}\nHTTP: {$httpCode}\nTime: " . current_time('Y-m-d H:i:s'));

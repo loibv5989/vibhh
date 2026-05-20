@@ -74,7 +74,7 @@ class MBTI_Mistral {
         $keys = $this->settings()->mistralKeysArray();
 
         if (empty($keys)) {
-            return '[Error] Chưa cấu hình Mistral API key.';
+            return '[Error] Mistral API key not configured.';
         }
 
         $body = $this->buildBody($prompt);

@@ -24,34 +24,34 @@ jQuery(function ($) {
     const Validator = {
         name(value) {
             const val = value.trim();
-            if (!val)           return { valid: false, msg: 'Vui lòng nhập họ và tên.' };
-            if (/\d/.test(val)) return { valid: false, msg: 'Họ tên không được chứa số.' };
+            if (!val)           return { valid: false, msg: 'Please enter your full name.' };
+            if (/\d/.test(val)) return { valid: false, msg: 'Name must not contain numbers.' };
             return { valid: true, value: normalizeName(val) };
         },
 
         dob(value) {
             const val = value.trim();
-            if (!val) return { valid: false, msg: 'Vui lòng nhập ngày sinh.' };
+            if (!val) return { valid: false, msg: 'Please enter your date of birth.' };
 
             const match = val.match(/^(\d{1,2})[\/\-\.\s](\d{1,2})[\/\-\.\s](19\d{2}|20\d{2})$/);
-            if (!match) return { valid: false, msg: 'Ngày sinh sai định dạng (VD: 15/12/1999).' };
+            if (!match) return { valid: false, msg: 'Invalid date format (e.g., 15/12/1999).' };
 
             const day   = parseInt(match[1], 10);
             const month = parseInt(match[2], 10);
             const year  = parseInt(match[3], 10);
 
-            if (month < 1 || month > 12) return { valid: false, msg: 'Tháng phải từ 1 đến 12.' };
-            if (day < 1 || day > 31) return { valid: false, msg: 'Ngày không hợp lệ.' };
+            if (month < 1 || month > 12) return { valid: false, msg: 'Month must be between 1 and 12.' };
+            if (day < 1 || day > 31) return { valid: false, msg: 'Invalid day.' };
 
             const testDate = new Date(year, month - 1, day);
             if (testDate.getFullYear() !== year || testDate.getMonth() !== month - 1 || testDate.getDate() !== day) {
-                return { valid: false, msg: `Ngày ${day}/${month} không tồn tại.` };
+                return { valid: false, msg: `Date ${day}/${month} does not exist.` };
             }
 
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             if (testDate > today) {
-                return { valid: false, msg: 'Vui lòng nhập ngày sinh thực tế của bạn.' };
+                return { valid: false, msg: 'Please enter your actual date of birth.' };
             }
 
             return { valid: true, value: val };
@@ -121,7 +121,7 @@ jQuery(function ($) {
 
     UI.$nextBtn.on('click', function () {
         if (!allAnsweredInStep(currentStep)) {
-            showError('Vui lòng trả lời tất cả các câu hỏi để tiếp tục.');
+            showError('Please answer all questions to continue.');
             return;
         }
         currentStep++;
@@ -139,7 +139,7 @@ jQuery(function ($) {
         e.preventDefault();
 
         if (!allAnsweredInStep(totalSteps)) {
-            showError('Vui lòng hoàn thành các câu hỏi cuối cùng.');
+            showError('Please complete the final questions.');
             return;
         }
 
@@ -164,12 +164,12 @@ jQuery(function ($) {
                 $('.ast-action-footer').fadeIn(400);
                 $('html,body').animate({ scrollTop: UI.$result.offset().top - 30 }, 500);
             } else {
-                showError(res.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+                showError(res.message || 'An error occurred. Please try again.');
                 setSubmitLoading(UI.$submitBtn, false);
             }
         })
         .catch(() => {
-            showError('Lỗi kết nối. Vui lòng thử lại.');
+            showError('Connection error. Please try again.');
             setSubmitLoading(UI.$submitBtn, false);
         });
     });
@@ -212,12 +212,12 @@ jQuery(function ($) {
 
                 AIResult.renderHTML($finalResult, res.html);
             } else {
-                $aiErr.text(res.message || 'Có lỗi xảy ra.').show();
+                $aiErr.text(res.message || 'An error occurred.').show();
                 setSubmitLoading($aiBtn, false);
             }
         })
         .catch(() => {
-            $aiErr.text('Lỗi kết nối. Vui lòng thử lại.').show();
+            $aiErr.text('Connection error. Please try again.').show();
             setSubmitLoading($aiBtn, false);
         });
     });

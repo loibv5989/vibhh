@@ -55,21 +55,21 @@ class MBTI_Admin {
         $analysis_order = get_option('mbti_analysis_order', 'gemini,mistral,groq');
         ?>
         <div class="wrap">
-            <h1>Cấu hình | MBTI</h1>
+            <h1>Settings | MBTI</h1>
             <form method="post">
                 <?php wp_nonce_field('mbti_settings_form'); ?>
 
-                <h2>🤖 Bật/Tắt AI</h2>
+                <h2>🤖 Enable / Disable AI</h2>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Cho phép sử dụng AI</th>
+                        <th scope="row">Allow AI analysis</th>
                         <td>
                             <label>
                                 <input type="checkbox" name="allow_ai" value="1" <?php checked($allow_ai, '1'); ?>>
-                                Bật chức năng AI
+                                Enable AI feature
                             </label>
                             <p class="description" style="color: #d63638;">
-                                <strong>⚠️ Lưu ý:</strong> Nếu tắt, toàn bộ chức năng AI sẽ bị vô hiệu hóa.
+                                <strong>⚠️ Note:</strong> Disabling this will turn off all AI functionality.
                             </p>
                         </td>
                     </tr>
@@ -77,13 +77,13 @@ class MBTI_Admin {
 
                 <hr style="margin: 30px 0;">
 
-                <h2>⚙️ Thứ tự ưu tiên Model (Fallback)</h2>
-                <p style="margin-top: 0; color: #666;">Hệ thống sẽ tự động chuyển sang model dự phòng nếu model chính gặp lỗi.</p>
+                <h2>⚙️ Model Priority Order (Fallback)</h2>
+                <p style="margin-top: 0; color: #666;">The system will automatically fall back to the next model if the primary one fails.</p>
                 <table class="form-table">
                     <tr>
                         <th scope="row">
                             <strong>Analysis order</strong>
-                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">Phân tích và giải đáp MBTI</p>
+                            <p style="font-weight: normal; color: #666; margin: 5px 0 0 0;">MBTI analysis and response</p>
                         </th>
                         <td>
                             <select name="analysis_order" style="min-width: 260px;">
@@ -100,7 +100,7 @@ class MBTI_Admin {
 
                 <hr style="margin: 30px 0;">
 
-                <h2>🔑 Cấu hình API Keys &amp; Models</h2>
+                <h2>🔑 API Keys &amp; Models</h2>
 
                 <h3 style="margin-top: 20px;">Google Gemini</h3>
                 <table class="form-table">
@@ -119,8 +119,8 @@ class MBTI_Admin {
                     <tr>
                         <th scope="row">Gemini API Keys</th>
                         <td>
-                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($gemini_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="gemini_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($gemini_key); ?></textarea>
+                            <p class="description">Add multiple keys to enable automatic rotation when rate limits are hit.</p>
                         </td>
                     </tr>
                 </table>
@@ -140,8 +140,8 @@ class MBTI_Admin {
                     <tr>
                         <th scope="row">Groq API Keys</th>
                         <td>
-                            <textarea name="groq_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($groq_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="groq_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($groq_key); ?></textarea>
+                            <p class="description">Add multiple keys to enable automatic rotation when rate limits are hit.</p>
                         </td>
                     </tr>
                 </table>
@@ -164,8 +164,8 @@ class MBTI_Admin {
                     <tr>
                         <th scope="row">Mistral API Keys</th>
                         <td>
-                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Nhập API keys (mỗi key một dòng)"><?php echo esc_textarea($mistral_key); ?></textarea>
-                            <p class="description">Nhập nhiều keys để hệ thống tự động rotate khi gặp rate limit.</p>
+                            <textarea name="mistral_key" rows="4" cols="60" placeholder="Enter API keys (one per line)"><?php echo esc_textarea($mistral_key); ?></textarea>
+                            <p class="description">Add multiple keys to enable automatic rotation when rate limits are hit.</p>
                         </td>
                     </tr>
                 </table>
@@ -173,7 +173,7 @@ class MBTI_Admin {
                 <h3 style="margin-top: 30px;">Test Connection</h3>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Chọn provider để test</th>
+                        <th scope="row">Select provider to test</th>
                         <td>
                             <select name="provider" id="mbti_provider_select" style="min-width: 250px;">
                                 <option value="gemini" <?php selected($provider, 'gemini'); ?>>Google Gemini</option>
@@ -188,13 +188,13 @@ class MBTI_Admin {
 
                 <hr style="margin: 30px 0;">
 
-                <h2>📄 Tạo trang</h2>
-                <p>Tự động tạo trang WordPress với shortcode <code>[mbti_form]</code>.</p>
-                <button type="button" id="mbti-create-pages" class="button button-secondary">Tạo Trang Mẫu</button>
+                <h2>📄 Create Pages</h2>
+                <p>Automatically create a WordPress page with the <code>[mbti_form]</code> shortcode.</p>
+                <button type="button" id="mbti-create-pages" class="button button-secondary">Create Sample Page</button>
                 <div id="mbti-pages-result" style="margin-top:10px;"></div>
 
                 <hr>
-                <?php submit_button('Lưu Cấu Hình'); ?>
+                <?php submit_button('Save Settings'); ?>
             </form>
         </div>
         <?php
@@ -295,11 +295,11 @@ class MBTI_Admin {
             wp_send_json_error('Unauthorized', 403);
         }
 
-        $pages   = [
+        $pages = [
             [
-                    'title' => 'Trắc nghiệm MBTI',
-                    'content' => '<!-- wp:shortcode -->' . "\n" . '[mbti_form]' . "\n" . '<!-- /wp:shortcode -->',
-                    'slug' => 'trac-nghiem-mbti'
+                'title'   => 'MBTI Personality Test',
+                'content' => '<!-- wp:shortcode -->' . "\n" . '[mbti_form]' . "\n" . '<!-- /wp:shortcode -->',
+                'slug'    => 'mbti-personality-test',
             ],
         ];
         $created = [];
@@ -319,8 +319,8 @@ class MBTI_Admin {
         }
 
         if (empty($created)) {
-            wp_send_json_success(['message' => 'Trang đã tồn tại.']);
+            wp_send_json_success(['message' => 'Page already exists.']);
         }
-        wp_send_json_success(['message' => 'Đã tạo: ' . implode(', ', $created)]);
+        wp_send_json_success(['message' => 'Created: ' . implode(', ', $created)]);
     }
 }

@@ -52,7 +52,7 @@ jQuery(function ($) {
 
     // Create pages
     $('#mbti-create-pages').on('click', function () {
-        var $btn     = $(this).prop('disabled', true).text('Đang tạo...');
+        var $btn     = $(this).prop('disabled', true).text('Creating...');
         var $results = $('#mbti-pages-result').html('');
 
         $.post(ajaxurl, {
@@ -62,10 +62,10 @@ jQuery(function ($) {
             if (res.success) {
                 $results.html('<div class="notice notice-success"><p>✅ ' + res.data.message + '</p></div>');
             } else {
-                $results.html('<div class="notice notice-error"><p>❌ ' + (res.data.message || 'Lỗi') + '</p></div>');
+                $results.html('<div class="notice notice-error"><p>❌ ' + (res.data.message || 'Error') + '</p></div>');
             }
         }).always(function () {
-            $btn.prop('disabled', false).text('Tạo Trang Mẫu');
+            $btn.prop('disabled', false).text('Create Sample Page');
         });
     });
 });

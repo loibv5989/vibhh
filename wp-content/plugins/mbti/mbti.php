@@ -3,8 +3,8 @@
 /**
  * Plugin Name:   MBTI
  * Plugin URI:    https://nbblo.com
- * Description:   Plugin trắc nghiệm tính cách MBTI
- * Version:       26.4.20
+ * Description:   MBTI Personality Test Plugin
+ * Version:       26.4.21
  * Author:        Loibv
  * Requires PHP: 8.2 or higher
  * Author URI:    https://nbblo.com
@@ -14,7 +14,7 @@
 if (!defined('ABSPATH')) exit;
 
 define('MBTI_NAME', 'MBTI');
-define('MBTI_VERSION', '26.4.20');
+define('MBTI_VERSION', '26.4.21');
 define('MBTI_PLUGIN_FILE', __FILE__);
 define('MBTI_PLUGIN_BASE', plugin_basename(MBTI_PLUGIN_FILE));
 define('MBTI_PLUGIN_DIR',  plugin_dir_path(MBTI_PLUGIN_FILE));
