@@ -36,7 +36,7 @@ function lbv_load_files() {
         '/includes/webp-picture-wrapper.php',
         '/includes/optimization.php',
         '/includes/analytics.php',
-//        '/includes/clear-cache.php',
+        '/includes/clear-cache.php',
     ];
 
     foreach ($files as $file) {
