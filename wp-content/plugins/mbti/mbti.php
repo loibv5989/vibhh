@@ -14,7 +14,7 @@
 if (!defined('ABSPATH')) exit;
 
 define('MBTI_NAME', 'MBTI');
-define('MBTI_VERSION', '26.4.20');
+define('MBTI_VERSION', time()); //đang dev
 define('MBTI_PLUGIN_FILE', __FILE__);
 define('MBTI_PLUGIN_BASE', plugin_basename(MBTI_PLUGIN_FILE));
 define('MBTI_PLUGIN_DIR',  plugin_dir_path(MBTI_PLUGIN_FILE));

@@ -19,40 +19,26 @@ class MBTI_Handler {
     }
 
     private static function loadData(): void {
-        if (!class_exists('MBTI_Data')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/data.php';
-        }
+        require_once MBTI_PLUGIN_DIR . 'includes/data.php';
     }
 
     private static function loadCalc(): void {
         self::loadData();
-        if (!class_exists('MBTI_Calc')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/calc.php';
-        }
+        require_once MBTI_PLUGIN_DIR . 'includes/calc.php';
     }
 
     private static function loadRender(): void {
-        if (!class_exists('MBTI_Render')) {
-            require_once MBTI_PLUGIN_DIR . 'templates/render.php';
-        }
+        require_once MBTI_PLUGIN_DIR . 'templates/render.php';
     }
 
     private static function loadPrompt(): void {
-        if (!class_exists('MBTI_Prompt')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/prompt.php';
-        }
+        require_once MBTI_PLUGIN_DIR . 'includes/prompt.php';
     }
 
     private static function loadAIProviders(): void {
-        if (!class_exists('MBTI_Gemini')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/gemini.php';
-        }
-        if (!class_exists('MBTI_Groq')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/groq.php';
-        }
-        if (!class_exists('MBTI_Mistral')) {
-            require_once MBTI_PLUGIN_DIR . 'includes/mistral.php';
-        }
+        require_once MBTI_PLUGIN_DIR . 'includes/gemini.php';
+        require_once MBTI_PLUGIN_DIR . 'includes/groq.php';
+        require_once MBTI_PLUGIN_DIR . 'includes/mistral.php';
     }
 
     private static function loadThanSoHocCalc(): void {
@@ -75,7 +61,7 @@ class MBTI_Handler {
         if (!has_shortcode($post->post_content, 'mbti_form')) return;
 
         wp_enqueue_style('bb-mbti',  MBTI_PLUGIN_URL . 'assets/mbti.css',  [], MBTI_VERSION);
-        wp_enqueue_script('bb-mbti', MBTI_PLUGIN_URL . 'assets/mbti.min.js', ['jquery'], MBTI_VERSION, true);
+        wp_enqueue_script('bb-mbti', MBTI_PLUGIN_URL . 'assets/mbti.js', ['jquery'], MBTI_VERSION, true);
         wp_localize_script('bb-mbti', 'MbtiRest', [
             'rest_url' => rest_url('mbti/v1'),
         ]);

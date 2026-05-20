@@ -137,7 +137,7 @@ class TR_Handle {
         $picked    = is_string($pickedRaw) ? json_decode(wp_unslash($pickedRaw), true) : $pickedRaw;
 
         if (!is_array($picked) || empty($picked)) {
-            return new WP_REST_Response(['success' => false, 'message' => 'Lựa chọn lá bài không hợp lệ.'], 200);
+            return new WP_REST_Response(['success' => false, 'message' => 'Invalid card selection.'], 200);
         }
 
         $spreads   = require TAROT_PLUGIN_DIR . 'includes/spreads.php';
@@ -160,7 +160,7 @@ class TR_Handle {
         $html_content = is_array($renderHTML) ? ($renderHTML['html'] ?? '') : $renderHTML;
         $hints = [];
         foreach ($fullCards as $pos_key => $card) {
-            $hints[$pos_key] = $card['hint'] ?? 'Có thông điệp ẩn';
+            $hints[$pos_key] = $card['hint'] ?? 'A hidden message awaits';
         }
 
         return new WP_REST_Response([

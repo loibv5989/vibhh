@@ -2,17 +2,19 @@
 if (!defined('ABSPATH')) exit;
 /**
  * @var array $chunks
+ * @var array $questions
  */
 ?>
 <div class="fortune-page">
     <section class="ftn-hero">
         <div class="ftn-hero-badge">🧠 Trắc Nghiệm Tính Cách Miễn Phí Online</div>
         <h1 class="ftn-hero-title">Đọc vị bản thân<br>qua <span>Bản đồ tâm lý MBTI</span></h1>
-        <p>Nhận diện nhóm tính cách cốt lõi qua 32 câu hỏi. Khám phá phong cách làm việc, xu hướng tình cảm và định hướng phát triển dành riêng cho bạn.</p>
+        <p>Nhận diện nhóm tính cách cốt lõi qua <?= count($questions) ?> câu hỏi. Khám phá phong cách làm việc, xu hướng tình cảm và định hướng phát triển dành riêng cho bạn.</p>
     </section>
 
     <div class="ftn-mbti-progress">
-        <div class="ftn-mbti-bar" id="mbti-progress-bar" style="width: 25%;">25%</div>
+        <?php $total_steps = count($chunks); $init_pct = round(100 / $total_steps); ?>
+        <div class="ftn-mbti-bar" id="mbti-progress-bar" style="width: <?= $init_pct ?>%;"><?= $init_pct ?>%</div>
     </div>
 
     <form id="mbti-form" class="ftn-calc-card">

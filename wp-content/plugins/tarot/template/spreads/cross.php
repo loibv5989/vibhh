@@ -1,7 +1,7 @@
 <?php
 /**
- * Template: Cross Spread (5 lá)
- * Layout: Plus Shape (Chữ thập)
+ * Template: Cross Spread (5 Cards)
+ * Layout: Plus Shape
  */
 
 if (!defined('ABSPATH')) exit;
@@ -12,15 +12,15 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
     $positions = $spread_config['positions'];
 
     $orient_symbol = ['upright' => '↑', 'reversed' => '↓'];
-    $orient_label  = ['upright' => 'Xuôi', 'reversed' => 'Ngược'];
-    $topic_labels  = ['love' => 'Tình yêu', 'career' => 'Công việc', 'finance' => 'Tài chính', 'study' => 'Học tập', 'health' => 'Sức khỏe', 'future' => 'Tương lai'];
+    $orient_label  = ['upright' => 'Upright', 'reversed' => 'Reversed'];
+    $topic_labels  = ['love' => 'Love', 'career' => 'Career', 'finance' => 'Finance', 'study' => 'Study', 'health' => 'Health', 'future' => 'Future'];
     $colors_palette = ['#8b5cf6', '#d4af37', '#10b981', '#f43f5e', '#0ea5e9'];
 
     $element_symbols = ['fire' => '🔥', 'water' => '🌊', 'air' => '🌬️', 'earth' => '🌿'];
     $suit_symbols = ['wands' => '🕯️', 'cups' => '🏆', 'swords' => '⚔️', 'pentacles' => '⭐'];
 
     $intro_text = (($mode === 'question' || $mode === 'love') && !empty($question))
-        ? 'Phương pháp: ' . $spread_config['name']
+        ? 'Spread: ' . $spread_config['name']
         : $spread_config['name'] . ':';
 
     $lines = [
@@ -72,13 +72,13 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
 
     <?php if (($mode === 'question' || $mode === 'love') && !empty($question)): ?>
         <div class="trt-context-badge">
-            <span class="trt-context-icon">Câu hỏi » </span>
+            <span class="trt-context-icon">Question » </span>
             <span class="trt-context-text"><?= esc_html(mb_substr($question, 0, 120)) ?></span>
         </div>
     <?php elseif (!empty($topic)): ?>
         <div class="trt-context-badge">
             <span class="trt-context-icon">» </span>
-            <span class="trt-context-text">Chủ đề: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
+            <span class="trt-context-text">Theme: <?= esc_html($topic_labels[$topic] ?? $topic) ?></span>
         </div>
     <?php endif; ?>
 
@@ -95,11 +95,11 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
     </div>
 
     <div id="trt-detail-container" style="display:none">
-        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Bấm mở lá bài để xem chi tiết.</p>
+        <p style="text-align: center; margin: 20px 0; font-size: 14px; color: #666;">Click a card to reveal its reading.</p>
         <div class="trt-5cross-area">
             <?php foreach ($cards_data as $i => $data):
                 $c = $data['card'];
-                $slot_num = $i + 1; // 1 đến 5
+                $slot_num = $i + 1;
                 $orient = $c['orientation'];
                 $el_class = 'trt-el-' . ($c['element'] ?? 'earth');
                 ?>
@@ -115,18 +115,18 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
 
         <?php if (get_option('tarot_allow_ai', '0') === '1'): ?>
         <div id="trt-deep-analyze-form">
-            <h3>Giải mã các lá bài</h3>
-            <p class="analyze-desc">Luận giải chi tiết ý nghĩa, sự liên kết giữa các lá bài.</p>
+            <h3>Interpret the Spread</h3>
+            <p class="analyze-desc">A detailed interpretation of each card and their connections within the spread.</p>
             <div class="trt-input-section">
                 <div class="trt-input-trap" aria-hidden="true">
                     <input type="text" id="trt-deep-trap" name="trt-deep-trap" tabindex="-1" autocomplete="off">
                 </div>
-                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Họ và tên của bạn..." maxlength="40">
+                <input type="text" id="trt-deep-name" class="trt-input" placeholder="Your name..." maxlength="40">
                 <span class="trt-error" id="trt-err-deep-name"></span>
             </div>
             <button class="trt-submit-btn" id="trt-btn-deep-analyze">
-                <span class="trt-btn-text">Giải mã</span>
-                <span class="trt-btn-loading"><span class="trt-spinner"></span> Đang giải mã...</span>
+                <span class="trt-btn-text">Read the Cards</span>
+                <span class="trt-btn-loading"><span class="trt-spinner"></span> Reading the cards...</span>
             </button>
             <span class="trt-error trt-error-analyze" id="trt-err-analyze"></span>
         </div>
@@ -137,12 +137,12 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
         <?php endif; ?>
 
         <div class="ast-action-footer" style="display:none;">
-            <span id="ast-btn-comment" class="ast-btn-comment">Thảo Luận</span>
-            <span class="ast-reload" onclick="window.location.reload()">↺ Trải bài khác</span>
+            <span id="ast-btn-comment" class="ast-btn-comment">Discussion</span>
+            <span class="ast-reload" onclick="window.location.reload()">↺ New Reading</span>
         </div>
 
         <p class="trt-disclaimer" id="trt-disclaimer" style="display:none;">
-            ✦ Đây là kết quả tham khảo theo hệ thống Tarot. Mọi hành động và hướng đi tiếp theo nằm ở sự lựa chọn sáng suốt cũng như nỗ lực của bản thân.
+            ✦ This reading is for guidance only. The choices you make and the efforts you put forth are entirely your own.
         </p>
 
     </div>
@@ -180,7 +180,7 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
                     'pos' => sprintf('%02d · %s', $d['idx'] + 1, $d['pos_label']),
                     'sym' => $d['el_symbol'],
                     'name' => $c['name'],
-                    'dir' => $c['orientation'] === 'upright' ? '↑ Xuôi' : '↓ Ngược',
+                    'dir' => $c['orientation'] === 'upright' ? '↑ Upright' : '↓ Reversed',
                     'dirCls' => $c['orientation'],
                     'kw' => $d['kw'],
                     'timing' => $c['timing'] ?? '',
@@ -200,7 +200,7 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
                 document.getElementById('trtMSym').textContent = c.sym;
                 document.getElementById('trtMPos').textContent = c.pos;
                 document.getElementById('trtMName').textContent = c.name;
-                document.getElementById('trtMNameVi').textContent = c.nameVi;
+                document.getElementById('trtMNameVi').textContent = '';
 
                 const dirEl = document.getElementById('trtMDir');
                 dirEl.textContent = c.dir;
@@ -215,12 +215,12 @@ function tarot_cross(string $topic, array $cards, string $mode = 'topic', string
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Element</div><div class="trt-modal-info-val">${c.element}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Planet / Sign</div><div class="trt-modal-info-val">${c.planet || '—'}</div></div>
                 <div class="trt-modal-info"><div class="trt-modal-info-label">Arcana</div><div class="trt-modal-info-val">${c.arcana}</div></div>
-                ${c.themes ? `<div class="trt-modal-info"><div class="trt-modal-info-label">Chủ đề</div><div class="trt-modal-info-val">${c.themes}</div></div>` : ''}
+                ${c.themes ? `<div class="trt-modal-info"><div class="trt-modal-info-label">Themes</div><div class="trt-modal-info-val">${c.themes}</div></div>` : ''}
                 `;
 
                 if (c.links && c.links.length) {
                     document.getElementById('trtMLinks').innerHTML = `
-                    <div class="trt-modal-links-label">Liên kết lá bài</div>
+                    <div class="trt-modal-links-label">Related Cards</div>
                     <div class="trt-modal-link-tags">${c.links.map(l => `<span class="trt-modal-link-tag">${l.replace(/_/g, ' ')}</span>`).join('')}</div>
                     `;
                 } else {

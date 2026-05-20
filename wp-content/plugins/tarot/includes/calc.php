@@ -127,7 +127,7 @@ class Tarot_Calc {
         }
 
         if (empty(trim(strip_tags($html)))) {
-            $html = '<p>Không thể giải mã kết quả. Vui lòng thử lại.</p>';
+            $html = '<p>Unable to parse the reading. Please try again.</p>';
         }
 
         return ['hints' => [], 'html' => $html];

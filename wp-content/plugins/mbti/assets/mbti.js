@@ -2,8 +2,8 @@ jQuery(function ($) {
     'use strict';
 
     let currentStep  = 1;
-    const totalSteps = 4;
     let storedAnswers = {};
+    const totalSteps = $('.mbti-step').length;
 
     const UI = {
         $form:        $('#mbti-form'),

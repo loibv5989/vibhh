@@ -41,15 +41,15 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Vui lòng nhập họ và tên.');
+                $e.text('Please enter your full name.');
                 return false;
             }
             if (val.length > 40) {
-                $e.text('Họ tên tối đa 40 ký tự.');
+                $e.text('Name must be 40 characters or fewer.');
                 return false;
             }
             if (/\d/.test(val)) {
-                $e.text('Họ tên không được chứa số.');
+                $e.text('Name must not contain numbers.');
                 return false;
             }
             return true;
@@ -58,7 +58,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val) {
-                $e.text('Vui lòng chọn chủ đề.');
+                $e.text('Please select a topic.');
                 return false;
             }
             return true;
@@ -67,7 +67,7 @@ jQuery(function ($) {
             const $e = $('#' + errorId);
             $e.text('');
             if (!val || val.trim().length < 5) {
-                $e.text('Vui lòng nhập câu hỏi (tối thiểu 5 ký tự).');
+                $e.text('Please enter your question (at least 5 characters).');
                 return false;
             }
             return true;
@@ -169,10 +169,10 @@ jQuery(function ($) {
                             State.shuffledDeck = res.shuffled_deck;
                             resolve(res);
                         } else {
-                            reject(res?.message || 'Đã có lỗi xảy ra.');
+                            reject(res?.message || 'An error occurred.');
                         }
                     },
-                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Connection error. Please try again.')
                 });
             });
             return this.drawPromise;
@@ -188,8 +188,8 @@ jQuery(function ($) {
                         spread: State.spread,
                         picked: JSON.stringify(State.pickedCards),
                     },
-                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'Đã có lỗi xảy ra.'),
-                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
+                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'An error occurred.'),
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Connection error. Please try again.')
                 });
             });
         },
@@ -206,8 +206,8 @@ jQuery(function ($) {
                         cards: JSON.stringify(State.cardsLite),
                         hp_trap: $('#trt-deep-trap').val(),
                     },
-                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'Đã có lỗi xảy ra.'),
-                    error: xhr => reject(xhr?.responseJSON?.message || 'Lỗi kết nối. Vui lòng thử lại.')
+                    success: res => (res && res.success) ? resolve(res) : reject(res?.message || 'An error occurred.'),
+                    error: xhr => reject(xhr?.responseJSON?.message || 'Connection error. Please try again.')
                 });
             });
         }
@@ -241,7 +241,7 @@ jQuery(function ($) {
                 $slotsWrap.append(`<div class="trt-slot" data-slot="${idx}"><span class="trt-slot-pos">${label}</span></div>`);
             });
 
-            $('#trt-deck-instruction').show().html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
+            $('#trt-deck-instruction').show().html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
             $('#trt-selected-count').text('0');
             $('#trt-target-count').text(this.targetCount);
 
@@ -298,13 +298,13 @@ jQuery(function ($) {
             $card.addClass('selected-card').css({zIndex: 9999}).off('mouseenter mouseleave');
 
             if (!State.shuffledDeck) {
-                $('#trt-deck-instruction').html('✦ Đang kết nối với các lá bài...').css('opacity', 0.6);
+                $('#trt-deck-instruction').html('✦ Connecting with the cards...').css('opacity', 0.6);
                 try {
                     await Ajax.drawPromise;
                 } catch (e) {
                     return;
                 }
-                $('#trt-deck-instruction').html(`✦ Tập trung vào câu hỏi của bạn và chọn <strong>${this.targetCount} lá bài</strong>`).css('opacity', 1);
+                $('#trt-deck-instruction').html(`✦ Focus on your question and choose <strong>${this.targetCount} cards</strong>`).css('opacity', 1);
             }
 
             const clickedIndex = parseInt($card.data('index'));
@@ -376,7 +376,7 @@ jQuery(function ($) {
                 $('.ast-action-footer').fadeIn(400);
                 $('#trt-detail-container').slideDown(600);
             } catch (e) {
-                $('#trt-deck-instruction').html('Lỗi kết nối. Vui lòng thử lại.').css('opacity', 1).show();
+                $('#trt-deck-instruction').html('Connection error. Please try again.').css('opacity', 1).show();
             }
         },
 
@@ -386,9 +386,9 @@ jQuery(function ($) {
             $('#ast-analysis-wrap').slideDown(400);
 
             const loadingTexts = [
-                'Đang kết nối...', 'Khởi tạo dữ liệu...', 'Phân tích lá bài...',
-                'Phân tích ngữ cảnh...', 'Đối chiếu ý nghĩa...', 'Tổng hợp kết quả...',
-                'Luận giải...', 'Hoàn tất xử lý...', 'Vui lòng chờ...'
+                'Connecting...', 'Initialising...', 'Reading the cards...',
+                'Analysing context...', 'Cross-referencing meanings...', 'Synthesising the spread...',
+                'Interpreting...', 'Finalising the reading...', 'Please wait...'
             ];
             let textIdx = 0;
             const $loadingSpan = $btn.find('.trt-btn-loading');
@@ -409,7 +409,7 @@ jQuery(function ($) {
 
             } catch (error) {
                 clearInterval(textInterval);
-                $('#trt-err-analyze').text(error || 'Lỗi kết nối. Vui lòng thử lại sau.');
+                $('#trt-err-analyze').text(error || 'Connection error. Please try again.');
                 $('#ast-analysis-wrap').html('').hide();
                 $('html, body').animate({ scrollTop: $('#trt-deep-analyze-form').offset().top - 50 }, 400);
                 $btn.removeClass('loading').prop('disabled', false);
