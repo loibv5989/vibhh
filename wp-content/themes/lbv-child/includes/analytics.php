@@ -12,7 +12,7 @@ function google_enqueue_scripts(){
 //        );
 
         wp_enqueue_script('analytics',
-            'https://www.googletagmanager.com/gtag/js?id=G-74G4QGDXBG',
+            'https://www.googletagmanager.com/gtag/js?id=G-EZS4GW92SX',
             array(),
             null,
             true
@@ -23,7 +23,7 @@ function google_enqueue_scripts(){
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-74G4QGDXBG');
+gtag('config', 'G-EZS4GW92SX');
 </script>\n";
         }, 20);
     }
