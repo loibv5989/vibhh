@@ -16,4 +16,4 @@ Disallow: /*/feed$
 Disallow: /*/feed/
 
 Allow: /wp-admin/admin-ajax.php
-Sitemap: https://nbblo.com/sitemap_index.xml
+Sitemap: https://vibhh.com/sitemap_index.xml

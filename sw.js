@@ -19,7 +19,7 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    if (url.origin !== location.origin && url.origin !== 'https://cdn.nbblo.top') {
+    if (url.origin !== location.origin && url.origin !== 'https://cdn.vibhh.com') {
         return;
     }
 

@@ -2,14 +2,14 @@
 
 if (!defined('ABSPATH')) exit;
 
-define( 'LBV_CDN_URL', 'https://cdn.nbblo.top');
+define( 'LBV_CDN_URL', 'https://cdn.vibhh.com');
 
 add_filter('wp_mail_from', function($from_email) {
-    return 'contact@nbblo.com';
+    return 'contact@vibhh.com';
 });
 
 add_filter('wp_mail_from_name', function($from_name) {
-    return 'nbblo.com';
+    return 'Vibhh';
 });
 
 function is_dev() {
@@ -72,7 +72,7 @@ function register_sw() {
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js?v=nbblo-v1', { scope: '/' });
+                navigator.serviceWorker.register('/sw.js?v=vibhh-v1', { scope: '/' });
             });
         }
     </script>
