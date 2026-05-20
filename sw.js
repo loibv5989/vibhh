@@ -1,8 +1,5 @@
-const CACHE_NAME = 'vibhh-v1';
-
-const urlsToCache = [
-    '/'
-];
+const CACHE_NAME = 'vibhh-v2';
+const urlsToCache = ['/'];
 
 self.addEventListener('install', event => {
     event.waitUntil(
@@ -11,11 +8,22 @@ self.addEventListener('install', event => {
     self.skipWaiting();
 });
 
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames =>
+            Promise.all(cacheNames.filter(c => c !== CACHE_NAME).map(c => caches.delete(c)))
+        )
+    );
+    self.clients.claim();
+});
+
 self.addEventListener('fetch', event => {
-    const {request} = event;
+    const { request } = event;
     const url = new URL(request.url);
 
-    if (url.pathname.match(/\.(json|php)$/) && url.pathname !== '/manifest.json') {
+    if (request.method !== 'GET') return;
+
+    if (url.pathname.endsWith('.php') || url.pathname.startsWith('/wp-json/') || (url.pathname.endsWith('.json') && url.pathname !== '/manifest.json')) {
         return;
     }
 
@@ -23,37 +31,30 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    if (request.destination === 'style' ||
-        request.destination === 'script' ||
-        request.destination === 'image') {
-
+    if (request.destination === 'style' || request.destination === 'script' || request.destination === 'image'
+    ) {
         event.respondWith(
             caches.match(request).then(cached => {
-                return cached || fetch(request).then(response => {
-                    if (response && response.status === 200) {
-                        const responseClone = response.clone();
+                if (cached) return cached;
+
+                return fetch(request).then(response => {
+                    if (response && response.status === 200 && response.type === 'basic') {
+                        const clone = response.clone();
                         caches.open(CACHE_NAME).then(cache => {
-                            cache.put(request, responseClone);
+                            cache.put(request, clone);
                         });
                     }
                     return response;
                 });
             })
         );
-    } else {
-        event.respondWith(
-            fetch(request).catch(() => caches.match(request) || new Response())
-        );
+        return;
     }
-});
 
-self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.filter(c => c !== CACHE_NAME).map(c => caches.delete(c))
-            );
+    event.respondWith(
+        fetch(request).catch(async () => {
+            const cached = await caches.match(request);
+            return cached ?? Response.error();
         })
     );
-    self.clients.claim();
 });
