@@ -12,7 +12,7 @@ class LBV_CDN_Rewriter {
 
     private $includes = ['wp-content', 'wp-includes'];
 
-    private $excludes = ['.php', 'logo.svg', 'logo_dark.svg', 'favicon', '.ico', 'vibhh-dark', 'vibhh-light'];
+    private $excludes = ['.php', 'logo.svg', 'logo_dark.svg', '.ico', 'vibhh-dark', 'vibhh-light', 'favicon', 'cropped-favicon'];
 
     private $excluded_thumbs = [];
 
