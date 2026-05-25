@@ -3,18 +3,14 @@
 class CleanImage150Handler {
 
     private $dry_run = false;
+    private $errors = array();
 
     public function __construct( $dry_run = false ) {
         $this->dry_run = $dry_run;
     }
 
     public function execute() {
-        $this->log( "🔍 Starting scan for 150x[x] images..." );
-        $this->log( "Checking which attachments are featured images..." );
-
         $featured_image_ids = $this->get_all_featured_image_ids();
-        $this->log( "Found " . count( $featured_image_ids ) . " featured images in use." );
-
         $attachments = $this->get_all_attachments();
         $deleted_count = 0;
         $skipped_count = 0;
@@ -35,7 +31,6 @@ class CleanImage150Handler {
                     $total_found++;
 
                     if ( $is_featured ) {
-                        $this->log( "⏭️  Skipped (Featured Image) - Attachment {$attachment_id}: {$size_name} ({$size_data['width']}x{$size_data['height']})" );
                         $skipped_count++;
                         continue;
                     }
@@ -44,35 +39,24 @@ class CleanImage150Handler {
                         'size_name' => $size_name,
                         'size_data' => $size_data
                     );
-                    $this->log( "Found: Attachment {$attachment_id} - {$size_name} ({$size_data['width']}x{$size_data['height']})" );
                 }
             }
 
             if ( ! empty( $sizes_to_delete ) ) {
                 if ( ! $this->dry_run ) {
                     foreach ( $sizes_to_delete as $size_info ) {
-                        $this->delete_single_size( $attachment_id, $size_info['size_name'], $meta );
-                        $deleted_count++;
+                        $result = $this->delete_single_size( $attachment_id, $size_info['size_name'], $meta );
+                        if ( $result ) {
+                            $deleted_count++;
+                        }
                     }
-                    $this->log( "✅ Deleted " . count( $sizes_to_delete ) . " sizes from attachment {$attachment_id}" );
                 } else {
                     $deleted_count += count( $sizes_to_delete );
-                    $this->log( "🧪 [DRY-RUN] Would delete " . count( $sizes_to_delete ) . " sizes from attachment {$attachment_id}" );
                 }
             }
         }
 
-        $this->log( "\n" . str_repeat( "=", 50 ) );
-        $this->log( "📊 Summary:" );
-        $this->log( "Total 150x[x] images found: {$total_found}" );
-        $this->log( "Images deleted: {$deleted_count}" );
-        $this->log( "Featured images skipped: {$skipped_count}" );
-
-        if ( $this->dry_run ) {
-            $this->log( "\n🧪 This was a DRY-RUN. No files were deleted." );
-        } else {
-            $this->log( "✨ Cleanup completed!" );
-        }
+        $this->log_errors();
 
         return array(
             'total_found' => $total_found,
@@ -168,7 +152,7 @@ class CleanImage150Handler {
             }
 
             if ( file_exists( $full_path ) ) {
-                $this->log( "Could not delete file: {$full_path}", 'warning' );
+                $this->add_error( "Could not delete file: {$full_path}" );
                 return false;
             }
         }
@@ -179,16 +163,21 @@ class CleanImage150Handler {
         return true;
     }
 
-    private function log( $message, $level = 'info' ) {
-        if ( defined( 'WP_CLI' ) && WP_CLI ) {
-            if ( $level === 'warning' ) {
-                \WP_CLI::warning( $message );
-            } else {
-                \WP_CLI::log( $message );
-            }
-        } else {
+    private function add_error( $message ) {
+        $this->errors[] = $message;
+    }
 
-            error_log( '[Clean Image 150] ' . $message );
+    private function log_errors() {
+        if ( ! empty( $this->errors ) ) {
+            foreach ( $this->errors as $error ) {
+                error_log( '[Clean Image 150 Error] ' . $error );
+            }
+        }
+
+        if ( defined( 'WP_CLI' ) && WP_CLI && ! empty( $this->errors ) ) {
+            foreach ( $this->errors as $error ) {
+                \WP_CLI::warning( $error );
+            }
         }
     }
 }
@@ -198,18 +187,17 @@ class CleanImage150CLI {
     public function delete( $args, $assoc_args ) {
         $dry_run = isset( $assoc_args['dry-run'] );
         $handler = new CleanImage150Handler( $dry_run );
-        $handler->execute();
+        $result = $handler->execute();
 
-        if ( ! $dry_run ) {
-            \WP_CLI::success( "✨ Cleanup completed!" );
-        } else {
+        if ( $dry_run ) {
+            \WP_CLI::log( "Dry run completed. Found: {$result['total_found']}, Would delete: {$result['deleted']}, Skipped: {$result['skipped']}" );
             \WP_CLI::log( "Run without --dry-run to actually delete files." );
+        } else {
+            \WP_CLI::success( "Cleanup completed! Deleted: {$result['deleted']}, Skipped: {$result['skipped']}" );
         }
     }
 
     public function list_images( $args, $assoc_args ) {
-        \WP_CLI::log( "🔍 Listing all 150x[x] images..." );
-
         $handler = new CleanImage150Handler();
         $results = $handler->get_list();
 
@@ -234,6 +222,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
     \WP_CLI::add_command( 'clean-image-150', 'CleanImage150CLI' );
 }
 
+// Cron scheduling
 function clean_image_150_add_cron_schedule( $schedules ) {
     $schedules['daily_midnight'] = array(
         'interval' => 86400,
@@ -254,17 +243,8 @@ function clean_image_150_schedule_cron() {
 add_action( 'init', 'clean_image_150_schedule_cron' );
 
 function clean_image_150_run_cleanup() {
-
     $handler = new CleanImage150Handler( false );
     $result = $handler->execute();
-
-    error_log( sprintf(
-        '[Clean Image 150] Daily cleanup completed at %s - Found: %d, Deleted: %d, Skipped: %d',
-        current_time( 'mysql' ),
-        $result['total_found'],
-        $result['deleted'],
-        $result['skipped']
-    ) );
 }
 add_action( 'clean_image_150_daily_task', 'clean_image_150_run_cleanup' );
 

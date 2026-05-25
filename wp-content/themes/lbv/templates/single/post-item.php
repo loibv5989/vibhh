@@ -29,6 +29,10 @@ $post_id = get_the_ID();
                 <?php echo apply_filters( 'lbv_modified_date', get_the_modified_date('', $post_id), $post_id ); ?>
             </span>
         </div>
+        <?php else: $helper = Idols_Helper::get_instance();
+            echo $helper->get_profile_summary_sentence($post_id);
+            echo $helper->get_group_meta_html( $post_id );
+        ?>
         <?php endif;?>
     </div>
 </article>

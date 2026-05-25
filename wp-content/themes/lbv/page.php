@@ -9,23 +9,20 @@ get_header(); ?>
             while ( have_posts() ) : the_post();
                 ?>
                 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <?php
-                    $title = apply_filters('lbv_header_title', get_the_title(), get_the_ID());
-                    $description = apply_filters('lbv_page_header_description', '', get_the_ID());
-
-                    if (!empty($title)) :
+                    <header class="page-header">
+                        <h1 class="page-title">
+                            <?php
+                            $title = apply_filters('lbv_header_title', get_the_title(), get_the_ID());
+                            echo esc_html($title);
+                            ?>
+                        </h1>
+                        <?php
+                        $description = apply_filters('lbv_page_header_description', '', get_the_ID());
+                        if (!empty($description)) {
+                            echo '<p class="page-description">' . wp_kses_post($description) . '</p>';
+                        }
                         ?>
-                        <header class="page-header">
-                            <?php if (!empty($title)) : ?>
-                                <h1 class="page-title"><?php echo esc_html($title); ?></h1>
-                            <?php endif; ?>
-
-                            <?php if (!empty($description)) : ?>
-                                <p class="page-description"><?php echo wp_kses_post($description); ?></p>
-                            <?php endif; ?>
-                        </header>
-                    <?php endif; ?>
-
+                    </header>
                     <div class="page-content">
                         <?php the_content(); ?>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
-function social_icons_sprite() {$icons = [
+function social_icons_sprite() {
+    $icons = [
         'instagram' => '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>',
         'tiktok' => '<path d="M16 3c.6 2.2 2.3 3.9 4.5 4.5V11c-1.8-.1-3.4-.7-4.5-1.6V16a5 5 0 1 1-5-5c.3 0 .7 0 1 .1V14a2 2 0 1 0 2 2V3h2z"/>',
         'youtube' => '<path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5a3.02 3.02 0 0 0-2.12 2.14C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81z" fill="currentColor"/><path d="M9.55 15.57V8.43L15.82 12z" fill="var(--yt-play-color, #fff)"/>',
@@ -23,9 +24,7 @@ function social_icons_sprite() {$icons = [
     echo '</svg>' . PHP_EOL;
 }
 
-if (LBV_SOCIAL_ENABLE) {
-    add_action('wp_footer', 'social_icons_sprite', 1);
-}
+add_action( 'wp_footer', 'social_icons_sprite', 1 );
 
 
 function lbv_social_icon( $name ) {

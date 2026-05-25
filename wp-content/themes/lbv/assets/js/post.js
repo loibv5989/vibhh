@@ -260,30 +260,11 @@
     const SidebarPopular = {
         isLoading: false,
         isInitialized: false,
-        nonce: '',
-        nonceInitialized: false,
 
         init: function () {
             if (this.isInitialized) return;
             this.isInitialized = true;
             this.bindEvents();
-        },
-
-        fetchNonce: function() {
-            const self = this;
-            return $.ajax({
-                url: ajax_url,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    action: 'lbv_get_popular_nonce'
-                },
-                success: function(response) {
-                    if (response.success && response.data) {
-                        self.nonce = response.data.nonce;
-                    }
-                }
-            });
         },
 
         bindEvents: function () {
@@ -294,16 +275,6 @@
                 e.stopImmediatePropagation();
 
                 if (self.isLoading) return;
-
-                if (!self.nonceInitialized) {
-                    self.fetchNonce().then(() => {
-                        self.handleNavigation(e);
-                    });
-                    return;
-                }
-
-                if (!self.nonce) return;
-
                 self.handleNavigation(e);
             });
         },
@@ -333,46 +304,46 @@
             const postType = $nav.attr('data-post-type') || self.getCurrentPostType();
             const is_profile = $nav.attr('data-profile');
 
+            let currentLang = document.documentElement.lang || '';
+            if (currentLang.indexOf('-') > -1) {
+                currentLang = currentLang.split('-')[0];
+            }
+
             $buttons.prop('disabled', true);
             $container.css('opacity', '0.6');
 
+            const restUrl = lbvPost.rest_url + 'popular-posts';
+
             $.ajax({
-                url: ajax_url,
-                type: 'POST',
+                url: restUrl,
+                type: 'GET',
                 dataType: 'json',
                 data: {
-                    action: 'load_popular_posts',
                     page: targetPage,
                     reference_post_id: referencePostId,
                     post_type: postType,
                     is_profile: is_profile,
-                    nonce: self.nonce,
+                    lang: currentLang,
                     timestamp: new Date().getTime()
                 },
                 success: function (response) {
-                    if (response.success && response.data) {
-                        $container.html(response.data.html);
+                    if (response && response.html) {
+                        $container.html(response.html);
 
                         $nav.attr({
-                            'data-current-page': response.data.current_page,
-                            'data-max-pages': response.data.max_pages
+                            'data-current-page': response.current_page,
+                            'data-max-pages': response.max_pages
                         });
 
-                        if (response.data.reference_post_id) {
-                            $nav.attr('data-reference-post-id', response.data.reference_post_id);
+                        if (response.reference_post_id) {
+                            $nav.attr('data-reference-post-id', response.reference_post_id);
                         }
 
-                        self.updateButtons(response.data.current_page, response.data.max_pages);
+                        self.updateButtons(response.current_page, response.max_pages);
                     }
                 },
                 error: function (xhr) {
-                    if (xhr.responseJSON?.data?.message === 'Invalid security token') {
-                        self.fetchNonce().then(() => {
-                            setTimeout(() => self.loadPosts(targetPage, referencePostId, $nav), 100);
-                        });
-                    } else {
-                        $buttons.prop('disabled', false);
-                    }
+                    $buttons.prop('disabled', false);
                 },
                 complete: function () {
                     $container.css('opacity', '1');
@@ -388,7 +359,6 @@
 
             return window.current_post_type || 'post';
         },
-
 
         updateButtons: function (currentPage, maxPages) {
             $('.prev-popular').prop('disabled', currentPage <= 1);

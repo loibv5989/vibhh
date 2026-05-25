@@ -1,7 +1,7 @@
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-wrapper">
-            <?php if ( LBV_SOCIAL_ENABLE ) : ?>
+            <?php if (LBV_SOCIAL_ENABLE) :?>
             <div class="footer-social">
                 <a rel="me noopener" target="_blank" href="<?= esc_url( LBV_SOCIAL_FACEBOOK ); ?>" class="social-link" aria-label="Facebook">
                     <?= lbv_social_icon('facebook'); ?></a>

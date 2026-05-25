@@ -27,6 +27,15 @@ $lbvSettings = LBV_Theme_Settings::get_instance();
                                 </svg>
                             </span>
                         <?php endif; ?>
+
+                        <?php
+                        if ( get_current_user_id() === (int) $author_id ) :
+                            $page_id = get_page_by_path('my-account')->ID;
+                            ?>
+                            <a href="<?php echo esc_url( get_permalink( $page_id ) ); ?>" class="author-edit-btn">
+                                Edit
+                            </a>
+                        <?php endif; ?>
                     </h1>
 
                     <?php if ($author_bio) : ?>
@@ -36,13 +45,29 @@ $lbvSettings = LBV_Theme_Settings::get_instance();
                     <?php
                     $twitter  = get_user_meta( $author_id, 'twitter', true );
                     $facebook = get_user_meta( $author_id, 'facebook', true );
+                    $website  = get_the_author_meta( 'user_url', $author_id );
 
-                    if ( $facebook || $twitter ) : ?>
+                    if ( $facebook || $twitter || $website ) : ?>
                         <div class="author-social">
                             <span class="follow-label"><?php _e('FOLLOW:'); ?></span>
 
+                            <?php if ( $website ) :
+                                $rel_attr = 'noopener';
+                                $site_host  = parse_url( home_url(), PHP_URL_HOST );
+                                $link_host  = parse_url( $website, PHP_URL_HOST );
+                                if ( $link_host && $link_host !== $site_host ) {
+                                    $rel_attr = 'nofollow noopener';
+                                }
+                            ?>
+                                <a href="<?php echo esc_url( $website ); ?>" target="_blank" rel="<?php echo esc_attr( $rel_attr ); ?>" aria-label="Website">
+                                    <svg width="18" height="18" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                    </svg>
+                                </a>
+                            <?php endif; ?>
+
                             <?php if ( $facebook ) : ?>
-                                <a href="<?php echo esc_url( $facebook ); ?>" target="_blank" rel="noopener" aria-label="Facebook">
+                                <a href="<?php echo esc_url( $facebook ); ?>" target="_blank" rel="nofollow noopener" aria-label="Facebook">
                                     <svg width="18" height="18" viewBox="0 0 24 24">
                                         <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
                                     </svg>
@@ -50,7 +75,7 @@ $lbvSettings = LBV_Theme_Settings::get_instance();
                             <?php endif; ?>
 
                             <?php if ( $twitter ) : ?>
-                                <a href="<?php echo esc_url( $twitter ); ?>" target="_blank" rel="noopener" aria-label="Twitter">
+                                <a href="<?php echo esc_url( $twitter ); ?>" target="_blank" rel="nofollow noopener" aria-label="Twitter">
                                     <svg width="18" height="18" viewBox="0 0 24 24">
                                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.966 6.817h-3.31l7.73-8.835-8.156-10.465h6.826l4.713 6.231 5.48-6.231zm-1.161 17.52h1.833l-7.977-10.544h-1.97l7.977 10.544z"/>
                                     </svg>

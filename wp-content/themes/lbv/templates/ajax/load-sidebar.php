@@ -6,8 +6,6 @@ class LBV_Popular_Posts {
 
     private static $instance = null;
 
-    private $nonce_action = 'lbv_popular_posts_nonce';
-
     private $posts_per_page = 5;
 
     public static function get_instance() {
@@ -18,30 +16,15 @@ class LBV_Popular_Posts {
     }
 
     private function __construct() {
-        add_action('wp_ajax_load_popular_posts', array($this, 'load_posts'));
-        add_action('wp_ajax_nopriv_load_popular_posts', array($this, 'load_posts'));
-        add_action('wp_ajax_lbv_get_popular_nonce', array($this, 'get_nonce'));
-        add_action('wp_ajax_nopriv_lbv_get_popular_nonce', array($this, 'get_nonce'));
+        add_action('rest_api_init', array($this, 'register_routes'));
     }
 
-    public function get_nonce() {
-        $this->clean_output_buffer();
-        wp_send_json_success(array(
-            'nonce' => wp_create_nonce($this->nonce_action)
+    public function register_routes() {
+        register_rest_route('lbv/v1', '/popular-posts', array(
+            'methods'             => WP_REST_Server::READABLE,
+            'callback'            => array($this, 'load_posts'),
+            'permission_callback' => '__return_true'
         ));
-    }
-
-    private function verify_nonce() {
-        if (!check_ajax_referer($this->nonce_action, 'nonce', false)) {
-            wp_send_json_error(array('message' => __('Invalid security token', 'lbv')));
-            exit;
-        }
-    }
-
-    private function clean_output_buffer() {
-        if (ob_get_length()) {
-            ob_end_clean();
-        }
     }
 
     private function get_reference_post_id($provided_id = 0, $post_type = 'post') {
@@ -66,18 +49,10 @@ class LBV_Popular_Posts {
 
     private function get_posts_by_tags($reference_post_id, $offset, $limit, $post_type = 'post') {
         global $wpdb;
-
         $post_tags = wp_get_post_tags($reference_post_id);
+        if (empty($post_tags)) return array('posts' => array(), 'total' => 0);
 
-        if (empty($post_tags)) {
-            return array('posts' => array(), 'total' => 0);
-        }
-
-        $tag_ids = array_map(function($tag) {
-            return intval($tag->term_id);
-        }, $post_tags);
-
-        $tag_ids_str = implode(',', $tag_ids);
+        $tag_ids_str = implode(',', array_map(function($tag) { return intval($tag->term_id); }, $post_tags));
 
         $sql = $wpdb->prepare("
             SELECT SQL_CALC_FOUND_ROWS DISTINCT p.*, COUNT(c.comment_ID) as comment_count
@@ -95,24 +70,16 @@ class LBV_Popular_Posts {
             LIMIT %d, %d
         ", $post_type, $reference_post_id, $offset, $limit);
 
-        $posts = $wpdb->get_results($sql);
-        $total = intval($wpdb->get_var("SELECT FOUND_ROWS()"));
-
-        return array('posts' => $posts, 'total' => $total);
+        return array('posts' => $wpdb->get_results($sql), 'total' => intval($wpdb->get_var("SELECT FOUND_ROWS()")));
     }
 
     private function get_posts_by_categories($reference_post_id, $offset, $limit, $post_type = 'post') {
         global $wpdb;
-
         $post_categories = wp_get_post_categories($reference_post_id);
-
-        if (empty($post_categories)) {
-            return array('posts' => array(), 'total' => 0);
-        }
+        if (empty($post_categories)) return array('posts' => array(), 'total' => 0);
 
         $cat_ids_str = implode(',', array_map('intval', $post_categories));
 
-        // SỬA: Thêm %s cho post_type
         $sql = $wpdb->prepare("
             SELECT SQL_CALC_FOUND_ROWS DISTINCT p.*, COUNT(c.comment_ID) as comment_count
             FROM {$wpdb->posts} p
@@ -129,10 +96,7 @@ class LBV_Popular_Posts {
             LIMIT %d, %d
         ", $post_type, $reference_post_id, $offset, $limit);
 
-        $posts = $wpdb->get_results($sql);
-        $total = intval($wpdb->get_var("SELECT FOUND_ROWS()"));
-
-        return array('posts' => $posts, 'total' => $total);
+        return array('posts' => $wpdb->get_results($sql), 'total' => intval($wpdb->get_var("SELECT FOUND_ROWS()")));
     }
 
     private function get_all_popular_posts($offset, $limit, $post_type = 'post') {
@@ -149,32 +113,23 @@ class LBV_Popular_Posts {
             LIMIT %d, %d
         ", $post_type, $offset, $limit);
 
-        $posts = $wpdb->get_results($sql);
-        $total = intval($wpdb->get_var("SELECT FOUND_ROWS()"));
-
-        return array('posts' => $posts, 'total' => $total);
+        return array('posts' => $wpdb->get_results($sql), 'total' => intval($wpdb->get_var("SELECT FOUND_ROWS()")));
     }
 
     private function fetch_posts($reference_post_id, $offset, $limit, $post_type = 'post') {
         $result = $this->get_posts_by_tags($reference_post_id, $offset, $limit, $post_type);
-
-        if (!empty($result['posts'])) {
-            return array_merge($result, array('query_type' => 'tag'));
-        }
+        if (!empty($result['posts'])) return array_merge($result, array('query_type' => 'tag'));
 
         $result = $this->get_posts_by_categories($reference_post_id, $offset, $limit, $post_type);
-
-        if (!empty($result['posts'])) {
-            return array_merge($result, array('query_type' => 'category'));
-        }
+        if (!empty($result['posts'])) return array_merge($result, array('query_type' => 'category'));
 
         $result = $this->get_all_popular_posts($offset, $limit, $post_type);
-
         return array_merge($result, array('query_type' => 'all'));
     }
 
     private function render_post_item($post) {
         $post_id   = isset($post->ID) ? (int) $post->ID : 0;
+        $post_type = get_post_type($post_id);
         $permalink = esc_url(get_permalink($post_id));
 
         $thumbnail = '';
@@ -184,12 +139,11 @@ class LBV_Popular_Posts {
         }
 
         $title = esc_html(get_the_title($post_id));
-
         $date = apply_filters('lbv_modified_date', get_the_modified_date('', $post_id), $post_id);
         $extra_html = '<div class="post-meta"><span class="post-date">' . esc_html($date) . '</span></div>';
 
         return <<<HTML
-<div class="popular-post-item">
+<div class="popular-post-item" data-post-id="{$post_id}">
     {$thumbnail}
     <div class="post-info">
         <div class="post-list-title">
@@ -201,23 +155,18 @@ class LBV_Popular_Posts {
 HTML;
     }
 
-
-    public function load_posts() {
-        $this->clean_output_buffer();
-        $this->verify_nonce();
-
-        $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    public function load_posts(WP_REST_Request $request) {
+        $paged = $request->get_param('page') ? intval($request->get_param('page')) : 1;
         $offset = ($paged - 1) * $this->posts_per_page;
 
-        $reference_post_id = isset($_POST['reference_post_id']) ? intval($_POST['reference_post_id']) : 0;
-        $post_type = isset($_POST['post_type']) ? sanitize_key($_POST['post_type']) : 'post';
+        $reference_post_id = $request->get_param('reference_post_id') ? intval($request->get_param('reference_post_id')) : 0;
+        $post_type = $request->get_param('post_type') ? sanitize_key($request->get_param('post_type')) : 'post';
 
         if (!post_type_exists($post_type)) {
             $post_type = 'post';
         }
 
         $reference_post_id = $this->get_reference_post_id($reference_post_id, $post_type);
-
         $result = $this->fetch_posts($reference_post_id, $offset, $this->posts_per_page, $post_type);
 
         $posts = $result['posts'];
@@ -235,7 +184,7 @@ HTML;
             $output = '<p>' . sprintf(__('No posts found for page %d', 'lbv'), $paged) . '</p>';
         }
 
-        wp_send_json_success(array(
+        return rest_ensure_response(array(
             'html'              => $output,
             'current_page'      => $paged,
             'max_pages'         => $max_pages,

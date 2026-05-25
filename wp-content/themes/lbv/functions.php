@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'LBV_THEME_VERSION', '26.5.20' );
+define( 'LBV_THEME_VERSION', '26.5.26' );
 define( 'LBV_THEME_DIR', trailingslashit( get_template_directory() ) );
 define( 'LBV_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
 
-define( 'LBV_SOCIAL_ENABLE',  0 );
+define( 'LBV_SOCIAL_ENABLE',      0);
 define( 'LBV_SOCIAL_FACEBOOK',  '' );
 define( 'LBV_SOCIAL_X',         '' );
 define( 'LBV_SOCIAL_TIKTOK',    '' );
@@ -28,7 +28,7 @@ function lbv_theme_setup() {
     ));
 
     add_theme_support('title-tag');
-    add_theme_support('post-thumbnails', array('post', 'page'));
+    add_theme_support('post-thumbnails');
     add_theme_support('html5', array(
         'search-form',
         'comment-form',
@@ -53,10 +53,11 @@ function lbv_theme_activated() {
 add_action('after_switch_theme', 'lbv_theme_activated');
 
 function enqueue_scripts() {
-    wp_enqueue_style('lbv', LBV_THEME_URI . 'assets/css/main.css', array(), LBV_THEME_VERSION, 'all');
-    wp_enqueue_script('lbv', LBV_THEME_URI . 'assets/js/main.min.js', array('jquery'), LBV_THEME_VERSION, true);
-    wp_localize_script('lbv', 'lbvMain', array(
+    wp_enqueue_style('lbv-main', LBV_THEME_URI . 'assets/css/main.css', array(), LBV_THEME_VERSION, 'all');
+    wp_enqueue_script('lbv-main', LBV_THEME_URI . 'assets/js/main.min.js', array('jquery'), LBV_THEME_VERSION, true);
+    wp_localize_script('lbv-main', 'lbvMain', array(
         'ajax_url' => admin_url('admin-ajax.php'),
+        'rest_url' => esc_url_raw( rest_url( 'lbv/v1/' ) ),
         'login_url' => site_url('/wp-login.php'),
         'is_user_logged_in' => is_user_logged_in()
     ));
@@ -70,6 +71,7 @@ function enqueue_scripts() {
         wp_localize_script('lbv-post', 'lbvPost', array(
             'is_admin' => current_user_can('manage_options'),
             'ajax_url' => admin_url('admin-ajax.php'),
+            'rest_url' => esc_url_raw( rest_url('lbv/v1/' )),
             'is_logged_in' => is_user_logged_in(),
             'current_user' => [
                 'name' => $current_user->display_name,
@@ -79,22 +81,20 @@ function enqueue_scripts() {
         ));
 
         wp_enqueue_script('lbv-popup', LBV_THEME_URI . 'assets/js/popup.min.js', array('jquery'), LBV_THEME_VERSION, true);
-
     }
 
     if ((is_singular('page') && !is_front_page()) || is_404()) {
         wp_enqueue_style('lbv-page', LBV_THEME_URI . 'assets/css/page.css', array(), LBV_THEME_VERSION, 'all');
-
         if (is_singular('page') && !is_front_page()) {
             $current_user = wp_get_current_user();
             wp_enqueue_script('lbv-page', LBV_THEME_URI . 'assets/js/page.min.js', array('jquery'), LBV_THEME_VERSION, true);
-            wp_localize_script('lbv-page', 'lbvPost', array(
+            wp_localize_script('lbv-page', 'lbvPage', array(
                 'is_admin'    => current_user_can('manage_options'),
                 'ajax_url'    => admin_url('admin-ajax.php'),
                 'is_logged_in' => is_user_logged_in(),
                 'current_user' => array(
                     'name'   => $current_user->display_name,
-                    'avatar' => get_avatar_url($current_user->ID, array('size' => 32)),
+                    'avatar' => get_avatar_url($current_user->ID, array('size' => 40)),
                     'id'     => $current_user->ID,
                 ),
             ));
@@ -103,14 +103,6 @@ function enqueue_scripts() {
 
     if (is_author()) {
         wp_enqueue_style('lbv-author', LBV_THEME_URI . 'assets/css/author.css', array(), LBV_THEME_VERSION);
-    }
-
-    if (!is_singular(['post']) && !is_author() && !is_front_page() && !is_page()) {
-        wp_enqueue_script('lbv-archive', LBV_THEME_URI . 'assets/js/archive.min.js', array('jquery'), LBV_THEME_VERSION, true);
-
-        wp_localize_script('lbv-archive', 'lbvArchive', array(
-            'ajax_url' => admin_url('admin-ajax.php')
-        ));
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts', 10);
@@ -128,15 +120,18 @@ function lbv_load_theme_files() {
         'includes/menu-footer.php',
         'includes/toc-nav.php',
         'includes/walker-comment.php',
+
+        'templates/contact.php',
+        'templates/profile.php',
+        'templates/login.php',
+        'templates/login/github.php',
+        'templates/login/google.php',
+
         'templates/ajax/load-posts.php',
         'templates/ajax/live-search.php',
         'templates/ajax/load-sidebar.php',
         'templates/ajax/comments.php',
-        'templates/contact.php',
-        'templates/login.php',
-        'templates/login/github.php',
-        'templates/login/google.php',
-        'templates/profile.php',
+
         'backend/login.php',
         'backend/users.php',
         'includes/robots.php',
@@ -166,6 +161,7 @@ if (is_admin()) {
         'backend/contact.php',
         'backend/thumbnail.php',
         'backend/post-cleaner.php',
+
     ];
 
     foreach ($admin_files as $file) {
@@ -173,9 +169,5 @@ if (is_admin()) {
         if (file_exists($path)) {
             require_once $path;
         }
-    }
-
-    if (class_exists('LBV_Admin')) {
-        new LBV_Admin();
     }
 }

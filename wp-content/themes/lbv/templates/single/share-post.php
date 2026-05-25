@@ -39,4 +39,3 @@ $threads_url = "https://www.threads.net/intent/post?text=" . $post_title . "%20"
         </a>
     </div>
 </section>
-<?php echo apply_filters( 'lbv_after_post_content', '' ); ?>

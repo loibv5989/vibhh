@@ -282,53 +282,6 @@ class LBV_USER_Profile {
             $reg_time = get_user_meta($user->ID, 'registration_time', true);
         }
         ?>
-        <style>
-            .user-profile-picture {
-                display: none !important;
-            }
-            <?php if ($is_admin_viewing) : ?>
-            .lbv-reg-info-table {
-                background: #f9f9f9;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-            }
-            .lbv-reg-info-table th {
-                width: 200px;
-                font-weight: 600;
-            }
-            .lbv-reg-info-table code {
-                background: #fff;
-                padding: 2px 6px;
-                border: 1px solid #ddd;
-                border-radius: 3px;
-                font-size: 12px;
-            }
-            .lbv-reg-badge {
-                display: inline-block;
-                padding: 4px 10px;
-                border-radius: 4px;
-                font-weight: 600;
-                font-size: 13px;
-            }
-            .lbv-reg-badge.google {
-                background: #e8f0fe;
-                color: #1967d2;
-            }
-            .lbv-reg-badge.github {
-                background: #f3f4f6;
-                color: #24292f;
-            }
-            .lbv-reg-badge.wordpress {
-                background: #e5f3ff;
-                color: #0073aa;
-            }
-            .lbv-reg-badge.admin {
-                background: #f0f0f1;
-                color: #50575e;
-            }
-            <?php endif; ?>
-        </style>
-
         <!-- Profile Picture Section -->
         <table class="form-table lbv-profile-picture-table" role="presentation">
             <tbody>
@@ -588,7 +541,7 @@ class LBV_USER_Profile {
         if ( $hook !== 'profile.php' && $hook !== 'user-edit.php' ) {
             return;
         }
-
+        wp_enqueue_style('user-profile', LBV_THEME_URI . 'backend/assets/css/user.css', array(), LBV_THEME_VERSION);
         wp_add_inline_script( 'jquery', '
             jQuery(document).ready(function($) {
                 var lbvSection = $("#lbv-profile-picture-heading, .lbv-profile-picture-table");

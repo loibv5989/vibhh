@@ -1,4 +1,4 @@
-<div class="search-result-item">
+<div class="search-result-item" data-post-id="<?php the_ID(); ?>">
     <div class="result-content">
         <div class="result-meta">
             <span class="result-author">

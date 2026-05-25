@@ -29,22 +29,14 @@ class LBV_Ajax_Search {
             $posts_per_page = $this->theme_settings()->lbv_posts_per_page();
         }
 
-        $excluded_pages = $this->theme_settings()->get_excluded_page_ids();
-
-        $args = array(
+        return array(
             's'                   => sanitize_text_field($search_term),
-            'post_type'           => ['page', 'post'],
+            'post_type'           => ['idol', 'group', 'photo', 'actor', 'v_star', 'post'],
             'post_status'         => 'publish',
             'posts_per_page'      => intval($posts_per_page),
             'paged'               => intval($paged),
             'ignore_sticky_posts' => true
         );
-
-        if (!empty($excluded_pages)) {
-            $args['post__not_in'] = $excluded_pages;
-        }
-
-        return $args;
     }
 
     public function live_search() {

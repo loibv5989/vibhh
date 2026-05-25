@@ -5,19 +5,30 @@ defined('ABSPATH') ||  exit;
 class LBV_Admin {
 
     private static $instance = null;
-    private $settings;
+    private $lbv_settings;
 
     public function __construct() {
-        $this->settings = new LBV_Settings();
         add_action('admin_menu', array($this, 'add_admin_menu'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'), 99);
+        add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'), 99);
         add_action('admin_init', array($this, 'register_settings'));
         add_filter('wp_generate_attachment_metadata', array($this, 'add_svg_dimensions'), 10, 2);
     }
-
     public function enqueue_block_editor_assets() {
         wp_enqueue_style('lbv-main', LBV_THEME_URI . 'backend/assets/css/editor.css', array(), LBV_THEME_VERSION);
+    }
+
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+    private function lbv_settings() {
+        if ($this->lbv_settings === null) {
+            $this->lbv_settings = LBV_Settings::get_instance();
+        }
+        return $this->lbv_settings;
     }
 
     public function add_svg_dimensions($data, $id) {
@@ -191,22 +202,6 @@ class LBV_Admin {
                                 ),
                         ),
                 ),
-//                'header' => array(
-//                        'label' => 'Header',
-//                        'icon' => 'menu',
-//                ),
-//                'category' => array(
-//                        'label' => 'Category',
-//                        'icon' => 'category',
-//                ),
-//                'sidebars' => array(
-//                        'label' => 'Sidebars',
-//                        'icon' => 'columns',
-//                ),
-//                'footer' => array(
-//                        'label' => 'Footer',
-//                        'icon' => 'editor-insertmore',
-//                ),
         );
     }
 
@@ -214,15 +209,15 @@ class LBV_Admin {
         if ($current_tab === 'theme-options') {
             switch ($current_section) {
                 case 'default-logos':
-                    $this->settings->render_logo_settings();
+                    $this->lbv_settings()->render_logo_settings();
                     break;
 
                 case 'mobile-logos':
-                    $this->settings->render_mobile_logo_settings();
+                    $this->lbv_settings()->render_mobile_logo_settings();
                     break;
 
                 case 'oauth-credentials':
-                    $this->settings->render_oauth_settings();
+                    $this->lbv_settings()->render_oauth_settings();
                     break;
 
                 default:
@@ -230,7 +225,7 @@ class LBV_Admin {
                     break;
             }
         } elseif ($current_tab === 'system-info') {
-            $this->settings->render_system_info();
+            $this->lbv_settings()->render_system_info();
         } else {
             $this->render_welcome_screen();
         }
@@ -245,3 +240,5 @@ class LBV_Admin {
         <?php
     }
 }
+
+LBV_Admin::get_instance();

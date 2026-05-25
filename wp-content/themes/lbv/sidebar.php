@@ -63,23 +63,9 @@ $widget_title = __('Related Post', 'lbv');
                         <?php endif; ?>
                         <div class="post-info">
                             <div class="post-list-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
-                            <?php if ($post_type === 'post') : ?>
-                                <div class="post-meta">
-                                    <?php
-                                    if (function_exists('pll_current_language') && pll_current_language() === 'vi') {
-                                        echo get_the_modified_date('j \t\h\á\n\g n, Y');
-                                    } else {
-                                        echo get_the_modified_date();
-                                    }
-                                    ?>
-                                </div>
-                            <?php else:
-                                $helper = Idols_Helper::get_instance();
-                                $birthday = $helper->check_birthday_today($idol_id);
-                                echo !empty($birthday['is_birthday']) ? $birthday['message'] : $helper->get_profile_summary_sentence($idol_id);
-                                echo $helper->get_group_meta_html( $idol_id );
-                                ?>
-                            <?php endif;?>
+                            <div class="post-meta">
+                                <?= get_the_modified_date(); ?>
+                            </div>
                         </div>
                     </div>
                 <?php

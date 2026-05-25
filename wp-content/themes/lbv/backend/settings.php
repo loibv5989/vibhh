@@ -4,6 +4,8 @@ defined('ABSPATH') || exit;
 
 class LBV_Settings {
 
+    private static $instance = null;
+
     private $options;
 
     public function __construct() {
@@ -11,6 +13,13 @@ class LBV_Settings {
         add_action('wp_ajax_lbv_save_logo', array($this, 'save_logo_settings'));
         add_action('wp_ajax_lbv_remove_logo', array($this, 'remove_logo'));
         add_action('wp_ajax_lbv_save_oauth', array($this, 'save_oauth_settings'));
+    }
+
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public function get_option($key, $default = '') {
@@ -264,11 +273,7 @@ class LBV_Settings {
                     <?php _e('Google OAuth', 'lbv'); ?>
                 </h3>
                 <?php
-                $this->render_text_field(
-                    'google_client_id',
-                    __('Google Client ID', 'lbv'),
-                    __('Enter your Google OAuth application Client ID.', 'lbv')
-                );
+                $this->render_text_field('google_client_id', __('Google Client ID', 'lbv'), __('Enter your Google OAuth application Client ID.', 'lbv'));
                 ?>
                 <?php
                 $this->render_password_field(
@@ -291,13 +296,11 @@ class LBV_Settings {
                 <p class="lbv-field-desc"><?php echo esc_html($description); ?></p>
             </div>
             <div class="lbv-field-right">
-                <input type="text"
-                       class="lbv-text-input"
-                       name="lbv_options[<?php echo esc_attr($field_key); ?>]"
-                       value="<?php echo esc_attr($value); ?>"
-                       placeholder="<?php echo esc_attr($label); ?>">
+                <input type="text" class="lbv-text-input" name="lbv_options[<?php echo esc_attr($field_key); ?>]"
+                       value="<?php echo esc_attr($value); ?>" placeholder="<?php echo esc_attr($label); ?>">
             </div>
         </div>
+        <p>Authorized redirect URIs: <?= home_url() ?>/wp-login.php?loginSocial=google</p>
         <?php
     }
 
@@ -336,3 +339,5 @@ class LBV_Settings {
         }
     }
 }
+
+LBV_Settings::get_instance();

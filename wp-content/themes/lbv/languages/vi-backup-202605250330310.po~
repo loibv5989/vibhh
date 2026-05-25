@@ -615,7 +615,7 @@ msgstr "Đăng xuất?"
 
 #: templates/ajax/comments.php:89
 msgid "logged in"
-msgstr "đăng nhập"
+msgstr "đã đăng nhập"
 
 #: templates/ajax/comments.php:101
 #, php-format

@@ -39,17 +39,21 @@ class Lbv_Walker_Comment extends Walker_Comment {
                         printf(__('%s ago', 'lbv'), $time_diff);
                         ?>
                     </time>
-                    <span class="meta-separator">·</span>
+
                     <?php
-                    comment_reply_link(array_merge($args, array(
-                        'add_below' => 'comment',
-                        'depth'     => $depth,
-                        'max_depth' => $args['max_depth'],
-                        'reply_text' => __('Reply', 'lbv'),
-                        'before'    => '',
-                        'after'     => '',
-                    )));
-                    ?>
+                    if (is_user_logged_in()) : ?>
+                    <span class="meta-separator">·</span>
+                        <?php
+                        comment_reply_link(array_merge($args, array(
+                                'add_below' => 'comment',
+                                'depth'     => $depth,
+                                'max_depth' => $args['max_depth'],
+                                'reply_text' => __('Reply', 'lbv'),
+                                'before'    => '',
+                                'after'     => '',
+                        )));
+                        ?>
+                    <?php endif; ?>
 
                     <?php if (is_user_logged_in() && get_current_user_id() === intval($comment->user_id)) : ?>
                         <span class="meta-separator">·</span>

@@ -1,4 +1,5 @@
 <?php
+
 defined('ABSPATH') || exit;
 if (post_password_required() || (!comments_open() && !pings_open())) {
     return;

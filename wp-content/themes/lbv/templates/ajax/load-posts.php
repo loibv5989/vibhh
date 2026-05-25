@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class LBV_Ajax_Load_Post {
+class LBV_Load_Post {
 
     private static $instance = null;
 
@@ -14,36 +14,29 @@ class LBV_Ajax_Load_Post {
     }
 
     private function __construct() {
-        add_action('wp_ajax_lbv_load_posts', array($this, 'load_posts'));
-        add_action('wp_ajax_nopriv_lbv_load_posts', array($this, 'load_posts'));
-        add_action('wp_ajax_lbv_get_nonce', array($this, 'get_nonce'));
-        add_action('wp_ajax_nopriv_lbv_get_nonce', array($this, 'get_nonce'));
+        add_action('rest_api_init', array($this, 'register_routes'));
     }
 
-    public function get_nonce() {
-        wp_send_json_success(array(
-            'nonce' => wp_create_nonce('archive_nonce'),
-            'timestamp' => time()
+    public function register_routes() {
+        register_rest_route('lbv/v1', '/load-posts', array(
+            'methods'             => WP_REST_Server::READABLE,
+            'callback'            => array($this, 'load_posts'),
+            'permission_callback' => '__return_true'
         ));
     }
 
-    public function load_posts() {
-        if (!check_ajax_referer('archive_nonce', 'archive_nonce', false)) {
-            wp_send_json_error(array('message' => 'Invalid nonce'));
-        }
-
-        $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-        $archive_id = isset($_POST['archive_id']) ? intval($_POST['archive_id']) : 0;
-        $context = isset($_POST['context']) ? sanitize_text_field($_POST['context']) : 'category';
-        $search_query = isset($_POST['search_query']) ? sanitize_text_field($_POST['search_query']) : '';
-        $is_home = isset($_POST['is_home']) ? intval($_POST['is_home']) : 0;
+    public function load_posts(WP_REST_Request $request) {
+        $paged        = $request->get_param('paged') ? intval($request->get_param('paged')) : 1;
+        $archive_id   = $request->get_param('archive_id') ? intval($request->get_param('archive_id')) : 0;
+        $context      = $request->get_param('context') ? sanitize_text_field($request->get_param('context')) : 'category';
+        $search_query = $request->get_param('search_query') ? sanitize_text_field($request->get_param('search_query')) : '';
+        $is_home      = $request->get_param('is_home') ? intval($request->get_param('is_home')) : 0;
+        $post_type_param = $request->get_param('post_type') ? sanitize_text_field($request->get_param('post_type')) : '';
 
         $posts_per_page = LBV_Theme_Settings::get_instance()->lbv_posts_per_page();
         $uncat_id = get_category_by_slug('uncategorized')->term_id ?? 0;
 
         $offset = ($paged - 1) * $posts_per_page;
-
-        $post_type_param = isset($_POST['post_type']) ? sanitize_text_field($_POST['post_type']) : '';
 
         $post_types = ['idol', 'group', 'photo', 'actor', 'v_star'];
 
@@ -59,9 +52,7 @@ class LBV_Ajax_Load_Post {
             'orderby'        => 'date',
             'order'          => 'DESC',
             'category__not_in' => [$uncat_id],
-
             'no_found_rows'  => true,
-
             'update_post_term_cache' => false,
             'update_post_meta_cache' => false,
         ];
@@ -95,20 +86,21 @@ class LBV_Ajax_Load_Post {
             $query->post_count = $posts_per_page;
         }
 
-        $response = array(
-            'posts'     => $this->get_posts_html($query, $is_home),
-            'has_more'  => $has_more,
-            'max_pages' => 999,
+        $response_data = array(
+            'posts'        => $this->get_posts_html($query, $is_home),
+            'has_more'     => $has_more,
+            'max_pages'    => 999999,
             'current_page' => $paged,
-            'post_count' => $query->post_count,
+            'post_count'   => $query->post_count,
         );
 
         if (!$has_more) {
-            $response['notice'] = $this->end_list();
+            $response_data['notice'] = $this->end_list();
         }
 
         wp_reset_postdata();
-        wp_send_json_success($response);
+
+        return rest_ensure_response($response_data);
     }
 
     private function get_posts_html($query, $is_home = false) {
@@ -128,7 +120,6 @@ class LBV_Ajax_Load_Post {
         return $output;
     }
 
-
     private function end_list() {
         $output = '<div class="end-list"><span>';
         $output .= __( 'You\'ve reached the end of the list!', 'lbv' );
@@ -138,4 +129,4 @@ class LBV_Ajax_Load_Post {
     }
 }
 
-LBV_Ajax_Load_Post::get_instance();
+LBV_Load_Post::get_instance();

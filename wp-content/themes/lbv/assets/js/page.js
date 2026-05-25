@@ -1,7 +1,7 @@
 (function ($) {
     'use strict';
 
-    let ajax_url = lbvPost.ajax_url;
+    let ajax_url = lbvPage.ajax_url;
 
     const PostComment = {
         config: {
@@ -57,7 +57,7 @@
         },
 
         initLoginTrigger: function () {
-            if (!lbvPost.is_logged_in) {
+            if (!lbvPage.is_logged_in) {
                 const self = this;
 
                 $(this.selectors.commentField + ', ' + this.selectors.submitButton).on('click focus', function (e) {
@@ -218,7 +218,7 @@
                 return false;
             }
 
-            if (!lbvPost.is_logged_in && !this.validateGuestUser($replyTitle)) {
+            if (!lbvPage.is_logged_in && !this.validateGuestUser($replyTitle)) {
                 return false;
             }
 
@@ -380,7 +380,7 @@
         },
 
         createTempComment: function (tempId, content, parentId) {
-            const user = lbvPost.current_user || {
+            const user = lbvPage.current_user || {
                 name: 'Guest',
                 avatar: 'https://secure.gravatar.com/avatar/?s=32&d=mm',
                 id: 0
@@ -606,7 +606,7 @@
                 }
             });
 
-            if (!lbvPost.is_logged_in) {
+            if (!lbvPage.is_logged_in) {
                 $('.comment-reply-login').remove();
             }
         },

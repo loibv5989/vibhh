@@ -74,7 +74,7 @@ class LBV_Contact {
 
 
     public function admin_page_callback() {
-        require_once get_template_directory() . '/backend/templates/contact/table.php';
+        require_once get_template_directory() . '/backend/templates/contact-table.php';
 
         $table = new LBV_Contact_Table();
         if (isset($_GET['action']) && $_GET['action'] === 'reply' && isset($_GET['contact'])) {

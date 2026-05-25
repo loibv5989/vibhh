@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 $lbvSettings = LBV_Theme_Settings::get_instance();
 ?>
 <div class="header-wrapper" id="site-header">
@@ -12,7 +13,10 @@ $lbvSettings = LBV_Theme_Settings::get_instance();
                     <span class="close-icon"><span></span><span></span></span>
                 </button>
                 <div class="logo-wrap">
-                    <?php $lbvSettings->lbv_site_logo(); ?>
+                    <?php if (is_front_page()) :?>
+                        <h1 class="logo-title is-hidden"><?php bloginfo('name'); ?></h1>
+                        <p class="site-description is-hidden"><?php bloginfo('description'); ?></p>
+                    <?php endif; ?><?php $lbvSettings->lbv_site_logo(); ?>
                 </div>
                 <nav class="nav nav-menu">
                     <?php
@@ -49,6 +53,10 @@ $lbvSettings = LBV_Theme_Settings::get_instance();
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
+                                </a>
+                                <a href="<?php echo home_url('loved-reads/'); ?>" class="user-dropdown-item">
+                                    <span><?php _e('Loved Reads', 'lbv'); ?></span>
+                                    <span class="loved-reads-icon">❤️</span>
                                 </a>
                                 <a rel="nofollow" href="<?php echo esc_url($logout_url); ?>" class="user-dropdown-item lbv-logout">
                                     <span><?php _e('Sign Out', 'lbv'); ?></span>

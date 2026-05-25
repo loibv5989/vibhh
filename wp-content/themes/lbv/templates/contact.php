@@ -20,7 +20,7 @@ class LBV_USER_Form {
     }
 
     public function enqueue_scripts(){
-        if (is_page( 'contact-us' ) || is_page( 'lien-he' ) || is_page( 'contact' )) {
+        if (is_page( 'contact-us' ) || is_page( 'contact' ) || is_page( 'lien-he' )) {
             wp_enqueue_style('lbv-contact', LBV_THEME_URI . 'assets/css/contact.css', [], LBV_THEME_VERSION);
             wp_enqueue_script('lbv-contact', LBV_THEME_URI . 'assets/js/contact.min.js', ['jquery'], LBV_THEME_VERSION, true);
             wp_localize_script('lbv-contact', 'lbvCT', [

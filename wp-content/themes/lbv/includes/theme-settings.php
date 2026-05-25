@@ -5,9 +5,7 @@ defined('ABSPATH') || exit;
 class LBV_Theme_Settings {
 
     private static $instance = null;
-
     private $lbv_options = null;
-
     private $lbv_option_key = 'lbv_options';
 
     public static function get_instance() {
@@ -48,12 +46,6 @@ class LBV_Theme_Settings {
         if ($query->is_search() || is_author()) {
             $query->set('post_type', $this->post_type());
         }
-        if ($query->is_search() || is_author() || is_category() || is_tag()) {
-            $excluded_pages = $this->get_excluded_page_ids();
-            if (!empty($excluded_pages)) {
-                $query->set('post__not_in', $excluded_pages);
-            }
-        }
     }
 
     public function get_option($key, $default = '') {
@@ -65,14 +57,8 @@ class LBV_Theme_Settings {
     }
 
     private function post_type(){
-        $post_type = [ 'post', 'page'];
+        $post_type = ['idol', 'group', 'photo', 'actor', 'v_star', 'post'];
         return $post_type;
-    }
-
-    public function get_excluded_page_ids() {
-        return array_filter(array_unique([
-            51556, 36621, 1481, 36630, 36636, 36641, 51505
-        ]));
     }
 
     private function lbv_const( $name, $default ) {

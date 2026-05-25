@@ -32,7 +32,6 @@ get_header(); ?>
                     <article id="<?php echo esc_attr( get_post_type() . '-' . $post_id ); ?>" <?php post_class(); ?>>
                         <header class="<?php echo esc_attr( implode( ' ', $header_classes ) ); ?>">
                             <h1 class="entry-title"><?php echo esc_html( $title ); ?></h1>
-
                             <?php if ( 'post' === $current_post_type ) : ?>
                                 <div class="entry-meta">
                                     <?php
@@ -40,7 +39,6 @@ get_header(); ?>
                                     $author    = get_userdata( $author_id );
                                     $is_admin  = in_array( 'administrator', (array) $author->roles, true );
                                     ?>
-
                                     <span class="<?php echo $is_admin ? 'admin' : 'author'; ?> meta-review">
                                         <?php esc_html_e( 'Last updated & reviewed:', 'lbv' ); ?>
                                         <span class="meta-line">
@@ -54,7 +52,6 @@ get_header(); ?>
                                             </a>
                                         </span>
                                     </span>
-
                                     <?php if ( ! $editing ) : ?>
                                         <?php if ( is_user_logged_in() ) : ?>
                                             <span class="lbv-edit-artist-btn">

@@ -265,11 +265,6 @@ class LBV_Ajax_Comment {
     }
 
     private function handle_new_comment($comment_post_ID, $comment_parent, $comment_content) {
-        if (!is_user_logged_in()) {
-            wp_send_json_error(__('You must be logged in to comment.', 'lbv'));
-            return;
-        }
-
         $user_id = $this->get_cached_user_id();
 
         if (!$this->check_duplicate_hash($comment_post_ID, $user_id, $comment_content)) {
@@ -296,6 +291,24 @@ class LBV_Ajax_Comment {
             $current_user = wp_get_current_user();
             $comment_data['comment_author']       = $current_user->display_name;
             $comment_data['comment_author_email'] = $current_user->user_email;
+        } else {
+            $author = isset($_POST['author']) ? sanitize_text_field($_POST['author']) : '';
+            $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+
+            if (empty($author) || empty($email)) {
+                wp_send_json_error(__('Name and email are required.', 'lbv'));
+            }
+
+            if (!is_email($email)) {
+                wp_send_json_error(__('Invalid email address.', 'lbv'));
+            }
+
+            $comment_data['comment_author']       = $author;
+            $comment_data['comment_author_email'] = $email;
+
+            if ($has_links) {
+                $comment_data['comment_approved'] = 0;
+            }
         }
 
         $comment_id = wp_new_comment($comment_data, true);
@@ -404,12 +417,14 @@ class LBV_Ajax_Comment {
 
                         <span class="meta-separator">·</span>
 
-                        <a rel="nofollow" class="comment-reply-link"
-                           href="<?php echo esc_url(get_permalink($comment->comment_post_ID)); ?>?replytocom=<?php echo absint($comment->comment_ID); ?>#respond"
-                           data-commentid="<?php echo absint($comment->comment_ID); ?>"
-                           data-postid="<?php echo absint($comment->comment_post_ID); ?>"
-                           data-belowelement="comment-<?php echo absint($comment->comment_ID); ?>"
-                           data-respondelement="respond"><?php echo esc_html__('Reply', 'lbv'); ?></a>
+                        <?php if (is_user_logged_in()) :?>
+                            <a rel="nofollow" class="comment-reply-link"
+                               href="<?php echo esc_url(get_permalink($comment->comment_post_ID)); ?>?replytocom=<?php echo absint($comment->comment_ID); ?>#respond"
+                               data-commentid="<?php echo absint($comment->comment_ID); ?>"
+                               data-postid="<?php echo absint($comment->comment_post_ID); ?>"
+                               data-belowelement="comment-<?php echo absint($comment->comment_ID); ?>"
+                               data-respondelement="respond"><?php echo esc_html__('Reply', 'lbv'); ?></a>
+                        <?php endif; ?>
 
                         <?php if ($current_user_id && $current_user_id === intval($comment->user_id)) : ?>
                             <?php if ($this->allow_comment_edit($comment->comment_ID)) : ?>

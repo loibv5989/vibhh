@@ -60,19 +60,19 @@ class LBV_Google_OAuth {
         }
 
         $state_data = array(
-            'created'     => time(),
-            'redirect_to' => $redirect_to
+                'created'     => time(),
+                'redirect_to' => $redirect_to
         );
         set_transient('lbv_oauth_state_' . $state, $state_data, 600);
 
         $params = array(
-            'client_id'     => $this->client_id(),
-            'redirect_uri'  => $this->redirect_uri(),
-            'response_type' => 'code',
-            'scope'         => 'openid email profile',
-            'access_type'   => 'online',
-            'prompt'        => 'select_account',
-            'state'         => $state
+                'client_id'     => $this->client_id(),
+                'redirect_uri'  => $this->redirect_uri(),
+                'response_type' => 'code',
+                'scope'         => 'openid email profile',
+                'access_type'   => 'online',
+                'prompt'        => 'select_account',
+                'state'         => $state
         );
 
         wp_redirect('https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query($params));
@@ -123,17 +123,17 @@ class LBV_Google_OAuth {
 
     private function get_access_token($code) {
         $response = wp_remote_post('https://oauth2.googleapis.com/token', array(
-            'timeout' => 30,
-            'headers' => array(
-                'Content-Type' => 'application/x-www-form-urlencoded'
-            ),
-            'body' => array(
-                'code'          => $code,
-                'client_id'     => $this->client_id(),
-                'client_secret' => $this->client_secret(),
-                'redirect_uri'  => $this->redirect_uri(),
-                'grant_type'    => 'authorization_code'
-            )
+                'timeout' => 30,
+                'headers' => array(
+                        'Content-Type' => 'application/x-www-form-urlencoded'
+                ),
+                'body' => array(
+                        'code'          => $code,
+                        'client_id'     => $this->client_id(),
+                        'client_secret' => $this->client_secret(),
+                        'redirect_uri'  => $this->redirect_uri(),
+                        'grant_type'    => 'authorization_code'
+                )
         ));
 
         if (is_wp_error($response)) {
@@ -156,10 +156,10 @@ class LBV_Google_OAuth {
 
     private function get_user_info($access_token) {
         $response = wp_remote_get('https://www.googleapis.com/oauth2/v2/userinfo', array(
-            'timeout' => 30,
-            'headers' => array(
-                'Authorization' => 'Bearer ' . $access_token
-            )
+                'timeout' => 30,
+                'headers' => array(
+                        'Authorization' => 'Bearer ' . $access_token
+                )
         ));
 
         if (is_wp_error($response)) {
@@ -231,13 +231,13 @@ class LBV_Google_OAuth {
         }
 
         $user_data = array(
-            'user_login'    => $username,
-            'user_email'    => $email,
-            'display_name'  => isset($user_info['name']) ? sanitize_text_field($user_info['name']) : $username,
-            'first_name'    => isset($user_info['given_name']) ? sanitize_text_field($user_info['given_name']) : '',
-            'last_name'     => isset($user_info['family_name']) ? sanitize_text_field($user_info['family_name']) : '',
-            'user_pass'     => wp_generate_password(20, true, true),
-            'role'          => get_option('default_role')
+                'user_login'    => $username,
+                'user_email'    => $email,
+                'display_name'  => isset($user_info['name']) ? sanitize_text_field($user_info['name']) : $username,
+                'first_name'    => isset($user_info['given_name']) ? sanitize_text_field($user_info['given_name']) : '',
+                'last_name'     => isset($user_info['family_name']) ? sanitize_text_field($user_info['family_name']) : '',
+                'user_pass'     => wp_generate_password(20, true, true),
+                'role'          => get_option('default_role')
         );
 
         $user_id = wp_insert_user($user_data);
